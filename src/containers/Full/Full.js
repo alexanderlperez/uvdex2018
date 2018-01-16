@@ -7,7 +7,9 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 import Dashboard from '../../views/Dashboard/';
-import TestPage from '../../views/TestPage/';
+import NewInventory from '../../views/NewInventory/';
+import UsedInventory from '../../views/UsedInventory/';
+import Integrations from '../../views/Integrations/';
 
 class Full extends Component {
   render() {
@@ -23,7 +25,9 @@ class Full extends Component {
 
               <Switch>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                <Route path="/testpage" name="TestPage" component={TestPage}/>
+                <Route path="/newinventory" name="NewInventory" component={NewInventory}/>
+                <Route path="/usedinventory" name="UsedInventory" component={UsedInventory}/>
+                <Route path="/integrations" name="Integrations" component={Integrations}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>

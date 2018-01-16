@@ -5,7 +5,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        Hello World
+        <h2>Description of Dashboard Functionality</h2>
+        <p>This screen will allow the user to add new salespeople, update contact & payment information, display basic information about what has been updated recently.</p>
       </div>
     )
   }

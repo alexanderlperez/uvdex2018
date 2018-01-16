@@ -10,9 +10,16 @@ export default {
       }
     },
     {
-      name: 'Test Page',
-    url: '/testpage',
-      icon: 'icon-speedometer',
+      name: 'New Inventory',
+      url: '/newinventory',
+    },
+    {
+      name: 'Used Inventory',
+      url: '/usedinventory',
+    },
+    {
+      name: 'Integrations',
+      url: '/integrations',
     }
   ]
 };

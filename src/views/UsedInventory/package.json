@@ -1,0 +1,6 @@
+{
+  "name": "UsedInventory",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./UsedInventory.js"
+}
