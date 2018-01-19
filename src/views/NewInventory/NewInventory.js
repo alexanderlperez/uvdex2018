@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Alert } from 'reactstrap';
+import ReactDataGrid from 'react-data-grid';
 
 class NewInventory extends Component {
   render() {
@@ -12,7 +13,11 @@ class NewInventory extends Component {
           <p></p>
           <p></p>
           <p></p>
-
+          {
+          /*This component needs data and attributes configured to run
+           *<ReactDataGrid />
+           */
+          }
       </div>
     )
   }
