@@ -20,6 +20,10 @@ export default {
     {
       name: 'Integrations',
       url: '/integrations',
+    },
+    {
+      name: 'Leads Management',
+      url: '/leads',
     }
   ]
 };

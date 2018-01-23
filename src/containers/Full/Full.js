@@ -10,6 +10,7 @@ import Dashboard from '../../views/Dashboard/';
 import NewInventory from '../../views/NewInventory/';
 import UsedInventory from '../../views/UsedInventory/';
 import Integrations from '../../views/Integrations/';
+import Leads from '../../views/Leads/';
 
 class Full extends Component {
   render() {
@@ -28,6 +29,7 @@ class Full extends Component {
                 <Route path="/newinventory" name="NewInventory" component={NewInventory}/>
                 <Route path="/usedinventory" name="UsedInventory" component={UsedInventory}/>
                 <Route path="/integrations" name="Integrations" component={Integrations}/>
+                <Route path="/leads" name="Leads" component={Leads}/>
                 <Redirect from="/" to="/dashboard"/>
               </Switch>
             </Container>
