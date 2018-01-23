@@ -36,6 +36,7 @@
     "create-react-class": "^15.6.2",
     "font-awesome": "4.7.0",
     "history": "4.7.2",
+    "jquery": "^3.2.1",
     "react": "16.1.1",
     "react-chartjs-2": "2.6.4",
     "react-data-grid": "^3.0.3",
