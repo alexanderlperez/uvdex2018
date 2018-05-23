@@ -22,7 +22,7 @@ export default {
       url: '/integrations',
     },
     {
-      name: 'Leads Management',
+      name: 'Leads',
       url: '/leads',
     }
   ]
