@@ -111,13 +111,27 @@ return [
         'MAIN NAVIGATION',
         [
             'text'        => 'Dealers',
-            'url'         => 'admin/dealers',
+            'url'         => 'dealers',
             'icon'        => 'users',
         ],
         [
-            'text' => 'Vehicles',
-            'url'  => 'admin/vehicles',
+            'text' => 'Manage Vehicles',
+            'url'  => '#',
             'icon' => 'car',
+            'submenu' => [
+                [
+                    'text'   => 'Vehicles',
+                    'url'    => 'vehicles',
+                    'icon'   => 'car',
+                    'active' => ['vehicles'],
+                ],
+                [
+                    'text'   => 'Import Vehicles',
+                    'url'    => 'vehicles/create',
+                    'icon'   => 'download',
+                ],
+            ]
+
         ],
         'ACCOUNT SETTINGS',
         [
