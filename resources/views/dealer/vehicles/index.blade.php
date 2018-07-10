@@ -1,6 +1,6 @@
 @extends('adminlte::page')
-@section('title_prefix',ucfirst($title))
-@section('heading','Manage '.ucfirst($title))
+@section('title_prefix', 'Vehicle')
+@section('heading','Manage Vehicle')
 
 @section('action')
     <a href='{{ route('vehicles.create') }}' class='btn btn-primary'>Import Vehicle</a>
@@ -12,7 +12,7 @@
             <div class="box">
                 <div class="box-body">
                     {!! showFlashMessage() !!}
-                    <table class="display responsive nowrap" id="{{$title_head}}-table">
+                    <table class="display responsive nowrap" id="vehicle-table">
                         <thead>
                         <tr>
                             <th>Name</th>

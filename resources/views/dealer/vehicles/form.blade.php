@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title_prefix',ucfirst($title))
+@section('title_prefix', 'Vehicle')
 @section('action')
     <a href='{{ route('vehicles.index') }}' class='btn btn-primary'>Go Back</a>
 @stop
