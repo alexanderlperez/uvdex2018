@@ -43,6 +43,51 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Debug Blacklist
+    |--------------------------------------------------------------------------
+    |
+    | When your application is in debug mode, blacklisted variables will not be shown.
+    |
+    */
+
+    'debug_blacklist' => [
+        '_ENV' => [
+            'APP_KEY',
+            'DB_CONNECTION',
+            'DB_HOST',
+            'DB_PORT',
+            'DB_DATABASE',
+            'DB_USERNAME',
+            'DB_PASSWORD',
+            'MAIL_HOST',
+            'MAIL_USERNAME',
+            'MAIL_PASSWORD',
+            'SESSION_LIFETIME',
+            'STRIPE_KEY',
+            'STRIPE_API_KEY',
+        ],
+        '_SERVER' => [
+            'APP_KEY',
+            'DB_CONNECTION',
+            'DB_HOST',
+            'DB_PORT',
+            'DB_DATABASE',
+            'DB_USERNAME',
+            'DB_PASSWORD',
+            'MAIL_HOST',
+            'MAIL_USERNAME',
+            'MAIL_PASSWORD',
+            'SESSION_LIFETIME',
+            'STRIPE_KEY',
+            'STRIPE_API_KEY',
+        ],
+        '_POST' => [
+            'password',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application URL
     |--------------------------------------------------------------------------
     |
