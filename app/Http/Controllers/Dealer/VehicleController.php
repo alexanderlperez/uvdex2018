@@ -14,12 +14,11 @@ use Box\Spout\Common\Type;
 
 class VehicleController extends Controller
 {
+    public $successStatus = 200;
     private $title = 'Vehicle';
 
     public function __construct()
     {
-        // Sharing variable in views
-        View::share(['title'=> 'vehicles', 'title_head' => 'vehicle']);
     }
 
     /**
@@ -39,7 +38,8 @@ class VehicleController extends Controller
      */
     public function getData(){
 
-        $vehicle = Vehicle::select(['id','name','image','is_active'])->orderBy('updated_at', 'desc');
+        $vehicle = Vehicle::all();
+        return response()->json(['data' => $vehicle], $this-> successStatus)->header('Access-Control-Allow-Origin', 'http://lareact.io');
     }
 
     /**
@@ -203,12 +203,9 @@ class VehicleController extends Controller
 
         // This would be used for the payload
         $filePath = $input->file->getPathName();
-
         $reader->open($filePath);
-
         $data = [];
 
-        echo '<pre>';
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $key => $row) {
 
