@@ -43,6 +43,7 @@
 
 .car-info-section {
   margin: 25px 0;
+  min-height: 700px;
 }
 
 .car-info-section a {

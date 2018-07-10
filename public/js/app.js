@@ -36409,7 +36409,6 @@ var Main = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__filters_filter__["a" /* default */], null),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__data_data__["a" /* default */], null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__details_detail__["a" /* default */], null),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__footer_footer__["a" /* default */], null)
             );
         }
@@ -55897,7 +55896,7 @@ var Cardata = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Cardata.__proto__ || Object.getPrototypeOf(Cardata)).call(this, props));
 
-        _this.state = { data: "hello" };
+        _this.state = { data: "" };
         return _this;
     }
 
@@ -56255,7 +56254,7 @@ var DetailBlock = function (_Component) {
     return DetailBlock;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (DetailBlock);
+/* unused harmony default export */ var _unused_webpack_default_export = (DetailBlock);
 
 /***/ }),
 /* 62 */

@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 class Cardata extends Component{
     constructor(props) {
         super(props);
-        this.state = {data: "hello"};
+        this.state = {data: ""};
     }
     render() {
         return (

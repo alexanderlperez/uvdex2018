@@ -14,7 +14,7 @@ class Main extends Component{
             <div>
                 <Filter />
                 <Cardata />
-                <DetailBlock />
+                {/*<DetailBlock />*/}
                 <Footer />
                 
             </div>
