@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dealer;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use DB;
 
-class UserController extends Controller
+class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,13 +22,13 @@ class UserController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show admin dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return redirect(getDashboardUrl());
+        return view('dealer.index');
     }
 
     /**
@@ -36,7 +37,7 @@ class UserController extends Controller
      */
     public function changePassword(){
 
-        return view('user.change_password');
+        return view('admin.change_password');
     }
 
     /**
@@ -104,8 +105,7 @@ class UserController extends Controller
      */
     public function profile(){
 
-        $data['user'] = Auth::user();
-        return view('user.profile', $data);
+        return view('admin.profile');
     }
 
     /**
@@ -116,8 +116,8 @@ class UserController extends Controller
     public function updateProfile(Request $request){
 
         $rules = array(
-            'first_name'=>'required|string',
-            'last_name'=>'required|string',
+            'firstname'=>'required|string',
+            'lastname'=>'required|string',
             'email'=>'required|email|unique:users,email,'.Auth::user()->id,
         );
 

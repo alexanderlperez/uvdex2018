@@ -16,9 +16,10 @@ class CheckRole
     public function handle($request, Closure $next,$role)
     {
 
-        $response = $next($request);
-
-        if(Auth::user()->role_id != $role)
+        $roles = explode('|', $role);
+        if(in_array(Auth::user()->role_id, $roles))
+            $response = $next($request);
+        else
             return redirect(getDashboardUrl());
 
         return $response;

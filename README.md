@@ -1,6 +1,5 @@
 
-#Saxon Health
-
+#UVDex
 
 ##System Requirements
 1. PHP (Version 7.0.0+)
@@ -10,7 +9,6 @@
 5. Mysql (Version 5.6.35)
 6. 1 GB Ram(at least)
 7. Apache Web Server(Version 2.4)
-
 
 
 ## Framework Used

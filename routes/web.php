@@ -14,6 +14,14 @@
 Route::get('/', 'HomeController@index');
 Route::get('home', 'UserController@index')->name('home');
 
+Route::group(['middleware' => ['auth', 'role:'.config('constants.role.super_admin').'|'.config('constants.role.dealer')]], function () {
+
+    Route::get('changePassword', 'UserController@changePassword')->name('changePassword');
+    Route::post('updatePassword', 'UserController@updatePassword')->name('updatePassword');
+    Route::get('profile', 'UserController@profile')->name('profile');
+    Route::post('updateProfile', 'UserController@updateProfile')->name('updateProfile');
+});
+
 Auth::routes();
 
 //Includes all routes from folder
