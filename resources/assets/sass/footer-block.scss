@@ -1,0 +1,36 @@
+/*============== footer block css here ============*/
+
+footer {
+    background-color: $dark-blue;
+    padding: 7px 0;
+    border-top: 4px solid $black;
+    border-bottom: 4px solid $black;
+    ul {
+        list-style-type: none;
+        margin-bottom: 0;
+        padding-left: 0;
+        li {
+            display: inline-block;
+            margin: 0 10px;
+            a {
+                i {
+                    color: $white;
+                    font-size: 17px;
+                    line-height: 23px;
+                    &.fa-star,
+                    &.fa-envelope {
+                        font-size: 21px;
+                        line-height: 24px;
+                        vertical-align: middle;
+                    }
+                }
+            }
+            &.round-icon {
+                border: 2px solid #fff;
+                border-radius: 100%;
+                padding: 3px 8px;
+                text-align: center;
+            }
+        }
+    }
+}

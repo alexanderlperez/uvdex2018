@@ -1,14 +1,31 @@
-
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
 @import "variables";
-
+@import "filter";
+@import "button";
+@import "main-page";
+@import "footer-block.scss";
+@import "detail-page.scss";
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
 .navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    font-family: $lato-font;
+}
+
+a {
+    text-decoration: none;
+}
+
+.used-car-text-color {
+    color: $medium-green;
+}
+
+.new-car-text-color {
+    color: $dark-blue;
 }

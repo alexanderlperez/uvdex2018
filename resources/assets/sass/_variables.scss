@@ -1,8 +1,21 @@
-
 // Body
 $body-bg: #f5f8fa;
-
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
+$lato-font: 'Lato',
+sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+//Colors 
+$white: #ffffff;
+$black: #000000;
+$dark-gray: #666666;
+$dark-blue: #0051A6;
+$sky-blue: #008cba;
+$dark-sky-blue: #007095;
+$medium-gray: #CFCFCF;
+$medium-green: #50a600;
+//screen width sizes
+$smscreen-size: 576px;
+$mdscreen-size: 768px;
+$lgscreen-size: 992px;
+$xlscreen-size: 1200px;
