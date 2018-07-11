@@ -3,7 +3,7 @@
 @section('heading','Manage Vehicle')
 
 @section('action')
-    <a href='{{ route('vehicles.create') }}' class='btn btn-primary'>Import Vehicle</a>
+    <a href='{{ route('export') }}' class='btn btn-primary'>Export Vehicle</a>
 @stop
 
 @section('content')
