@@ -39,4 +39,5 @@ return [
     'profile_success'=>'Profile updated successfully.',
     'session_expired'=>'Your session has expired due to inactivity, please try again.',
     'email_sent'=>'Thank you for contacting us, we\'ll get back to you soon.',
+    'no_vehicle'=>'Seems like there is no data available.',
 ];
