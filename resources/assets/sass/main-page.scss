@@ -3,6 +3,10 @@
 .car-info-section {
     margin: 25px 0;
     min-height: 700px;
+    padding: 0 15px;
+    @media screen and (min-width: $mdscreen-size) {
+        padding: 0;
+    }
     a {
         text-decoration: none;
         &:hover {

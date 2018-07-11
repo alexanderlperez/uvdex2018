@@ -1,0 +1,43 @@
+/*================ Header css here =================*/
+
+.navbar-brand {
+    h1 {
+        font-size: 20px;
+        line-height: 24px;
+        margin: 0;
+        color: $white;
+    }
+}
+
+.navbar-header {
+    button {
+        &.navbar-toggle {
+            span {
+                &.icon-bar {
+                    background-color: $white;
+                    height: 4px;
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+.navbar-collapse {
+    @media screen and (max-width: ($mdscreen-size - 1)) {
+        border-top: 3px solid $black !important;
+    }
+}
+
+.filter-section {
+    .container {
+        @media screen and (max-width: ($lgscreen-size - 1)) {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+            max-width: 100%;
+        }
+    }
+}
