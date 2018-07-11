@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dealer;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use DB;
 use Config;
@@ -39,6 +40,19 @@ class VehicleController extends Controller
     public function getData(){
 
         $vehicle = Vehicle::all();
+
+        $vehicle->transform(function ($item){
+
+            $item->type = 'Used';
+            if ($item->type == 'N')
+                $item->type = 'New';
+
+            if(!empty($item->images))
+                $item->images = explode(',', $item->images);
+
+            return $item;
+        });
+
         return response()->json(['data' => $vehicle], $this-> successStatus)->header('Access-Control-Allow-Origin', 'http://lareact.io');
     }
 
@@ -212,6 +226,7 @@ class VehicleController extends Controller
                 if($key == 1) // Skipping header
                     continue;
 
+                $data[$key]['user_id'] = Auth::user()->id;
                 $data[$key]['vin'] = $row[0];
                 $data[$key]['type'] = $row[1];
                 $data[$key]['stock_number'] = $row[2];
@@ -236,8 +251,10 @@ class VehicleController extends Controller
 
         $reader->close();
 
-        if(!empty($data))
+        if(!empty($data)) {
+            Vehicle::whereUserId(Auth::user()->id)->delete();
             Vehicle::insert($data);
+        }
 
     }
 }
