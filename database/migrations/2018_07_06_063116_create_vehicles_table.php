@@ -15,6 +15,7 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned()->index();
             $table->string('vin', 50)->unique();
             $table->string('type', 5)->nullable();
             $table->string('stock_number', 20)->nullable();
@@ -35,6 +36,10 @@ class CreateVehiclesTable extends Migration
             $table->text('description')->nullable();
             $table->text('images')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
