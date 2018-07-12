@@ -154,7 +154,9 @@ class InlineGrid extends React.Component {
 
     componentDidMount() {
 
-        fetch("getVehicles/"+user_id)
+        fetch("getVehicles/"+user_id, {
+            credentials: "same-origin",
+        })
             .then(res => res.json())
             .then(
                 (result) => {

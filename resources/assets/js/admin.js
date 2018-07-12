@@ -4,4 +4,12 @@
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+window.$ = window.jQuery = require('jquery');
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    },
+});
+
+
 require('./components/data-grid/InlineGrid');
