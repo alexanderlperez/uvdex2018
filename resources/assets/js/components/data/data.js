@@ -18,7 +18,7 @@ class Cardata extends Component{
                             <div className="image-block col-md-4">
                                 <a href="#">
                                     <figure>
-                                        <img src="" alt=""/>
+                                        <img src={"./img/data.jpeg"} alt=""/>
                                     </figure>
                                 </a>
                             </div>

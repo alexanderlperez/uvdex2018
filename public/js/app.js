@@ -55953,7 +55953,7 @@ var Cardata = function (_Component) {
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'figure',
                                         null,
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: '', alt: '' })
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: "./img/data.jpeg", alt: '' })
                                     )
                                 )
                             ),
