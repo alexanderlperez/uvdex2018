@@ -6,11 +6,11 @@ use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
 use DB;
 use Config;
 
 use Box\Spout\Reader\ReaderFactory;
+use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Common\Type;
 
 class VehicleController extends Controller
@@ -34,14 +34,15 @@ class VehicleController extends Controller
 
     /**
      * Get Vehicle Data
+     * @param $id
      * @return mixed
      * @throws \Exception
      */
-    public function getData(){
+    public function getData($id){
 
-        $vehicle = Vehicle::all();
+        $vehicle = Vehicle::whereUserId($id)->exclude(['user_id', 'created_at', 'updated_at'])->get();
 
-        $vehicle->transform(function ($item){
+        $vehicle->transform(function ($item, $key){
 
             $item->type = 'Used';
             if ($item->type == 'N')
@@ -50,10 +51,12 @@ class VehicleController extends Controller
             if(!empty($item->images))
                 $item->images = explode(',', $item->images);
 
+            $item->key = $key+1;
+
             return $item;
         });
 
-        return response()->json(['data' => $vehicle], $this-> successStatus)->header('Access-Control-Allow-Origin', 'http://lareact.io');
+        return response()->json(['data' => $vehicle], $this->successStatus);
     }
 
     /**
@@ -254,6 +257,33 @@ class VehicleController extends Controller
         if(!empty($data)) {
             Vehicle::whereUserId(Auth::user()->id)->delete();
             Vehicle::insert($data);
+        }
+
+    }
+
+    /**
+     * Export vehicle inventory
+     */
+    public function export() {
+
+        $vehicles =  Vehicle::whereUserId(Auth::user()->id)->exclude(['id', 'user_id', 'created_at', 'updated_at'])->get()->toArray();
+
+        if(!empty($vehicles)) {
+
+            $headers[] = Config::get('constants.headers');
+            $rows = $headers + $vehicles;
+
+            $writer = WriterFactory::create(Type::CSV); // for CSV files
+            $filename = 'inventory.csv';
+            $path = storage_path('app/'.$filename);
+            $writer->openToBrowser($path); // stream data directly to the browser
+
+            $writer->addRows($rows);
+            $writer->close();
+        } else {
+
+            setFlashMessage('error', trans('message.no_vehicle'));
+            return back();
         }
 
     }
