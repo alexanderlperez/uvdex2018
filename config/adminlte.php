@@ -109,11 +109,11 @@ return [
 
     'menu' => [
         'MAIN NAVIGATION',
-        [
+        /*[
             'text'        => 'Dealers',
             'url'         => 'dealers',
             'icon'        => 'users',
-        ],
+        ],*/
         [
             'text' => 'Manage Vehicles',
             'url'  => '#',
