@@ -12,18 +12,13 @@
             <div class="box">
                 <div class="box-body">
                     {!! showFlashMessage() !!}
-                    <table class="display responsive nowrap" id="vehicle-table">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                    </table>
+                    <div id="inline_grid"></div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>
     </div>
+
+    <script> var user_id = '{{Auth::user()->id}}'; </script>
+    <script src="{{asset('js/admin.js')}}"></script>
+
 @stop
