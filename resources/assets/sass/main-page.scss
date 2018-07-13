@@ -34,6 +34,7 @@
             font-weight: 600;
             color: $black;
             font-family: $lato-font;
+            margin-top: 0;
         }
         .dealer-notes {
             h4 {
@@ -69,6 +70,17 @@
                 &.stroke-text {
                     text-decoration: line-through;
                 }
+            }
+            .button-block {
+                margin-top: 18px;
+                button {
+                    padding: 15px 30px !important;
+                    margin: 0 5px;
+                }
+            }
+            img {
+                width: 100%;
+                @include object-fit($property: cover);
             }
         }
     }

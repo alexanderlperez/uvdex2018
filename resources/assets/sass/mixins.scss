@@ -1,0 +1,9 @@
+/*============= Object fit mixins here ================*/
+
+@mixin object-fit($property) {
+    -webkit-object-fit: $property;
+    -ms-object-fit: $property;
+    -o-object-fit: $property;
+    -moz-object-fit: $property;
+    object-fit: $property;
+}

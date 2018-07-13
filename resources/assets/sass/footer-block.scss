@@ -5,6 +5,11 @@ footer {
     padding: 7px 0;
     border-top: 4px solid $black;
     border-bottom: 4px solid $black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    right: 0;
     ul {
         list-style-type: none;
         margin-bottom: 0;
@@ -12,30 +17,12 @@ footer {
         li {
             display: inline-block;
             margin: 0 10px;
-            vertical-align: middle;
             a {
-                i {
-                    color: $white;
-                    font-size: 17px;
-                    line-height: 23px;
-                    &.fa-star,
-                    &.fa-envelope {
-                        font-size: 32px;
-                        line-height: 36px;
-                    }
-                    &.fa-phone,
-                    &.fa-arrow-left {
-                        font-size: 21px;
-                        padding: 10px 8px;
-                        width: 43px;
-                        height: 43px;
-                    }
+                img {
+                    width: 30px;
+                    height: 30px;
+                    @include object-fit($property: cover);
                 }
-            }
-            &.round-icon {
-                border: 2px solid #fff;
-                border-radius: 100%;
-                text-align: center;
             }
         }
     }

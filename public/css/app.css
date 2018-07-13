@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*============ filter-section Css start here ===========*/
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*============= Object fit mixins here ================*/
+
+/*============ filter-section Css start here ===========*/
 
 .filter-section {
   background-color: #0051A6;
@@ -118,6 +120,7 @@
   font-weight: 600;
   color: #000000;
   font-family: "Lato", sans-serif;
+  margin-top: 0;
 }
 
 .car-info-section .car-detail-wrapper .dealer-notes h4 {
@@ -155,6 +158,24 @@
   text-decoration: line-through;
 }
 
+.car-info-section .car-detail-wrapper .car-detail-block .button-block {
+  margin-top: 18px;
+}
+
+.car-info-section .car-detail-wrapper .car-detail-block .button-block button {
+  padding: 15px 30px !important;
+  margin: 0 5px;
+}
+
+.car-info-section .car-detail-wrapper .car-detail-block img {
+  width: 100%;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  -o-object-fit: cover;
+  -moz-object-fit: cover;
+  object-fit: cover;
+}
+
 a.fav-icon i {
   font-size: 36px;
   line-height: 40px;
@@ -168,6 +189,11 @@ footer {
   padding: 7px 0;
   border-top: 4px solid #000000;
   border-bottom: 4px solid #000000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
 }
 
 footer ul {
@@ -179,33 +205,16 @@ footer ul {
 footer ul li {
   display: inline-block;
   margin: 0 10px;
-  vertical-align: middle;
 }
 
-footer ul li a i {
-  color: #ffffff;
-  font-size: 17px;
-  line-height: 23px;
-}
-
-footer ul li a i.fa-star,
-footer ul li a i.fa-envelope {
-  font-size: 32px;
-  line-height: 36px;
-}
-
-footer ul li a i.fa-phone,
-footer ul li a i.fa-arrow-left {
-  font-size: 21px;
-  padding: 10px 8px;
-  width: 43px;
-  height: 43px;
-}
-
-footer ul li.round-icon {
-  border: 2px solid #fff;
-  border-radius: 100%;
-  text-align: center;
+footer ul li a img {
+  width: 30px;
+  height: 30px;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  -o-object-fit: cover;
+  -moz-object-fit: cover;
+  object-fit: cover;
 }
 
 /*================== Detail Page CSS here ==========================*/
