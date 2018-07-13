@@ -30315,10 +30315,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_data_grid__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_data_grid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_data_grid__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_data_grid_addons__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_data_grid_addons___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_data_grid_addons__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_immutability_helper__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_immutability_helper__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_immutability_helper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_immutability_helper__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30331,10 +30329,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+var _require = __webpack_require__(68),
+    Editors = _require.Editors,
+    Toolbar = _require.Toolbar,
+    _require$Filters = _require.Filters,
+    NumericFilter = _require$Filters.NumericFilter,
+    MultiSelectFilter = _require$Filters.MultiSelectFilter,
+    SingleSelectFilter = _require$Filters.SingleSelectFilter,
+    Selectors = _require.Data.Selectors;
 
-var AutoCompleteEditor = __WEBPACK_IMPORTED_MODULE_3_react_data_grid_addons__["Editors"].AutoComplete,
-    DropDownEditor = __WEBPACK_IMPORTED_MODULE_3_react_data_grid_addons__["Editors"].DropDownEditor;
-var ImageFormatter = __WEBPACK_IMPORTED_MODULE_3_react_data_grid_addons__["Formatters"].ImageFormatter;
+var DropDownEditor = Editors.DropDownEditor;
+
+
+
+var types = ['Used', 'New'];
 
 var InlineGrid = function (_React$Component) {
     _inherits(InlineGrid, _React$Component);
@@ -30354,109 +30362,132 @@ var InlineGrid = function (_React$Component) {
             name: 'Vin',
             editable: true,
             width: 147,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'type',
             name: 'Type',
             editable: true,
             width: 50,
-            resizable: true
+            editor: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DropDownEditor, { options: types }),
+            resizable: true,
+            filterable: true,
+            filterRenderer: SingleSelectFilter
         }, {
             key: 'cylinders',
             name: 'Cylinders',
             editable: true,
             width: 75,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'description',
             name: 'Description',
             editable: true,
             width: 200,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'engine_description',
             name: 'Engine Description',
             editable: true,
             width: 130,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'body_style',
             name: 'Body Style',
             editable: true,
             width: 85,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'fuel_type',
             name: 'Fuel Type',
             editable: true,
             width: 80,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'interior_color',
             name: 'Interior Color',
             editable: true,
             width: 100,
-            resizable: true
+            resizable: true,
+            filterable: true,
+            sortable: true,
+            filterRenderer: MultiSelectFilter
         }, {
             key: 'exterior_color',
             name: 'Exterior Color',
             editable: true,
             width: 100,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'make',
             name: 'Make',
             editable: true,
             width: 70,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'stock_number',
             name: 'Stock Number',
             editable: true,
             width: 100,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'mileage',
             name: 'Mileage',
             editable: true,
             width: 70,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'transmission',
             name: 'Transmission',
             editable: true,
             width: 100,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'model',
             name: 'Model',
             editable: true,
             width: 70,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'model_year',
             name: 'Model Year',
             editable: true,
             width: 90,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'trim',
             name: 'Trim',
             editable: true,
             width: 110,
-            resizable: true
+            resizable: true,
+            filterable: true
         }, {
             key: 'price',
             name: 'Price',
             editable: true,
             width: 60,
-            resizable: true
+            resizable: true,
+            filterable: true,
+            filterRenderer: NumericFilter
         }, {
             key: 'option_text',
             name: 'Option Text',
             editable: true,
             width: 200,
-            resizable: true
+            resizable: true,
+            filterable: true
         }];
 
         _this.state = { rows: [] };
@@ -30465,6 +30496,10 @@ var InlineGrid = function (_React$Component) {
         _this.handleAddRow = _this.handleAddRow.bind(_this);
         _this.getRowAt = _this.getRowAt.bind(_this);
         _this.getSize = _this.getSize.bind(_this);
+        _this.handleFilterChange = _this.handleFilterChange.bind(_this);
+        _this.getValidFilterValues = _this.getValidFilterValues.bind(_this);
+        _this.handleOnClearFilters = _this.handleOnClearFilters.bind(_this);
+        _this.handleGridSort = _this.handleGridSort.bind(_this);
         return _this;
     }
 
@@ -30482,11 +30517,7 @@ var InlineGrid = function (_React$Component) {
                     isLoaded: true,
                     rows: result.data
                 });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            function (error) {
+            }, function (error) {
                 _this2.setState({
                     isLoaded: true,
                     error: error
@@ -30520,7 +30551,7 @@ var InlineGrid = function (_React$Component) {
 
             for (var i = fromRow; i <= toRow; i++) {
                 var rowToUpdate = rows[i];
-                var updatedRow = __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default()(rowToUpdate, { $merge: updated });
+                var updatedRow = __WEBPACK_IMPORTED_MODULE_3_immutability_helper___default()(rowToUpdate, { $merge: updated });
                 rows[i] = updatedRow;
             }
 
@@ -30533,13 +30564,12 @@ var InlineGrid = function (_React$Component) {
 
             var newRow = {
                 value: newRowIndex,
-                userStory: '',
-                developer: '',
-                epic: ''
+                type: '',
+                interior_color: ''
             };
 
             var rows = this.state.rows.slice();
-            rows = __WEBPACK_IMPORTED_MODULE_4_immutability_helper___default()(rows, { $push: [newRow] });
+            rows = __WEBPACK_IMPORTED_MODULE_3_immutability_helper___default()(rows, { $push: [newRow] });
             this.setState({ rows: rows });
         }
     }, {
@@ -30549,12 +30579,43 @@ var InlineGrid = function (_React$Component) {
                 return undefined;
             }
 
-            return this.state.rows[index];
+            return Selectors.getRows(this.state)[index];
         }
     }, {
         key: 'getSize',
         value: function getSize() {
-            return this.state.rows.length;
+            return Selectors.getRows(this.state).length;
+        }
+    }, {
+        key: 'handleFilterChange',
+        value: function handleFilterChange(filter) {
+            var newFilters = Object.assign({}, this.state.filters);
+            if (filter.filterTerm) {
+                newFilters[filter.column.key] = filter;
+            } else {
+                delete newFilters[filter.column.key];
+            }
+            this.setState({ filters: newFilters });
+        }
+    }, {
+        key: 'getValidFilterValues',
+        value: function getValidFilterValues(columnId) {
+            var values = this.state.rows.map(function (r) {
+                return r[columnId];
+            });
+            return values.filter(function (item, i, a) {
+                return i === a.indexOf(item);
+            });
+        }
+    }, {
+        key: 'handleOnClearFilters',
+        value: function handleOnClearFilters() {
+            this.setState({ filters: {} });
+        }
+    }, {
+        key: 'handleGridSort',
+        value: function handleGridSort(sortColumn, sortDirection) {
+            this.setState({ sortColumn: sortColumn, sortDirection: sortDirection });
         }
     }, {
         key: 'render',
@@ -30565,12 +30626,16 @@ var InlineGrid = function (_React$Component) {
                 ref: function ref(node) {
                     return _this4.grid = node;
                 },
+                onGridSort: this.handleGridSort,
                 enableCellSelect: true,
                 columns: this.getColumns(),
                 rowGetter: this.getRowAt,
                 rowsCount: this.getSize(),
                 onGridRowsUpdated: this.handleGridRowsUpdated,
-                toolbar: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_data_grid_addons__["Toolbar"], { onAddRow: this.handleAddRow }),
+                toolbar: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Toolbar, { onAddRow: this.handleAddRow, enableFilter: true }),
+                onAddFilter: this.handleFilterChange,
+                getValidFilterValues: this.getValidFilterValues,
+                onClearFilters: this.handleOnClearFilters,
                 enableRowSelect: true,
                 rowHeight: 50,
                 minHeight: 600,
