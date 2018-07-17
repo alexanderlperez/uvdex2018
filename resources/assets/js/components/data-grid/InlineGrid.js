@@ -4,6 +4,8 @@ import ReactDataGrid from 'react-data-grid';
 const { Editors, Toolbar, Filters: { NumericFilter, MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
 const { DropDownEditor } = Editors;
 import update from 'immutability-helper';
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const types = ['Used', 'New'];
 
@@ -182,24 +184,15 @@ class InlineGrid extends React.Component {
 
     componentDidMount() {
 
-        fetch("getVehicles/"+user_id, {
-            credentials: "same-origin",
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        rows: result.data
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            );
+        axios.get('/getVehicles/'+user_id)
+            .then((response) => {
+                this.setState({
+                    rows: [...response.data.vehicles]
+                })
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
     }
 
     getColumns() {
@@ -220,6 +213,32 @@ class InlineGrid extends React.Component {
 
         for (let i = fromRow; i <= toRow; i++) {
             let rowToUpdate = rows[i];
+
+            if(rowToUpdate.id !== undefined){ // Update
+
+                axios.patch('/vehicles/'+rowToUpdate.id, {updated})
+                    .then(
+                        response => {
+                            NotificationManager.success(response.data.message.type, response.data.message.status);
+                    })
+                    .catch((error) => {
+                        NotificationManager.error('Error', error.response.statusText);
+                        console.log(error.response.statusText);
+                    });
+            } else {
+
+                axios.post('/vehicles', {updated})
+                    .then(
+                        response => {
+                            console.log(response);
+                            //NotificationManager.success(response.data.message.type, response.data.message.status);
+                        })
+                    .catch((error) => {
+                        //NotificationManager.error('Error', error.response.statusText);
+                        console.log(error.response.statusText);
+                    });
+            }
+
             let updatedRow = update(rowToUpdate, {$merge: updated});
             rows[i] = updatedRow;
         }
@@ -276,22 +295,26 @@ class InlineGrid extends React.Component {
 
     render() {
         return  (
-            <ReactDataGrid
-                ref={ node => this.grid = node }
-                onGridSort={this.handleGridSort}
-                enableCellSelect={true}
-                columns={this.getColumns()}
-                rowGetter={this.getRowAt}
-                rowsCount={this.getSize()}
-                onGridRowsUpdated={this.handleGridRowsUpdated}
-                toolbar={<Toolbar onAddRow={this.handleAddRow} enableFilter={true}/>}
-                onAddFilter={this.handleFilterChange}
-                getValidFilterValues={this.getValidFilterValues}
-                onClearFilters={this.handleOnClearFilters}
-                enableRowSelect={true}
-                rowHeight={50}
-                minHeight={600}
-                rowScrollTimeout={200} />);
+            <div>
+                <ReactDataGrid
+                    ref={ node => this.grid = node }
+                    onGridSort={this.handleGridSort}
+                    enableCellSelect={true}
+                    columns={this.getColumns()}
+                    rowGetter={this.getRowAt}
+                    rowsCount={this.getSize()}
+                    onGridRowsUpdated={this.handleGridRowsUpdated}
+                    toolbar={<Toolbar onAddRow={this.handleAddRow} enableFilter={true}/>}
+                    onAddFilter={this.handleFilterChange}
+                    getValidFilterValues={this.getValidFilterValues}
+                    onClearFilters={this.handleOnClearFilters}
+                    enableRowSelect={true}
+                    rowHeight={50}
+                    minHeight={600}
+                    rowScrollTimeout={200} />
+                    <NotificationContainer/>
+            </div>
+        );
     }
 }
 
