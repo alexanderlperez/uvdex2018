@@ -226,8 +226,8 @@ class InlineGrid extends React.Component {
                         console.log(error.response.statusText);
                     });
             } else {
-
-                axios.post('/vehicles', {updated})
+console.log(rowToUpdate);
+                /*axios.post('/vehicles', {updated})
                     .then(
                         response => {
                             console.log(response);
@@ -236,7 +236,7 @@ class InlineGrid extends React.Component {
                     .catch((error) => {
                         //NotificationManager.error('Error', error.response.statusText);
                         console.log(error.response.statusText);
-                    });
+                    });*/
             }
 
             let updatedRow = update(rowToUpdate, {$merge: updated});
