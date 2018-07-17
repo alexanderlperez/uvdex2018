@@ -55812,13 +55812,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Filter = function (_Component) {
     _inherits(Filter, _Component);
 
-    function Filter() {
+    function Filter(props) {
         _classCallCheck(this, Filter);
 
-        return _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this, props));
+
+        _this.state = {
+            value: 'All Prices',
+            min: 10,
+            max: 60
+        };
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
     }
 
     _createClass(Filter, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState({ value: '$' + event.target.value });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -55891,7 +55905,42 @@ var Filter = function (_Component) {
                                     'SUV'
                                 )
                             ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'col-md-3 range-filter-block' })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'col-md-3 range-filter-block' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h3',
+                                    null,
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'strong',
+                                        null,
+                                        this.state.value
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', onChange: this.handleChange }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h4',
+                                    { className: 'low-price' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'strong',
+                                        null,
+                                        '$',
+                                        this.state.min,
+                                        'K'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h4',
+                                    { className: 'high-price' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'strong',
+                                        null,
+                                        '$',
+                                        this.state.max,
+                                        'K'
+                                    )
+                                )
+                            )
                         )
                     )
                 )
@@ -55913,6 +55962,10 @@ var Filter = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_on_png__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_on_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_on_png__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -55924,6 +55977,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+//Fav Icon import here 
+
+
+
 var Cardata = function (_Component) {
     _inherits(Cardata, _Component);
 
@@ -55932,11 +55989,28 @@ var Cardata = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Cardata.__proto__ || Object.getPrototypeOf(Cardata)).call(this, props));
 
-        _this.state = { data: "New" };
+        _this.state = {
+            data: "New",
+            iconUrl: __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a
+        };
+
+        _this.toggleIcons = _this.toggleIcons.bind(_this);
         return _this;
     }
 
+    //Toggle footer fav icon function
+
+
     _createClass(Cardata, [{
+        key: 'toggleIcons',
+        value: function toggleIcons() {
+            if (this.state.iconUrl === __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a) {
+                this.setState({ iconUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_on_png___default.a });
+            } else {
+                this.setState({ iconUrl: __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a });
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -55988,7 +56062,7 @@ var Cardata = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'a',
                                     { href: '#', className: 'fav-icon d-block d-sm-none' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-star' })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconUrl, alt: 'Fav Icon', onClick: this.toggleIcons })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'figure',
@@ -56050,7 +56124,7 @@ var Cardata = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'a',
                                     { href: '#', className: 'fav-icon' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('i', { className: 'far fa-star' })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconUrl, alt: 'Fav Icon', onClick: this.toggleIcons })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'p',
@@ -56399,6 +56473,49 @@ var DetailBlock = function (_Component) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */,
+/* 96 */,
+/* 97 */,
+/* 98 */,
+/* 99 */,
+/* 100 */,
+/* 101 */,
+/* 102 */,
+/* 103 */,
+/* 104 */,
+/* 105 */,
+/* 106 */,
+/* 107 */,
+/* 108 */,
+/* 109 */,
+/* 110 */,
+/* 111 */,
+/* 112 */,
+/* 113 */
+/***/ (function(module, exports) {
+
+module.exports = "/images/favorite_off.png?62c012ec9e45c2354d4daa4f01e72518";
 
 /***/ })
 /******/ ]);

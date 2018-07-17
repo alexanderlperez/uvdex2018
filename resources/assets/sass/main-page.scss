@@ -37,6 +37,11 @@
             margin-top: 0;
         }
         .dealer-notes {
+            @media screen and (max-width: ($lgscreen-size - 1)) {
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+            }
             h4 {
                 font-size: 18px;
                 line-height: 22px;
@@ -55,12 +60,21 @@
             a {
                 &.fav-icon {
                     position: absolute;
-                    top: 0;
+                    top: 19px;
                     right: 0;
+                    @include object-fit($property: cover);
+                    @media screen and (min-width: $lgscreen-size) {
+                        top: 0;
+                    }
                 }
             }
         }
         .car-detail-block {
+            @media screen and (max-width: ($lgscreen-size - 1)) {
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+            }
             h5 {
                 font-size: 17px;
                 line-height: 21px;
@@ -74,13 +88,35 @@
             .button-block {
                 margin-top: 18px;
                 button {
-                    padding: 15px 30px !important;
+                    padding: 11px 19px !important;
                     margin: 0 5px;
+                    @media screen and (min-width: $smscreen-size) {
+                        padding: 15px 30px !important;
+                    }
                 }
             }
             img {
                 width: 100%;
                 @include object-fit($property: cover);
+            }
+            a {
+                &.fav-icon {
+                    position: absolute;
+                    right: 0;
+                    top: -5px;
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        @include object-fit($property: cover);
+                    }
+                }
+            }
+        }
+        .image-block {
+            @media screen and (max-width: ($lgscreen-size - 1)) {
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
             }
         }
     }

@@ -3,7 +3,20 @@ import ReactDOM from 'react-dom';
 
 
 class Filter extends Component{
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: 'All Prices',
+            min: 10,
+            max: 60,
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: '$' + event.target.value});
+    }
     render() {
         return (
             <div className="filter-section navbar-fixed-top">
@@ -31,6 +44,11 @@ class Filter extends Component{
                                         <button type="button" className="btn btn-primary">SUV</button>
                                     </div>
                                     <div className="col-md-3 range-filter-block">
+                                        <h3><strong>{this.state.value}</strong></h3>
+                                        
+                                        <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  onChange={this.handleChange}/>
+                                       
+                                        <h4 className="low-price"><strong>${this.state.min}K</strong></h4><h4 className="high-price"><strong>${this.state.max}K</strong></h4>
 
                                     </div>
                             </div>

@@ -57227,14 +57227,17 @@ var InlineGrid = function (_React$Component) {
                         console.log(error.response.statusText);
                     });
                 } else {
-
-                    axios.post('/vehicles', { updated: updated }).then(function (response) {
-                        console.log(response);
-                        //NotificationManager.success(response.data.message.type, response.data.message.status);
-                    }).catch(function (error) {
-                        //NotificationManager.error('Error', error.response.statusText);
-                        console.log(error.response.statusText);
-                    });
+                    console.log(rowToUpdate);
+                    /*axios.post('/vehicles', {updated})
+                        .then(
+                            response => {
+                                console.log(response);
+                                //NotificationManager.success(response.data.message.type, response.data.message.status);
+                            })
+                        .catch((error) => {
+                            //NotificationManager.error('Error', error.response.statusText);
+                            console.log(error.response.statusText);
+                        });*/
                 }
 
                 var updatedRow = __WEBPACK_IMPORTED_MODULE_3_immutability_helper___default()(rowToUpdate, { $merge: updated });

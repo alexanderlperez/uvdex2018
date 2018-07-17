@@ -42,6 +42,29 @@
   }
 }
 
+.filter-section .range-filter-block h3 {
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.filter-section .range-filter-block input[type="range"] {
+  width: 100%;
+}
+
+.filter-section .range-filter-block h4 {
+  color: #ffffff;
+}
+
+.filter-section .range-filter-block h4.low-price {
+  float: left;
+}
+
+.filter-section .range-filter-block h4.high-price {
+  float: right;
+}
+
 .btn-primary {
   border: 2px solid #ffffff !important;
   background-color: #008cba !important;
@@ -123,6 +146,14 @@
   margin-top: 0;
 }
 
+@media screen and (max-width: 991px) {
+  .car-info-section .car-detail-wrapper .dealer-notes {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
 .car-info-section .car-detail-wrapper .dealer-notes h4 {
   font-size: 18px;
   line-height: 22px;
@@ -142,8 +173,27 @@
 
 .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
   position: absolute;
-  top: 0;
+  top: 19px;
   right: 0;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  -o-object-fit: cover;
+  -moz-object-fit: cover;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 992px) {
+  .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
+    top: 0;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .car-info-section .car-detail-wrapper .car-detail-block {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block h5 {
@@ -163,8 +213,14 @@
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block .button-block button {
-  padding: 15px 30px !important;
+  padding: 11px 19px !important;
   margin: 0 5px;
+}
+
+@media screen and (min-width: 576px) {
+  .car-info-section .car-detail-wrapper .car-detail-block .button-block button {
+    padding: 15px 30px !important;
+  }
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block img {
@@ -174,6 +230,30 @@
   -o-object-fit: cover;
   -moz-object-fit: cover;
   object-fit: cover;
+}
+
+.car-info-section .car-detail-wrapper .car-detail-block a.fav-icon {
+  position: absolute;
+  right: 0;
+  top: -5px;
+}
+
+.car-info-section .car-detail-wrapper .car-detail-block a.fav-icon img {
+  width: 30px;
+  height: 30px;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  -o-object-fit: cover;
+  -moz-object-fit: cover;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 991px) {
+  .car-info-section .car-detail-wrapper .image-block {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
 }
 
 a.fav-icon i {
