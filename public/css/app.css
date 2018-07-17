@@ -42,6 +42,29 @@
   }
 }
 
+.filter-section .range-filter-block h3 {
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.filter-section .range-filter-block input[type="range"] {
+  width: 100%;
+}
+
+.filter-section .range-filter-block h4 {
+  color: #ffffff;
+}
+
+.filter-section .range-filter-block h4.low-price {
+  float: left;
+}
+
+.filter-section .range-filter-block h4.high-price {
+  float: right;
+}
+
 .btn-primary {
   border: 2px solid #ffffff !important;
   background-color: #008cba !important;

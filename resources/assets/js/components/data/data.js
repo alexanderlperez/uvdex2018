@@ -13,16 +13,16 @@ class Cardata extends Component{
             iconUrl: FavIconBlue
         };
 
-        this.toggleIcon = this.toggleIcon.bind(this);
+        this.toggleIcons = this.toggleIcons.bind(this);
     }
 
     //Toggle footer fav icon function
-    toggleIcon(){
-        if(this.state.iconsUrl === FavIconBlue){
-            this.setState({iconsUrl: FavIconDarkBlue});
+    toggleIcons(){
+        if(this.state.iconUrl === FavIconBlue){
+            this.setState({iconUrl: FavIconDarkBlue});
         }
         else{
-            this.setState({iconsUrl: FavIconBlue});
+            this.setState({iconUrl: FavIconBlue});
         }
     }
 
@@ -43,7 +43,7 @@ class Cardata extends Component{
                             <div className="car-detail-block  col-md-4 text-center">
                                 <a href="#" className="d-none d-sm-block"><h2>{this.state.data}</h2></a>
                                 <a href="#"><h3>2015 Ford Explorer XLT</h3></a>
-                                <a href="#"className="fav-icon d-block d-sm-none"><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></a>
+                                <a href="#"className="fav-icon d-block d-sm-none"><img src={this.state.iconUrl} alt="Fav Icon" onClick={this.toggleIcons}/></a>
                                 <figure className="d-block d-sm-none">
                                         <img src={"./img/data.jpeg"} alt=""/>
                                 </figure>
@@ -58,7 +58,7 @@ class Cardata extends Component{
                                 </div>
                             </div>
                             <div className="dealer-notes  col-md-4 text-center d-none d-sm-block">
-                                <h4>Dealer Notes</h4><a href="#"className="fav-icon"><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></a>
+                                <h4>Dealer Notes</h4><a href="#"className="fav-icon"><img src={this.state.iconUrl} alt="Fav Icon" onClick={this.toggleIcons}/></a>
                                 
                                 
                                 <p>42 COMBINED CITY/HWY, Heated Leather, Rear view camera, Touch Navigation, Michelin Tires</p>

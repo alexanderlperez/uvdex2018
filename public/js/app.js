@@ -55811,13 +55811,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Filter = function (_Component) {
     _inherits(Filter, _Component);
 
-    function Filter() {
+    function Filter(props) {
         _classCallCheck(this, Filter);
 
-        return _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this, props));
+
+        _this.state = {
+            value: 'All Prices',
+            min: 10,
+            max: 60
+        };
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
     }
 
     _createClass(Filter, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState({ value: '$' + event.target.value });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -55899,7 +55913,30 @@ var Filter = function (_Component) {
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'strong',
                                         null,
-                                        'All Prices'
+                                        this.state.value
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', onChange: this.handleChange }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h4',
+                                    { className: 'low-price' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'strong',
+                                        null,
+                                        '$',
+                                        this.state.min,
+                                        'K'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h4',
+                                    { className: 'high-price' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'strong',
+                                        null,
+                                        '$',
+                                        this.state.max,
+                                        'K'
                                     )
                                 )
                             )
@@ -55956,7 +55993,7 @@ var Cardata = function (_Component) {
             iconUrl: __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a
         };
 
-        _this.toggleIcon = _this.toggleIcon.bind(_this);
+        _this.toggleIcons = _this.toggleIcons.bind(_this);
         return _this;
     }
 
@@ -55964,12 +56001,12 @@ var Cardata = function (_Component) {
 
 
     _createClass(Cardata, [{
-        key: 'toggleIcon',
-        value: function toggleIcon() {
-            if (this.state.iconsUrl === __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a) {
-                this.setState({ iconsUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_on_png___default.a });
+        key: 'toggleIcons',
+        value: function toggleIcons() {
+            if (this.state.iconUrl === __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a) {
+                this.setState({ iconUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_on_png___default.a });
             } else {
-                this.setState({ iconsUrl: __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a });
+                this.setState({ iconUrl: __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a });
             }
         }
     }, {
@@ -56024,7 +56061,7 @@ var Cardata = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'a',
                                     { href: '#', className: 'fav-icon d-block d-sm-none' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconsUrl, alt: 'Fav Icon', onClick: this.toggleIcon })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconUrl, alt: 'Fav Icon', onClick: this.toggleIcons })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'figure',
@@ -56086,7 +56123,7 @@ var Cardata = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'a',
                                     { href: '#', className: 'fav-icon' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconsUrl, alt: 'Fav Icon', onClick: this.toggleIcon })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconUrl, alt: 'Fav Icon', onClick: this.toggleIcons })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'p',

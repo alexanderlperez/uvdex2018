@@ -24,4 +24,24 @@
             }
         }
     }
+    .range-filter-block {
+        h3 {
+            font-size: 16px;
+            line-height: 20px;
+            color: $white;
+            text-align: center;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        h4 {
+            color: $white;
+            &.low-price {
+                float: left;
+            }
+            &.high-price {
+                float: right;
+            }
+        }
+    }
 }
