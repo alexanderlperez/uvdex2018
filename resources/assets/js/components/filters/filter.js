@@ -31,7 +31,7 @@ class Filter extends Component{
                                         <button type="button" className="btn btn-primary">SUV</button>
                                     </div>
                                     <div className="col-md-3 range-filter-block">
-
+                                        <h3><strong>All Prices</strong></h3>
                                     </div>
                             </div>
                         </div>
