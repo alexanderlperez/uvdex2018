@@ -25,7 +25,7 @@
             </div>
 
             <div class="box-footer">
-                {!! Form::submit('Import Vehicles',['class'=>'btn btn-primary  pull-right'])!!}
+                {!! Form::submit('Import Inventory',['class'=>'btn btn-primary  pull-right'])!!}
             </div>
 
         {!! form::close()!!}
