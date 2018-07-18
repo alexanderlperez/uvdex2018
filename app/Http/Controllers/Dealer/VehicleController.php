@@ -40,9 +40,9 @@ class VehicleController extends Controller
      */
     public function getData($id){
 
-        $vehicle = Vehicle::whereUserId($id)->exclude(['user_id', 'created_at', 'updated_at'])->get();
+        $vehicles = Vehicle::whereUserId($id)->exclude(['user_id', 'created_at', 'updated_at'])->get();
 
-        $vehicle->transform(function ($item, $key){
+        $vehicles->transform(function ($item, $key){
 
             $item->type = 'Used';
             if ($item->type == 'N')
@@ -56,7 +56,7 @@ class VehicleController extends Controller
             return $item;
         });
 
-        return response()->json(['data' => $vehicle], $this->successStatus);
+        return response()->json(['vehicles' => $vehicles], $this->successStatus);
     }
 
     /**
@@ -96,18 +96,6 @@ class VehicleController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $data['vehicle'] = Vehicle::findOrFail($id);
-        return view('dealer.vehicles.form',$data);
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -116,22 +104,25 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->_validate($request, $id);
+        $data = $request->get('updated');
 
         try {
 
             DB::beginTransaction();
-            $this->_save($request, $id);
+            $this->_update($data, $id);
             DB::commit();
-            setFlashMessage('success', trans('message.update_success', ['name' => $this->title]));
+
+            $message['type'] = 'Success';
+            $message['status'] = trans('message.update_success', ['name' => $this->title]);
+
+            return response()->json(['message' => $message], $this->successStatus);
         } catch (\Exception $e) {
 
             DB::rollBack();
-            setFlashMessage('danger', $e->getMessage());
-            return back()->withInput($request->all());
+            $message['type'] = 'Error';
+            $message['status'] = $e->getMessage();
+            return response()->json(['message' => $message], $this->successStatus);
         }
-
-        return redirect()->route('vehicles.index');
     }
 
     /**
@@ -199,7 +190,6 @@ class VehicleController extends Controller
     /**
      * _validate
      * @param $request
-     * @param $id
      */
     protected function _validate($request){
 
@@ -231,7 +221,14 @@ class VehicleController extends Controller
 
                 $data[$key]['user_id'] = Auth::user()->id;
                 $data[$key]['vin'] = $row[0];
-                $data[$key]['type'] = $row[1];
+
+                $type = '';
+                if ($row[1] == 'U')
+                    $type = 'Used';
+                elseif ($row[1] == 'N')
+                    $type = 'New';
+
+                $data[$key]['type'] = $type;
                 $data[$key]['stock_number'] = $row[2];
                 $data[$key]['make'] = $row[3];
                 $data[$key]['model'] = $row[4];
@@ -259,6 +256,12 @@ class VehicleController extends Controller
             Vehicle::insert($data);
         }
 
+    }
+
+    public function _update($data, $id)
+    {
+        $vehicle = Vehicle::find($id);
+        $vehicle->update($data);
     }
 
     /**

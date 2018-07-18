@@ -4,6 +4,8 @@ import ReactDataGrid from 'react-data-grid';
 const { Editors, Toolbar, Filters: { NumericFilter, MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
 const { DropDownEditor } = Editors;
 import update from 'immutability-helper';
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const types = ['Used', 'New'];
 
@@ -18,60 +20,52 @@ class InlineGrid extends React.Component {
                 resizable: true
             },
             {
-                key: 'vin',
-                name: 'Vin',
+                key: 'stock_number',
+                name: 'Stock',
                 editable: true,
-                width: 147,
+                width: 70,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'type',
-                name: 'Type',
+                name: 'New_Used',
                 editable: true,
-                width: 50,
+                width: 80,
                 editor: <DropDownEditor options={types}/>,
                 resizable: true,
                 filterable: true,
                 filterRenderer: SingleSelectFilter
             },
             {
-                key: 'cylinders',
-                name: 'Cylinders',
-                editable: true,
-                width: 75,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'description',
-                name: 'Description',
-                editable: true,
-                width: 200,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'engine_description',
-                name: 'Engine Description',
-                editable: true,
-                width: 130,
-                resizable: true,
-                filterable: true,
-            },
-            {
                 key: 'body_style',
-                name: 'Body Style',
+                name: 'Car_Truck',
                 editable: true,
                 width: 85,
                 resizable: true,
                 filterable: true,
             },
             {
-                key: 'fuel_type',
-                name: 'Fuel Type',
+                key: 'model_year',
+                name: 'Year',
                 editable: true,
-                width: 80,
+                width: 45,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'make',
+                name: 'Make',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'model',
+                name: 'Model',
+                editable: true,
+                width: 70,
                 resizable: true,
                 filterable: true,
             },
@@ -94,26 +88,58 @@ class InlineGrid extends React.Component {
                 filterable: true,
             },
             {
-                key: 'make',
-                name: 'Make',
+                key: 'price',
+                name: 'Price',
                 editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'stock_number',
-                name: 'Stock Number',
-                editable: true,
-                width: 100,
+                width: 60,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'mileage',
-                name: 'Mileage',
+                name: 'Miles',
                 editable: true,
                 width: 70,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'vin',
+                name: 'Vin',
+                editable: true,
+                width: 147,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'description',
+                name: 'Description',
+                editable: true,
+                width: 200,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'cylinders',
+                name: 'Cylinders',
+                editable: true,
+                width: 75,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'engine_description',
+                name: 'Engine Description',
+                editable: true,
+                width: 130,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'fuel_type',
+                name: 'Fuel Type',
+                editable: true,
+                width: 80,
                 resizable: true,
                 filterable: true,
             },
@@ -126,37 +152,12 @@ class InlineGrid extends React.Component {
                 filterable: true,
             },
             {
-                key: 'model',
-                name: 'Model',
-                editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'model_year',
-                name: 'Model Year',
-                editable: true,
-                width: 90,
-                resizable: true,
-                filterable: true,
-            },
-            {
                 key: 'trim',
                 name: 'Trim',
                 editable: true,
                 width: 110,
                 resizable: true,
                 filterable: true,
-            },
-            {
-                key: 'price',
-                name: 'Price',
-                editable: true,
-                width: 60,
-                resizable: true,
-                filterable: true,
-                filterRenderer: NumericFilter
             },
             {
                 key: 'option_text',
@@ -182,24 +183,15 @@ class InlineGrid extends React.Component {
 
     componentDidMount() {
 
-        fetch("getVehicles/"+user_id, {
-            credentials: "same-origin",
-        })
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        rows: result.data
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            );
+        axios.get('/getVehicles/'+user_id)
+            .then((response) => {
+                this.setState({
+                    rows: [...response.data.vehicles]
+                })
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
     }
 
     getColumns() {
@@ -220,6 +212,32 @@ class InlineGrid extends React.Component {
 
         for (let i = fromRow; i <= toRow; i++) {
             let rowToUpdate = rows[i];
+
+            if(rowToUpdate.id !== undefined){ // Update
+
+                axios.patch('/vehicles/'+rowToUpdate.id, {updated})
+                    .then(
+                        response => {
+                            NotificationManager.success(response.data.message.type, response.data.message.status);
+                    })
+                    .catch((error) => {
+                        NotificationManager.error('Error', error.response.statusText);
+                        console.log(error.response.statusText);
+                    });
+            } else {
+console.log(rowToUpdate);
+                /*axios.post('/vehicles', {updated})
+                    .then(
+                        response => {
+                            console.log(response);
+                            //NotificationManager.success(response.data.message.type, response.data.message.status);
+                        })
+                    .catch((error) => {
+                        //NotificationManager.error('Error', error.response.statusText);
+                        console.log(error.response.statusText);
+                    });*/
+            }
+
             let updatedRow = update(rowToUpdate, {$merge: updated});
             rows[i] = updatedRow;
         }
@@ -276,22 +294,26 @@ class InlineGrid extends React.Component {
 
     render() {
         return  (
-            <ReactDataGrid
-                ref={ node => this.grid = node }
-                onGridSort={this.handleGridSort}
-                enableCellSelect={true}
-                columns={this.getColumns()}
-                rowGetter={this.getRowAt}
-                rowsCount={this.getSize()}
-                onGridRowsUpdated={this.handleGridRowsUpdated}
-                toolbar={<Toolbar onAddRow={this.handleAddRow} enableFilter={true}/>}
-                onAddFilter={this.handleFilterChange}
-                getValidFilterValues={this.getValidFilterValues}
-                onClearFilters={this.handleOnClearFilters}
-                enableRowSelect={true}
-                rowHeight={50}
-                minHeight={600}
-                rowScrollTimeout={200} />);
+            <div>
+                <ReactDataGrid
+                    ref={ node => this.grid = node }
+                    onGridSort={this.handleGridSort}
+                    enableCellSelect={true}
+                    columns={this.getColumns()}
+                    rowGetter={this.getRowAt}
+                    rowsCount={this.getSize()}
+                    onGridRowsUpdated={this.handleGridRowsUpdated}
+                    toolbar={<Toolbar onAddRow={this.handleAddRow} enableFilter={true}/>}
+                    onAddFilter={this.handleFilterChange}
+                    getValidFilterValues={this.getValidFilterValues}
+                    onClearFilters={this.handleOnClearFilters}
+                    enableRowSelect={true}
+                    rowHeight={50}
+                    minHeight={600}
+                    rowScrollTimeout={200} />
+                    <NotificationContainer/>
+            </div>
+        );
     }
 }
 

@@ -12,7 +12,7 @@ class Cardata extends Component{
             data: "New",
             iconUrl: FavIconBlue
         };
-
+        
         this.toggleIcons = this.toggleIcons.bind(this);
     }
 

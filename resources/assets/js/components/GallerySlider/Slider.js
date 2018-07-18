@@ -50,7 +50,7 @@ class Slider extends Component{
             controlNavigation: 'thumbnails',
 				imageScaleMode: 'fit-if-smaller',
 				navigateByClick: true,
-				arrowsNav:true,
+				arrowsNav: true,
 				arrowsNavAutoHide: true,
 				arrowsNavHideOnTouch: true,
 				keyboardNavEnabled: true,

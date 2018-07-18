@@ -24,6 +24,7 @@
     "dependencies": {
         "immutability-helper": "^2.7.1",
         "react-data-grid": "^4.0.7",
-        "react-data-grid-addons": "^4.0.8"
+        "react-data-grid-addons": "^4.0.8",
+        "react-notifications": "^1.4.3"
     }
 }
