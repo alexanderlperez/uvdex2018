@@ -16,7 +16,7 @@ class CreateVehiclesTable extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('vin', 50)->unique();
+            $table->string('vin', 50)->nullable();
             $table->string('type', 5)->nullable();
             $table->string('stock_number', 20)->nullable();
             $table->string('make', 50)->nullable();
@@ -35,6 +35,9 @@ class CreateVehiclesTable extends Migration
             $table->text('option_text')->nullable();
             $table->text('description')->nullable();
             $table->text('images')->nullable();
+            $table->string('package', 100)->nullable();
+            $table->string('msrp', 20)->nullable();
+            $table->tinyInteger('passengers')->nullable();
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')
