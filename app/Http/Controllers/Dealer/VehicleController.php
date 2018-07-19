@@ -44,10 +44,6 @@ class VehicleController extends Controller
 
         $vehicles->transform(function ($item, $key){
 
-            $item->type = 'Used';
-            if ($item->type == 'N')
-                $item->type = 'New';
-
             if(!empty($item->images))
                 $item->images = explode(',', $item->images);
 
@@ -93,6 +89,37 @@ class VehicleController extends Controller
         }
 
         return redirect()->route('vehicles.index');
+    }
+
+    /**
+     * Save Vehicle the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveVehicle(Request $request)
+    {
+        $data = $request->get('updated');
+
+        try {
+
+            DB::beginTransaction();
+            $data['user_id'] = Auth::user()->id;
+            $vehicle = Vehicle::create($data);
+            DB::commit();
+
+            $message['type'] = 'Success';
+            $message['status'] = trans('message.add_success', ['name' => $this->title]);
+            $message['id'] = $vehicle->id;
+
+            return response()->json(['message' => $message], $this->successStatus);
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            $message['type'] = 'Error';
+            $message['status'] = $e->getMessage();
+            return response()->json(['message' => $message], $this->successStatus);
+        }
     }
 
     /**
@@ -258,6 +285,11 @@ class VehicleController extends Controller
 
     }
 
+    /**
+     * _update
+     * @param $data
+     * @param $id
+     */
     public function _update($data, $id)
     {
         $vehicle = Vehicle::find($id);
