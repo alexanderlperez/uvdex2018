@@ -6,6 +6,7 @@ const { DropDownEditor } = Editors;
 import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import _ from 'lodash';
 
 const types = ['Used', 'New'];
 
@@ -70,6 +71,14 @@ class InlineGrid extends React.Component {
                 filterable: true,
             },
             {
+                key: 'package',
+                name: 'Package',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true,
+            },
+            {
                 key: 'interior_color',
                 name: 'Interior Color',
                 editable: true,
@@ -96,6 +105,14 @@ class InlineGrid extends React.Component {
                 filterable: true,
             },
             {
+                key: 'msrp',
+                name: 'MSRP',
+                editable: true,
+                width: 60,
+                resizable: true,
+                filterable: true,
+            },
+            {
                 key: 'mileage',
                 name: 'Miles',
                 editable: true,
@@ -108,6 +125,14 @@ class InlineGrid extends React.Component {
                 name: 'Vin',
                 editable: true,
                 width: 147,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'passenger',
+                name: 'Passengers',
+                editable: true,
+                width: 90,
                 resizable: true,
                 filterable: true,
             },
@@ -213,7 +238,7 @@ class InlineGrid extends React.Component {
         for (let i = fromRow; i <= toRow; i++) {
             let rowToUpdate = rows[i];
 
-            if(rowToUpdate.id !== undefined){ // Update
+            if(rowToUpdate.id !== undefined && rowToUpdate.id !== ''){ // Update
 
                 axios.patch('/vehicles/'+rowToUpdate.id, {updated})
                     .then(
@@ -225,17 +250,17 @@ class InlineGrid extends React.Component {
                         console.log(error.response.statusText);
                     });
             } else {
-console.log(rowToUpdate);
-                /*axios.post('/vehicles', {updated})
+                axios.post('/saveVehicle', {updated})
                     .then(
                         response => {
-                            console.log(response);
-                            //NotificationManager.success(response.data.message.type, response.data.message.status);
+                            rows[i].id = response.data.message.id;
+                            this.setState({ rows });
+                            NotificationManager.success(response.data.message.type, response.data.message.status);
                         })
                     .catch((error) => {
-                        //NotificationManager.error('Error', error.response.statusText);
+                        NotificationManager.error('Error', error.response.statusText);
                         console.log(error.response.statusText);
-                    });*/
+                    });
             }
 
             let updatedRow = update(rowToUpdate, {$merge: updated});
@@ -247,7 +272,8 @@ console.log(rowToUpdate);
 
     handleAddRow({ newRowIndex }) {
         const newRow = {
-            value: newRowIndex,
+            id: '',
+            key: newRowIndex+1,
             type: '',
             interior_color: '',
         };
@@ -302,7 +328,7 @@ console.log(rowToUpdate);
                     columns={this.getColumns()}
                     rowGetter={this.getRowAt}
                     rowsCount={this.getSize()}
-                    onGridRowsUpdated={this.handleGridRowsUpdated}
+                    onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
                     toolbar={<Toolbar onAddRow={this.handleAddRow} enableFilter={true}/>}
                     onAddFilter={this.handleFilterChange}
                     getValidFilterValues={this.getValidFilterValues}
