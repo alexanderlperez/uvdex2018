@@ -4,4 +4,5 @@ Route::group(array('namespace' => 'Dealer', 'middleware' => ['auth', 'role:'.con
     Route::resource('vehicles', 'VehicleController');
     Route::get('export', 'VehicleController@export')->name('export');
     Route::get('getVehicles/{id}', 'VehicleController@getData')->name('getVehicles');
+    Route::post('saveVehicle', 'VehicleController@saveVehicle')->name('saveVehicle');
 });
