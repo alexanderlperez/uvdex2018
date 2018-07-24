@@ -19,27 +19,27 @@ class Slider extends Component{
         this.setState({images: [
             {
                 id: 1,
-                img: '',
+                img: '/images/img1.jpeg',
             },
             {
                 id: 2,
-                img: '',
+                img: '/images/img2.jpeg',
             },
             {
                 id: 3,
-                img: '',
+                img: '/images/img3.jpeg',
             },
             {
                 id: 4,
-                img: '',
+                img: '/images/img4.jpeg',
             },
             {
                 id: 5,
-                img: '',
+                img: '/images/img5.jpeg',
             },
             {
-                id: 5,
-                img: '',
+                id: 6,
+                img: '/images/img6.jpeg',
             },
         ]});
     }
