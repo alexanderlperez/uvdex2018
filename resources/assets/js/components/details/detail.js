@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import Slider from '../../components/GallerySlider/Slider';
 class DetailBlock extends Component{
     render() {
         return(
             <div className="container detail-information-wrapper">
                 <div className="row">
-                    <div className="col-sm-6">
-
+                    <div className="col-12 col-md-7">
+                        <Slider />
                     </div>
-                    <div className="col-sm-6 car-price-detail">
+                    <div className="col-12 col-md-5 car-price-detail">
                         <h3>2015 Ford Explorer XLT</h3>
                         <h5><span>Condtion:</span> New</h5>
                         <h5><span>Mileage:</span> 0</h5>

@@ -30,6 +30,9 @@
             line-height: 20px;
             color: $white;
             text-align: center;
+            @media screen and (min-width: $mdscreen-size) {
+                margin-top: 0;
+            }
         }
         input[type="range"] {
             width: 100%;
