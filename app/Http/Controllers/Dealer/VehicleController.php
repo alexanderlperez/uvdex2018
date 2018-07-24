@@ -40,12 +40,17 @@ class VehicleController extends Controller
      */
     public function getData($id){
 
+        // TODO: Sort according to vehicle type
         $vehicles = Vehicle::whereUserId($id)->exclude(['user_id', 'created_at', 'updated_at'])->get();
 
         $vehicles->transform(function ($item, $key){
 
             if(!empty($item->images))
                 $item->images = explode(',', $item->images);
+
+            $item->is_sold = 'Available';
+            if(empty($item->is_sold) == Config::get('constants.status.active'))
+                $item->is_sold = 'Sold';
 
             $item->key = $key+1;
 
@@ -270,9 +275,18 @@ class VehicleController extends Controller
                 $data[$key]['price'] = $row[13];
                 $data[$key]['exterior_color'] = $row[14];
                 $data[$key]['interior_color'] = $row[15];
-                $data[$key]['option_text'] = $row[16];
-                $data[$key]['description'] = $row[17];
-                $data[$key]['images'] = $row[18];
+
+                $data[$key]['option_text'] = '';
+                if(!empty($row[16]))
+                    $data[$key]['option_text'] = $row[16];
+
+                $data[$key]['description'] = '';
+                if(!empty($row[17]))
+                    $data[$key]['description'] = $row[17];
+
+                $data[$key]['images'] = '';
+                if(!empty($row[18]))
+                    $data[$key]['images'] = $row[18];
             }
         }
 
