@@ -21,6 +21,19 @@ return [
         'active' => 1,
         'inactive' => 0,
     ],
+    'body_type' => [
+        'car' => [
+            'coupe',
+            'sedan',
+            'hatchback'
+        ],
+        'suv' => [
+            'suv',
+        ],
+        'truck' => [
+            'pickup truck'
+        ],
+    ],
     'headers' => [
         'VIN',
         'Type',
