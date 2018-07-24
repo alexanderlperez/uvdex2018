@@ -22,10 +22,12 @@ class RowRenderer extends React.Component {
 
     getRowBackground() {
 
-        if(this.props.row.body_style === 'SUV')
+        if(this.props.row.body_type === 'CAR')
+            return 'orange';
+        if(this.props.row.body_type === 'SUV')
             return 'green';
-
-        return 'blue';
+        if(this.props.row.body_type === 'TRUCK')
+            return 'blue';
     };
 
     render() {
@@ -48,7 +50,7 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'stock_number',
-                name: 'Stock',
+                name: 'STOCK',
                 editable: true,
                 width: 70,
                 resizable: true,
@@ -56,33 +58,33 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'type',
-                name: 'New_Used',
+                name: 'NEW_USED',
                 editable: true,
-                width: 80,
+                width: 85,
                 editor: <DropDownEditor options={types}/>,
                 resizable: true,
                 filterable: true,
                 filterRenderer: SingleSelectFilter
             },
             {
-                key: 'body_style',
-                name: 'Car_Truck',
+                key: 'body_type',
+                name: 'CAR_TRUCK',
                 editable: true,
-                width: 85,
+                width: 95,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'model_year',
-                name: 'Year',
+                name: 'YEAR',
                 editable: true,
-                width: 45,
+                width: 47,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'make',
-                name: 'Make',
+                name: 'MAKE',
                 editable: true,
                 width: 70,
                 resizable: true,
@@ -90,7 +92,7 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'model',
-                name: 'Model',
+                name: 'MODEL',
                 editable: true,
                 width: 70,
                 resizable: true,
@@ -98,7 +100,7 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'package',
-                name: 'Package',
+                name: 'PACKAGE',
                 editable: true,
                 width: 70,
                 resizable: true,
@@ -106,9 +108,9 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'interior_color',
-                name: 'Interior Color',
+                name: 'INTERIOR COLOR',
                 editable: true,
-                width: 100,
+                width: 120,
                 resizable: true,
                 filterable: true,
                 sortable: true,
@@ -116,15 +118,15 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'exterior_color',
-                name: 'Exterior Color',
+                name: 'EXTERIOR COLOR',
                 editable: true,
-                width: 100,
+                width: 120,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'price',
-                name: 'Price',
+                name: 'PRICE',
                 editable: true,
                 width: 60,
                 resizable: true,
@@ -140,7 +142,7 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'mileage',
-                name: 'Miles',
+                name: 'MILES',
                 editable: true,
                 width: 70,
                 resizable: true,
@@ -148,7 +150,7 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'vin',
-                name: 'Vin',
+                name: 'VIN',
                 editable: true,
                 width: 147,
                 resizable: true,
@@ -156,15 +158,15 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'passengers',
-                name: 'Passengers',
+                name: 'PASSENGERS',
                 editable: true,
-                width: 90,
+                width: 100,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'description',
-                name: 'Description',
+                name: 'DESCRIPTION',
                 editable: true,
                 width: 200,
                 resizable: true,
@@ -172,23 +174,23 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'cylinders',
-                name: 'Cylinders',
+                name: 'CYLINDERS',
                 editable: true,
-                width: 75,
+                width: 80,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'engine_description',
-                name: 'Engine Description',
+                name: 'ENGINE DESCRIPTION',
                 editable: true,
-                width: 130,
+                width: 150,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'fuel_type',
-                name: 'Fuel Type',
+                name: 'FUEL TYPE',
                 editable: true,
                 width: 80,
                 resizable: true,
@@ -196,15 +198,15 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'transmission',
-                name: 'Transmission',
+                name: 'TRANSMISSION',
                 editable: true,
-                width: 100,
+                width: 110,
                 resizable: true,
                 filterable: true,
             },
             {
                 key: 'trim',
-                name: 'Trim',
+                name: 'TRIM',
                 editable: true,
                 width: 110,
                 resizable: true,
@@ -212,7 +214,7 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'option_text',
-                name: 'Option Text',
+                name: 'OPTION TEXT',
                 editable: true,
                 width: 200,
                 resizable: true,
@@ -220,9 +222,9 @@ class InlineGrid extends React.Component {
             },
             {
                 key: 'is_sold',
-                name: 'Status',
+                name: 'STATUS',
                 editable: true,
-                width: 100,
+                width: 70,
                 resizable: true,
                 filterable: true,
             },
