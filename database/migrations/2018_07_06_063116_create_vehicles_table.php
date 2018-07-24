@@ -24,6 +24,7 @@ class CreateVehiclesTable extends Migration
             $table->string('model_year', 5)->default('');
             $table->string('trim', 50)->default('');
             $table->string('body_style', 50)->default('');
+            $table->string('body_type', 50)->default('');
             $table->string('mileage', 20)->default('');
             $table->string('engine_description', 100)->default('');
             $table->string('cylinders', 50)->default('');
@@ -32,9 +33,9 @@ class CreateVehiclesTable extends Migration
             $table->string('price', 20)->default('');
             $table->string('exterior_color', 100)->default('');
             $table->string('interior_color', 100)->default('');
-            $table->text('option_text');
-            $table->text('description');
-            $table->text('images');
+            $table->text('option_text')->nullable(FALSE);
+            $table->text('description')->nullable(FALSE);
+            $table->text('images')->nullable(FALSE);
             $table->string('package', 100)->default('');
             $table->string('msrp', 20)->default('');
             $table->string('passengers')->default('');
