@@ -1,14 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDataGrid from 'react-data-grid';
-const { Editors, Toolbar, Filters: { NumericFilter, MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
+const { Row } = ReactDataGrid;
+const { Editors, Toolbar, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
 const { DropDownEditor } = Editors;
 import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 const types = ['Used', 'New'];
+
+class RowRenderer extends React.Component {
+
+    getRowStyle () {
+        return {
+            color: this.getRowBackground()
+        };
+    };
+
+    getRowBackground() {
+
+        if(this.props.row.body_style === 'SUV')
+            return 'green';
+
+        return 'blue';
+    };
+
+    render() {
+        // here we are just changing the style
+        // but we could replace this with anything we liked, cards, images, etc
+        // usually though it will just be a matter of wrapping a div, and then calling back through to the grid
+        return (<div style={this.getRowStyle()}><Row ref={node => this.row = node} {...this.props}/></div>);
+    }
+}
 
 class InlineGrid extends React.Component {
     constructor(props, context) {
@@ -129,7 +155,7 @@ class InlineGrid extends React.Component {
                 filterable: true,
             },
             {
-                key: 'passenger',
+                key: 'passengers',
                 name: 'Passengers',
                 editable: true,
                 width: 90,
@@ -189,6 +215,14 @@ class InlineGrid extends React.Component {
                 name: 'Option Text',
                 editable: true,
                 width: 200,
+                resizable: true,
+                filterable: true,
+            },
+            {
+                key: 'is_sold',
+                name: 'Status',
+                editable: true,
+                width: 100,
                 resizable: true,
                 filterable: true,
             },
@@ -266,7 +300,6 @@ class InlineGrid extends React.Component {
             let updatedRow = update(rowToUpdate, {$merge: updated});
             rows[i] = updatedRow;
         }
-
         this.setState({ rows });
     };
 
@@ -276,6 +309,9 @@ class InlineGrid extends React.Component {
             key: newRowIndex+1,
             type: '',
             interior_color: '',
+            option_text: '',
+            description: '',
+            images: '',
         };
 
         let rows = this.state.rows.slice();
@@ -336,6 +372,7 @@ class InlineGrid extends React.Component {
                     enableRowSelect={true}
                     rowHeight={50}
                     minHeight={600}
+                    rowRenderer={RowRenderer}
                     rowScrollTimeout={200} />
                     <NotificationContainer/>
             </div>
