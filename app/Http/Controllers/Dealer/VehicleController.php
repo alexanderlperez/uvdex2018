@@ -40,8 +40,7 @@ class VehicleController extends Controller
      */
     public function getData($id){
 
-        // TODO: Sort according to vehicle type
-        $vehicles = Vehicle::whereUserId($id)->exclude(['user_id', 'created_at', 'updated_at'])->get();
+        $vehicles = Vehicle::whereUserId($id)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(type , 'New', 'Used') ASC")->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck') ASC")->get();
 
         $vehicles->transform(function ($item, $key){
 
@@ -52,6 +51,7 @@ class VehicleController extends Controller
             if(empty($item->is_sold) == Config::get('constants.status.active'))
                 $item->is_sold = 'Sold';
 
+            $item->body_type = strtoupper($item->body_type);
             $item->key = $key+1;
 
             return $item;
@@ -110,6 +110,10 @@ class VehicleController extends Controller
 
             DB::beginTransaction();
             $data['user_id'] = Auth::user()->id;
+
+            if(!empty($data['body_type']))
+                $data['body_type'] = strtolower($data['body_type']);
+
             $vehicle = Vehicle::create($data);
             DB::commit();
 
@@ -267,6 +271,17 @@ class VehicleController extends Controller
                 $data[$key]['model_year'] = $row[5];
                 $data[$key]['trim'] = $row[6];
                 $data[$key]['body_style'] = $row[7];
+
+                $data[$key]['body_type'] = '';
+                if(!empty($row[7]) && (in_array(strtolower($row[7]), Config::get('constants.body_type.car'))))
+                    $data[$key]['body_type'] = 'car';
+
+                if(!empty($row[7]) && (in_array(strtolower($row[7]), Config::get('constants.body_type.suv'))))
+                    $data[$key]['body_type'] = 'suv';
+
+                if(!empty($row[7]) && (in_array(strtolower($row[7]), Config::get('constants.body_type.truck'))))
+                    $data[$key]['body_type'] = 'truck';
+
                 $data[$key]['mileage'] = $row[8];
                 $data[$key]['engine_description'] = $row[9];
                 $data[$key]['cylinders'] = $row[10];
