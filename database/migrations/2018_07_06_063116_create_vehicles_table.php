@@ -36,10 +36,14 @@ class CreateVehiclesTable extends Migration
             $table->text('option_text')->nullable(FALSE);
             $table->text('description')->nullable(FALSE);
             $table->text('images')->nullable(FALSE);
-            $table->string('package', 100)->default('');
+            $table->string('scheduled', 50)->default('');
+            $table->string('sold', 50)->default('');
             $table->string('msrp', 20)->default('');
-            $table->string('passengers')->default('');
-            $table->tinyInteger('is_sold')->default(Config::get('constants.status.inactive'));
+            $table->string('rebate_price', 20)->default('');
+            $table->string('nada', 20)->default('');
+            $table->string('cpo')->default('');
+            $table->string('code', 50)->default('');
+            $table->string('previous_owner', 50)->default('');
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')
