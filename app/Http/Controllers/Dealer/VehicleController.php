@@ -16,44 +16,50 @@ use Box\Spout\Common\Type;
 class VehicleController extends Controller
 {
     public $successStatus = 200;
-    private $title = 'Vehicle';
+    private $title = 'Inventory';
 
     public function __construct()
     {
     }
 
     /**
-     * Display a listing of the resource.
+     * Display listing of new vehicles.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function newVehicles()
     {
-        return view('dealer.vehicles.index');
+        return view('dealer.vehicles.new');
+    }
+
+    /**
+     * Display listing of used vehicles.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function usedVehicles()
+    {
+        return view('dealer.vehicles.used');
     }
 
     /**
      * Get Vehicle Data
+     * @param $type
      * @param $id
      * @return mixed
      * @throws \Exception
      */
-    public function getData($id){
+    public function getData($type, $id){
 
-        $vehicles = Vehicle::whereUserId($id)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(type , 'New', 'Used') ASC")->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck') ASC")->get();
+        $vehicles = Vehicle::whereUserId($id)->whereType($type)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck') ASC")->orderBy('model_year', 'desc')->get();
+
 
         $vehicles->transform(function ($item, $key){
 
             if(!empty($item->images))
                 $item->images = explode(',', $item->images);
 
-            $item->is_sold = 'Available';
-            if(empty($item->is_sold) == Config::get('constants.status.active'))
-                $item->is_sold = 'Sold';
-
-            $item->body_type = strtoupper($item->body_type);
             $item->key = $key+1;
-
             return $item;
         });
 
@@ -86,14 +92,13 @@ class VehicleController extends Controller
             $this->_save($request);
             DB::commit();
             setFlashMessage('success', trans('message.add_success', ['name' => $this->title]));
+            return back();
         } catch (\Exception $e) {
 
             DB::rollBack();
             setFlashMessage('danger', $e->getMessage());
             return back()->withInput($request->all());
         }
-
-        return redirect()->route('vehicles.index');
     }
 
     /**
@@ -110,9 +115,6 @@ class VehicleController extends Controller
 
             DB::beginTransaction();
             $data['user_id'] = Auth::user()->id;
-
-            if(!empty($data['body_type']))
-                $data['body_type'] = strtolower($data['body_type']);
 
             $vehicle = Vehicle::create($data);
             DB::commit();
@@ -192,38 +194,6 @@ class VehicleController extends Controller
     }
 
     /**
-     * Change Vehicle Status
-     * @param $id
-     * @param $value
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function changeStatus($id, $value) {
-
-        $data = getStatus($value);
-
-        try {
-
-            DB::beginTransaction();
-
-            $vehicle = Vehicle::findOrFail($id);
-            $vehicle->update($data);
-
-            DB::commit();
-
-            if($data['is_active'])
-                setFlashMessage('success', trans('message.status_active', ['name' => $this->title]));
-            else
-                setFlashMessage('success', trans('message.status_inactive', ['name' => $this->title]));
-        } catch (\Exception $e) {
-
-            DB::rollBack();
-            setFlashMessage('danger', trans('message.status_fail', ['name' => $this->title]));
-        }
-
-        return back();
-    }
-
-    /**
      * _validate
      * @param $request
      */
@@ -257,14 +227,7 @@ class VehicleController extends Controller
 
                 $data[$key]['user_id'] = Auth::user()->id;
                 $data[$key]['vin'] = $row[0];
-
-                $type = '';
-                if ($row[1] == 'U')
-                    $type = 'Used';
-                elseif ($row[1] == 'N')
-                    $type = 'New';
-
-                $data[$key]['type'] = $type;
+                $data[$key]['type'] = $row[1];
                 $data[$key]['stock_number'] = $row[2];
                 $data[$key]['make'] = $row[3];
                 $data[$key]['model'] = $row[4];
@@ -287,7 +250,11 @@ class VehicleController extends Controller
                 $data[$key]['cylinders'] = $row[10];
                 $data[$key]['fuel_type'] = $row[11];
                 $data[$key]['transmission'] = $row[12];
-                $data[$key]['price'] = $row[13];
+
+                $data[$key]['price'] = '';
+                if(!empty($row[13]))
+                    $data[$key]['price'] = '$'.number_format((double)$row[13], 0);
+
                 $data[$key]['exterior_color'] = $row[14];
                 $data[$key]['interior_color'] = $row[15];
 

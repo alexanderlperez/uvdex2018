@@ -120,10 +120,14 @@ return [
             'icon' => 'car',
             'submenu' => [
                 [
-                    'text'   => 'Vehicles',
-                    'url'    => 'vehicles',
+                    'text'   => 'New Vehicles',
+                    'url'    => 'new-vehicles',
                     'icon'   => 'car',
-                    'active' => ['vehicles'],
+                ],
+                [
+                    'text'   => 'Used Vehicles',
+                    'url'    => 'used-vehicles',
+                    'icon'   => 'car',
                 ],
                 [
                     'text'   => 'Import Vehicles',

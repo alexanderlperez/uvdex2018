@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title_prefix', 'Vehicle')
+@section('title_prefix', 'Inventory')
 @section('action')
     <a href='{{ route('vehicles.index') }}' class='btn btn-primary'>Go Back</a>
 @stop
@@ -8,7 +8,7 @@
 
     <div class="box box-primary">
 
-        @section('heading','Import Vehicles')
+        @section('heading','Import Inventory')
         {!!Form::open(['url' => 'vehicles','class'=>'form-horizontal', 'enctype'=>'multipart/form-data'])!!}
 
             <div class="box-body">
