@@ -8,9 +8,6 @@ import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import _ from 'lodash';
-import PropTypes from 'prop-types';
-
-const types = ['Used', 'New'];
 
 class RowRenderer extends React.Component {
 
@@ -22,11 +19,11 @@ class RowRenderer extends React.Component {
 
     getRowBackground() {
 
-        if(this.props.row.body_type === 'CAR')
+        if(this.props.row.body_type === 'car')
             return 'orange';
-        if(this.props.row.body_type === 'SUV')
+        if(this.props.row.body_type === 'suv')
             return 'green';
-        if(this.props.row.body_type === 'TRUCK')
+        if(this.props.row.body_type === 'truck')
             return 'blue';
     };
 
@@ -41,194 +38,222 @@ class RowRenderer extends React.Component {
 class InlineGrid extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this._columns = [
-            {
-                key: 'key',
-                name: 'ID',
-                width: 30,
-                resizable: true
-            },
-            {
-                key: 'stock_number',
-                name: 'STOCK',
-                editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'type',
-                name: 'NEW_USED',
-                editable: true,
-                width: 85,
-                editor: <DropDownEditor options={types}/>,
-                resizable: true,
-                filterable: true,
-                filterRenderer: SingleSelectFilter
-            },
-            {
-                key: 'body_type',
-                name: 'CAR_TRUCK',
-                editable: true,
-                width: 95,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'model_year',
-                name: 'YEAR',
-                editable: true,
-                width: 47,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'make',
-                name: 'MAKE',
-                editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'model',
-                name: 'MODEL',
-                editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'package',
-                name: 'PACKAGE',
-                editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'interior_color',
-                name: 'INTERIOR COLOR',
-                editable: true,
-                width: 120,
-                resizable: true,
-                filterable: true,
-                sortable: true,
-                filterRenderer: MultiSelectFilter
-            },
-            {
-                key: 'exterior_color',
-                name: 'EXTERIOR COLOR',
-                editable: true,
-                width: 120,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'price',
-                name: 'PRICE',
-                editable: true,
-                width: 60,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'msrp',
-                name: 'MSRP',
-                editable: true,
-                width: 60,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'mileage',
-                name: 'MILES',
-                editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'vin',
-                name: 'VIN',
-                editable: true,
-                width: 147,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'passengers',
-                name: 'PASSENGERS',
-                editable: true,
-                width: 100,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'description',
-                name: 'DESCRIPTION',
-                editable: true,
-                width: 200,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'cylinders',
-                name: 'CYLINDERS',
-                editable: true,
-                width: 80,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'engine_description',
-                name: 'ENGINE DESCRIPTION',
-                editable: true,
-                width: 150,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'fuel_type',
-                name: 'FUEL TYPE',
-                editable: true,
-                width: 80,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'transmission',
-                name: 'TRANSMISSION',
-                editable: true,
-                width: 110,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'trim',
-                name: 'TRIM',
-                editable: true,
-                width: 110,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'option_text',
-                name: 'OPTION TEXT',
-                editable: true,
-                width: 200,
-                resizable: true,
-                filterable: true,
-            },
-            {
-                key: 'is_sold',
-                name: 'STATUS',
-                editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true,
-            },
-        ];
+
+        if (action === 'new-vehicles') {
+
+            this._columns = [
+                {
+                    key: 'key',
+                    name: 'ID',
+                    width: 30,
+                    resizable: true
+                },
+                {
+                    key: 'stock_number',
+                    name: 'STOCK',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'scheduled',
+                    name: 'SCHEDULED',
+                    editable: true,
+                    width: 100,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'sold',
+                    name: 'SOLD',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'model_year',
+                    name: 'YEAR',
+                    editable: true,
+                    width: 47,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'msrp',
+                    name: 'MSRP',
+                    editable: true,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'rebate_price',
+                    name: 'SALE PRICE W REBATES',
+                    editable: true,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'model',
+                    name: 'MODEL',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'trim',
+                    name: 'PKG.',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'body_style',
+                    name: 'STOCK',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'exterior_color',
+                    name: 'EXTERIOR COLOR',
+                    editable: true,
+                    width: 150,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'vin',
+                    name: 'VIN',
+                    editable: true,
+                    width: 147,
+                    resizable: true,
+                    filterable: true,
+                },
+            ];
+        } else if (action === 'used-vehicles') {
+
+            this._columns = [
+                {
+                    key: 'key',
+                    name: 'ID',
+                    width: 30,
+                    resizable: true
+                },
+                {
+                    key: 'stock_number',
+                    name: 'STOCK',
+                    editable: true,
+                    width: 65,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'price',
+                    name: 'SALE PRICE',
+                    editable: true,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'nada',
+                    name: 'NADA',
+                    editable: true,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'model_year',
+                    name: 'YEAR',
+                    editable: true,
+                    width: 47,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'make',
+                    name: 'MAKE',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'model',
+                    name: 'MODEL',
+                    editable: true,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'cpo',
+                    name: 'CPO',
+                    editable: true,
+                    width: 40,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'exterior_color',
+                    name: 'EXTERIOR COLOR',
+                    editable: true,
+                    width: 120,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'trim',
+                    name: 'PKG.',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'mileage',
+                    name: 'MILES',
+                    editable: true,
+                    width: 60,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'engine_description',
+                    name: 'ENGINE',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'vin',
+                    name: 'VIN',
+                    editable: true,
+                    width: 147,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'code',
+                    name: 'CODE',
+                    editable: true,
+                    width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'previous_owner',
+                    name: 'PREVIOUS OWNER',
+                    editable: true,
+                    resizable: true,
+                    filterable: true,
+                },
+            ];
+        }
 
         this.state = { rows: [] };
         this.getColumns = this.getColumns.bind(this);
@@ -244,15 +269,29 @@ class InlineGrid extends React.Component {
 
     componentDidMount() {
 
-        axios.get('/getVehicles/'+user_id)
-            .then((response) => {
-                this.setState({
-                    rows: [...response.data.vehicles]
+        if (action === 'new-vehicles') {
+
+            axios.get('/getVehicles/N/'+user_id)
+                .then((response) => {
+                    this.setState({
+                        rows: [...response.data.vehicles]
+                    })
                 })
-            })
-            .catch((error) => {
-                console.log(error.response);
-            });
+                .catch((error) => {
+                    console.log(error.response);
+                });
+        } else {
+
+            axios.get('/getVehicles/U/'+user_id)
+                .then((response) => {
+                    this.setState({
+                        rows: [...response.data.vehicles]
+                    })
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                });
+        }
     }
 
     getColumns() {
@@ -309,7 +348,6 @@ class InlineGrid extends React.Component {
         const newRow = {
             id: '',
             key: newRowIndex+1,
-            type: '',
             interior_color: '',
             option_text: '',
             description: '',

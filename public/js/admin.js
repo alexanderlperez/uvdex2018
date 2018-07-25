@@ -436,6 +436,40 @@ if (false) {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (true) {
+  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
+    Symbol.for &&
+    Symbol.for('react.element')) ||
+    0xeac7;
+
+  var isValidElement = function(object) {
+    return typeof object === 'object' &&
+      object !== null &&
+      object.$$typeof === REACT_ELEMENT_TYPE;
+  };
+
+  // By explicitly using `prop-types` you are opting into new development behavior.
+  // http://fb.me/prop-types-in-prod
+  var throwOnDirectAccess = true;
+  module.exports = __webpack_require__(100)(isValidElement, throwOnDirectAccess);
+} else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = require('./factoryWithThrowingShims')();
+}
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -10804,7 +10838,7 @@ return jQuery;
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10908,7 +10942,7 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10948,40 +10982,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (true) {
-  var REACT_ELEMENT_TYPE = (typeof Symbol === 'function' &&
-    Symbol.for &&
-    Symbol.for('react.element')) ||
-    0xeac7;
-
-  var isValidElement = function(object) {
-    return typeof object === 'object' &&
-      object !== null &&
-      object.$$typeof === REACT_ELEMENT_TYPE;
-  };
-
-  // By explicitly using `prop-types` you are opting into new development behavior.
-  // http://fb.me/prop-types-in-prod
-  var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(100)(isValidElement, throwOnDirectAccess);
-} else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = require('./factoryWithThrowingShims')();
-}
-
 
 /***/ }),
 /* 7 */
@@ -14099,7 +14099,7 @@ module.exports = emptyObject;
 
 
 
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(6);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -31299,7 +31299,7 @@ window.Popper = __webpack_require__(10).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(3);
+  window.$ = window.jQuery = __webpack_require__(4);
 
   __webpack_require__(23);
 } catch (e) {}
@@ -31383,7 +31383,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(3), __webpack_require__(10)) :
+   true ? factory(exports, __webpack_require__(4), __webpack_require__(10)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -35322,7 +35322,7 @@ module.exports = __webpack_require__(25);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(11);
 var Axios = __webpack_require__(27);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 
 /**
  * Create an instance of Axios
@@ -35405,7 +35405,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(37);
 var dispatchRequest = __webpack_require__(38);
@@ -36134,7 +36134,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(39);
 var isCancel = __webpack_require__(14);
-var defaults = __webpack_require__(4);
+var defaults = __webpack_require__(5);
 var isAbsoluteURL = __webpack_require__(40);
 var combineURLs = __webpack_require__(41);
 
@@ -36410,7 +36410,7 @@ var _assign = __webpack_require__(7);
 var invariant = __webpack_require__(16);
 var emptyObject = __webpack_require__(17);
 var warning = __webpack_require__(18);
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(6);
 var checkPropTypes = __webpack_require__(8);
 
 // TODO: this is special because it gets imported during build.
@@ -37904,7 +37904,7 @@ var React = __webpack_require__(1);
 var warning = __webpack_require__(18);
 var ExecutionEnvironment = __webpack_require__(46);
 var _assign = __webpack_require__(7);
-var emptyFunction = __webpack_require__(5);
+var emptyFunction = __webpack_require__(6);
 var checkPropTypes = __webpack_require__(8);
 var getActiveElement = __webpack_require__(47);
 var shallowEqual = __webpack_require__(48);
@@ -55739,7 +55739,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -55863,7 +55863,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -56147,7 +56147,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -57013,8 +57013,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_notifications__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -57047,9 +57045,6 @@ var DropDownEditor = Editors.DropDownEditor;
 
 
 
-
-var types = ['Used', 'New'];
-
 var RowRenderer = function (_React$Component) {
     _inherits(RowRenderer, _React$Component);
 
@@ -57070,9 +57065,9 @@ var RowRenderer = function (_React$Component) {
         key: 'getRowBackground',
         value: function getRowBackground() {
 
-            if (this.props.row.body_type === 'CAR') return 'orange';
-            if (this.props.row.body_type === 'SUV') return 'green';
-            if (this.props.row.body_type === 'TRUCK') return 'blue';
+            if (this.props.row.body_type === 'car') return 'orange';
+            if (this.props.row.body_type === 'suv') return 'green';
+            if (this.props.row.body_type === 'truck') return 'blue';
         }
     }, {
         key: 'render',
@@ -57103,170 +57098,192 @@ var InlineGrid = function (_React$Component2) {
 
         var _this3 = _possibleConstructorReturn(this, (InlineGrid.__proto__ || Object.getPrototypeOf(InlineGrid)).call(this, props, context));
 
-        _this3._columns = [{
-            key: 'key',
-            name: 'ID',
-            width: 30,
-            resizable: true
-        }, {
-            key: 'stock_number',
-            name: 'STOCK',
-            editable: true,
-            width: 70,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'type',
-            name: 'NEW_USED',
-            editable: true,
-            width: 85,
-            editor: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DropDownEditor, { options: types }),
-            resizable: true,
-            filterable: true,
-            filterRenderer: SingleSelectFilter
-        }, {
-            key: 'body_type',
-            name: 'CAR_TRUCK',
-            editable: true,
-            width: 95,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'model_year',
-            name: 'YEAR',
-            editable: true,
-            width: 47,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'make',
-            name: 'MAKE',
-            editable: true,
-            width: 70,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'model',
-            name: 'MODEL',
-            editable: true,
-            width: 70,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'package',
-            name: 'PACKAGE',
-            editable: true,
-            width: 70,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'interior_color',
-            name: 'INTERIOR COLOR',
-            editable: true,
-            width: 120,
-            resizable: true,
-            filterable: true,
-            sortable: true,
-            filterRenderer: MultiSelectFilter
-        }, {
-            key: 'exterior_color',
-            name: 'EXTERIOR COLOR',
-            editable: true,
-            width: 120,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'price',
-            name: 'PRICE',
-            editable: true,
-            width: 60,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'msrp',
-            name: 'MSRP',
-            editable: true,
-            width: 60,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'mileage',
-            name: 'MILES',
-            editable: true,
-            width: 70,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'vin',
-            name: 'VIN',
-            editable: true,
-            width: 147,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'passengers',
-            name: 'PASSENGERS',
-            editable: true,
-            width: 100,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'description',
-            name: 'DESCRIPTION',
-            editable: true,
-            width: 200,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'cylinders',
-            name: 'CYLINDERS',
-            editable: true,
-            width: 80,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'engine_description',
-            name: 'ENGINE DESCRIPTION',
-            editable: true,
-            width: 150,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'fuel_type',
-            name: 'FUEL TYPE',
-            editable: true,
-            width: 80,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'transmission',
-            name: 'TRANSMISSION',
-            editable: true,
-            width: 110,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'trim',
-            name: 'TRIM',
-            editable: true,
-            width: 110,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'option_text',
-            name: 'OPTION TEXT',
-            editable: true,
-            width: 200,
-            resizable: true,
-            filterable: true
-        }, {
-            key: 'is_sold',
-            name: 'STATUS',
-            editable: true,
-            width: 70,
-            resizable: true,
-            filterable: true
-        }];
+        if (action === 'new-vehicles') {
+
+            _this3._columns = [{
+                key: 'key',
+                name: 'ID',
+                width: 30,
+                resizable: true
+            }, {
+                key: 'stock_number',
+                name: 'STOCK',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'scheduled',
+                name: 'SCHEDULED',
+                editable: true,
+                width: 100,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'sold',
+                name: 'SOLD',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'model_year',
+                name: 'YEAR',
+                editable: true,
+                width: 47,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'msrp',
+                name: 'MSRP',
+                editable: true,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'rebate_price',
+                name: 'SALE PRICE W REBATES',
+                editable: true,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'model',
+                name: 'MODEL',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'trim',
+                name: 'PKG.',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'body_style',
+                name: 'STOCK',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'exterior_color',
+                name: 'EXTERIOR COLOR',
+                editable: true,
+                width: 150,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'vin',
+                name: 'VIN',
+                editable: true,
+                width: 147,
+                resizable: true,
+                filterable: true
+            }];
+        } else if (action === 'used-vehicles') {
+
+            _this3._columns = [{
+                key: 'key',
+                name: 'ID',
+                width: 30,
+                resizable: true
+            }, {
+                key: 'stock_number',
+                name: 'STOCK',
+                editable: true,
+                width: 65,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'price',
+                name: 'SALE PRICE',
+                editable: true,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'nada',
+                name: 'NADA',
+                editable: true,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'model_year',
+                name: 'YEAR',
+                editable: true,
+                width: 47,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'make',
+                name: 'MAKE',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'model',
+                name: 'MODEL',
+                editable: true,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'cpo',
+                name: 'CPO',
+                editable: true,
+                width: 40,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'exterior_color',
+                name: 'EXTERIOR COLOR',
+                editable: true,
+                width: 120,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'trim',
+                name: 'PKG.',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'mileage',
+                name: 'MILES',
+                editable: true,
+                width: 60,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'engine_description',
+                name: 'ENGINE',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'vin',
+                name: 'VIN',
+                editable: true,
+                width: 147,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'code',
+                name: 'CODE',
+                editable: true,
+                width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'previous_owner',
+                name: 'PREVIOUS OWNER',
+                editable: true,
+                resizable: true,
+                filterable: true
+            }];
+        }
 
         _this3.state = { rows: [] };
         _this3.getColumns = _this3.getColumns.bind(_this3);
@@ -57286,13 +57303,25 @@ var InlineGrid = function (_React$Component2) {
         value: function componentDidMount() {
             var _this4 = this;
 
-            axios.get('/getVehicles/' + user_id).then(function (response) {
-                _this4.setState({
-                    rows: [].concat(_toConsumableArray(response.data.vehicles))
+            if (action === 'new-vehicles') {
+
+                axios.get('/getVehicles/N/' + user_id).then(function (response) {
+                    _this4.setState({
+                        rows: [].concat(_toConsumableArray(response.data.vehicles))
+                    });
+                }).catch(function (error) {
+                    console.log(error.response);
                 });
-            }).catch(function (error) {
-                console.log(error.response);
-            });
+            } else {
+
+                axios.get('/getVehicles/U/' + user_id).then(function (response) {
+                    _this4.setState({
+                        rows: [].concat(_toConsumableArray(response.data.vehicles))
+                    });
+                }).catch(function (error) {
+                    console.log(error.response);
+                });
+            }
         }
     }, {
         key: 'getColumns',
@@ -57361,7 +57390,6 @@ var InlineGrid = function (_React$Component2) {
             var newRow = {
                 id: '',
                 key: newRowIndex + 1,
-                type: '',
                 interior_color: '',
                 option_text: '',
                 description: '',
@@ -107252,7 +107280,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -107556,7 +107584,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -108008,7 +108036,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -108134,7 +108162,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(6);
+var _propTypes = __webpack_require__(3);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
