@@ -280,6 +280,7 @@ footer {
   width: 100%;
   left: 0;
   right: 0;
+  z-index: 99;
 }
 
 footer ul {
@@ -319,9 +320,17 @@ footer ul li a img {
   text-decoration: underline;
 }
 
-.detail-information-wrapper .car-price-detail .btn.btn-primary {
+.detail-information-wrapper .car-price-detail .button-block {
+  position: relative;
+}
+
+.detail-information-wrapper .car-price-detail .button-block .btn.btn-primary {
   padding: 17px !important;
   min-width: 230px;
+}
+
+.detail-information-wrapper .car-price-detail .button-block .btn.btn-primary.visible {
+  position: absolute;
 }
 
 /*================ Header css here =================*/
@@ -11582,5 +11591,13 @@ a {
 
 .new-car-text-color {
   color: #0051A6;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 

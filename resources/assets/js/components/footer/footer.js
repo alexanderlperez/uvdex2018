@@ -14,10 +14,16 @@ class Footer extends Component{
     constructor(){
         super();
         this.state = {
-            iconsUrl : FavIcon
+            iconsUrl : FavIcon,
+            mailTo: 'mailto:josh@rostmotor.com',
+            Subject: 'this is demo',
+            copied: false,
+            telTo: 'tel:7124693383',
+            rostsiteUrl: 'http://rostmotor.com/'
         }
 
         this.toggleIcon = this.toggleIcon.bind(this);
+        this.copyPath = this.copyPath.bind(this);
     }
     //Toggle footer fav icon function
     toggleIcon(){
@@ -28,6 +34,13 @@ class Footer extends Component{
             this.setState({iconsUrl: FavIcon})
         }
     }
+    
+    copyPath(){
+        this.setState={
+           Subject: 'true'
+        }
+        console.log(this.state.hasBeenClicked);
+    }
     render() {
         return(
             <div className="footer-section">
@@ -36,9 +49,9 @@ class Footer extends Component{
                         <div className="row">
                             <div className="col-12 text-center">
                                 <ul>
-                                    <li><a href="#"><img src={PhoneIcon} alt="Phone Call Icon"/></a></li>
-                                    <li><a href="#"><img src={MailIcon} alt="Email Icon"/></a></li>
-                                    <li><a href="#"><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
+                                    <li><a href="{this.state.telTo}"><img src={PhoneIcon} alt="Phone Call Icon"/></a></li>
+                                    <li><a href="mailto:mailto:josh@rostmotor.com?subject=Your Favorites Car&body=This is Demo Body Content!"><img src={MailIcon} alt="Email Icon"/></a></li>
+                                    <li><a href={this.state.rostsiteUrl}><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
                                     <li><a href="#"><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></a></li>
                                 </ul>
                             </div>
