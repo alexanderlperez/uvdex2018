@@ -13,6 +13,7 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('home', 'UserController@index')->name('home');
+Route::get('allVehicles', 'HomeController@allVehicles')->name('allVehicles');
 
 Route::group(['middleware' => ['auth', 'role:'.config('constants.role.super_admin').'|'.config('constants.role.dealer')]], function () {
 

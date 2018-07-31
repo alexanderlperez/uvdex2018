@@ -19,4 +19,9 @@ class Vehicle extends Model
         $columns = $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
         return $query->select( array_diff( $columns,(array) $value) );
     }
+
+    public function getNameAttribute()
+    {
+        return $this->model_year . " " . $this->make. " " . $this->model. " " . $this->trim;
+    }
 }
