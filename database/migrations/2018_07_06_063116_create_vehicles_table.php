@@ -36,6 +36,7 @@ class CreateVehiclesTable extends Migration
             $table->text('option_text')->nullable(FALSE);
             $table->text('description')->nullable(FALSE);
             $table->text('images')->nullable(FALSE);
+            $table->string('passengers', 10)->default('');
             $table->string('scheduled', 50)->default('');
             $table->string('sold', 50)->default('');
             $table->string('msrp', 20)->default('');

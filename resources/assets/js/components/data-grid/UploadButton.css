@@ -1,0 +1,31 @@
+input[type=file] {
+    cursor: pointer;
+    width: 100px;
+    height: 34px;
+    overflow: hidden;
+}
+
+input[type=file]:before {
+    width: 100px;
+    height: 32px;
+    font-size: 14px;
+    line-height: 32px;
+    content: 'Choose File';
+    display: inline-block;
+    background: #0080A4;
+    border: 1px solid #0080A4;
+    padding: 0 10px;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+.file-upload{
+    width: 100px;
+    border-radius: 0px;
+    height: 32px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+    visibility: hidden;
+}

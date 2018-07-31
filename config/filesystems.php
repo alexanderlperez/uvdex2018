@@ -63,6 +63,12 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
+        'inventory' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/inventory'),
+            'url' => env('APP_URL').'/storage/inventory',
+            'visibility' => 'public',
+        ],
 
     ],
 

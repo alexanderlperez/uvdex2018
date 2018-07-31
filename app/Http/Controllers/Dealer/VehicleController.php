@@ -12,6 +12,7 @@ use Config;
 use Box\Spout\Reader\ReaderFactory;
 use Box\Spout\Writer\WriterFactory;
 use Box\Spout\Common\Type;
+use Illuminate\Support\Facades\Storage;
 
 class VehicleController extends Controller
 {
@@ -52,7 +53,6 @@ class VehicleController extends Controller
     public function getData($type, $id){
 
         $vehicles = Vehicle::whereUserId($id)->whereType($type)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck') ASC")->orderBy('model_year', 'desc')->get();
-
 
         $vehicles->transform(function ($item, $key){
 
@@ -315,6 +315,53 @@ class VehicleController extends Controller
 
             setFlashMessage('error', trans('message.no_vehicle'));
             return back();
+        }
+
+    }
+
+    /**
+     * uploadImage
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadImage(Request $request) {
+
+        try {
+            $imageName = saveFile($request, 'file', Config::get('constants.inventory.prefix'), Config::get('constants.inventory.folder'));
+            $data = ['images' => $imageName];
+
+            if(!empty($request->get('id')) && !is_null($request->get('id'))){
+
+                $update = $data;
+                $vehicle = Vehicle::findOrFail($request->get('id'));
+
+                //Append to existing string if present
+                if(!empty($vehicle->images))
+                    $update['images'] = $vehicle->images.','.url('/').Storage::url('inventory/'.$data['images']);
+
+                $vehicle->update($update);
+
+                $message['type'] = 'Success';
+                $message['status'] = trans('message.image_success');
+            } else {
+
+                $data['user_id'] = Auth::user()->id;
+                $data['option_text'] = '';
+                $data['description'] = '';
+                $vehicle = Vehicle::create($data);
+
+                $message['id'] = $vehicle->id;
+                $message['type'] = 'Success';
+                $message['status'] = trans('message.image_success');
+            }
+
+            return response()->json(['message' => $message], $this->successStatus);
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            $message['type'] = 'Error';
+            $message['status'] = $e->getMessage();
+            return response()->json(['message' => $message], $this->successStatus);
         }
 
     }

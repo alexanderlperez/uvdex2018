@@ -1,39 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDataGrid from 'react-data-grid';
-const { Row } = ReactDataGrid;
-const { Editors, Toolbar, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
-const { DropDownEditor } = Editors;
+const { Toolbar, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
 import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import _ from 'lodash';
-
-class RowRenderer extends React.Component {
-
-    getRowStyle () {
-        return {
-            color: this.getRowBackground()
-        };
-    };
-
-    getRowBackground() {
-
-        if(this.props.row.body_type === 'car')
-            return 'orange';
-        if(this.props.row.body_type === 'suv')
-            return 'green';
-        if(this.props.row.body_type === 'truck')
-            return 'blue';
-    };
-
-    render() {
-        // here we are just changing the style
-        // but we could replace this with anything we liked, cards, images, etc
-        // usually though it will just be a matter of wrapping a div, and then calling back through to the grid
-        return (<div style={this.getRowStyle()}><Row ref={node => this.row = node} {...this.props}/></div>);
-    }
-}
+import RowRenderer from './Row';
+import ImageUploadFormatter from './ImageUploadFormatter';
 
 class InlineGrid extends React.Component {
     constructor(props, context) {
@@ -49,7 +23,7 @@ class InlineGrid extends React.Component {
                     resizable: true
                 },
                 {
-                    key: 'stock_number',
+                    key: 'body_style',
                     name: 'STOCK',
                     editable: true,
                     width: 70,
@@ -111,7 +85,7 @@ class InlineGrid extends React.Component {
                     filterable: true,
                 },
                 {
-                    key: 'body_style',
+                    key: 'stock_number',
                     name: 'STOCK',
                     editable: true,
                     width: 70,
@@ -133,6 +107,13 @@ class InlineGrid extends React.Component {
                     width: 147,
                     resizable: true,
                     filterable: true,
+                },
+                {
+                    key: 'images',
+                    name: 'Images',
+                    resizable: true,
+                    formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
+                    getRowMetaData: (row) => row
                 },
             ];
         } else if (action === 'used-vehicles') {
@@ -201,7 +182,7 @@ class InlineGrid extends React.Component {
                     key: 'exterior_color',
                     name: 'EXTERIOR COLOR',
                     editable: true,
-                    width: 120,
+                    width: 70,
                     resizable: true,
                     filterable: true,
                 },
@@ -249,8 +230,17 @@ class InlineGrid extends React.Component {
                     key: 'previous_owner',
                     name: 'PREVIOUS OWNER',
                     editable: true,
+                    width: 140,
                     resizable: true,
                     filterable: true,
+                },
+                {
+                    key: 'image',
+                    name: 'Images',
+                    width: 200,
+                    resizable: true,
+                    formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
+                    getRowMetaData: (row) => row
                 },
             ];
         }
@@ -265,6 +255,7 @@ class InlineGrid extends React.Component {
         this.getValidFilterValues = this.getValidFilterValues.bind(this);
         this.handleOnClearFilters = this.handleOnClearFilters.bind(this);
         this.handleGridSort = this.handleGridSort.bind(this);
+        this.onUpload = this.onUpload.bind(this);
     }
 
     componentDidMount() {
@@ -292,6 +283,15 @@ class InlineGrid extends React.Component {
                     console.log(error.response);
                 });
         }
+    }
+
+    onUpload(key, value) {
+
+        let rows = this.state.rows.slice();
+        let rowToUpdate = rows[key];
+        let updated = {id: value};
+        rows[key] = update(rowToUpdate, {$merge: updated});
+        this.setState({ rows });
     }
 
     getColumns() {
@@ -345,14 +345,19 @@ class InlineGrid extends React.Component {
     };
 
     handleAddRow({ newRowIndex }) {
-        const newRow = {
-            id: '',
+        let newRow = {
             key: newRowIndex+1,
+            id: '',
             interior_color: '',
             option_text: '',
             description: '',
             images: '',
         };
+
+        if (action === 'new-vehicles')
+            newRow.type = 'N';
+        else if (action === 'used-vehicles')
+            newRow.type = 'U';
 
         let rows = this.state.rows.slice();
         rows = update(rows, {$push: [newRow]});
@@ -409,8 +414,7 @@ class InlineGrid extends React.Component {
                     onAddFilter={this.handleFilterChange}
                     getValidFilterValues={this.getValidFilterValues}
                     onClearFilters={this.handleOnClearFilters}
-                    enableRowSelect={true}
-                    rowHeight={50}
+                    rowHeight={70}
                     minHeight={600}
                     rowRenderer={RowRenderer}
                     rowScrollTimeout={200} />

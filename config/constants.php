@@ -54,5 +54,9 @@ return [
         'OptionText',
         'Description',
         'images',
-    ]
+    ],
+    'inventory' => [
+        'prefix' => 'inv_',
+        'folder' => 'inventory',
+    ],
 ];

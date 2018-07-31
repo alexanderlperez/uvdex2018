@@ -40,4 +40,6 @@ return [
     'session_expired'=>'Your session has expired due to inactivity, please try again.',
     'email_sent'=>'Thank you for contacting us, we\'ll get back to you soon.',
     'no_vehicle'=>'Seems like there is no data available.',
+    'image_success' => 'Image uploaded successfully',
+    'image_fail' => 'Something went wrong, please try again.',
 ];
