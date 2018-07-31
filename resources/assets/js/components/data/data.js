@@ -17,12 +17,43 @@ class Cardata extends Component{
         super(props);
         this.state = {
             data: "New",
-            iconUrl: FavIconBlue
+            iconUrl: FavIconBlue,
+            carId: []
         };
         
         this.toggleIcons = this.toggleIcons.bind(this);
     }
 
+    componentWillMount(){
+        this.setState({
+            carId:[
+                {
+                    id: 1,
+                    name: "one"
+                },
+                {
+                    id: 2,
+                    name: "two"
+                },
+                {
+                    id: 3,
+                    name: "three"
+                },
+                {
+                    id: 4,
+                    name: "four"
+                },
+                {
+                    id: 5,
+                    name: "five"
+                },
+                {
+                    id: 6,
+                    name: "six"
+                },
+            ]
+        })
+    }
     //Toggle footer fav icon function
     toggleIcons(){
         if(this.state.iconUrl === FavIconBlue){
@@ -38,12 +69,15 @@ class Cardata extends Component{
         
         
         return (
-            <Link to="/vehicles">
             <div className="car-info-section">
                 <div className="container">
                     <div className="row ">
+            {this.state.carId.map(carItem => {
+                    return(
+                        <Link to="/vehicles">
+            
                         
-                            <div className="car-detail-wrapper">
+                            <div className="car-detail-wrapper clearfix" >
                             <div className="image-block col-md-4 d-none d-sm-block">
                                      <Link to="/detail">
                                         <figure>
@@ -53,7 +87,7 @@ class Cardata extends Component{
                             </div>
                             <div className="car-detail-block  col-md-4 text-center">
                                 <Link to="/detail" className="d-none d-sm-block"><h2>{this.state.data}</h2></Link>
-                                <Link to="/detail"><h3>2015 Ford Explorer XLT</h3></Link>
+                                <Link to="/detail"><h3>{carItem.name}</h3></Link>
                                 <Link to="/detail" className="fav-icon d-block d-sm-none"><img src={this.state.iconUrl} alt="Fav Icon" onClick={this.toggleIcons}/></Link>
                                 <Link to="/detail"><figure className="d-block d-sm-none">
                                         <img src={"./img/data.jpeg"} alt=""/>
@@ -76,10 +110,14 @@ class Cardata extends Component{
                             </div>
                         
                             </div>
-                    </div>
+                
+            </Link>
+                    )
+            })}
+            
+            </div>
                 </div>
             </div>
-            </Link>
         );
     }
 }

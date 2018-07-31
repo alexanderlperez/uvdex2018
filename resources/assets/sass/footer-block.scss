@@ -18,7 +18,8 @@ footer {
         li {
             display: inline-block;
             margin: 0 10px;
-            a {
+            a ,
+            button.back-button{
                 img {
                     width: 30px;
                     height: 30px;
@@ -26,5 +27,9 @@ footer {
                 }
             }
         }
+    }
+    .back-button{
+        border: none;
+        background-color: transparent;
     }
 }
