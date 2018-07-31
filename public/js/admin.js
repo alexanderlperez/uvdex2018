@@ -108593,7 +108593,7 @@ var ImageUploadFormatter = function (_React$Component) {
             data.append('id', this.props.dependentValues.id);
 
             axios.post('/uploadImage', data, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
-                // Set Parent State
+
                 if (_this2.props.dependentValues.id === "") _this2.props.onUpload(key, response.data.message.id);
 
                 __WEBPACK_IMPORTED_MODULE_1_react_notifications__["NotificationManager"].success('Success', response.data.message.status);

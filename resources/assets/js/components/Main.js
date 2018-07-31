@@ -6,6 +6,16 @@ import Cardata from './data/data';
 import Footer from './footer/footer';
 import DetailBlock from './details/detail';
 
+
+import { HashRouter } from 'react-router-dom';
+// import route Components here
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch,
+    Redirect
+  } from 'react-router-dom';
 /*An example react component */
 class Main extends Component{
     
@@ -13,9 +23,11 @@ class Main extends Component{
         return (
             <div>
                 <Filter />
-                <Cardata />
-                <DetailBlock />
+                {/* <Cardata /> */}
+                <Route path="/" exact={true} component={Cardata} />
+                {/* <DetailBlock /> */}
                 <Footer />
+                <Route path="/detail" component={DetailBlock} />
                 
             </div>
             
@@ -29,5 +41,5 @@ export default Main;
 */
 
 if(document.getElementById('root')){
-    ReactDOM.render(<Main />, document.getElementById('root'));
+    ReactDOM.render(<HashRouter><Main /></HashRouter>, document.getElementById('root'));
 }

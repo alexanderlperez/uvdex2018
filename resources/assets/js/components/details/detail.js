@@ -3,7 +3,25 @@ import ReactDOM from 'react-dom';
 
 import Slider from '../../components/GallerySlider/Slider';
 class DetailBlock extends Component{
+    constructor(props){
+       super(props);
+       this.state = {addClass: false}
+       this.Hidebutton = this.Hidebutton.bind(this);
+       
+    }
+    Hidebutton(){
+        this.setState({
+            addClass: !this.state.addClass
+        });
+    }
+    
     render() {
+        let buttonClass = ["visible btn btn-primary"];
+        
+        if(this.state.addClass){
+            buttonClass.push('hidden');
+            
+        }
         return(
             <div className="container detail-information-wrapper">
                 <div className="row">
@@ -19,7 +37,12 @@ class DetailBlock extends Component{
                         <h5><span>Color#:</span> Ruby Red RR</h5>
                         <h5><span>Passengers#:</span> 7</h5>
                         <h2 className="price">$37,486.00</h2>
-                        <button className="btn btn-primary">Add To Favorites</button>
+                        <div className="button-block">
+                            <button className={buttonClass.join(' ')} onClick={this.Hidebutton.bind(this)} >Add To Favorites</button>
+                            <a href="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</a>
+                        </div>
+                            
+                        
                     </div>
                     <div className="row dealer-notes">
                         <div className="col-12">

@@ -67,6 +67,8 @@ class Slider extends Component{
 					nativeFS: true
                 }
         });
+        $(".rsFullscreenIcn").click();
+
     }
     
     render(){
@@ -75,8 +77,8 @@ class Slider extends Component{
                 {this.state.images.map(imgItem => {
 
                     return(
-                        <a class="rsImg" data-rsw="400" data-rsh="500"  data-rsBigImg={imgItem.img} href={imgItem.img}>
-                            <img width="96" height="72" class="rsTmb" src={imgItem.img} /></a>
+                        <a class="rsImg"   data-rsBigImg={imgItem.img} href={imgItem.img}>
+                            <img  class="rsTmb" src={imgItem.img} alt=""/></a>
                     )
                 })}           
                 

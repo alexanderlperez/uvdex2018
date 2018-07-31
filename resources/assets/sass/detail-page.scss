@@ -15,10 +15,18 @@
         }
     }
     .car-price-detail {
-        .btn {
-            &.btn-primary {
-                padding: 17px !important;
-                min-width: 230px;
+        
+        .button-block{
+            position: relative;
+            .btn {
+                &.btn-primary {
+                    padding: 17px !important;
+                    min-width: 230px;
+                    &.visible{
+                        position: absolute;
+                        
+                    }
+                }
             }
         }
     }

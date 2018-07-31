@@ -26,7 +26,7 @@ class ImageUploadFormatter extends React.Component {
         axios
             .post('/uploadImage', data, { headers: {'Content-Type': 'multipart/form-data'} })
             .then(response => {
-                // Set Parent State
+
                 if(this.props.dependentValues.id === "")
                     this.props.onUpload(key, response.data.message.id);
 

@@ -4,7 +4,14 @@ import ReactDOM from 'react-dom';
 //Fav Icon import here 
 import FavIconBlue from '../../../img/icons/favorite_off.png';
 import FavIconDarkBlue from '../../../img/icons/favorite_on.png';
-
+import Slider from '../../components/GallerySlider/Slider';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Switch,
+    Redirect
+  } from 'react-router-dom';
 class Cardata extends Component{
     constructor(props) {
         super(props);
@@ -25,28 +32,32 @@ class Cardata extends Component{
             this.setState({iconUrl: FavIconBlue});
         }
     }
+    
 
     render() {
+        
+        
         return (
+            <Link to="/vehicles">
             <div className="car-info-section">
                 <div className="container">
                     <div className="row ">
                         
                             <div className="car-detail-wrapper">
                             <div className="image-block col-md-4 d-none d-sm-block">
-                                <a href="#">
-                                    <figure>
-                                        <img src={"./img/data.jpeg"} alt=""/>
-                                    </figure>
-                                </a>
+                                     <Link to="/detail">
+                                        <figure>
+                                            <img src={"./img/data.jpeg"} alt=""/>
+                                        </figure>
+                                    </Link>
                             </div>
                             <div className="car-detail-block  col-md-4 text-center">
-                                <a href="#" className="d-none d-sm-block"><h2>{this.state.data}</h2></a>
-                                <a href="#"><h3>2015 Ford Explorer XLT</h3></a>
-                                <a href="#"className="fav-icon d-block d-sm-none"><img src={this.state.iconUrl} alt="Fav Icon" onClick={this.toggleIcons}/></a>
-                                <figure className="d-block d-sm-none">
+                                <Link to="/detail" className="d-none d-sm-block"><h2>{this.state.data}</h2></Link>
+                                <Link to="/detail"><h3>2015 Ford Explorer XLT</h3></Link>
+                                <Link to="/detail" className="fav-icon d-block d-sm-none"><img src={this.state.iconUrl} alt="Fav Icon" onClick={this.toggleIcons}/></Link>
+                                <Link to="/detail"><figure className="d-block d-sm-none">
                                         <img src={"./img/data.jpeg"} alt=""/>
-                                </figure>
+                                </figure></Link>
                                 <h5 className="d-none d-sm-block">Mileage: 0</h5>
                                 <h5 className="d-none d-sm-block">Color#: Ruby Red RR</h5>
                                 <h5 className="d-none d-sm-block">Passengers: 7</h5>
@@ -68,6 +79,7 @@ class Cardata extends Component{
                     </div>
                 </div>
             </div>
+            </Link>
         );
     }
 }
