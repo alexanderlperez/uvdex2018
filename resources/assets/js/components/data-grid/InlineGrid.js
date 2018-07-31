@@ -122,6 +122,7 @@ class InlineGrid extends React.Component {
                     key: 'images',
                     name: 'Images',
                     resizable: true,
+                    width: 120,
                     formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
                     getRowMetaData: (row) => row
                 },
@@ -265,7 +266,7 @@ class InlineGrid extends React.Component {
                 {
                     key: 'image',
                     name: 'Images',
-                    width: 200,
+                    width: 120,
                     resizable: true,
                     formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
                     getRowMetaData: (row) => row

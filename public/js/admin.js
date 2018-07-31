@@ -57877,6 +57877,7 @@ var InlineGrid = function (_React$Component) {
                 key: 'images',
                 name: 'Images',
                 resizable: true,
+                width: 120,
                 formatter: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ImageUploadFormatter__["a" /* default */], { onUpload: _this.onUpload }),
                 getRowMetaData: function getRowMetaData(row) {
                     return row;
@@ -58003,7 +58004,7 @@ var InlineGrid = function (_React$Component) {
             }, {
                 key: 'image',
                 name: 'Images',
-                width: 200,
+                width: 120,
                 resizable: true,
                 formatter: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ImageUploadFormatter__["a" /* default */], { onUpload: _this.onUpload }),
                 getRowMetaData: function getRowMetaData(row) {
