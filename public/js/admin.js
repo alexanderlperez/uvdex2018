@@ -57096,12 +57096,21 @@ var InlineGrid = function (_React$Component) {
                 key: 'msrp',
                 name: 'MSRP',
                 editable: true,
+                width: 90,
                 resizable: true,
                 filterable: true
             }, {
                 key: 'rebate_price',
                 name: 'SALE PRICE W REBATES',
                 editable: true,
+                width: 155,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'make',
+                name: 'MAKE',
+                editable: true,
+                width: 70,
                 resizable: true,
                 filterable: true
             }, {
@@ -57147,6 +57156,20 @@ var InlineGrid = function (_React$Component) {
                 getRowMetaData: function getRowMetaData(row) {
                     return row;
                 }
+            }, {
+                key: 'passengers',
+                name: 'PASSENGERS',
+                editable: true,
+                width: 100,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'description',
+                name: 'DEALER NOTES',
+                editable: true,
+                width: 105,
+                resizable: true,
+                filterable: true
             }];
         } else if (action === 'used-vehicles') {
 
@@ -57165,6 +57188,7 @@ var InlineGrid = function (_React$Component) {
             }, {
                 key: 'price',
                 name: 'SALE PRICE',
+                width: 90,
                 editable: true,
                 resizable: true,
                 filterable: true
@@ -57172,6 +57196,7 @@ var InlineGrid = function (_React$Component) {
                 key: 'nada',
                 name: 'NADA',
                 editable: true,
+                width: 90,
                 resizable: true,
                 filterable: true
             }, {
@@ -57259,6 +57284,20 @@ var InlineGrid = function (_React$Component) {
                 getRowMetaData: function getRowMetaData(row) {
                     return row;
                 }
+            }, {
+                key: 'passengers',
+                name: 'PASSENGERS',
+                editable: true,
+                width: 100,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'description',
+                name: 'DEALER NOTES',
+                editable: true,
+                width: 105,
+                resizable: true,
+                filterable: true
             }];
         }
 
@@ -108547,10 +108586,8 @@ function isUndefined(arg) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_notifications__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_notifications__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UploadButton_css__ = __webpack_require__(123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UploadButton_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__UploadButton_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UploadButton_css__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UploadButton_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__UploadButton_css__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -108560,7 +108597,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 
-
+//import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 var ImageUploadFormatter = function (_React$Component) {
@@ -108591,14 +108628,15 @@ var ImageUploadFormatter = function (_React$Component) {
             var data = new FormData();
             data.append('file', file, file.name);
             data.append('id', this.props.dependentValues.id);
+            data.append('type', this.props.dependentValues.type);
 
             axios.post('/uploadImage', data, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
 
                 if (_this2.props.dependentValues.id === "") _this2.props.onUpload(key, response.data.message.id);
 
-                __WEBPACK_IMPORTED_MODULE_1_react_notifications__["NotificationManager"].success('Success', response.data.message.status);
+                //NotificationManager.success('Success', response.data.message.status);
             }).catch(function (error) {
-                __WEBPACK_IMPORTED_MODULE_1_react_notifications__["NotificationManager"].error('Error', error);
+                //NotificationManager.error('Error', error);
             });
         }
     }, {
@@ -108619,8 +108657,7 @@ var ImageUploadFormatter = function (_React$Component) {
                     "button",
                     { className: "btn btn-primary file-upload" },
                     "Upload"
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_notifications__["NotificationContainer"], null)
+                )
             );
         }
     }]);
