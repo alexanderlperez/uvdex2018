@@ -1,6 +1,10 @@
 /*================== Detail Page CSS here ==========================*/
 
 .detail-information-wrapper {
+    @media screen and (min-width: $mdscreen-size){
+        margin-top: 50px;
+    }
+    
     .dealer-notes {
         margin-top: 20px;
         margin-bottom: 20px;

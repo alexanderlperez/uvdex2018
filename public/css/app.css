@@ -105,7 +105,7 @@
 /*=========== main page css here ===========*/
 
 .car-info-section {
-  margin: 25px 0;
+  margin: 25px 0 50px 0;
   min-height: 700px;
   padding: 0 15px;
 }
@@ -129,6 +129,7 @@
   border: 2px solid #CFCFCF;
   padding: 15px;
   cursor: pointer;
+  margin-bottom: 22px;
 }
 
 .car-info-section .car-detail-wrapper:hover {
@@ -294,7 +295,8 @@ footer ul li {
   margin: 0 10px;
 }
 
-footer ul li a img {
+footer ul li a img,
+footer ul li button.back-button img {
   width: 30px;
   height: 30px;
   -webkit-object-fit: cover;
@@ -304,7 +306,18 @@ footer ul li a img {
   object-fit: cover;
 }
 
+footer .back-button {
+  border: none;
+  background-color: transparent;
+}
+
 /*================== Detail Page CSS here ==========================*/
+
+@media screen and (min-width: 768px) {
+  .detail-information-wrapper {
+    margin-top: 50px;
+  }
+}
 
 .detail-information-wrapper .dealer-notes {
   margin-top: 20px;
