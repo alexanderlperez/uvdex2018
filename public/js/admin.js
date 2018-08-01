@@ -108810,7 +108810,7 @@ exports = module.exports = __webpack_require__(77)(false);
 
 
 // module
-exports.push([module.i, "input[type=file] {\n    cursor: pointer;\n    width: 100px;\n    height: 34px;\n    overflow: hidden;\n}\n\ninput[type=file]:before {\n    width: 100px;\n    height: 32px;\n    font-size: 14px;\n    line-height: 32px;\n    content: 'Choose File';\n    display: inline-block;\n    background: #0080A4;\n    border: 1px solid #0080A4;\n    padding: 0 10px;\n    text-align: center;\n    font-family: Helvetica, Arial, sans-serif;\n    color: white;\n}\n\n.file-upload{\n    width: 100px;\n    border-radius: 0px;\n    height: 32px;\n}\n\ninput[type=file]::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.react-grid-image{\n    background-repeat: no-repeat !important;\n}\n\n", ""]);
+exports.push([module.i, "input[type=file] {\r\n    cursor: pointer;\r\n    width: 100px;\r\n    height: 34px;\r\n    overflow: hidden;\r\n}\r\n\r\ninput[type=file]:before {\r\n    width: 100px;\r\n    height: 32px;\r\n    font-size: 14px;\r\n    line-height: 32px;\r\n    content: 'Choose File';\r\n    display: inline-block;\r\n    background: #0080A4;\r\n    border: 1px solid #0080A4;\r\n    padding: 0 10px;\r\n    text-align: center;\r\n    font-family: Helvetica, Arial, sans-serif;\r\n    color: white;\r\n}\r\n\r\n.file-upload{\r\n    width: 100px;\r\n    border-radius: 0px;\r\n    height: 32px;\r\n}\r\n\r\ninput[type=file]::-webkit-file-upload-button {\r\n    visibility: hidden;\r\n}\r\n\r\n.react-grid-image{\r\n    background-repeat: no-repeat !important;\r\n}\r\n\r\n", ""]);
 
 // exports
 
