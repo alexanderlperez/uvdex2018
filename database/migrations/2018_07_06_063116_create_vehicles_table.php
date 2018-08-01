@@ -45,6 +45,7 @@ class CreateVehiclesTable extends Migration
             $table->string('cpo')->default('');
             $table->string('code', 50)->default('');
             $table->string('previous_owner', 50)->default('');
+            $table->tinyInteger('is_active')->default(Config::get('constants.status.active'));
             $table->timestamps();
             $table->foreign('user_id')
                 ->references('id')->on('users')
