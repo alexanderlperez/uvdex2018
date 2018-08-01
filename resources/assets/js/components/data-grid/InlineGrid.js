@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDataGrid from 'react-data-grid';
-const { Toolbar, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
+const { Toolbar, Formatters, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
+const { ImageFormatter } = Formatters;
 import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -23,7 +24,14 @@ class InlineGrid extends React.Component {
                     resizable: true
                 },
                 {
-                    key: 'body_style',
+                    key: 'images',
+                    name: 'Image',
+                    width: 50,
+                    formatter: ImageFormatter,
+                    resizable: true,
+                },
+                {
+                    key: 'stock_number',
                     name: 'STOCK',
                     editable: true,
                     width: 70,
@@ -34,7 +42,7 @@ class InlineGrid extends React.Component {
                     key: 'scheduled',
                     name: 'SCHEDULED',
                     editable: true,
-                    width: 100,
+                    width: 95,
                     resizable: true,
                     filterable: true,
                 },
@@ -74,7 +82,7 @@ class InlineGrid extends React.Component {
                     key: 'make',
                     name: 'MAKE',
                     editable: true,
-                    width: 70,
+                    width: 50,
                     resizable: true,
                     filterable: true,
                 },
@@ -82,7 +90,7 @@ class InlineGrid extends React.Component {
                     key: 'model',
                     name: 'MODEL',
                     editable: true,
-                    width: 70,
+                    width: 65,
                     resizable: true,
                     filterable: true,
                 },
@@ -90,15 +98,7 @@ class InlineGrid extends React.Component {
                     key: 'trim',
                     name: 'PKG.',
                     editable: true,
-                    width: 70,
-                    resizable: true,
-                    filterable: true,
-                },
-                {
-                    key: 'stock_number',
-                    name: 'STOCK',
-                    editable: true,
-                    width: 70,
+                    width: 160,
                     resizable: true,
                     filterable: true,
                 },
@@ -119,6 +119,14 @@ class InlineGrid extends React.Component {
                     filterable: true,
                 },
                 {
+                    key: 'description',
+                    name: 'DEALER NOTES',
+                    editable: true,
+                    width: 150,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
                     key: 'images',
                     name: 'Images',
                     resizable: true,
@@ -134,14 +142,6 @@ class InlineGrid extends React.Component {
                     resizable: true,
                     filterable: true,
                 },
-                {
-                    key: 'description',
-                    name: 'DEALER NOTES',
-                    editable: true,
-                    width: 105,
-                    resizable: true,
-                    filterable: true,
-                },
             ];
         } else if (action === 'used-vehicles') {
 
@@ -151,6 +151,13 @@ class InlineGrid extends React.Component {
                     name: 'ID',
                     width: 30,
                     resizable: true
+                },
+                {
+                    key: 'images',
+                    name: 'Image',
+                    width: 50,
+                    formatter: ImageFormatter,
+                    resizable: true,
                 },
                 {
                     key: 'stock_number',
@@ -188,7 +195,7 @@ class InlineGrid extends React.Component {
                     key: 'make',
                     name: 'MAKE',
                     editable: true,
-                    width: 70,
+                    width: 50,
                     resizable: true,
                     filterable: true,
                 },
@@ -219,7 +226,7 @@ class InlineGrid extends React.Component {
                     key: 'trim',
                     name: 'PKG.',
                     editable: true,
-                    width: 70,
+                    width: 160,
                     resizable: true,
                     filterable: true,
                 },
@@ -235,7 +242,7 @@ class InlineGrid extends React.Component {
                     key: 'engine_description',
                     name: 'ENGINE',
                     editable: true,
-                    width: 70,
+                    width: 65,
                     resizable: true,
                     filterable: true,
                 },
@@ -252,6 +259,14 @@ class InlineGrid extends React.Component {
                     name: 'CODE',
                     editable: true,
                     width: 70,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'description',
+                    name: 'DEALER NOTES',
+                    editable: true,
+                    width: 150,
                     resizable: true,
                     filterable: true,
                 },
@@ -276,14 +291,6 @@ class InlineGrid extends React.Component {
                     name: 'PASSENGERS',
                     editable: true,
                     width: 100,
-                    resizable: true,
-                    filterable: true,
-                },
-                {
-                    key: 'description',
-                    name: 'DEALER NOTES',
-                    editable: true,
-                    width: 105,
                     resizable: true,
                     filterable: true,
                 },
@@ -455,7 +462,7 @@ class InlineGrid extends React.Component {
                     rowGetter={this.getRowAt}
                     rowsCount={this.getSize()}
                     onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
-                    toolbar={<Toolbar onAddRow={this.handleAddRow} enableFilter={true}/>}
+                    toolbar={<Toolbar addRowButtonText="Add Inventory" onAddRow={this.handleAddRow} enableFilter={true}/>}
                     onAddFilter={this.handleFilterChange}
                     getValidFilterValues={this.getValidFilterValues}
                     onClearFilters={this.handleOnClearFilters}

@@ -57,7 +57,7 @@ class VehicleController extends Controller
         $vehicles->transform(function ($item, $key){
 
             if(!empty($item->images))
-                $item->images = explode(',', $item->images);
+                $item->images = explode(',', $item->images)[0];
 
             $item->key = $key+1;
             return $item;
@@ -245,7 +245,10 @@ class VehicleController extends Controller
                 if(!empty($row[7]) && (in_array(strtolower($row[7]), Config::get('constants.body_type.truck'))))
                     $data[$key]['body_type'] = 'truck';
 
-                $data[$key]['mileage'] = $row[8];
+                $data[$key]['mileage'] = '';
+                if(!empty($row[8]))
+                    $data[$key]['mileage'] = number_format((double)$row[8], 0);
+
                 $data[$key]['engine_description'] = $row[9];
                 $data[$key]['cylinders'] = $row[10];
                 $data[$key]['fuel_type'] = $row[11];
@@ -345,6 +348,7 @@ class VehicleController extends Controller
                 $message['status'] = trans('message.image_success');
             } else {
 
+                $data['images'] = url('/').Storage::url('inventory/'.$data['images']);
                 $data['user_id'] = Auth::user()->id;
                 $data['option_text'] = '';
                 $data['description'] = '';

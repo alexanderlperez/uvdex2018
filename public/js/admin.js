@@ -57762,10 +57762,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var _require = __webpack_require__(131),
     Toolbar = _require.Toolbar,
+    Formatters = _require.Formatters,
     _require$Filters = _require.Filters,
     MultiSelectFilter = _require$Filters.MultiSelectFilter,
     SingleSelectFilter = _require$Filters.SingleSelectFilter,
     Selectors = _require.Data.Selectors;
+
+var ImageFormatter = Formatters.ImageFormatter;
 
 
 
@@ -57790,7 +57793,13 @@ var InlineGrid = function (_React$Component) {
                 width: 30,
                 resizable: true
             }, {
-                key: 'body_style',
+                key: 'images',
+                name: 'Image',
+                width: 50,
+                formatter: ImageFormatter,
+                resizable: true
+            }, {
+                key: 'stock_number',
                 name: 'STOCK',
                 editable: true,
                 width: 70,
@@ -57800,7 +57809,7 @@ var InlineGrid = function (_React$Component) {
                 key: 'scheduled',
                 name: 'SCHEDULED',
                 editable: true,
-                width: 100,
+                width: 95,
                 resizable: true,
                 filterable: true
             }, {
@@ -57835,28 +57844,21 @@ var InlineGrid = function (_React$Component) {
                 key: 'make',
                 name: 'MAKE',
                 editable: true,
-                width: 70,
+                width: 50,
                 resizable: true,
                 filterable: true
             }, {
                 key: 'model',
                 name: 'MODEL',
                 editable: true,
-                width: 70,
+                width: 65,
                 resizable: true,
                 filterable: true
             }, {
                 key: 'trim',
                 name: 'PKG.',
                 editable: true,
-                width: 70,
-                resizable: true,
-                filterable: true
-            }, {
-                key: 'stock_number',
-                name: 'STOCK',
-                editable: true,
-                width: 70,
+                width: 160,
                 resizable: true,
                 filterable: true
             }, {
@@ -57871,6 +57873,13 @@ var InlineGrid = function (_React$Component) {
                 name: 'VIN',
                 editable: true,
                 width: 147,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'description',
+                name: 'DEALER NOTES',
+                editable: true,
+                width: 150,
                 resizable: true,
                 filterable: true
             }, {
@@ -57889,13 +57898,6 @@ var InlineGrid = function (_React$Component) {
                 width: 100,
                 resizable: true,
                 filterable: true
-            }, {
-                key: 'description',
-                name: 'DEALER NOTES',
-                editable: true,
-                width: 105,
-                resizable: true,
-                filterable: true
             }];
         } else if (action === 'used-vehicles') {
 
@@ -57903,6 +57905,12 @@ var InlineGrid = function (_React$Component) {
                 key: 'key',
                 name: 'ID',
                 width: 30,
+                resizable: true
+            }, {
+                key: 'images',
+                name: 'Image',
+                width: 50,
+                formatter: ImageFormatter,
                 resizable: true
             }, {
                 key: 'stock_number',
@@ -57936,7 +57944,7 @@ var InlineGrid = function (_React$Component) {
                 key: 'make',
                 name: 'MAKE',
                 editable: true,
-                width: 70,
+                width: 50,
                 resizable: true,
                 filterable: true
             }, {
@@ -57963,7 +57971,7 @@ var InlineGrid = function (_React$Component) {
                 key: 'trim',
                 name: 'PKG.',
                 editable: true,
-                width: 70,
+                width: 160,
                 resizable: true,
                 filterable: true
             }, {
@@ -57977,7 +57985,7 @@ var InlineGrid = function (_React$Component) {
                 key: 'engine_description',
                 name: 'ENGINE',
                 editable: true,
-                width: 70,
+                width: 65,
                 resizable: true,
                 filterable: true
             }, {
@@ -57992,6 +58000,13 @@ var InlineGrid = function (_React$Component) {
                 name: 'CODE',
                 editable: true,
                 width: 70,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'description',
+                name: 'DEALER NOTES',
+                editable: true,
+                width: 150,
                 resizable: true,
                 filterable: true
             }, {
@@ -58015,13 +58030,6 @@ var InlineGrid = function (_React$Component) {
                 name: 'PASSENGERS',
                 editable: true,
                 width: 100,
-                resizable: true,
-                filterable: true
-            }, {
-                key: 'description',
-                name: 'DEALER NOTES',
-                editable: true,
-                width: 105,
                 resizable: true,
                 filterable: true
             }];
@@ -58218,7 +58226,7 @@ var InlineGrid = function (_React$Component) {
                     rowGetter: this.getRowAt,
                     rowsCount: this.getSize(),
                     onGridRowsUpdated: __WEBPACK_IMPORTED_MODULE_6_lodash___default.a.debounce(this.handleGridRowsUpdated, 500),
-                    toolbar: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Toolbar, { onAddRow: this.handleAddRow, enableFilter: true }),
+                    toolbar: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Toolbar, { addRowButtonText: 'Add Inventory', onAddRow: this.handleAddRow, enableFilter: true }),
                     onAddFilter: this.handleFilterChange,
                     getValidFilterValues: this.getValidFilterValues,
                     onClearFilters: this.handleOnClearFilters,
@@ -108718,23 +108726,19 @@ var ImageUploadFormatter = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (ImageUploadFormatter.__proto__ || Object.getPrototypeOf(ImageUploadFormatter)).call(this, props));
 
-        _this.state = {
-            image: ''
-        };
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.onChange = _this.onChange.bind(_this);
         return _this;
     }
 
     _createClass(ImageUploadFormatter, [{
-        key: "handleSubmit",
-        value: function handleSubmit(e) {
+        key: "onChange",
+        value: function onChange(e) {
             var _this2 = this;
 
             e.preventDefault();
 
             var key = this.props.dependentValues.key - 1;
-            var file = this.state.image;
+            var file = e.target.files[0];
             var data = new FormData();
             data.append('file', file, file.name);
             data.append('id', this.props.dependentValues.id);
@@ -108750,24 +108754,13 @@ var ImageUploadFormatter = function (_React$Component) {
             });
         }
     }, {
-        key: "onChange",
-        value: function onChange(e) {
-
-            this.setState({ image: e.target.files[0] });
-        }
-    }, {
         key: "render",
         value: function render() {
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "form",
-                { onSubmit: this.handleSubmit, encType: "multipart/form-data" },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "file", className: "file", onChange: this.onChange }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "button",
-                    { className: "btn btn-primary file-upload" },
-                    "Upload"
-                )
+                { encType: "multipart/form-data" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "file", className: "file", onChange: this.onChange })
             );
         }
     }]);
