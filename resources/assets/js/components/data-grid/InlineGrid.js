@@ -58,6 +58,7 @@ class InlineGrid extends React.Component {
                     key: 'msrp',
                     name: 'MSRP',
                     editable: true,
+                    width: 90,
                     resizable: true,
                     filterable: true,
                 },
@@ -65,6 +66,15 @@ class InlineGrid extends React.Component {
                     key: 'rebate_price',
                     name: 'SALE PRICE W REBATES',
                     editable: true,
+                    width: 155,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'make',
+                    name: 'MAKE',
+                    editable: true,
+                    width: 70,
                     resizable: true,
                     filterable: true,
                 },
@@ -112,8 +122,25 @@ class InlineGrid extends React.Component {
                     key: 'images',
                     name: 'Images',
                     resizable: true,
+                    width: 120,
                     formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
                     getRowMetaData: (row) => row
+                },
+                {
+                    key: 'passengers',
+                    name: 'PASSENGERS',
+                    editable: true,
+                    width: 100,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'description',
+                    name: 'DEALER NOTES',
+                    editable: true,
+                    width: 105,
+                    resizable: true,
+                    filterable: true,
                 },
             ];
         } else if (action === 'used-vehicles') {
@@ -136,6 +163,7 @@ class InlineGrid extends React.Component {
                 {
                     key: 'price',
                     name: 'SALE PRICE',
+                    width: 90,
                     editable: true,
                     resizable: true,
                     filterable: true,
@@ -144,6 +172,7 @@ class InlineGrid extends React.Component {
                     key: 'nada',
                     name: 'NADA',
                     editable: true,
+                    width: 90,
                     resizable: true,
                     filterable: true,
                 },
@@ -237,10 +266,26 @@ class InlineGrid extends React.Component {
                 {
                     key: 'image',
                     name: 'Images',
-                    width: 200,
+                    width: 120,
                     resizable: true,
                     formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
                     getRowMetaData: (row) => row
+                },
+                {
+                    key: 'passengers',
+                    name: 'PASSENGERS',
+                    editable: true,
+                    width: 100,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'description',
+                    name: 'DEALER NOTES',
+                    editable: true,
+                    width: 105,
+                    resizable: true,
+                    filterable: true,
                 },
             ];
         }

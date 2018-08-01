@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 128);
+/******/ 	return __webpack_require__(__webpack_require__.s = 127);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -56553,7 +56553,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(127);
+var	fixUrls = __webpack_require__(126);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -56869,41 +56869,10 @@ function updateLink (link, options, obj) {
 /* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(131);
+module.exports = __webpack_require__(130);
 
 /***/ }),
 /* 80 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NotificationManager = exports.NotificationContainer = exports.Notifications = undefined;
-
-var _Notifications = __webpack_require__(81);
-
-var _Notifications2 = _interopRequireDefault(_Notifications);
-
-var _NotificationContainer = __webpack_require__(153);
-
-var _NotificationContainer2 = _interopRequireDefault(_NotificationContainer);
-
-var _NotificationManager = __webpack_require__(86);
-
-var _NotificationManager2 = _interopRequireDefault(_NotificationManager);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.Notifications = _Notifications2.default;
-exports.NotificationContainer = _NotificationContainer2.default;
-exports.NotificationManager = _NotificationManager2.default;
-exports.default = _Notifications2.default;
-
-/***/ }),
-/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56925,7 +56894,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactTransitionGroup = __webpack_require__(142);
 
-var _classnames = __webpack_require__(85);
+var _classnames = __webpack_require__(84);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -57025,7 +56994,7 @@ exports.default = Notifications;
 module.exports = exports['default'];
 
 /***/ }),
-/* 82 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57300,7 +57269,7 @@ exports.default = TransitionGroup;
 module.exports = exports['default'];
 
 /***/ }),
-/* 83 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57313,7 +57282,7 @@ exports.default = !!(typeof window !== 'undefined' && window.document && window.
 module.exports = exports['default'];
 
 /***/ }),
-/* 84 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57368,7 +57337,7 @@ var nameShape = exports.nameShape = _propTypes2.default.oneOfType([_propTypes2.d
 })]);
 
 /***/ }),
-/* 85 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -57427,7 +57396,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 86 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57573,6 +57542,7 @@ exports.default = new NotificationManager();
 module.exports = exports['default'];
 
 /***/ }),
+/* 86 */,
 /* 87 */,
 /* 88 */,
 /* 89 */,
@@ -57611,8 +57581,7 @@ module.exports = exports['default'];
 /* 122 */,
 /* 123 */,
 /* 124 */,
-/* 125 */,
-/* 126 */
+/* 125 */
 /***/ (function(module, exports) {
 
 module.exports = function escape(url) {
@@ -57634,7 +57603,7 @@ module.exports = function escape(url) {
 
 
 /***/ }),
-/* 127 */
+/* 126 */
 /***/ (function(module, exports) {
 
 
@@ -57729,14 +57698,14 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 128 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(129);
+module.exports = __webpack_require__(128);
 
 
 /***/ }),
-/* 129 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -57753,10 +57722,10 @@ __webpack_require__(27);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-__webpack_require__(130);
+__webpack_require__(129);
 
 /***/ }),
-/* 130 */
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57767,11 +57736,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_data_grid__ = __webpack_require__(79);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_data_grid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_data_grid__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_immutability_helper__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_immutability_helper__ = __webpack_require__(133);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_immutability_helper___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_immutability_helper__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_notifications_lib_notifications_css__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_notifications_lib_notifications_css__ = __webpack_require__(134);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_notifications_lib_notifications_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_notifications_lib_notifications_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_notifications__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_notifications__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_notifications__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
@@ -57791,7 +57760,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var _require = __webpack_require__(132),
+var _require = __webpack_require__(131),
     Toolbar = _require.Toolbar,
     _require$Filters = _require.Filters,
     MultiSelectFilter = _require$Filters.MultiSelectFilter,
@@ -57852,12 +57821,21 @@ var InlineGrid = function (_React$Component) {
                 key: 'msrp',
                 name: 'MSRP',
                 editable: true,
+                width: 90,
                 resizable: true,
                 filterable: true
             }, {
                 key: 'rebate_price',
                 name: 'SALE PRICE W REBATES',
                 editable: true,
+                width: 155,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'make',
+                name: 'MAKE',
+                editable: true,
+                width: 70,
                 resizable: true,
                 filterable: true
             }, {
@@ -57899,10 +57877,25 @@ var InlineGrid = function (_React$Component) {
                 key: 'images',
                 name: 'Images',
                 resizable: true,
+                width: 120,
                 formatter: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ImageUploadFormatter__["a" /* default */], { onUpload: _this.onUpload }),
                 getRowMetaData: function getRowMetaData(row) {
                     return row;
                 }
+            }, {
+                key: 'passengers',
+                name: 'PASSENGERS',
+                editable: true,
+                width: 100,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'description',
+                name: 'DEALER NOTES',
+                editable: true,
+                width: 105,
+                resizable: true,
+                filterable: true
             }];
         } else if (action === 'used-vehicles') {
 
@@ -57921,6 +57914,7 @@ var InlineGrid = function (_React$Component) {
             }, {
                 key: 'price',
                 name: 'SALE PRICE',
+                width: 90,
                 editable: true,
                 resizable: true,
                 filterable: true
@@ -57928,6 +57922,7 @@ var InlineGrid = function (_React$Component) {
                 key: 'nada',
                 name: 'NADA',
                 editable: true,
+                width: 90,
                 resizable: true,
                 filterable: true
             }, {
@@ -58009,12 +58004,26 @@ var InlineGrid = function (_React$Component) {
             }, {
                 key: 'image',
                 name: 'Images',
-                width: 200,
+                width: 120,
                 resizable: true,
                 formatter: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_8__ImageUploadFormatter__["a" /* default */], { onUpload: _this.onUpload }),
                 getRowMetaData: function getRowMetaData(row) {
                     return row;
                 }
+            }, {
+                key: 'passengers',
+                name: 'PASSENGERS',
+                editable: true,
+                width: 100,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'description',
+                name: 'DEALER NOTES',
+                editable: true,
+                width: 105,
+                resizable: true,
+                filterable: true
             }];
         }
 
@@ -58230,7 +58239,7 @@ if (document.getElementById('inline_grid')) {
 }
 
 /***/ }),
-/* 131 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -72183,13 +72192,13 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 
 /***/ }),
-/* 132 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(133);
+module.exports = __webpack_require__(132);
 
 /***/ }),
-/* 133 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -106983,7 +106992,7 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 
 /***/ }),
-/* 134 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invariant = __webpack_require__(4);
@@ -107258,13 +107267,13 @@ function invariantMapOrSet(target, command) {
 
 
 /***/ }),
-/* 135 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(136);
+var content = __webpack_require__(135);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -107289,19 +107298,25 @@ if(false) {
 }
 
 /***/ }),
-/* 136 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(126);
+var escape = __webpack_require__(125);
 exports = module.exports = __webpack_require__(77)(false);
 // imports
 
 
 // module
-exports.push([module.i, "@charset \"UTF-8\";\n@font-face {\n  font-family: 'Notification';\n  src: url(" + escape(__webpack_require__(137)) + ");\n  src: url(" + escape(__webpack_require__(138)) + "?#iefixs3g3t9) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(139)) + ") format(\"woff\"), url(" + escape(__webpack_require__(140)) + ") format(\"truetype\"), url(" + escape(__webpack_require__(141)) + "#notification) format(\"svg\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.notification-container {\n  box-sizing: border-box;\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 999999;\n  width: 320px;\n  padding: 0px 15px;\n  max-height: calc(100% - 30px);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n\n.notification {\n  box-sizing: border-box;\n  padding: 15px 15px 15px 58px;\n  border-radius: 2px;\n  color: #fff;\n  background-color: #ccc;\n  box-shadow: 0 0 12px #999;\n  cursor: pointer;\n  font-size: 1em;\n  line-height: 1.2em;\n  position: relative;\n  opacity: 0.9;\n  margin-top: 15px;\n}\n\n.notification .title {\n  font-size: 1em;\n  line-height: 1.2em;\n  font-weight: bold;\n  margin: 0 0 5px 0;\n}\n\n.notification:hover, .notification:focus {\n  opacity: 1;\n}\n\n.notification-enter {\n  visibility: hidden;\n  transform: translate3d(100%, 0, 0);\n}\n\n.notification-enter.notification-enter-active {\n  visibility: visible;\n  transform: translate3d(0, 0, 0);\n  transition: all 0.4s;\n}\n\n.notification-leave {\n  visibility: visible;\n  transform: translate3d(0, 0, 0);\n}\n\n.notification-leave.notification-leave-active {\n  visibility: hidden;\n  transform: translate3d(100%, 0, 0);\n  transition: all 0.4s;\n}\n\n.notification:before {\n  position: absolute;\n  top: 50%;\n  left: 15px;\n  margin-top: -14px;\n  display: block;\n  font-family: 'Notification';\n  width: 28px;\n  height: 28px;\n  font-size: 28px;\n  text-align: center;\n  line-height: 28px;\n}\n\n.notification-info {\n  background-color: #2f96b4;\n}\n\n.notification-info:before {\n  content: \"\\F05A\";\n}\n\n.notification-success {\n  background-color: #51a351;\n}\n\n.notification-success:before {\n  content: \"\\F058\";\n}\n\n.notification-warning {\n  background-color: #f89406;\n}\n\n.notification-warning:before {\n  content: \"\\F06A\";\n}\n\n.notification-error {\n  background-color: #bd362f;\n}\n\n.notification-error:before {\n  content: \"\\F057\";\n}\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\n@font-face {\n  font-family: 'Notification';\n  src: url(" + escape(__webpack_require__(136)) + ");\n  src: url(" + escape(__webpack_require__(137)) + "?#iefixs3g3t9) format(\"embedded-opentype\"), url(" + escape(__webpack_require__(138)) + ") format(\"woff\"), url(" + escape(__webpack_require__(139)) + ") format(\"truetype\"), url(" + escape(__webpack_require__(140)) + "#notification) format(\"svg\");\n  font-weight: normal;\n  font-style: normal;\n}\n\n.notification-container {\n  box-sizing: border-box;\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 999999;\n  width: 320px;\n  padding: 0px 15px;\n  max-height: calc(100% - 30px);\n  overflow-x: hidden;\n  overflow-y: auto;\n}\n\n.notification {\n  box-sizing: border-box;\n  padding: 15px 15px 15px 58px;\n  border-radius: 2px;\n  color: #fff;\n  background-color: #ccc;\n  box-shadow: 0 0 12px #999;\n  cursor: pointer;\n  font-size: 1em;\n  line-height: 1.2em;\n  position: relative;\n  opacity: 0.9;\n  margin-top: 15px;\n}\n\n.notification .title {\n  font-size: 1em;\n  line-height: 1.2em;\n  font-weight: bold;\n  margin: 0 0 5px 0;\n}\n\n.notification:hover, .notification:focus {\n  opacity: 1;\n}\n\n.notification-enter {\n  visibility: hidden;\n  transform: translate3d(100%, 0, 0);\n}\n\n.notification-enter.notification-enter-active {\n  visibility: visible;\n  transform: translate3d(0, 0, 0);\n  transition: all 0.4s;\n}\n\n.notification-leave {\n  visibility: visible;\n  transform: translate3d(0, 0, 0);\n}\n\n.notification-leave.notification-leave-active {\n  visibility: hidden;\n  transform: translate3d(100%, 0, 0);\n  transition: all 0.4s;\n}\n\n.notification:before {\n  position: absolute;\n  top: 50%;\n  left: 15px;\n  margin-top: -14px;\n  display: block;\n  font-family: 'Notification';\n  width: 28px;\n  height: 28px;\n  font-size: 28px;\n  text-align: center;\n  line-height: 28px;\n}\n\n.notification-info {\n  background-color: #2f96b4;\n}\n\n.notification-info:before {\n  content: \"\\F05A\";\n}\n\n.notification-success {\n  background-color: #51a351;\n}\n\n.notification-success:before {\n  content: \"\\F058\";\n}\n\n.notification-warning {\n  background-color: #f89406;\n}\n\n.notification-warning:before {\n  content: \"\\F06A\";\n}\n\n.notification-error {\n  background-color: #bd362f;\n}\n\n.notification-error:before {\n  content: \"\\F057\";\n}\n", ""]);
 
 // exports
 
+
+/***/ }),
+/* 136 */
+/***/ (function(module, exports) {
+
+module.exports = "/fonts/vendor/react-notifications/lib/notification.eot?c0d3c94cd6112550c51d7d1ed13b9da1";
 
 /***/ }),
 /* 137 */
@@ -107313,25 +107328,50 @@ module.exports = "/fonts/vendor/react-notifications/lib/notification.eot?c0d3c94
 /* 138 */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-notifications/lib/notification.eot?c0d3c94cd6112550c51d7d1ed13b9da1";
+module.exports = "/fonts/vendor/react-notifications/lib/notification.woff?651771e1df95c807c99608188d0a4287";
 
 /***/ }),
 /* 139 */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-notifications/lib/notification.woff?651771e1df95c807c99608188d0a4287";
+module.exports = "/fonts/vendor/react-notifications/lib/notification.ttf?0b4ac1dc75df35e169b70d7719afe4cc";
 
 /***/ }),
 /* 140 */
 /***/ (function(module, exports) {
 
-module.exports = "/fonts/vendor/react-notifications/lib/notification.ttf?0b4ac1dc75df35e169b70d7719afe4cc";
+module.exports = "/fonts/vendor/react-notifications/lib/notification.svg?5bee74caefdf9d0a834915f6c8eeb259";
 
 /***/ }),
 /* 141 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "/fonts/vendor/react-notifications/lib/notification.svg?5bee74caefdf9d0a834915f6c8eeb259";
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.NotificationManager = exports.NotificationContainer = exports.Notifications = undefined;
+
+var _Notifications = __webpack_require__(80);
+
+var _Notifications2 = _interopRequireDefault(_Notifications);
+
+var _NotificationContainer = __webpack_require__(153);
+
+var _NotificationContainer2 = _interopRequireDefault(_NotificationContainer);
+
+var _NotificationManager = __webpack_require__(85);
+
+var _NotificationManager2 = _interopRequireDefault(_NotificationManager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.Notifications = _Notifications2.default;
+exports.NotificationContainer = _NotificationContainer2.default;
+exports.NotificationManager = _NotificationManager2.default;
+exports.default = _Notifications2.default;
 
 /***/ }),
 /* 142 */
@@ -107344,7 +107384,7 @@ var _CSSTransitionGroup = __webpack_require__(143);
 
 var _CSSTransitionGroup2 = _interopRequireDefault(_CSSTransitionGroup);
 
-var _TransitionGroup = __webpack_require__(82);
+var _TransitionGroup = __webpack_require__(81);
 
 var _TransitionGroup2 = _interopRequireDefault(_TransitionGroup);
 
@@ -107374,7 +107414,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _TransitionGroup = __webpack_require__(82);
+var _TransitionGroup = __webpack_require__(81);
 
 var _TransitionGroup2 = _interopRequireDefault(_TransitionGroup);
 
@@ -107382,7 +107422,7 @@ var _CSSTransitionGroupChild = __webpack_require__(146);
 
 var _CSSTransitionGroupChild2 = _interopRequireDefault(_CSSTransitionGroupChild);
 
-var _PropTypes = __webpack_require__(84);
+var _PropTypes = __webpack_require__(83);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -107613,7 +107653,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactDom = __webpack_require__(3);
 
-var _PropTypes = __webpack_require__(84);
+var _PropTypes = __webpack_require__(83);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -107878,7 +107918,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _inDOM = __webpack_require__(83);
+var _inDOM = __webpack_require__(82);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -107938,7 +107978,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.animationEnd = exports.animationDelay = exports.animationTiming = exports.animationDuration = exports.animationName = exports.transitionEnd = exports.transitionDuration = exports.transitionDelay = exports.transitionTiming = exports.transitionProperty = exports.transform = undefined;
 
-var _inDOM = __webpack_require__(83);
+var _inDOM = __webpack_require__(82);
 
 var _inDOM2 = _interopRequireDefault(_inDOM);
 
@@ -108063,7 +108103,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _classnames = __webpack_require__(85);
+var _classnames = __webpack_require__(84);
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -108189,11 +108229,11 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _NotificationManager = __webpack_require__(86);
+var _NotificationManager = __webpack_require__(85);
 
 var _NotificationManager2 = _interopRequireDefault(_NotificationManager);
 
-var _Notifications = __webpack_require__(81);
+var _Notifications = __webpack_require__(80);
 
 var _Notifications2 = _interopRequireDefault(_Notifications);
 
@@ -108656,10 +108696,8 @@ var CellRenderer = function (_React$Component2) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_notifications__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_notifications__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UploadButton_css__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UploadButton_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__UploadButton_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UploadButton_css__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UploadButton_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__UploadButton_css__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -108669,7 +108707,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 
-
+//import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 var ImageUploadFormatter = function (_React$Component) {
@@ -108700,14 +108738,15 @@ var ImageUploadFormatter = function (_React$Component) {
             var data = new FormData();
             data.append('file', file, file.name);
             data.append('id', this.props.dependentValues.id);
+            data.append('type', this.props.dependentValues.type);
 
             axios.post('/uploadImage', data, { headers: { 'Content-Type': 'multipart/form-data' } }).then(function (response) {
 
                 if (_this2.props.dependentValues.id === "") _this2.props.onUpload(key, response.data.message.id);
 
-                __WEBPACK_IMPORTED_MODULE_1_react_notifications__["NotificationManager"].success('Success', response.data.message.status);
+                //NotificationManager.success('Success', response.data.message.status);
             }).catch(function (error) {
-                __WEBPACK_IMPORTED_MODULE_1_react_notifications__["NotificationManager"].error('Error', error);
+                //NotificationManager.error('Error', error);
             });
         }
     }, {
@@ -108728,8 +108767,7 @@ var ImageUploadFormatter = function (_React$Component) {
                     "button",
                     { className: "btn btn-primary file-upload" },
                     "Upload"
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_notifications__["NotificationContainer"], null)
+                )
             );
         }
     }]);
@@ -108779,7 +108817,7 @@ exports = module.exports = __webpack_require__(77)(false);
 
 
 // module
-exports.push([module.i, "input[type=file] {\n    cursor: pointer;\n    width: 100px;\n    height: 34px;\n    overflow: hidden;\n}\n\ninput[type=file]:before {\n    width: 100px;\n    height: 32px;\n    font-size: 14px;\n    line-height: 32px;\n    content: 'Choose File';\n    display: inline-block;\n    background: #0080A4;\n    border: 1px solid #0080A4;\n    padding: 0 10px;\n    text-align: center;\n    font-family: Helvetica, Arial, sans-serif;\n    color: white;\n}\n\n.file-upload{\n    width: 100px;\n    border-radius: 0px;\n    height: 32px;\n}\n\ninput[type=file]::-webkit-file-upload-button {\n    visibility: hidden;\n}\n.react-grid-image{\n    background-repeat: no-repeat !important;\n}", ""]);
+exports.push([module.i, "input[type=file] {\n    cursor: pointer;\n    width: 100px;\n    height: 34px;\n    overflow: hidden;\n}\n\ninput[type=file]:before {\n    width: 100px;\n    height: 32px;\n    font-size: 14px;\n    line-height: 32px;\n    content: 'Choose File';\n    display: inline-block;\n    background: #0080A4;\n    border: 1px solid #0080A4;\n    padding: 0 10px;\n    text-align: center;\n    font-family: Helvetica, Arial, sans-serif;\n    color: white;\n}\n\n.file-upload{\n    width: 100px;\n    border-radius: 0px;\n    height: 32px;\n}\n\ninput[type=file]::-webkit-file-upload-button {\n    visibility: hidden;\n}\n\n.react-grid-image{\n    background-repeat: no-repeat !important;\n}\n\n", ""]);
 
 // exports
 

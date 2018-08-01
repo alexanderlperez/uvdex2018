@@ -52,7 +52,7 @@ class VehicleController extends Controller
      */
     public function getData($type, $id){
 
-        $vehicles = Vehicle::whereUserId($id)->whereType($type)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck') ASC")->orderBy('model_year', 'desc')->get();
+        $vehicles = Vehicle::whereUserId($id)->whereType($type)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")->orderBy('model_year', 'desc')->get();
 
         $vehicles->transform(function ($item, $key){
 
@@ -348,6 +348,7 @@ class VehicleController extends Controller
                 $data['user_id'] = Auth::user()->id;
                 $data['option_text'] = '';
                 $data['description'] = '';
+                $data['type'] = $request->get('type');
                 $vehicle = Vehicle::create($data);
 
                 $message['id'] = $vehicle->id;

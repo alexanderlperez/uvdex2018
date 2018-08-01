@@ -1,5 +1,5 @@
 import React from "react";
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+//import {NotificationContainer, NotificationManager} from 'react-notifications';
 import "./UploadButton.css"
 
 class ImageUploadFormatter extends React.Component {
@@ -22,6 +22,7 @@ class ImageUploadFormatter extends React.Component {
         let data = new FormData();
         data.append('file', file, file.name);
         data.append('id', this.props.dependentValues.id);
+        data.append('type', this.props.dependentValues.type);
 
         axios
             .post('/uploadImage', data, { headers: {'Content-Type': 'multipart/form-data'} })
@@ -30,10 +31,10 @@ class ImageUploadFormatter extends React.Component {
                 if(this.props.dependentValues.id === "")
                     this.props.onUpload(key, response.data.message.id);
 
-                NotificationManager.success('Success', response.data.message.status);
+                //NotificationManager.success('Success', response.data.message.status);
             })
             .catch((error) => {
-                NotificationManager.error('Error', error);
+                //NotificationManager.error('Error', error);
             });
     }
 
@@ -48,7 +49,6 @@ class ImageUploadFormatter extends React.Component {
             <form onSubmit={this.handleSubmit} encType="multipart/form-data">
                 <input type="file" className="file" onChange={this.onChange}  />
                 <button className="btn btn-primary file-upload">Upload</button>
-                <NotificationContainer/>
             </form>);
     }
 }
