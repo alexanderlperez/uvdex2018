@@ -29,27 +29,33 @@ class Cardata extends Component{
             carId:[
                 {
                     id: 1,
-                    name: "one"
+                    name: "one",
+                    img: '/images/img1.jpeg',
                 },
                 {
                     id: 2,
-                    name: "two"
+                    name: "two",
+                    img: '/images/img2.jpeg',
                 },
                 {
                     id: 3,
-                    name: "three"
+                    name: "three",
+                    img: '/images/img3.jpeg',
                 },
                 {
                     id: 4,
-                    name: "four"
+                    name: "four",
+                    img: '/images/img4.jpeg',
                 },
                 {
                     id: 5,
-                    name: "five"
+                    name: "five",
+                    img: '/images/img5.jpeg',
                 },
                 {
                     id: 6,
-                    name: "six"
+                    name: "six",
+                    img: '/images/img6.jpeg',
                 },
             ]
         })
@@ -81,7 +87,7 @@ class Cardata extends Component{
                             <div className="image-block col-md-4 d-none d-sm-block">
                                      <Link to="/detail">
                                         <figure>
-                                            <img src={"./img/data.jpeg"} alt=""/>
+                                            <img src={carItem.img} alt=""/>
                                         </figure>
                                     </Link>
                             </div>

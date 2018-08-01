@@ -108779,7 +108779,7 @@ exports = module.exports = __webpack_require__(77)(false);
 
 
 // module
-exports.push([module.i, "input[type=file] {\n    cursor: pointer;\n    width: 100px;\n    height: 34px;\n    overflow: hidden;\n}\n\ninput[type=file]:before {\n    width: 100px;\n    height: 32px;\n    font-size: 14px;\n    line-height: 32px;\n    content: 'Choose File';\n    display: inline-block;\n    background: #0080A4;\n    border: 1px solid #0080A4;\n    padding: 0 10px;\n    text-align: center;\n    font-family: Helvetica, Arial, sans-serif;\n    color: white;\n}\n\n.file-upload{\n    width: 100px;\n    border-radius: 0px;\n    height: 32px;\n}\n\ninput[type=file]::-webkit-file-upload-button {\n    visibility: hidden;\n}", ""]);
+exports.push([module.i, "input[type=file] {\n    cursor: pointer;\n    width: 100px;\n    height: 34px;\n    overflow: hidden;\n}\n\ninput[type=file]:before {\n    width: 100px;\n    height: 32px;\n    font-size: 14px;\n    line-height: 32px;\n    content: 'Choose File';\n    display: inline-block;\n    background: #0080A4;\n    border: 1px solid #0080A4;\n    padding: 0 10px;\n    text-align: center;\n    font-family: Helvetica, Arial, sans-serif;\n    color: white;\n}\n\n.file-upload{\n    width: 100px;\n    border-radius: 0px;\n    height: 32px;\n}\n\ninput[type=file]::-webkit-file-upload-button {\n    visibility: hidden;\n}\n.react-grid-image{\n    background-repeat: no-repeat !important;\n}", ""]);
 
 // exports
 

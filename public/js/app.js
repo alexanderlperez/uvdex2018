@@ -58116,8 +58116,8 @@ var Main = function (_Component) {
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__filters_filter__["a" /* default */], null),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_react_router_dom__["c" /* Route */], { path: '/', exact: true, component: __WEBPACK_IMPORTED_MODULE_3__data_data__["a" /* default */] }),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__footer_footer__["a" /* default */], null),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_react_router_dom__["c" /* Route */], { path: '/detail', component: __WEBPACK_IMPORTED_MODULE_5__details_detail__["a" /* default */] })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_react_router_dom__["c" /* Route */], { path: '/detail', component: __WEBPACK_IMPORTED_MODULE_5__details_detail__["a" /* default */] }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__footer_footer__["a" /* default */], null)
             );
         }
     }]);
@@ -58358,22 +58358,28 @@ var Cardata = function (_Component) {
             this.setState({
                 carId: [{
                     id: 1,
-                    name: "one"
+                    name: "one",
+                    img: '/images/img1.jpeg'
                 }, {
                     id: 2,
-                    name: "two"
+                    name: "two",
+                    img: '/images/img2.jpeg'
                 }, {
                     id: 3,
-                    name: "three"
+                    name: "three",
+                    img: '/images/img3.jpeg'
                 }, {
                     id: 4,
-                    name: "four"
+                    name: "four",
+                    img: '/images/img4.jpeg'
                 }, {
                     id: 5,
-                    name: "five"
+                    name: "five",
+                    img: '/images/img5.jpeg'
                 }, {
                     id: 6,
-                    name: "six"
+                    name: "six",
+                    img: '/images/img6.jpeg'
                 }]
             });
         }
@@ -58418,7 +58424,7 @@ var Cardata = function (_Component) {
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'figure',
                                                 null,
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: "./img/data.jpeg", alt: '' })
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: carItem.img, alt: '' })
                                             )
                                         )
                                     ),
@@ -61445,7 +61451,7 @@ var Footer = function (_Component) {
                                         null,
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'a',
-                                            { href: '{this.state.telTo}' },
+                                            { href: this.state.telTo },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__img_icons_phone_icon_png___default.a, alt: 'Phone Call Icon' })
                                         )
                                     ),
