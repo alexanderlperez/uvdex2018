@@ -23,12 +23,10 @@ class Main extends Component{
         return (
             <div>
                 <Filter />
-                {/* <Cardata /> */}
-                <Route path="/" exact={true} component={Cardata} />
-                {/* <DetailBlock /> */}
-                <Footer />
-                <Route path="/detail" component={DetailBlock} />
                 
+                <Route path="/" exact={true} component={Cardata} />
+                <Route path="/detail" component={DetailBlock} />
+                <Footer />
             </div>
             
         );
