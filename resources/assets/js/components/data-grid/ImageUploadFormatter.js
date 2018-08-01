@@ -6,19 +6,15 @@ class ImageUploadFormatter extends React.Component {
 
     constructor(props){
         super(props);
-
-        this.state ={
-            image: ''
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
-    handleSubmit(e) {
+    onChange(e){
+
         e.preventDefault();
 
         let key = this.props.dependentValues.key-1;
-        let file = this.state.image;
+        let file = e.target.files[0];
         let data = new FormData();
         data.append('file', file, file.name);
         data.append('id', this.props.dependentValues.id);
@@ -38,17 +34,11 @@ class ImageUploadFormatter extends React.Component {
             });
     }
 
-    onChange(e){
-
-        this.setState({image: e.target.files[0]});
-    }
-
     render() {
 
         return (
-            <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+            <form encType="multipart/form-data">
                 <input type="file" className="file" onChange={this.onChange}  />
-                <button className="btn btn-primary file-upload">Upload</button>
             </form>);
     }
 }
