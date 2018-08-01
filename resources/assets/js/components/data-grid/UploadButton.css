@@ -1,20 +1,20 @@
 input[type=file] {
     cursor: pointer;
     width: 100px;
-    height: 34px;
+    height: 40px;
     overflow: hidden;
 }
 
 input[type=file]:before {
     width: 100px;
-    height: 32px;
+    height: 40px;
     font-size: 14px;
     line-height: 32px;
     content: 'Choose File';
     display: inline-block;
     background: #0080A4;
     border: 1px solid #0080A4;
-    padding: 0 10px;
+    padding: 2px 10px;
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
     color: white;
