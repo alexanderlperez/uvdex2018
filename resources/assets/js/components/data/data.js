@@ -18,11 +18,22 @@ class Cardata extends Component{
         this.state = {
             data: "New",
             iconUrl: FavIconBlue,
-            carId: []
+            carId: [],
+            carData: []
         };
         
         this.toggleIcons = this.toggleIcons.bind(this);
+        
     }
+    // componentDidMount() {
+    //     axios.get(`/allVehicles`)
+    //       .then(res => {
+    //           console.log(res);
+    //         const carData = res.data;
+    //         this.setState({ carData });
+    //       })
+    //   }
+    
 
     componentWillMount(){
         this.setState({

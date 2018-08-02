@@ -58344,12 +58344,23 @@ var Cardata = function (_Component) {
         _this.state = {
             data: "New",
             iconUrl: __WEBPACK_IMPORTED_MODULE_2__img_icons_favorite_off_png___default.a,
-            carId: []
+            carId: [],
+            carData: []
         };
 
         _this.toggleIcons = _this.toggleIcons.bind(_this);
+
         return _this;
     }
+    // componentDidMount() {
+    //     axios.get(`/allVehicles`)
+    //       .then(res => {
+    //           console.log(res);
+    //         const carData = res.data;
+    //         this.setState({ carData });
+    //       })
+    //   }
+
 
     _createClass(Cardata, [{
         key: 'componentWillMount',
