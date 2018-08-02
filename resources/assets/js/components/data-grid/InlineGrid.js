@@ -29,7 +29,7 @@ class InlineGrid extends React.Component {
                 {
                     key: 'featured',
                     name: 'Image',
-                    width: 85,
+                    width: 90,
                     formatter: CustomImageFormatter,
                     resizable: true,
                     getRowMetaData: (row) => row
@@ -38,7 +38,7 @@ class InlineGrid extends React.Component {
                     key: 'stock_number',
                     name: 'STOCK',
                     editable: true,
-                    width: 70,
+                    width: 77,
                     resizable: true,
                     filterable: true,
                 },
@@ -46,7 +46,7 @@ class InlineGrid extends React.Component {
                     key: 'scheduled',
                     name: 'SCHEDULED',
                     editable: true,
-                    width: 95,
+                    width: 97,
                     resizable: true,
                     filterable: true,
                 },
@@ -62,7 +62,7 @@ class InlineGrid extends React.Component {
                     key: 'model_year',
                     name: 'YEAR',
                     editable: true,
-                    width: 47,
+                    width: 55,
                     resizable: true,
                     filterable: true,
                 },
@@ -78,7 +78,7 @@ class InlineGrid extends React.Component {
                     key: 'rebate_price',
                     name: 'SALE PRICE W REBATES',
                     editable: true,
-                    width: 155,
+                    width: 180,
                     resizable: true,
                     filterable: true,
                 },
@@ -86,7 +86,7 @@ class InlineGrid extends React.Component {
                     key: 'make',
                     name: 'MAKE',
                     editable: true,
-                    width: 50,
+                    width: 60,
                     resizable: true,
                     filterable: true,
                 },
@@ -94,7 +94,7 @@ class InlineGrid extends React.Component {
                     key: 'model',
                     name: 'MODEL',
                     editable: true,
-                    width: 65,
+                    width: 70,
                     resizable: true,
                     filterable: true,
                 },
@@ -102,7 +102,7 @@ class InlineGrid extends React.Component {
                     key: 'trim',
                     name: 'PKG.',
                     editable: true,
-                    width: 160,
+                    width: 200,
                     resizable: true,
                     filterable: true,
                 },
@@ -110,7 +110,7 @@ class InlineGrid extends React.Component {
                     key: 'exterior_color',
                     name: 'EXTERIOR COLOR',
                     editable: true,
-                    width: 150,
+                    width: 140,
                     resizable: true,
                     filterable: true,
                 },
@@ -118,7 +118,7 @@ class InlineGrid extends React.Component {
                     key: 'vin',
                     name: 'VIN',
                     editable: true,
-                    width: 147,
+                    width: 190,
                     resizable: true,
                     filterable: true,
                 },
@@ -126,7 +126,7 @@ class InlineGrid extends React.Component {
                     key: 'description',
                     name: 'DEALER NOTES',
                     editable: true,
-                    width: 150,
+                    width: 350,
                     resizable: true,
                     filterable: true,
                 },
@@ -142,7 +142,7 @@ class InlineGrid extends React.Component {
                     key: 'passengers',
                     name: 'PASSENGERS',
                     editable: true,
-                    width: 100,
+                    width: 105,
                     resizable: true,
                     filterable: true,
                 },
@@ -151,7 +151,7 @@ class InlineGrid extends React.Component {
                     name: 'Status',
                     editable: true,
                     editor: <DropDownEditor options={status}/>,
-                    width: 80,
+                    width: 120,
                     resizable: true,
                     filterable: true,
                 },
@@ -168,7 +168,7 @@ class InlineGrid extends React.Component {
                 {
                     key: 'featured',
                     name: 'Image',
-                    width: 85,
+                    width: 90,
                     formatter: CustomImageFormatter,
                     resizable: true,
                     getRowMetaData: (row) => row
@@ -177,14 +177,14 @@ class InlineGrid extends React.Component {
                     key: 'stock_number',
                     name: 'STOCK',
                     editable: true,
-                    width: 70,
+                    width: 77,
                     resizable: true,
                     filterable: true,
                 },
                 {
                     key: 'price',
                     name: 'SALE PRICE',
-                    width: 90,
+                    width: 95,
                     editable: true,
                     resizable: true,
                     filterable: true,
@@ -201,7 +201,7 @@ class InlineGrid extends React.Component {
                     key: 'model_year',
                     name: 'YEAR',
                     editable: true,
-                    width: 47,
+                    width: 55,
                     resizable: true,
                     filterable: true,
                 },
@@ -209,7 +209,7 @@ class InlineGrid extends React.Component {
                     key: 'make',
                     name: 'MAKE',
                     editable: true,
-                    width: 50,
+                    width: 60,
                     resizable: true,
                     filterable: true,
                 },
@@ -217,6 +217,7 @@ class InlineGrid extends React.Component {
                     key: 'model',
                     name: 'MODEL',
                     editable: true,
+                    width: 80,
                     resizable: true,
                     filterable: true,
                 },
@@ -224,7 +225,7 @@ class InlineGrid extends React.Component {
                     key: 'cpo',
                     name: 'CPO',
                     editable: true,
-                    width: 40,
+                    width: 42,
                     resizable: true,
                     filterable: true,
                 },
@@ -232,7 +233,7 @@ class InlineGrid extends React.Component {
                     key: 'exterior_color',
                     name: 'EXTERIOR COLOR',
                     editable: true,
-                    width: 70,
+                    width: 140,
                     resizable: true,
                     filterable: true,
                 },
@@ -240,7 +241,7 @@ class InlineGrid extends React.Component {
                     key: 'trim',
                     name: 'PKG.',
                     editable: true,
-                    width: 160,
+                    width: 200,
                     resizable: true,
                     filterable: true,
                 },
@@ -248,7 +249,7 @@ class InlineGrid extends React.Component {
                     key: 'mileage',
                     name: 'MILES',
                     editable: true,
-                    width: 60,
+                    width: 80,
                     resizable: true,
                     filterable: true,
                 },
@@ -256,7 +257,7 @@ class InlineGrid extends React.Component {
                     key: 'engine_description',
                     name: 'ENGINE',
                     editable: true,
-                    width: 65,
+                    width: 80,
                     resizable: true,
                     filterable: true,
                 },
@@ -264,7 +265,7 @@ class InlineGrid extends React.Component {
                     key: 'vin',
                     name: 'VIN',
                     editable: true,
-                    width: 147,
+                    width: 190,
                     resizable: true,
                     filterable: true,
                 },
@@ -280,7 +281,7 @@ class InlineGrid extends React.Component {
                     key: 'description',
                     name: 'DEALER NOTES',
                     editable: true,
-                    width: 150,
+                    width: 350,
                     resizable: true,
                     filterable: true,
                 },
@@ -304,7 +305,7 @@ class InlineGrid extends React.Component {
                     key: 'passengers',
                     name: 'PASSENGERS',
                     editable: true,
-                    width: 100,
+                    width: 105,
                     resizable: true,
                     filterable: true,
                 },
@@ -313,12 +314,124 @@ class InlineGrid extends React.Component {
                     name: 'Status',
                     editable: true,
                     editor: <DropDownEditor options={status}/>,
+                    width: 120,
+                    resizable: true,
+                    filterable: true,
+                },
+            ];
+        } else if (action === 'sold-vehicles') {
+
+            this._columns = [
+                {
+                    key: 'key',
+                    name: 'ID',
+                    width: 30,
+                    resizable: true
+                },
+                {
+                    key: 'featured',
+                    name: 'Image',
+                    width: 90,
+                    formatter: CustomImageFormatter,
+                    resizable: true,
+                    getRowMetaData: (row) => row
+                },
+                {
+                    key: 'stock_number',
+                    name: 'STOCK',
+                    width: 77,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'model_year',
+                    name: 'YEAR',
+                    width: 55,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'make',
+                    name: 'MAKE',
+                    width: 60,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'model',
+                    name: 'MODEL',
                     width: 80,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'exterior_color',
+                    name: 'EXTERIOR COLOR',
+                    width: 140,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'trim',
+                    name: 'PKG.',
+                    width: 200,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'mileage',
+                    name: 'MILES',
+                    width: 80,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'engine_description',
+                    name: 'ENGINE',
+                    width: 80,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'vin',
+                    name: 'VIN',
+                    width: 190,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'description',
+                    name: 'DEALER NOTES',
+                    width: 350,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'previous_owner',
+                    name: 'PREVIOUS OWNER',
+                    width: 140,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'passengers',
+                    name: 'PASSENGERS',
+                    width: 105,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'is_active',
+                    name: 'Status',
+                    editable: true,
+                    editor: <DropDownEditor options={status}/>,
+                    width: 120,
                     resizable: true,
                     filterable: true,
                 },
             ];
         }
+
 
         this.state = { rows: [] };
         this.getColumns = this.getColumns.bind(this);
@@ -346,9 +459,20 @@ class InlineGrid extends React.Component {
                 .catch((error) => {
                     console.log(error.response);
                 });
-        } else {
+        } else if (action === 'used-vehicles') {
 
             axios.get('/getVehicles/U/'+user_id)
+                .then((response) => {
+                    this.setState({
+                        rows: [...response.data.vehicles]
+                    })
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                });
+        } else if (action === 'sold-vehicles') {
+
+            axios.get('/getVehicles/S/'+user_id)
                 .then((response) => {
                     this.setState({
                         rows: [...response.data.vehicles]
@@ -475,27 +599,55 @@ class InlineGrid extends React.Component {
     };
 
     render() {
-        return  (
-            <div>
-                <ReactDataGrid
-                    ref={ node => this.grid = node }
-                    onGridSort={this.handleGridSort}
-                    enableCellSelect={true}
-                    columns={this.getColumns()}
-                    rowGetter={this.getRowAt}
-                    rowsCount={this.getSize()}
-                    onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
-                    toolbar={<Toolbar addRowButtonText="Add Vehicle" onAddRow={this.handleAddRow} enableFilter={true}/>}
-                    onAddFilter={this.handleFilterChange}
-                    getValidFilterValues={this.getValidFilterValues}
-                    onClearFilters={this.handleOnClearFilters}
-                    rowHeight={70}
-                    minHeight={600}
-                    rowRenderer={RowRenderer}
-                    rowScrollTimeout={200} />
+
+        if (action === 'sold-vehicles') {
+
+            return  (
+                <div>
+                    <ReactDataGrid
+                        ref={ node => this.grid = node }
+                        onGridSort={this.handleGridSort}
+                        enableCellSelect={true}
+                        columns={this.getColumns()}
+                        rowGetter={this.getRowAt}
+                        rowsCount={this.getSize()}
+                        onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
+                        toolbar={<Toolbar enableFilter={true}/>}
+                        onAddFilter={this.handleFilterChange}
+                        getValidFilterValues={this.getValidFilterValues}
+                        onClearFilters={this.handleOnClearFilters}
+                        rowHeight={70}
+                        minHeight={600}
+                        rowRenderer={RowRenderer}
+                        rowScrollTimeout={200} />
                     <NotificationContainer/>
-            </div>
-        );
+                </div>
+            );
+        } else {
+
+            return  (
+                <div>
+                    <ReactDataGrid
+                        ref={ node => this.grid = node }
+                        onGridSort={this.handleGridSort}
+                        enableCellSelect={true}
+                        columns={this.getColumns()}
+                        rowGetter={this.getRowAt}
+                        rowsCount={this.getSize()}
+                        onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
+                        toolbar={<Toolbar addRowButtonText="Add Vehicle" onAddRow={this.handleAddRow} enableFilter={true}/>}
+                        onAddFilter={this.handleFilterChange}
+                        getValidFilterValues={this.getValidFilterValues}
+                        onClearFilters={this.handleOnClearFilters}
+                        rowHeight={70}
+                        minHeight={600}
+                        rowRenderer={RowRenderer}
+                        rowScrollTimeout={200} />
+                    <NotificationContainer/>
+                </div>
+            );
+        }
+
     }
 }
 
