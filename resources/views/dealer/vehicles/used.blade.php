@@ -1,9 +1,9 @@
 @extends('adminlte::page')
-@section('title_prefix', 'Vehicle')
+@section('title_prefix', 'Used Vehicle')
 @section('heading','Used Vehicles')
 
 @section('action')
-    <a href='{{ route('export') }}' class='btn btn-primary'>Export Inventory</a>
+    <a href='{{ route('export', ['type' => 'U']) }}' class='btn btn-primary'>Export Inventory</a>
 @stop
 
 @section('content')

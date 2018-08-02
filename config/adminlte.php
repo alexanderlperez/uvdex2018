@@ -130,6 +130,11 @@ return [
                     'icon'   => 'car',
                 ],
                 [
+                    'text'   => 'Inactive/Sold Vehicles',
+                    'url'    => 'sold-vehicles',
+                    'icon'   => 'car',
+                ],
+                [
                     'text'   => 'Import Vehicles',
                     'url'    => 'vehicles/create',
                     'icon'   => 'download',

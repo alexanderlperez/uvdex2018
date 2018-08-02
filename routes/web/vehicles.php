@@ -4,7 +4,8 @@ Route::group(array('namespace' => 'Dealer', 'middleware' => ['auth', 'role:'.con
     Route::resource('vehicles', 'VehicleController');
     Route::get('new-vehicles', 'VehicleController@newVehicles')->name('new-vehicles');
     Route::get('used-vehicles', 'VehicleController@usedVehicles')->name('used-vehicles');
-    Route::get('export', 'VehicleController@export')->name('export');
+    Route::get('sold-vehicles', 'VehicleController@soldVehicles')->name('sold-vehicles');
+    Route::get('export/{type}', 'VehicleController@export')->name('export');
     Route::get('getVehicles/{type}/{id}', 'VehicleController@getData')->name('getVehicles');
     Route::post('saveVehicle', 'VehicleController@saveVehicle')->name('saveVehicle');
     Route::post('uploadImage', 'VehicleController@uploadImage')->name('uploadImage');
