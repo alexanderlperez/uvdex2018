@@ -44,6 +44,16 @@ class VehicleController extends Controller
     }
 
     /**
+     * Display listing of sold vehicles.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function soldVehicles()
+    {
+        return view('dealer.vehicles.sold');
+    }
+
+    /**
      * Get Vehicle Data
      * @param $type
      * @param $id
@@ -52,12 +62,24 @@ class VehicleController extends Controller
      */
     public function getData($type, $id){
 
-        $vehicles = Vehicle::whereUserId($id)->whereType($type)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")->orderBy('model_year', 'desc')->get();
+        if($type == 'S') // Sold vehicles
+            $vehicles = Vehicle::whereUserId($id)->whereIsActive(Config::get('constants.status.inactive'))->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")->orderBy('model_year', 'desc')->get();
+        else
+            $vehicles = Vehicle::whereUserId($id)->whereIsActive(Config::get('constants.status.active'))->whereType($type)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")->orderBy('model_year', 'desc')->get();
 
         $vehicles->transform(function ($item, $key){
 
-            if(!empty($item->images))
-                $item->images = explode(',', $item->images)[0];
+            $item->featured = '';
+            $item->images_count = 0;
+            if(!empty($item->images)){
+                $item->featured = explode(',', $item->images)[0];
+                $item->images_count = count(explode(',', $item->images));
+            }
+
+            if($item->is_active)
+                $item->is_active = 'Available';
+            else
+                $item->is_active = 'Sold';
 
             $item->key = $key+1;
             return $item;
@@ -116,6 +138,14 @@ class VehicleController extends Controller
             DB::beginTransaction();
             $data['user_id'] = Auth::user()->id;
 
+            if(isset($data['is_active'])) {
+
+                if($data['is_active'] == 'Sold')
+                    $data['is_active'] = Config::get('constants.status.inactive');
+                else
+                    $data['is_active'] = Config::get('constants.status.active');
+            }
+
             $vehicle = Vehicle::create($data);
             DB::commit();
 
@@ -143,6 +173,14 @@ class VehicleController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->get('updated');
+
+        if(isset($data['is_active'])) {
+
+            if($data['is_active'] == 'Sold')
+                $data['is_active'] = Config::get('constants.status.inactive');
+            else
+                $data['is_active'] = Config::get('constants.status.active');
+        }
 
         try {
 
@@ -296,19 +334,44 @@ class VehicleController extends Controller
     }
 
     /**
-     * Export vehicle inventory
+     * export
+     * @param $type
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Common\Exception\InvalidArgumentException
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
      */
-    public function export() {
+    public function export($type) {
 
-        $vehicles =  Vehicle::whereUserId(Auth::user()->id)->exclude(['id', 'user_id', 'created_at', 'updated_at'])->get()->toArray();
+        $headers[] = [];
+        $vehicles = '';
+        if($type == 'U') {
+            $headers[] = Config::get('constants.headers.used');
+            $vehicles = Vehicle::select('stock_number', 'price', 'nada', 'model_year', 'make', 'model', 'cpo', 'exterior_color', 'trim', 'mileage', 'engine_description', 'vin', 'code', 'description', 'previous_owner', 'images', 'passengers')
+                                ->whereUserId(Auth::user()->id)
+                                ->whereIsActive(Config::get('constants.status.active'))
+                                ->whereType($type)
+                                ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
+                                ->orderBy('model_year', 'desc')
+                                ->get()->toArray();
+        }else if($type == 'N') {
+            $headers[] = Config::get('constants.headers.new');
+            $vehicles = Vehicle::select('stock_number', 'scheduled', 'sold', 'model_year', 'msrp', 'rebate_price', 'make', 'model', 'trim', 'exterior_color', 'vin', 'description', 'images', 'passengers')
+                                ->whereUserId(Auth::user()->id)
+                                ->whereIsActive(Config::get('constants.status.active'))
+                                ->whereType($type)
+                                ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
+                                ->orderBy('model_year', 'desc')
+                                ->get()->toArray();
+        }
 
         if(!empty($vehicles)) {
 
-            $headers[] = Config::get('constants.headers');
             $rows = $headers + $vehicles;
 
-            $writer = WriterFactory::create(Type::CSV); // for CSV files
-            $filename = 'inventory.csv';
+            $writer = WriterFactory::create(Type::XLSX); // for XLSX files
+            $filename = 'inventory.xlsx';
             $path = storage_path('app/'.$filename);
             $writer->openToBrowser($path); // stream data directly to the browser
 
