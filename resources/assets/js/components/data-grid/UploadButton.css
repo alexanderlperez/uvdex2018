@@ -32,6 +32,7 @@ input[type=file]::-webkit-file-upload-button {
 
 .react-grid-image{
     background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
 .react-grid-Container .react-grid-Toolbar{
     height: 62px;
