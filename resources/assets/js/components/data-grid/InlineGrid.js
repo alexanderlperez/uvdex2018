@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDataGrid from 'react-data-grid';
-const { Toolbar, Formatters, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
-const { ImageFormatter } = Formatters;
+const { Toolbar, Editors, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
+const { DropDownEditor } = Editors;
 import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import _ from 'lodash';
 import RowRenderer from './Row';
 import ImageUploadFormatter from './ImageUploadFormatter';
+import CustomImageFormatter from './CustomImageFormatter';
+
+const status = ['Available', 'Sold'];
 
 class InlineGrid extends React.Component {
     constructor(props, context) {
@@ -24,11 +27,12 @@ class InlineGrid extends React.Component {
                     resizable: true
                 },
                 {
-                    key: 'images',
+                    key: 'featured',
                     name: 'Image',
-                    width: 50,
-                    formatter: ImageFormatter,
+                    width: 85,
+                    formatter: CustomImageFormatter,
                     resizable: true,
+                    getRowMetaData: (row) => row
                 },
                 {
                     key: 'stock_number',
@@ -142,6 +146,15 @@ class InlineGrid extends React.Component {
                     resizable: true,
                     filterable: true,
                 },
+                {
+                    key: 'is_active',
+                    name: 'Status',
+                    editable: true,
+                    editor: <DropDownEditor options={status}/>,
+                    width: 80,
+                    resizable: true,
+                    filterable: true,
+                },
             ];
         } else if (action === 'used-vehicles') {
 
@@ -153,17 +166,18 @@ class InlineGrid extends React.Component {
                     resizable: true
                 },
                 {
-                    key: 'images',
+                    key: 'featured',
                     name: 'Image',
-                    width: 50,
-                    formatter: ImageFormatter,
+                    width: 85,
+                    formatter: CustomImageFormatter,
                     resizable: true,
+                    getRowMetaData: (row) => row
                 },
                 {
                     key: 'stock_number',
                     name: 'STOCK',
                     editable: true,
-                    width: 65,
+                    width: 70,
                     resizable: true,
                     filterable: true,
                 },
@@ -291,6 +305,15 @@ class InlineGrid extends React.Component {
                     name: 'PASSENGERS',
                     editable: true,
                     width: 100,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'is_active',
+                    name: 'Status',
+                    editable: true,
+                    editor: <DropDownEditor options={status}/>,
+                    width: 80,
                     resizable: true,
                     filterable: true,
                 },
@@ -462,7 +485,7 @@ class InlineGrid extends React.Component {
                     rowGetter={this.getRowAt}
                     rowsCount={this.getSize()}
                     onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
-                    toolbar={<Toolbar addRowButtonText="Add Inventory" onAddRow={this.handleAddRow} enableFilter={true}/>}
+                    toolbar={<Toolbar addRowButtonText="Add Vehicle" onAddRow={this.handleAddRow} enableFilter={true}/>}
                     onAddFilter={this.handleFilterChange}
                     getValidFilterValues={this.getValidFilterValues}
                     onClearFilters={this.handleOnClearFilters}

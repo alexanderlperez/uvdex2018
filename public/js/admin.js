@@ -57746,6 +57746,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Row__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ImageUploadFormatter__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__CustomImageFormatter__ = __webpack_require__(159);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -57762,13 +57763,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var _require = __webpack_require__(131),
     Toolbar = _require.Toolbar,
-    Formatters = _require.Formatters,
+    Editors = _require.Editors,
     _require$Filters = _require.Filters,
     MultiSelectFilter = _require$Filters.MultiSelectFilter,
     SingleSelectFilter = _require$Filters.SingleSelectFilter,
     Selectors = _require.Data.Selectors;
 
-var ImageFormatter = Formatters.ImageFormatter;
+var DropDownEditor = Editors.DropDownEditor;
 
 
 
@@ -57776,6 +57777,9 @@ var ImageFormatter = Formatters.ImageFormatter;
 
 
 
+
+
+var status = ['Available', 'Sold'];
 
 var InlineGrid = function (_React$Component) {
     _inherits(InlineGrid, _React$Component);
@@ -57793,11 +57797,14 @@ var InlineGrid = function (_React$Component) {
                 width: 30,
                 resizable: true
             }, {
-                key: 'images',
+                key: 'featured',
                 name: 'Image',
-                width: 50,
-                formatter: ImageFormatter,
-                resizable: true
+                width: 85,
+                formatter: __WEBPACK_IMPORTED_MODULE_9__CustomImageFormatter__["a" /* default */],
+                resizable: true,
+                getRowMetaData: function getRowMetaData(row) {
+                    return row;
+                }
             }, {
                 key: 'stock_number',
                 name: 'STOCK',
@@ -57898,6 +57905,14 @@ var InlineGrid = function (_React$Component) {
                 width: 100,
                 resizable: true,
                 filterable: true
+            }, {
+                key: 'is_active',
+                name: 'Status',
+                editable: true,
+                editor: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DropDownEditor, { options: status }),
+                width: 80,
+                resizable: true,
+                filterable: true
             }];
         } else if (action === 'used-vehicles') {
 
@@ -57907,16 +57922,19 @@ var InlineGrid = function (_React$Component) {
                 width: 30,
                 resizable: true
             }, {
-                key: 'images',
+                key: 'featured',
                 name: 'Image',
-                width: 50,
-                formatter: ImageFormatter,
-                resizable: true
+                width: 85,
+                formatter: __WEBPACK_IMPORTED_MODULE_9__CustomImageFormatter__["a" /* default */],
+                resizable: true,
+                getRowMetaData: function getRowMetaData(row) {
+                    return row;
+                }
             }, {
                 key: 'stock_number',
                 name: 'STOCK',
                 editable: true,
-                width: 65,
+                width: 70,
                 resizable: true,
                 filterable: true
             }, {
@@ -58030,6 +58048,14 @@ var InlineGrid = function (_React$Component) {
                 name: 'PASSENGERS',
                 editable: true,
                 width: 100,
+                resizable: true,
+                filterable: true
+            }, {
+                key: 'is_active',
+                name: 'Status',
+                editable: true,
+                editor: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(DropDownEditor, { options: status }),
+                width: 80,
                 resizable: true,
                 filterable: true
             }];
@@ -58226,7 +58252,7 @@ var InlineGrid = function (_React$Component) {
                     rowGetter: this.getRowAt,
                     rowsCount: this.getSize(),
                     onGridRowsUpdated: __WEBPACK_IMPORTED_MODULE_6_lodash___default.a.debounce(this.handleGridRowsUpdated, 500),
-                    toolbar: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Toolbar, { addRowButtonText: 'Add Inventory', onAddRow: this.handleAddRow, enableFilter: true }),
+                    toolbar: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Toolbar, { addRowButtonText: 'Add Vehicle', onAddRow: this.handleAddRow, enableFilter: true }),
                     onAddFilter: this.handleFilterChange,
                     getValidFilterValues: this.getValidFilterValues,
                     onClearFilters: this.handleOnClearFilters,
@@ -108814,6 +108840,51 @@ exports.push([module.i, "input[type=file] {\r\n    cursor: pointer;\r\n    width
 
 // exports
 
+
+/***/ }),
+/* 159 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var CustomImageFormatter = function (_React$Component) {
+    _inherits(CustomImageFormatter, _React$Component);
+
+    function CustomImageFormatter() {
+        _classCallCheck(this, CustomImageFormatter);
+
+        return _possibleConstructorReturn(this, (CustomImageFormatter.__proto__ || Object.getPrototypeOf(CustomImageFormatter)).apply(this, arguments));
+    }
+
+    _createClass(CustomImageFormatter, [{
+        key: "render",
+        value: function render() {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "div",
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("img", { src: this.props.value, height: 40, width: 40 }),
+                " (",
+                this.props.dependentValues.images_count,
+                ")"
+            );
+        }
+    }]);
+
+    return CustomImageFormatter;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["a"] = (CustomImageFormatter);
 
 /***/ })
 /******/ ]);
