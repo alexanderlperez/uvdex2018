@@ -301,6 +301,7 @@
   -o-object-fit: cover;
   -moz-object-fit: cover;
   object-fit: cover;
+  border: 1px solid #CFCFCF;
 }
 
 a.fav-icon i {
