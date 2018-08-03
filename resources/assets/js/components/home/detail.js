@@ -13,6 +13,20 @@ class DetailBlock extends Component{
        this.Hidebutton = this.Hidebutton.bind(this);
        
     }
+
+    componentWillMount() {
+
+        axios.get(`/vehicles/${this.props.match.params.id}/details`)
+            .then(response => {
+                console.log(response);
+                /*this.setState({
+                    task: response.data.task,
+                    name: response.data.task.name
+                })*/
+            })
+    }
+
+
     Hidebutton(){
         this.setState({
             addClass: !this.state.addClass

@@ -60489,6 +60489,18 @@ var DetailBlock = function (_Component) {
     }
 
     _createClass(DetailBlock, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+
+            axios.get('/vehicles/' + this.props.match.params.id + '/details').then(function (response) {
+                console.log(response);
+                /*this.setState({
+                    task: response.data.task,
+                    name: response.data.task.name
+                })*/
+            });
+        }
+    }, {
         key: 'Hidebutton',
         value: function Hidebutton() {
             this.setState({
