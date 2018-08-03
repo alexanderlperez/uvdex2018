@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import Filter from './filter';
 import Footer from './footer';
 
+import { Link } from 'react-router-dom';
 import Slider from '../../components/GallerySlider/Slider';
+
 class DetailBlock extends Component{
     constructor(props){
        super(props);
@@ -46,7 +48,7 @@ class DetailBlock extends Component{
                             <div className="button-block">
                                 <button className={buttonClass.join(' ')} onClick={this.Hidebutton.bind(this)}>Add To Favorites
                                 </button>
-                                <a href="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</a>
+                                <Link to="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</Link>
                             </div>
 
 
