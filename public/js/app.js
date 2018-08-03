@@ -56115,7 +56115,7 @@ module.exports = camelize;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(112);
 /* unused harmony reexport StaticRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(114);
-/* unused harmony reexport Switch */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__generatePath__ = __webpack_require__(116);
 /* unused harmony reexport generatePath */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__matchPath__ = __webpack_require__(117);
@@ -57036,17 +57036,44 @@ var Filter = function (_Component) {
         _this.state = {
             value: 'All Prices',
             min: 10,
-            max: 60
+            max: 60,
+            filterCarType: '',
+            filterCarBody: '',
+            filterPriceSlider: ''
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
+        _this.clickFilterType = _this.clickFilterType.bind(_this);
+        _this.clickFilterBody = _this.clickFilterBody.bind(_this);
         return _this;
     }
 
     _createClass(Filter, [{
+        key: 'clickFilterType',
+        value: function clickFilterType(e) {
+
+            this.setState({ filterCarType: e.target.getAttribute('data-name') });
+            this.filterCars();
+        }
+    }, {
+        key: 'clickFilterBody',
+        value: function clickFilterBody(e) {
+
+            this.setState({ filterCarBody: e.target.getAttribute('data-name') });
+            this.filterCars();
+        }
+    }, {
         key: 'handleChange',
-        value: function handleChange(event) {
-            this.setState({ value: '$' + event.target.value });
+        value: function handleChange(e) {
+
+            this.setState({ value: '$' + e.target.value, filterPriceSlider: e.target.value });
+            this.filterCars();
+        }
+    }, {
+        key: 'filterCars',
+        value: function filterCars() {
+
+            this.props.onFilter(this.state.filterCarType, this.state.filterCarBody, this.state.filterPriceSlider);
         }
     }, {
         key: 'render',
@@ -57093,12 +57120,12 @@ var Filter = function (_Component) {
                                 { className: 'col-sm-5 col-md-4 button-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary' },
+                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'New', onClick: this.clickFilterType },
                                     'New'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary' },
+                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'Used', onClick: this.clickFilterType },
                                     'Used'
                                 )
                             ),
@@ -57107,17 +57134,17 @@ var Filter = function (_Component) {
                                 { className: 'col-sm-7 col-md-5 button-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary' },
+                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'car', onClick: this.clickFilterBody },
                                     'CAR'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary' },
+                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'truck', onClick: this.clickFilterBody },
                                     'TRUCK'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary' },
+                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'suv', onClick: this.clickFilterBody },
                                     'SUV'
                                 )
                             ),
@@ -58283,7 +58310,7 @@ if (document.getElementById('root')) {
         __WEBPACK_IMPORTED_MODULE_4_react_router_dom__["a" /* BrowserRouter */],
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
+            __WEBPACK_IMPORTED_MODULE_4_react_router_dom__["d" /* Switch */],
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_router_dom__["c" /* Route */], { path: '/', exact: true, component: __WEBPACK_IMPORTED_MODULE_2__home_data__["a" /* default */] }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_react_router_dom__["c" /* Route */], { path: '/:id/detail', component: __WEBPACK_IMPORTED_MODULE_3__home_detail__["a" /* default */] })
@@ -58332,6 +58359,9 @@ var CarData = function (_Component) {
 
         _this.state = { iconUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a, rows: [] };
         _this.toggleIcons = _this.toggleIcons.bind(_this);
+        _this.renderVehicles = _this.renderVehicles.bind(_this);
+        _this.onFilter = _this.onFilter.bind(_this);
+        _this.onFavourite = _this.onFavourite.bind(_this);
         return _this;
     }
 
@@ -58357,14 +58387,157 @@ var CarData = function (_Component) {
             }
         }
     }, {
+        key: 'onFilter',
+        value: function onFilter(type, body, range) {
+
+            console.log(type, body, range);
+        }
+    }, {
+        key: 'onFavourite',
+        value: function onFavourite() {}
+    }, {
+        key: 'renderVehicles',
+        value: function renderVehicles() {
+            var _this3 = this;
+
+            return this.state.rows.map(function (car) {
+
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { key: car.id, className: 'full-width-wrapper' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                        { to: '/vehicles' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'car-detail-wrapper clearfix' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'image-block col-md-3 d-none d-sm-block' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                    { to: car.id + '/detail' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'figure',
+                                        null,
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: car.featured, alt: '' })
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'car-detail-block  col-md-3 text-center' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                    { to: car.id + '/detail', className: 'd-none d-sm-block' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h2',
+                                        null,
+                                        car.type
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                    { to: car.id + '/detail' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'h3',
+                                        null,
+                                        car.model_year + ' ' + car.make + ' ' + car.model + ' ' + car.trim
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                    { to: car.id + '/detail', className: 'fav-icon d-block d-sm-none' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this3.state.iconUrl, alt: 'Fav Icon', onClick: _this3.toggleIcons })
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                    { to: car.id + '/detail' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'figure',
+                                        { className: 'd-block d-sm-none' },
+                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: car.featured, alt: '' })
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    { className: 'd-none d-sm-block' },
+                                    'Mileage: ',
+                                    car.mileage
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    { className: 'd-none d-sm-block' },
+                                    'Color#: ',
+                                    car.exterior_color
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    { className: 'd-none d-sm-block' },
+                                    'Passengers: ',
+                                    car.passengers
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    { className: 'stroke-text' },
+                                    'Their price: $39,820.00'
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    null,
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'strong',
+                                        null,
+                                        'Our Price: $37,486.00'
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'button-block d-block d-sm-none' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'button',
+                                        { type: 'button', className: 'btn btn-primary' },
+                                        'Gallery'
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'button',
+                                        { type: 'button', className: 'btn btn-primary' },
+                                        'Details'
+                                    )
+                                )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'div',
+                                { className: 'dealer-notes  col-md-6 text-center d-none d-sm-block' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h4',
+                                    null,
+                                    'Dealer Notes'
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                    { to: '#', className: 'fav-icon' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this3.state.iconUrl, alt: 'Fav Icon', onClick: _this3.toggleIcons })
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'p',
+                                    null,
+                                    car.description
+                                )
+                            )
+                        )
+                    )
+                );
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], null),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { onFilter: this.onFilter }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'car-info-section' },
@@ -58374,139 +58547,11 @@ var CarData = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'row ' },
-                            this.state.rows.map(function (car) {
-
-                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'div',
-                                    { key: car.id, className: 'full-width-wrapper' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                        { to: '/vehicles' },
-                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'div',
-                                            { className: 'car-detail-wrapper clearfix' },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'div',
-                                                { className: 'image-block col-md-3 d-none d-sm-block' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: car.id + '/detail' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'figure',
-                                                        null,
-                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: car.featured, alt: '' })
-                                                    )
-                                                )
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'div',
-                                                { className: 'car-detail-block  col-md-3 text-center' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: car.id + '/detail', className: 'd-none d-sm-block' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'h2',
-                                                        null,
-                                                        car.type
-                                                    )
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: car.id + '/detail' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'h3',
-                                                        null,
-                                                        car.model_year + ' ' + car.make + ' ' + car.model + ' ' + car.trim
-                                                    )
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: car.id + '/detail', className: 'fav-icon d-block d-sm-none' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this3.state.iconUrl, alt: 'Fav Icon', onClick: _this3.toggleIcons })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: car.id + '/detail' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'figure',
-                                                        { className: 'd-block d-sm-none' },
-                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: car.featured, alt: '' })
-                                                    )
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'h5',
-                                                    { className: 'd-none d-sm-block' },
-                                                    'Mileage: ',
-                                                    car.mileage
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'h5',
-                                                    { className: 'd-none d-sm-block' },
-                                                    'Color#: ',
-                                                    car.exterior_color
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'h5',
-                                                    { className: 'd-none d-sm-block' },
-                                                    'Passengers: ',
-                                                    car.passengers
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'h5',
-                                                    { className: 'stroke-text' },
-                                                    'Their price: $39,820.00'
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'h5',
-                                                    null,
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'strong',
-                                                        null,
-                                                        'Our Price: $37,486.00'
-                                                    )
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'div',
-                                                    { className: 'button-block d-block d-sm-none' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'button',
-                                                        { type: 'button', className: 'btn btn-primary' },
-                                                        'Gallery'
-                                                    ),
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'button',
-                                                        { type: 'button', className: 'btn btn-primary' },
-                                                        'Details'
-                                                    )
-                                                )
-                                            ),
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'div',
-                                                { className: 'dealer-notes  col-md-6 text-center d-none d-sm-block' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'h4',
-                                                    null,
-                                                    'Dealer Notes'
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: '#', className: 'fav-icon' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this3.state.iconUrl, alt: 'Fav Icon', onClick: _this3.toggleIcons })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    'p',
-                                                    null,
-                                                    car.description
-                                                )
-                                            )
-                                        )
-                                    )
-                                );
-                            })
+                            this.renderVehicles()
                         )
                     )
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], null)
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { onFavourite: this.onFavourite })
             );
         }
     }]);
@@ -60196,7 +60241,7 @@ StaticRouter.childContextTypes = {
 // Written in this round about way for babel-transform-imports
 
 
-/* unused harmony default export */ var _unused_webpack_default_export = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
 
 /***/ }),
 /* 115 */
