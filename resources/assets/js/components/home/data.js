@@ -51,32 +51,23 @@ class CarData extends Component{
                                 else if(car.type === 'U')
                                     type = 'Used';
 
-                                let image = car.images;
-                                if(car.images === '')
-                                    image = null;
-
                                 return (
                                     <div key={car.id} >
                                         <Link to="/vehicles">
 
                                             <div className="car-detail-wrapper clearfix">
                                                 <div className="image-block col-md-4 d-none d-sm-block">
-                                                    <Link to="/detail">
+                                                    <Link to={car.id+ '/detail'}>
                                                         <figure>
-                                                            <img src={image} alt=""/>
+                                                            <img src={car.image} alt=""/>
                                                         </figure>
                                                     </Link>
                                                 </div>
                                                 <div className="car-detail-block  col-md-4 text-center">
-                                                    <Link to="/detail" className="d-none d-sm-block"><h2>{type}</h2></Link>
-                                                    <Link to="/detail"><h3>{}</h3></Link>
-                                                    <Link to="/detail" className="fav-icon d-block d-sm-none">
+                                                    <Link to={car.id+ '/detail'} className="d-none d-sm-block"><h2>{type}</h2></Link>
+                                                    <Link to={car.id+ '/detail'}><h3>{}</h3></Link>
+                                                    <Link to={car.id+ '/detail'} className="fav-icon d-block d-sm-none">
                                                         <img src={this.state.iconUrl} alt="Fav Icon" onClick={this.toggleIcons}/>
-                                                    </Link>
-                                                    <Link to="/detail">
-                                                        <figure className="d-block d-sm-none">
-                                                            <img src={"./img/data.jpeg"} alt=""/>
-                                                        </figure>
                                                     </Link>
                                                     <h5 className="d-none d-sm-block">Mileage: {car.mileage}</h5>
                                                     <h5 className="d-none d-sm-block">Color#: {car.exterior_color}</h5>

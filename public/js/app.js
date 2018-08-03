@@ -58380,9 +58380,6 @@ var CarData = function (_Component) {
                                 var type = '';
                                 if (car.type === 'N') type = 'New';else if (car.type === 'U') type = 'Used';
 
-                                var image = car.images;
-                                if (car.images === '') image = null;
-
                                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'div',
                                     { key: car.id },
@@ -58397,11 +58394,11 @@ var CarData = function (_Component) {
                                                 { className: 'image-block col-md-4 d-none d-sm-block' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: '/detail' },
+                                                    { to: car.id + '/detail' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'figure',
                                                         null,
-                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: image, alt: '' })
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: car.image, alt: '' })
                                                     )
                                                 )
                                             ),
@@ -58410,7 +58407,7 @@ var CarData = function (_Component) {
                                                 { className: 'car-detail-block  col-md-4 text-center' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: '/detail', className: 'd-none d-sm-block' },
+                                                    { to: car.id + '/detail', className: 'd-none d-sm-block' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'h2',
                                                         null,
@@ -58419,22 +58416,13 @@ var CarData = function (_Component) {
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: '/detail' },
+                                                    { to: car.id + '/detail' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('h3', null)
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: '/detail', className: 'fav-icon d-block d-sm-none' },
+                                                    { to: car.id + '/detail', className: 'fav-icon d-block d-sm-none' },
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this3.state.iconUrl, alt: 'Fav Icon', onClick: _this3.toggleIcons })
-                                                ),
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                    __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                                    { to: '/detail' },
-                                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                        'figure',
-                                                        { className: 'd-block d-sm-none' },
-                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: "./img/data.jpeg", alt: '' })
-                                                    )
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'h5',
