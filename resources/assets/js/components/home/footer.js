@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
 
 //Footer icons import here 
 import PhoneIcon from '../../../img/icons/phone-icon.png';
@@ -38,7 +36,7 @@ class Footer extends Component{
     copyPath(){
         this.setState={
            Subject: 'true'
-        }
+        };
         console.log(this.state.hasBeenClicked);
     }
     render() {
