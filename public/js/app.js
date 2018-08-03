@@ -58430,7 +58430,7 @@ var CarData = function (_Component) {
                                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                         'figure',
                                                         { className: 'd-block d-sm-none' },
-                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: car.image, alt: '' })
+                                                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: car.featured, alt: '' })
                                                     )
                                                 ),
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

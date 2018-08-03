@@ -66,7 +66,7 @@ class CarData extends Component{
                                                     {/* Mobile View */}
                                                     <Link to={car.id+ '/detail'}>
                                                         <figure className="d-block d-sm-none">
-                                                            <img src={car.image} alt=""/>
+                                                            <img src={car.featured} alt=""/>
                                                         </figure>
                                                     </Link>
                                                     {/* Mobile View */}
