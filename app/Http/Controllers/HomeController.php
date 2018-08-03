@@ -25,8 +25,12 @@ class HomeController extends Controller
 
         $vehicles->transform(function ($item){
 
-            if(!empty($item->images))
-                $item->images = explode(',', $item->images)[0];
+            $item->featured = null;
+            if(!empty($item->images)) {
+
+                $item->featured = explode(',', $item->images)[0];
+                $item->images = explode(',', $item->images);
+            }
 
             return $item;
         });
