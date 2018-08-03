@@ -281,6 +281,10 @@ a.fav-icon i {
   color: #0051A6;
 }
 
+.full-width-wrapper {
+  width: 100%;
+}
+
 /*============== footer block css here ============*/
 
 footer {
