@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function allVehicles() {
 
-        $vehicles = Vehicle::select('type', 'stock_number', 'model_year', 'make', 'trim', 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'rebate_price', 'description', 'vin')
+        $vehicles = Vehicle::select('id', 'type', 'stock_number', 'model_year', 'make', 'trim', 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'rebate_price', 'description', 'vin', 'images')
                             ->orderByRaw("FIELD(type , 'N', 'U') ASC")
                             ->orderBy('model_year', 'desc')
                             ->get();
@@ -26,7 +26,7 @@ class HomeController extends Controller
         $vehicles->transform(function ($item){
 
             if(!empty($item->images))
-                $item->images = explode(',', $item->images);
+                $item->images = explode(',', $item->images)[0];
 
             return $item;
         });
