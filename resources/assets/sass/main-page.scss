@@ -107,6 +107,7 @@
             img {
                 width: 100%;
                 @include object-fit($property: cover);
+                margin-bottom: 20px;
             }
             a {
                 &.fav-icon {
@@ -146,7 +147,7 @@
                         min-height: 214px;
                         min-width: 100%;
                         @include object-fit($property: cover);
-                        border: 1px solid $border-color;
+                        
                     }
                 }
                 
