@@ -7,3 +7,17 @@
     -moz-object-fit: $property;
     object-fit: $property;
 }
+@mixin box-shadow ($string) {
+    -webkit-box-shadow: $string;
+    -moz-box-shadow: $string;
+    -ms-box-shadow: $string;
+    -o-box-shadow: $string;
+    box-shadow: $string;
+}
+@mixin transitions($time-delay) {
+    -webkit-transition: $time-delay ease-in-out;
+    -moz-transition: $time-delay ease-in-out;
+    -ms-transition: $time-delay ease-in-out;
+    -o-transition: $time-delay ease-in-out;
+    transition: $time-delay ease-in-out;
+  }

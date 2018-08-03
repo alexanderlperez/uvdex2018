@@ -58387,7 +58387,7 @@ var CarData = function (_Component) {
                                             { className: 'car-detail-wrapper clearfix' },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
-                                                { className: 'image-block col-md-4 d-none d-sm-block' },
+                                                { className: 'image-block col-md-3 d-none d-sm-block' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
                                                     { to: car.id + '/detail' },
@@ -58400,7 +58400,7 @@ var CarData = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
-                                                { className: 'car-detail-block  col-md-4 text-center' },
+                                                { className: 'car-detail-block  col-md-3 text-center' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
                                                     { to: car.id + '/detail', className: 'd-none d-sm-block' },
@@ -58482,7 +58482,7 @@ var CarData = function (_Component) {
                                             ),
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'div',
-                                                { className: 'dealer-notes  col-md-4 text-center d-none d-sm-block' },
+                                                { className: 'dealer-notes  col-md-6 text-center d-none d-sm-block' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                     'h4',
                                                     null,

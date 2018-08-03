@@ -48,14 +48,14 @@ class CarData extends Component{
                                     <div key={car.id} className="full-width-wrapper" >
                                         <Link to="/vehicles">
                                             <div className="car-detail-wrapper clearfix">
-                                                <div className="image-block col-md-4 d-none d-sm-block">
+                                                <div className="image-block col-md-3 d-none d-sm-block">
                                                     <Link to={car.id+ '/detail'}>
                                                         <figure>
                                                             <img src={car.featured} alt=""/>
                                                         </figure>
                                                     </Link>
                                                 </div>
-                                                <div className="car-detail-block  col-md-4 text-center">
+                                                <div className="car-detail-block  col-md-3 text-center">
                                                     <Link to={car.id+ '/detail'} className="d-none d-sm-block"><h2>{car.type}</h2></Link>
                                                     <Link to={car.id+ '/detail'}>
                                                         <h3>{car.model_year+' '+car.make+' '+car.model+' '+car.trim}</h3>
@@ -80,7 +80,7 @@ class CarData extends Component{
                                                         <button type="button" className="btn btn-primary">Details</button>
                                                     </div>
                                                 </div>
-                                                <div className="dealer-notes  col-md-4 text-center d-none d-sm-block">
+                                                <div className="dealer-notes  col-md-6 text-center d-none d-sm-block">
                                                     <h4>Dealer Notes</h4>
                                                         <Link to="#" className="fav-icon">
                                                             <img src={this.state.iconUrl} alt="Fav Icon" onClick={this.toggleIcons}/>
