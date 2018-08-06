@@ -13,31 +13,19 @@ class Filter extends Component{
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.clickFilterType = this.clickFilterType.bind(this);
-        this.clickFilterBody = this.clickFilterBody.bind(this);
+        this.clickFilter = this.clickFilter.bind(this);
     }
 
-    clickFilterType(e) {
+    clickFilter(e) {
 
-        this.setState({filterCarType: e.target.getAttribute('data-name')});
-        this.filterCars();
-    }
-
-    clickFilterBody(e) {
-
-        this.setState({filterCarBody: e.target.getAttribute('data-name')});
-        this.filterCars();
+        let data = {[e.target.getAttribute('data-title')]: e.target.getAttribute('data-name')};
+        this.props.onFilter(data);
     }
 
     handleChange(e) {
 
-        this.setState({value: '$' + e.target.value, filterPriceSlider: e.target.value});
-        this.filterCars();
-    }
-
-    filterCars() {
-
-        this.props.onFilter(this.state.filterCarType, this.state.filterCarBody, this.state.filterPriceSlider);
+        this.setState({value: '$' + e.target.value});
+        this.props.onFilter({'price': e.target.value});
     }
 
     render() {
@@ -57,13 +45,13 @@ class Filter extends Component{
                     <div id="navbar" className="navbar-collapse collapse ">
                         <div className="row">
                             <div className="col-sm-5 col-md-4 button-block">
-                                <button type="button" className="btn btn-primary" data-name="New" onClick={this.clickFilterType}>New</button>
-                                <button type="button" className="btn btn-primary" data-name="Used" onClick={this.clickFilterType}>Used</button>
+                                <button type="button" className="btn btn-primary" data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
+                                <button type="button" className="btn btn-primary" data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
                             </div>
                             <div className="col-sm-7 col-md-5 button-block">
-                                <button type="button" className="btn btn-primary" data-name="car" onClick={this.clickFilterBody}>CAR</button>
-                                <button type="button" className="btn btn-primary" data-name="truck" onClick={this.clickFilterBody}>TRUCK</button>
-                                <button type="button" className="btn btn-primary" data-name="suv" onClick={this.clickFilterBody}>SUV</button>
+                                <button type="button" className="btn btn-primary" data-title="body" data-name="car" onClick={this.clickFilter}>CAR</button>
+                                <button type="button" className="btn btn-primary" data-title="body" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
+                                <button type="button" className="btn btn-primary" data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
                             </div>
                             <div className="col-md-3 range-filter-block">
                                 <h3><strong>{this.state.value}</strong></h3>
