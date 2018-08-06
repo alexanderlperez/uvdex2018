@@ -57017,6 +57017,8 @@ var matchPath = function matchPath(pathname) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -57043,37 +57045,23 @@ var Filter = function (_Component) {
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
-        _this.clickFilterType = _this.clickFilterType.bind(_this);
-        _this.clickFilterBody = _this.clickFilterBody.bind(_this);
+        _this.clickFilter = _this.clickFilter.bind(_this);
         return _this;
     }
 
     _createClass(Filter, [{
-        key: 'clickFilterType',
-        value: function clickFilterType(e) {
+        key: 'clickFilter',
+        value: function clickFilter(e) {
 
-            this.setState({ filterCarType: e.target.getAttribute('data-name') });
-            this.filterCars();
-        }
-    }, {
-        key: 'clickFilterBody',
-        value: function clickFilterBody(e) {
-
-            this.setState({ filterCarBody: e.target.getAttribute('data-name') });
-            this.filterCars();
+            var data = _defineProperty({}, e.target.getAttribute('data-title'), e.target.getAttribute('data-name'));
+            this.props.onFilter(data);
         }
     }, {
         key: 'handleChange',
         value: function handleChange(e) {
 
-            this.setState({ value: '$' + e.target.value, filterPriceSlider: e.target.value });
-            this.filterCars();
-        }
-    }, {
-        key: 'filterCars',
-        value: function filterCars() {
-
-            this.props.onFilter(this.state.filterCarType, this.state.filterCarBody, this.state.filterPriceSlider);
+            this.setState({ value: '$' + e.target.value });
+            this.props.onFilter({ 'price': e.target.value });
         }
     }, {
         key: 'render',
@@ -57120,12 +57108,12 @@ var Filter = function (_Component) {
                                 { className: 'col-sm-5 col-md-4 button-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'New', onClick: this.clickFilterType },
+                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'type', 'data-name': 'New', onClick: this.clickFilter },
                                     'New'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'Used', onClick: this.clickFilterType },
+                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'type', 'data-name': 'Used', onClick: this.clickFilter },
                                     'Used'
                                 )
                             ),
@@ -57134,17 +57122,17 @@ var Filter = function (_Component) {
                                 { className: 'col-sm-7 col-md-5 button-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'car', onClick: this.clickFilterBody },
+                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'body', 'data-name': 'car', onClick: this.clickFilter },
                                     'CAR'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'truck', onClick: this.clickFilterBody },
+                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'body', 'data-name': 'truck', onClick: this.clickFilter },
                                     'TRUCK'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-name': 'suv', onClick: this.clickFilterBody },
+                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'body', 'data-name': 'suv', onClick: this.clickFilter },
                                     'SUV'
                                 )
                             ),
@@ -57203,18 +57191,19 @@ var Filter = function (_Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__img_icons_phone_icon_png__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__img_icons_phone_icon_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__img_icons_phone_icon_png__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__img_icons_mail_icon_png__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__img_icons_mail_icon_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__img_icons_mail_icon_png__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__img_icons_back_button_png__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__img_icons_back_button_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__img_icons_back_button_png__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_icon_png__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_icon_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_icon_png__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_on_png__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_on_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_on_png__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__img_icons_favorite_engaged_png__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__img_icons_favorite_engaged_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__img_icons_favorite_engaged_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__img_icons_phone_icon_png__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__img_icons_phone_icon_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__img_icons_phone_icon_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__img_icons_mail_icon_png__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__img_icons_mail_icon_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__img_icons_mail_icon_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__img_icons_back_button_png__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__img_icons_back_button_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__img_icons_back_button_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__img_icons_favorite_on_png__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__img_icons_favorite_on_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__img_icons_favorite_on_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__img_icons_favorite_engaged_png__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__img_icons_favorite_engaged_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__img_icons_favorite_engaged_png__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57222,6 +57211,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -57242,12 +57232,13 @@ var Footer = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).call(this));
 
         _this.state = {
-            iconsUrl: __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_icon_png___default.a,
+            iconsUrl: __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png___default.a,
             mailTo: 'mailto:josh@rostmotor.com',
             Subject: 'this is demo',
             copied: false,
             telTo: 'tel:7124693383',
-            rostsiteUrl: 'http://rostmotor.com/'
+            rostsiteUrl: 'http://rostmotor.com/',
+            fav: false
         };
 
         _this.toggleIcon = _this.toggleIcon.bind(_this);
@@ -57260,11 +57251,15 @@ var Footer = function (_Component) {
     _createClass(Footer, [{
         key: 'toggleIcon',
         value: function toggleIcon() {
-            if (this.state.iconsUrl === __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_icon_png___default.a) {
-                this.setState({ iconsUrl: __WEBPACK_IMPORTED_MODULE_6__img_icons_favorite_engaged_png___default.a });
+            if (this.state.iconsUrl === __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png___default.a) {
+                this.setState({ iconsUrl: __WEBPACK_IMPORTED_MODULE_7__img_icons_favorite_engaged_png___default.a });
             } else {
-                this.setState({ iconsUrl: __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_icon_png___default.a });
+                this.setState({ iconsUrl: __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png___default.a });
             }
+
+            if (this.state.fav === false) this.state.fav = true;else this.state.fav = false;
+
+            this.props.showHideFavourite(this.state.fav);
         }
     }, {
         key: 'copyPath',
@@ -57301,7 +57296,7 @@ var Footer = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'a',
                                             { href: this.state.telTo },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_1__img_icons_phone_icon_png___default.a, alt: 'Phone Call Icon' })
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__img_icons_phone_icon_png___default.a, alt: 'Phone Call Icon' })
                                         )
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -57310,7 +57305,7 @@ var Footer = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'a',
                                             { href: 'mailto:mailto:josh@rostmotor.com?subject=Your Favorites Car&body=This is Demo Body Content!' },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__img_icons_mail_icon_png___default.a, alt: 'Email Icon' })
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_3__img_icons_mail_icon_png___default.a, alt: 'Email Icon' })
                                         )
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -57319,7 +57314,7 @@ var Footer = function (_Component) {
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'a',
                                             { href: this.state.rostsiteUrl },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_3__img_icons_back_button_png___default.a, alt: 'Back Button Icon' })
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_4__img_icons_back_button_png___default.a, alt: 'Back Button Icon' })
                                         )
                                     ),
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58357,11 +58352,11 @@ var CarData = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (CarData.__proto__ || Object.getPrototypeOf(CarData)).call(this, props));
 
-        _this.state = { iconUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a, rows: [] };
+        _this.state = { iconUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a, favorites: [], rows: [], allRows: [] };
         _this.toggleIcons = _this.toggleIcons.bind(_this);
         _this.renderVehicles = _this.renderVehicles.bind(_this);
         _this.onFilter = _this.onFilter.bind(_this);
-        _this.onFavourite = _this.onFavourite.bind(_this);
+        _this.showHideFavourite = _this.showHideFavourite.bind(_this);
         return _this;
     }
 
@@ -58371,7 +58366,7 @@ var CarData = function (_Component) {
             var _this2 = this;
 
             axios.get('/allVehicles').then(function (response) {
-                _this2.setState({ rows: response.data.vehicles });
+                _this2.setState({ rows: response.data.vehicles, allRows: response.data.vehicles });
             });
         }
 
@@ -58379,26 +58374,45 @@ var CarData = function (_Component) {
 
     }, {
         key: 'toggleIcons',
-        value: function toggleIcons() {
-            if (this.state.iconUrl === __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a) {
-                this.setState({ iconUrl: __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_on_png___default.a });
+        value: function toggleIcons(e) {
+
+            if (e.target.getAttribute('data-icon') === 'off') {
+
+                e.target.src = __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_on_png___default.a;
+                e.target.setAttribute('data-icon', 'on');
             } else {
-                this.setState({ iconUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a });
+
+                e.target.src = __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a;
+                e.target.setAttribute('data-icon', 'off');
             }
+
+            // Add or Remove from favourites
+            if (!this.state.favorites.includes(e.target.getAttribute('data-key'))) this.state.favorites.push(e.target.getAttribute('data-key'));else this.setState({
+                favorites: this.state.favorites.filter(function (x) {
+                    return x === e.target.getAttribute('data-key') === false;
+                })
+            });
         }
     }, {
         key: 'onFilter',
-        value: function onFilter(type, body, range) {
+        value: function onFilter(data) {
 
-            console.log(type, body, range);
+            console.log(data);
         }
     }, {
-        key: 'onFavourite',
-        value: function onFavourite() {}
+        key: 'showHideFavourite',
+        value: function showHideFavourite(status) {
+            var _this3 = this;
+
+            // Show or Hide favourites
+            if (status) this.setState({ rows: this.state.rows.filter(function (vehicle) {
+                    return _this3.state.favorites.includes(vehicle.id.toString()) === true;
+                }) });else this.setState({ rows: this.state.allRows });
+        }
     }, {
         key: 'renderVehicles',
         value: function renderVehicles() {
-            var _this3 = this;
+            var _this4 = this;
 
             return this.state.rows.map(function (car) {
 
@@ -58448,7 +58462,7 @@ var CarData = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
                                     { to: car.id + '/detail', className: 'fav-icon d-block d-sm-none' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this3.state.iconUrl, alt: 'Fav Icon', onClick: _this3.toggleIcons })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this4.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': car.id, onClick: _this4.toggleIcons })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
@@ -58517,7 +58531,7 @@ var CarData = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
                                     { to: '#', className: 'fav-icon' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this3.state.iconUrl, alt: 'Fav Icon', onClick: _this3.toggleIcons })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this4.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': car.id, onClick: _this4.toggleIcons })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'p',
@@ -58551,7 +58565,7 @@ var CarData = function (_Component) {
                         )
                     )
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { onFavourite: this.onFavourite })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { showHideFavourite: this.showHideFavourite })
             );
         }
     }]);

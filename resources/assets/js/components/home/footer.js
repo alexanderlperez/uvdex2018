@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 //Footer icons import here 
 import PhoneIcon from '../../../img/icons/phone-icon.png';
@@ -17,8 +18,9 @@ class Footer extends Component{
             Subject: 'this is demo',
             copied: false,
             telTo: 'tel:7124693383',
-            rostsiteUrl: 'http://rostmotor.com/'
-        }
+            rostsiteUrl: 'http://rostmotor.com/',
+            fav: false,
+        };
 
         this.toggleIcon = this.toggleIcon.bind(this);
         this.copyPath = this.copyPath.bind(this);
@@ -31,6 +33,13 @@ class Footer extends Component{
         else{
             this.setState({iconsUrl: FavIcon})
         }
+
+        if(this.state.fav === false)
+            this.state.fav = true;
+        else
+            this.state.fav = false;
+
+        this.props.showHideFavourite(this.state.fav);
     }
     
     copyPath(){
