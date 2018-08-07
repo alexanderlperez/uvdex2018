@@ -11,7 +11,16 @@ class CarData extends Component{
     constructor(props) {
         super(props);
 
-        this.state = { iconUrl: FavIconBlue, favorites: [], rows: [], allRows: [] };
+        this.state = {
+            iconUrl: FavIconBlue,
+            favorites: [],
+            rows: [],
+            allRows: [],
+            type: '',
+            body: '',
+            price: '',
+        };
+
         this.toggleIcons = this.toggleIcons.bind(this);
         this.renderVehicles = this.renderVehicles.bind(this);
         this.onFilter = this.onFilter.bind(this);
@@ -42,14 +51,44 @@ class CarData extends Component{
         if(!this.state.favorites.includes(e.target.getAttribute('data-key')))
             this.state.favorites.push(e.target.getAttribute('data-key'));
         else
-            this.setState({
-                favorites: this.state.favorites.filter(x => x === e.target.getAttribute('data-key') === false)
-            });
+            this.setState({ favorites: this.state.favorites.filter(x => x === e.target.getAttribute('data-key') === false) });
     }
 
     onFilter(data) {
 
-        console.log(data);
+        let type = this.state.type;
+        let body = this.state.body;
+        let price = this.state.price;
+
+        if (data.type !== undefined) {
+            type = data.type;
+            this.state.type = type;
+        }
+
+        if (data.body !== undefined) {
+            body = data.body;
+            this.state.body = body;
+        }
+
+        let filters = {
+            type : type,
+            body_type : body
+        };
+
+        var filtered = this.multiFilter(this.state.allRows, filters);
+        this.setState({ rows: filtered });
+    }
+
+    multiFilter(arr, filters) {
+        const filterKeys = Object.keys(filters);
+        return arr.filter(eachObj => {
+            return filterKeys.every(eachKey => {
+                if (!filters[eachKey].length) {
+                    return true; // passing an empty filter means that filter is ignored.
+                }
+                return filters[eachKey].includes(eachObj[eachKey]);
+            });
+        });
     }
 
     showHideFavourite(status) {
@@ -63,39 +102,39 @@ class CarData extends Component{
 
     renderVehicles() {
 
-        return this.state.rows.map( (car)=> {
+        return this.state.rows.map( vehicle => {
 
             return (
-                <div key={car.id} className="full-width-wrapper" >
+                <div key={vehicle.id} className="full-width-wrapper" >
                     <Link to="/vehicles">
                         <div className="car-detail-wrapper clearfix">
                             <div className="image-block col-md-3 d-none d-sm-block">
-                                <Link to={car.id+ '/detail'}>
+                                <Link to={vehicle.id+ '/detail'}>
                                     <figure>
-                                        <img src={car.featured} alt=""/>
+                                        <img src={vehicle.featured} alt=""/>
                                     </figure>
                                 </Link>
                             </div>
                             <div className="car-detail-block  col-md-3 text-center">
-                                <Link to={car.id+ '/detail'} className="d-none d-sm-block"><h2>{car.type}</h2></Link>
-                                <Link to={car.id+ '/detail'}>
-                                    <h3>{car.model_year+' '+car.make+' '+car.model+' '+car.trim}</h3>
+                                <Link to={vehicle.id+ '/detail'} className="d-none d-sm-block"><h2>{vehicle.type}</h2></Link>
+                                <Link to={vehicle.id+ '/detail'}>
+                                    <h3>{vehicle.model_year+' '+vehicle.make+' '+vehicle.model+' '+vehicle.trim}</h3>
                                 </Link>
-                                <Link to={car.id+ '/detail'} className="fav-icon d-block d-sm-none">
-                                    <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={car.id} onClick={this.toggleIcons}/>
+                                <Link to={vehicle.id+ '/detail'} className="fav-icon d-block d-sm-none">
+                                    <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={vehicle.id} onClick={this.toggleIcons}/>
                                 </Link>
                                 {/* Mobile View */}
-                                <Link to={car.id+ '/detail'}>
+                                <Link to={vehicle.id+ '/detail'}>
                                     <figure className="d-block d-sm-none">
-                                        <img src={car.featured} alt=""/>
+                                        <img src={vehicle.featured} alt=""/>
                                     </figure>
                                 </Link>
                                 {/* Mobile View */}
-                                <h5 className="d-none d-sm-block">Mileage: {car.mileage}</h5>
-                                <h5 className="d-none d-sm-block">Color#: {car.exterior_color}</h5>
-                                <h5 className="d-none d-sm-block">Passengers: {car.passengers}</h5>
-                                <h5 className="stroke-text">Their price: $39,820.00</h5>
-                                <h5><strong>Our Price: $37,486.00</strong></h5>
+                                <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
+                                <h5 className="d-none d-sm-block">Color#: {vehicle.exterior_color}</h5>
+                                <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
+                                {vehicle.show_price ? <h5 className="stroke-text">Their price: {vehicle.filtered_their_price}</h5> : ''}
+                                <h5><strong>Our Price: {vehicle.filtered_our_price}</strong></h5>
                                 <div className="button-block d-block d-sm-none">
                                     <button type="button" className="btn btn-primary">Gallery</button>
                                     <button type="button" className="btn btn-primary">Details</button>
@@ -104,9 +143,9 @@ class CarData extends Component{
                             <div className="dealer-notes  col-md-6 text-center d-none d-sm-block">
                                 <h4>Dealer Notes</h4>
                                 <Link to="#" className="fav-icon">
-                                    <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={car.id} onClick={this.toggleIcons}/>
+                                    <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={vehicle.id} onClick={this.toggleIcons}/>
                                 </Link>
-                                <p>{car.description}</p>
+                                <p>{vehicle.description}</p>
                             </div>
                         </div>
                     </Link>
