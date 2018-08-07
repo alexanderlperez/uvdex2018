@@ -22,6 +22,9 @@
             @media screen and (min-width: $xlscreen-size) {
                 margin-right: 24px;
             }
+            &.active{
+                border-color: $black;
+            }
         }
     }
     .range-filter-block {
