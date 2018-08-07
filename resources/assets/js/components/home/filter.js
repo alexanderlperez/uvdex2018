@@ -7,14 +7,27 @@ class Filter extends Component{
             value: 'All Prices',
             min: 10,
             max: 60,
+            filterCarType: '',
+            filterCarBody: '',
+            filterPriceSlider: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.clickFilter = this.clickFilter.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: '$' + event.target.value});
+    clickFilter(e) {
+
+        let data = {[e.target.getAttribute('data-title')]: e.target.getAttribute('data-name')};
+        this.props.onFilter(data);
     }
+
+    handleChange(e) {
+
+        this.setState({value: '$' + e.target.value});
+        this.props.onFilter({'price': e.target.value});
+    }
+
     render() {
         return (
             <div className="filter-section navbar-fixed-top">
@@ -29,29 +42,26 @@ class Filter extends Component{
                         <a className="navbar-brand d-block d-sm-block d-md-none" href="#"><h1>ROST MOTOR INC</h1></a>
                     </div>
                
-                <div id="navbar" className="navbar-collapse collapse ">
-                    
-                            <div className="row">
-                                    <div className="col-sm-5 col-md-4 button-block">
-                                        <button type="button" className="btn btn-primary">New</button>
-                                        <button type="button" className="btn btn-primary">Used</button>
-                                    </div>
-                                    <div className="col-sm-7 col-md-5 button-block">
-                                        <button type="button" className="btn btn-primary">CAR</button>
-                                        <button type="button" className="btn btn-primary">TRUCK</button>
-                                        <button type="button" className="btn btn-primary">SUV</button>
-                                    </div>
-                                    <div className="col-md-3 range-filter-block">
-                                        <h3><strong>{this.state.value}</strong></h3>
-                                        
-                                        <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  onChange={this.handleChange}/>
-                                       
-                                        <h4 className="low-price"><strong>${this.state.min}K</strong></h4><h4 className="high-price"><strong>${this.state.max}K</strong></h4>
+                    <div id="navbar" className="navbar-collapse collapse ">
+                        <div className="row">
+                            <div className="col-sm-5 col-md-4 button-block">
+                                <button type="button" className="btn btn-primary" data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
+                                <button type="button" className="btn btn-primary" data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
+                            </div>
+                            <div className="col-sm-7 col-md-5 button-block">
+                                <button type="button" className="btn btn-primary" data-title="body" data-name="car" onClick={this.clickFilter}>CAR</button>
+                                <button type="button" className="btn btn-primary" data-title="body" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
+                                <button type="button" className="btn btn-primary" data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
+                            </div>
+                            <div className="col-md-3 range-filter-block">
+                                <h3><strong>{this.state.value}</strong></h3>
 
-                                    </div>
+                                <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  onChange={this.handleChange}/>
+                                <h4 className="low-price"><strong>${this.state.min}K</strong></h4>
+                                <h4 className="high-price"><strong>${this.state.max}K</strong></h4>
                             </div>
                         </div>
-                
+                    </div>
                 </div>
             </div>
             

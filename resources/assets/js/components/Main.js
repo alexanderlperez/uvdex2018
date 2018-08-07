@@ -7,12 +7,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 if(document.getElementById('root')){
     ReactDOM.render(
-        <BrowserRouter>
-            <div>
-                <Route path="/" exact={true} component={CarData} />
-                <Route path="/:id/detail" component={DetailBlock} />
-            </div>
-        </BrowserRouter>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/" exact={true} component={CarData} />
+                    <Route path="/:id/detail" component={DetailBlock} />
+                </Switch>
+            </BrowserRouter>
         , document.getElementById('root')
     );
 }
