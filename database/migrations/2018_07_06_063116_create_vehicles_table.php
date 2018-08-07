@@ -40,7 +40,6 @@ class CreateVehiclesTable extends Migration
             $table->string('scheduled', 50)->default('');
             $table->string('sold', 50)->default('');
             $table->string('msrp', 20)->default('');
-            $table->string('rebate_price', 20)->default('');
             $table->string('nada', 20)->default('');
             $table->string('cpo')->default('');
             $table->string('code', 50)->default('');
