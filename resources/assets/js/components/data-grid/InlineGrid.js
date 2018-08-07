@@ -75,7 +75,7 @@ class InlineGrid extends React.Component {
                     filterable: true,
                 },
                 {
-                    key: 'rebate_price',
+                    key: 'price',
                     name: 'SALE PRICE W REBATES',
                     editable: true,
                     width: 180,
