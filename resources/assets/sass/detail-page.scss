@@ -8,9 +8,18 @@
     .dealer-notes {
         margin-top: 20px;
         margin-bottom: 20px;
+        padding: 0 15px;
+        @media screen and (min-width: $mdscreen-size){
+            padding: 0;
+        }
+        
         p {
-            font-size: 18px;
+            font-size: 16px;
             line-height: 24px;
+            @media screen and (min-width: $mdscreen-size){
+                font-size: 18px;
+                line-height: 24px;
+            }
         }
         h4 {
             strong {

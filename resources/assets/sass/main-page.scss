@@ -146,7 +146,7 @@
                         height: 100%;
                         min-height: 214px;
                         min-width: 100%;
-                        @include object-fit($property: cover);
+                        @include object-fit($property: contain);
                         border: 1px solid $border-color;
                     }
                 }

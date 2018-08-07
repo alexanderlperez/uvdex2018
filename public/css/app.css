@@ -42,6 +42,10 @@
   }
 }
 
+.filter-section .button-block button.active {
+  border-color: #000000;
+}
+
 .filter-section .range-filter-block h3 {
   font-size: 16px;
   line-height: 20px;
@@ -296,11 +300,11 @@
   height: 100%;
   min-height: 214px;
   min-width: 100%;
-  -webkit-object-fit: cover;
-  -ms-object-fit: cover;
-  -o-object-fit: cover;
-  -moz-object-fit: cover;
-  object-fit: cover;
+  -webkit-object-fit: contain;
+  -ms-object-fit: contain;
+  -o-object-fit: contain;
+  -moz-object-fit: contain;
+  object-fit: contain;
   border: 1px solid #CFCFCF;
 }
 
@@ -377,11 +381,25 @@ footer .back-button {
 .detail-information-wrapper .dealer-notes {
   margin-top: 20px;
   margin-bottom: 20px;
+  padding: 0 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .detail-information-wrapper .dealer-notes {
+    padding: 0;
+  }
 }
 
 .detail-information-wrapper .dealer-notes p {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .detail-information-wrapper .dealer-notes p {
+    font-size: 18px;
+    line-height: 24px;
+  }
 }
 
 .detail-information-wrapper .dealer-notes h4 strong {
