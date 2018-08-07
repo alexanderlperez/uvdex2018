@@ -7,9 +7,6 @@ class Filter extends Component{
             value: 'All Prices',
             min: 10,
             max: 60,
-            filterCarType: '',
-            filterCarBody: '',
-            filterPriceSlider: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -17,6 +14,14 @@ class Filter extends Component{
     }
 
     clickFilter(e) {
+
+        if (e.target.getAttribute('data-title') === 'type')
+            $('.type>.btn').removeClass('active');
+
+        if (e.target.getAttribute('data-title') === 'body')
+            $('.body>.btn').removeClass('active');
+
+        e.target.classList.add('active');
 
         let data = {[e.target.getAttribute('data-title')]: e.target.getAttribute('data-name')};
         this.props.onFilter(data);
@@ -44,11 +49,11 @@ class Filter extends Component{
                
                     <div id="navbar" className="navbar-collapse collapse ">
                         <div className="row">
-                            <div className="col-sm-5 col-md-4 button-block">
+                            <div className="col-sm-5 col-md-4 button-block type">
                                 <button type="button" className="btn btn-primary" data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
                                 <button type="button" className="btn btn-primary" data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
                             </div>
-                            <div className="col-sm-7 col-md-5 button-block">
+                            <div className="col-sm-7 col-md-5 button-block body">
                                 <button type="button" className="btn btn-primary" data-title="body" data-name="car" onClick={this.clickFilter}>CAR</button>
                                 <button type="button" className="btn btn-primary" data-title="body" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
                                 <button type="button" className="btn btn-primary" data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
