@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -16,12 +17,22 @@ class HomeController extends Controller
         return view('welcome');
     }
 
-    public function allVehicles() {
+    /**
+     * getVehicles
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getVehicles($id=0) {
 
-        $vehicles = Vehicle::select('id', 'type', 'stock_number', 'body_type', 'model_year', 'make', 'model', 'trim', 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'description', 'vin', 'images')
-                            ->orderByRaw("FIELD(type , 'N', 'U') ASC")
-                            ->orderBy('model_year', 'desc')
-                            ->get();
+        if($id)
+            $vehicles = Vehicle::select('id', 'type', 'stock_number', DB::raw("CONCAT_WS(' ',model_year, make, model, trim ) as title"), 'body_type', 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'description', 'vin', 'images')
+                ->whereId($id)
+                ->get();
+        else
+            $vehicles = Vehicle::select('id', 'type', 'body_type', DB::raw("CONCAT_WS(' ',model_year, make, model, trim ) as title"), 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'description', 'vin', 'images')
+                                ->orderByRaw("FIELD(type , 'N', 'U') ASC")
+                                ->orderBy('model_year', 'desc')
+                                ->get();
 
         $vehicles->transform(function ($item){
 
@@ -32,46 +43,50 @@ class HomeController extends Controller
                 $item->images = explode(',', $item->images);
             }
 
-            // Fetch actual price
-            $item->price = (int) preg_replace("/[^0-9]/", "", $item->price);
-            $nada = (int) preg_replace("/[^0-9]/", "", $item->nada);
-            $msrp = (int) preg_replace("/[^0-9]/", "", $item->msrp);
-
-            $item->their_price = 0;
-            $item->our_price = 0;
+            $their_price = 0;
+            $our_price = 0;
 
             if ($item->type == 'N') {
 
                 $item->type = 'New';
 
-                if ($item->price < $msrp)
-                    $item->their_price = $msrp;
+                if ($item->price < $item->msrp)
+                    $their_price = $item->msrp;
 
-                $item->our_price = $item->price;
+                $our_price = $item->price;
 
             } else if ($item->type == 'U') {
 
                 $item->type = 'Used';
 
-                if ($item->price < $nada)
-                    $item->their_price = $nada;
+                if ($item->price < $item->nada)
+                    $their_price = $item->nada;
 
-                $item->our_price = $item->price;
+                $our_price = $item->price;
             }
 
-            $item->filtered_their_price = '$'.number_format((double)$item->their_price, 0);
-            $item->filtered_our_price = '$'.number_format((double)$item->our_price, 0);
+            $item->their_price = '$'.number_format((double)$their_price, 0);
+            $item->our_price = '$'.number_format((double)$our_price, 0);
 
             $item->show_price = TRUE;
-            if ( $item->filtered_their_price == 0 || ($item->filtered_their_price < $item->filtered_our_price) )
+            if ( $item->their_price == 0 || ($item->their_price < $item->our_price) )
                 $item->show_price = FALSE;
 
             return $item;
         });
 
-        //$vehicles['min'] = $vehicles->min('price');
-        //$vehicles['max'] = $vehicles->max('price');
+        if ($id)
+            return response()->json(['vehicle' => $vehicles[0]]);
+        else {
+            $minPrice = $vehicles->min('price');
+            if ($minPrice > 0)
+                $minPrice = floor($minPrice / 1000);
 
-        return response()->json(['vehicles' => $vehicles]);
+            $maxPrice = $vehicles->max('price');
+            if ($maxPrice > 0)
+                $maxPrice = ceil($maxPrice / 1000);
+
+            return response()->json(['vehicles' => $vehicles, 'min' => $minPrice, 'max' => $maxPrice]);
+        }
     }
 }
