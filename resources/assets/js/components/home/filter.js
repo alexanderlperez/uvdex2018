@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Filter extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            value: 'All Prices',
-            min: 10,
-            max: 60,
+            allPrice: 'All Prices',
+            min: 0,
+            max: 0,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.clickFilter = this.clickFilter.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            min: nextProps.min,
+            max: nextProps.max
+        })
     }
 
     clickFilter(e) {
@@ -29,7 +37,11 @@ class Filter extends Component{
 
     handleChange(e) {
 
-        this.setState({value: '$' + e.target.value});
+        if(parseInt(e.target.value) === this.state.max)
+            this.setState({allPrice: 'All Price'});
+        else
+            this.setState({allPrice: '$' + e.target.value});
+
         this.props.onFilter({'price': e.target.value});
     }
 
@@ -40,11 +52,11 @@ class Filter extends Component{
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                             <span className="sr-only">Toggle navigation</span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
+                            <span className="icon-bar"> </span>
+                            <span className="icon-bar"> </span>
+                            <span className="icon-bar"> </span>
                         </button>
-                        <a className="navbar-brand d-block d-sm-block d-md-none" href="#"><h1>ROST MOTOR INC</h1></a>
+                        <Link to="#" replace className="navbar-brand d-block d-sm-block d-md-none"><h1>ROST MOTOR INC</h1></Link>
                     </div>
                
                     <div id="navbar" className="navbar-collapse collapse ">
@@ -59,7 +71,7 @@ class Filter extends Component{
                                 <button type="button" className="btn btn-primary" data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
                             </div>
                             <div className="col-md-3 range-filter-block">
-                                <h3><strong>{this.state.value}</strong></h3>
+                                <h3><strong>{this.state.allPrice}</strong></h3>
 
                                 <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  onChange={this.handleChange}/>
                                 <h4 className="low-price"><strong>${this.state.min}K</strong></h4>

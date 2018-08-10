@@ -31582,9 +31582,9 @@ var createPath = function createPath(location) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(91);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* unused harmony reexport BrowserRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(97);
-/* unused harmony reexport HashRouter */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(72);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(98);
@@ -36819,7 +36819,7 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.4.1
+/** @license React v16.4.2
  * react.development.js
  *
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -36845,7 +36845,7 @@ var checkPropTypes = __webpack_require__(8);
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.4.1';
+var ReactVersion = '16.4.2';
 
 // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
 // nor polyfill, then a plain number is used for performance.
@@ -38312,7 +38312,7 @@ module.exports = react;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/** @license React v16.4.1
+/** @license React v16.4.2
  * react-dom.development.js
  *
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -40883,14 +40883,15 @@ var ATTRIBUTE_NAME_CHAR = ATTRIBUTE_NAME_START_CHAR + '\\-.0-9\\u00B7\\u0300-\\u
 var ROOT_ATTRIBUTE_NAME = 'data-reactroot';
 var VALID_ATTRIBUTE_NAME_REGEX = new RegExp('^[' + ATTRIBUTE_NAME_START_CHAR + '][' + ATTRIBUTE_NAME_CHAR + ']*$');
 
+var hasOwnProperty = Object.prototype.hasOwnProperty;
 var illegalAttributeNameCache = {};
 var validatedAttributeNameCache = {};
 
 function isAttributeNameSafe(attributeName) {
-  if (validatedAttributeNameCache.hasOwnProperty(attributeName)) {
+  if (hasOwnProperty.call(validatedAttributeNameCache, attributeName)) {
     return true;
   }
-  if (illegalAttributeNameCache.hasOwnProperty(attributeName)) {
+  if (hasOwnProperty.call(illegalAttributeNameCache, attributeName)) {
     return false;
   }
   if (VALID_ATTRIBUTE_NAME_REGEX.test(attributeName)) {
@@ -45216,7 +45217,7 @@ var warnedProperties = {};
 var rARIA = new RegExp('^(aria)-[' + ATTRIBUTE_NAME_CHAR + ']*$');
 var rARIACamel = new RegExp('^(aria)[A-Z][' + ATTRIBUTE_NAME_CHAR + ']*$');
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
 
 function getStackAddendum() {
   var stack = ReactDebugCurrentFrame.getStackAddendum();
@@ -45224,7 +45225,7 @@ function getStackAddendum() {
 }
 
 function validateProperty(tagName, name) {
-  if (hasOwnProperty.call(warnedProperties, name) && warnedProperties[name]) {
+  if (hasOwnProperty$1.call(warnedProperties, name) && warnedProperties[name]) {
     return true;
   }
 
@@ -55238,7 +55239,7 @@ implementation) {
 
 // TODO: this is special because it gets imported during build.
 
-var ReactVersion = '16.4.1';
+var ReactVersion = '16.4.2';
 
 // TODO: This type is shared between the reconciler and ReactDOM, but will
 // eventually be lifted out to the renderer.
@@ -57015,6 +57016,7 @@ var matchPath = function matchPath(pathname) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_router_dom__ = __webpack_require__(26);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -57027,6 +57029,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
+
 var Filter = function (_Component) {
     _inherits(Filter, _Component);
 
@@ -57036,9 +57039,9 @@ var Filter = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this, props));
 
         _this.state = {
-            value: 'All Prices',
-            min: 10,
-            max: 60
+            allPrice: 'All Prices',
+            min: 0,
+            max: 0
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
@@ -57047,6 +57050,14 @@ var Filter = function (_Component) {
     }
 
     _createClass(Filter, [{
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({
+                min: nextProps.min,
+                max: nextProps.max
+            });
+        }
+    }, {
         key: 'clickFilter',
         value: function clickFilter(e) {
 
@@ -57063,7 +57074,8 @@ var Filter = function (_Component) {
         key: 'handleChange',
         value: function handleChange(e) {
 
-            this.setState({ value: '$' + e.target.value });
+            if (parseInt(e.target.value) === this.state.max) this.setState({ allPrice: 'All Price' });else this.setState({ allPrice: '$' + e.target.value });
+
             this.props.onFilter({ 'price': e.target.value });
         }
     }, {
@@ -57086,13 +57098,25 @@ var Filter = function (_Component) {
                                 { className: 'sr-only' },
                                 'Toggle navigation'
                             ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' }),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'icon-bar' })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'span',
+                                { className: 'icon-bar' },
+                                ' '
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'span',
+                                { className: 'icon-bar' },
+                                ' '
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'span',
+                                { className: 'icon-bar' },
+                                ' '
+                            )
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'a',
-                            { className: 'navbar-brand d-block d-sm-block d-md-none', href: '#' },
+                            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
+                            { to: '#', replace: true, className: 'navbar-brand d-block d-sm-block d-md-none' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h1',
                                 null,
@@ -57148,7 +57172,7 @@ var Filter = function (_Component) {
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'strong',
                                         null,
-                                        this.state.value
+                                        this.state.allPrice
                                     )
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', onChange: this.handleChange }),
@@ -57324,8 +57348,8 @@ var Footer = function (_Component) {
                                         'li',
                                         null,
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                            'a',
-                                            { href: '#' },
+                                            __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
+                                            { to: '#', replace: true },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconsUrl, alt: 'Fav Icon', onClick: this.toggleIcon })
                                         )
                                     )
@@ -58305,7 +58329,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 if (document.getElementById('root')) {
     __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_4_react_router_dom__["a" /* BrowserRouter */],
+        __WEBPACK_IMPORTED_MODULE_4_react_router_dom__["a" /* HashRouter */],
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_4_react_router_dom__["d" /* Switch */],
@@ -58362,10 +58386,11 @@ var CarData = function (_Component) {
             allRows: [],
             type: '',
             body: '',
-            price: ''
+            price: '',
+            min: '',
+            max: ''
         };
 
-        _this.toggleIcons = _this.toggleIcons.bind(_this);
         _this.renderVehicles = _this.renderVehicles.bind(_this);
         _this.onFilter = _this.onFilter.bind(_this);
         _this.showHideFavourite = _this.showHideFavourite.bind(_this);
@@ -58377,8 +58402,8 @@ var CarData = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            axios.get('/allVehicles').then(function (response) {
-                _this2.setState({ rows: response.data.vehicles, allRows: response.data.vehicles });
+            axios.get('/getVehicles/0').then(function (response) {
+                _this2.setState({ rows: response.data.vehicles, allRows: response.data.vehicles, min: response.data.min, max: response.data.max });
             });
         }
 
@@ -58398,9 +58423,14 @@ var CarData = function (_Component) {
                 e.target.setAttribute('data-icon', 'off');
             }
 
-            // Add or Remove from favourites
-            if (!this.state.favorites.includes(e.target.getAttribute('data-key'))) this.state.favorites.push(e.target.getAttribute('data-key'));else this.setState({ favorites: this.state.favorites.filter(function (x) {
-                    return x === e.target.getAttribute('data-key') === false;
+            this.addRemoveFavourites(e.target.getAttribute('data-key'));
+        }
+    }, {
+        key: 'addRemoveFavourites',
+        value: function addRemoveFavourites(item) {
+
+            if (!this.state.favorites.includes(item)) this.state.favorites.push(item);else this.setState({ favorites: this.state.favorites.filter(function (x) {
+                    return x === item === false;
                 }) });
         }
     }, {
@@ -58421,9 +58451,15 @@ var CarData = function (_Component) {
                 this.state.body = body;
             }
 
+            if (data.price !== undefined) {
+                price = data.price * 1000;
+                this.state.price = price;
+            }
+
             var filters = {
                 type: type,
-                body_type: body
+                body_type: body,
+                price: price
             };
 
             var filtered = this.multiFilter(this.state.allRows, filters);
@@ -58432,30 +58468,32 @@ var CarData = function (_Component) {
     }, {
         key: 'multiFilter',
         value: function multiFilter(arr, filters) {
+            var _this3 = this;
+
             var filterKeys = Object.keys(filters);
             return arr.filter(function (eachObj) {
                 return filterKeys.every(function (eachKey) {
-                    if (!filters[eachKey].length) {
-                        return true; // passing an empty filter means that filter is ignored.
+                    if (!filters[eachKey].toString().length) {
+                        return true; // passing an empty filter means that filter is ignored
                     }
-                    return filters[eachKey].includes(eachObj[eachKey]);
+                    if (eachKey === 'price') return eachObj[eachKey] >= _this3.state.min * 1000 && eachObj[eachKey] <= filters[eachKey];else return filters[eachKey].includes(eachObj[eachKey]);
                 });
             });
         }
     }, {
         key: 'showHideFavourite',
         value: function showHideFavourite(status) {
-            var _this3 = this;
+            var _this4 = this;
 
             // Show or Hide favourites
             if (status) this.setState({ rows: this.state.rows.filter(function (vehicle) {
-                    return _this3.state.favorites.includes(vehicle.id.toString()) === true;
+                    return _this4.state.favorites.includes(vehicle.id.toString()) === true;
                 }) });else this.setState({ rows: this.state.allRows });
         }
     }, {
         key: 'renderVehicles',
         value: function renderVehicles() {
-            var _this4 = this;
+            var _this5 = this;
 
             return this.state.rows.map(function (vehicle) {
 
@@ -58499,13 +58537,13 @@ var CarData = function (_Component) {
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'h3',
                                         null,
-                                        vehicle.model_year + ' ' + vehicle.make + ' ' + vehicle.model + ' ' + vehicle.trim
+                                        vehicle.title
                                     )
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
                                     { to: vehicle.id + '/detail', className: 'fav-icon d-block d-sm-none' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this4.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': vehicle.id, onClick: _this4.toggleIcons })
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this5.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': vehicle.id, onClick: _this5.toggleIcons })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
@@ -58538,7 +58576,7 @@ var CarData = function (_Component) {
                                     'h5',
                                     { className: 'stroke-text' },
                                     'Their price: ',
-                                    vehicle.filtered_their_price
+                                    vehicle.their_price
                                 ) : '',
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h5',
@@ -58547,7 +58585,7 @@ var CarData = function (_Component) {
                                         'strong',
                                         null,
                                         'Our Price: ',
-                                        vehicle.filtered_our_price
+                                        vehicle.our_price
                                     )
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58575,8 +58613,10 @@ var CarData = function (_Component) {
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                    { to: '#', className: 'fav-icon' },
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this4.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': vehicle.id, onClick: _this4.toggleIcons })
+                                    { to: '#', replace: true, className: 'fav-icon' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this5.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': vehicle.id, onClick: function onClick(e) {
+                                            return _this5.toggleIcons(e);
+                                        } })
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'p',
@@ -58592,11 +58632,14 @@ var CarData = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _state = this.state,
+                min = _state.min,
+                max = _state.max;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { onFilter: this.onFilter }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { onFilter: this.onFilter, min: min, max: max }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'car-info-section' },
@@ -58684,7 +58727,7 @@ BrowserRouter.propTypes = {
 };
 
 
-/* harmony default export */ __webpack_exports__["a"] = (BrowserRouter);
+/* unused harmony default export */ var _unused_webpack_default_export = (BrowserRouter);
 
 /***/ }),
 /* 92 */
@@ -59662,7 +59705,7 @@ HashRouter.propTypes = {
 };
 
 
-/* unused harmony default export */ var _unused_webpack_default_export = (HashRouter);
+/* harmony default export */ __webpack_exports__["a"] = (HashRouter);
 
 /***/ }),
 /* 98 */
@@ -60586,22 +60629,18 @@ var DetailBlock = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (DetailBlock.__proto__ || Object.getPrototypeOf(DetailBlock)).call(this, props));
 
-        _this.state = { addClass: false };
+        _this.state = { addClass: false, vehicle: [] };
         _this.Hidebutton = _this.Hidebutton.bind(_this);
-
         return _this;
     }
 
     _createClass(DetailBlock, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
 
-            axios.get('/vehicles/' + this.props.match.params.id + '/details').then(function (response) {
-                console.log(response);
-                /*this.setState({
-                    task: response.data.task,
-                    name: response.data.task.name
-                })*/
+            axios.get('/getVehicles/' + this.props.match.params.id).then(function (response) {
+                _this2.setState({ vehicle: response.data.vehicle });
             });
         }
     }, {
@@ -60616,9 +60655,10 @@ var DetailBlock = function (_Component) {
         value: function render() {
             var buttonClass = ["visible btn btn-primary"];
 
-            if (this.state.addClass) {
-                buttonClass.push('hidden');
-            }
+            if (this.state.addClass) buttonClass.push('hidden');
+
+            var images = this.state.vehicle.images;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
@@ -60632,7 +60672,7 @@ var DetailBlock = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'col-12 col-md-7' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_GallerySlider_Slider__["a" /* default */], null)
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_GallerySlider_Slider__["a" /* default */], { images: images })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -60640,7 +60680,7 @@ var DetailBlock = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h3',
                                 null,
-                                '2015 Ford Explorer XLT'
+                                this.state.vehicle.title
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60650,7 +60690,8 @@ var DetailBlock = function (_Component) {
                                     null,
                                     'Condtion:'
                                 ),
-                                ' New'
+                                ' ',
+                                this.state.vehicle.type
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60660,7 +60701,8 @@ var DetailBlock = function (_Component) {
                                     null,
                                     'Mileage:'
                                 ),
-                                ' 0'
+                                ' ',
+                                this.state.vehicle.mileage
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60670,7 +60712,8 @@ var DetailBlock = function (_Component) {
                                     null,
                                     'Stock#:'
                                 ),
-                                ' N5474'
+                                ' ',
+                                this.state.vehicle.stock_number
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60680,7 +60723,8 @@ var DetailBlock = function (_Component) {
                                     null,
                                     'VIN#:'
                                 ),
-                                ' 1FM5K7D89FGA45474'
+                                ' ',
+                                this.state.vehicle.vin
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60690,7 +60734,8 @@ var DetailBlock = function (_Component) {
                                     null,
                                     'Color#:'
                                 ),
-                                ' Ruby Red RR'
+                                ' ',
+                                this.state.vehicle.exterior_color
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60700,12 +60745,13 @@ var DetailBlock = function (_Component) {
                                     null,
                                     'Passengers#:'
                                 ),
-                                ' 7'
+                                ' ',
+                                this.state.vehicle.passengers
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'h2',
+                                'h1',
                                 { className: 'price' },
-                                '$37,486.00'
+                                this.state.vehicle.our_price
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
@@ -60740,7 +60786,7 @@ var DetailBlock = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'p',
                                     null,
-                                    'Flex Fuel, Power Lift Gate, Trailer Tow Package, Voice Activated Navigation, 20\'\' Polished Alumninum Wheels, 24MPG HWY, 7 Passenger, Charcoal Leather Interior, Rear View Camera, Power Seats'
+                                    this.state.vehicle.description
                                 )
                             )
                         )
@@ -60763,12 +60809,8 @@ var DetailBlock = function (_Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__royalslider_min_js__ = __webpack_require__(123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__royalslider_min_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__royalslider_min_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__royalslider_min_js__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__royalslider_min_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__royalslider_min_js__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60776,10 +60818,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
 
 
 
@@ -60792,39 +60830,20 @@ var Slider = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
 
-        _this.state = {
-            images: []
-        };
+        _this.state = { images: [] };
         return _this;
     }
 
     _createClass(Slider, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.setState({ images: [{
-                    id: 1,
-                    img: '/images/img1.jpeg'
-                }, {
-                    id: 2,
-                    img: '/images/img2.jpeg'
-                }, {
-                    id: 3,
-                    img: '/images/img3.jpeg'
-                }, {
-                    id: 4,
-                    img: '/images/img4.jpeg'
-                }, {
-                    id: 5,
-                    img: '/images/img5.jpeg'
-                }, {
-                    id: 6,
-                    img: '/images/img6.jpeg'
-                }] });
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({ images: nextProps.images });
         }
     }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            __WEBPACK_IMPORTED_MODULE_3_jquery___default()(".royalSlider").royalSlider({
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
+
+            $(".royalSlider").royalSlider({
                 controlNavigation: 'thumbnails',
                 imageScaleMode: 'fit-if-smaller',
                 navigateByClick: true,
@@ -60845,22 +60864,34 @@ var Slider = function (_Component) {
                     nativeFS: true
                 }
             });
-            __WEBPACK_IMPORTED_MODULE_3_jquery___default()(".rsFullscreenIcn").click();
+
+            $(".rsFullscreenIcn").click();
         }
     }, {
         key: 'render',
         value: function render() {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+
+            if (this.state.images.length > 0) {
+
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'royalSlider rsDefault' },
+                    this.state.images.map(function (img, i) {
+                        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.Fragment,
+                            { key: i },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'a',
+                                { className: 'rsImg', 'data-rsbigimg': img, href: img },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'rsTmb', src: img, alt: '' })
+                            )
+                        );
+                    })
+                );
+            } else return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'royalSlider rsDefault' },
-                this.state.images.map(function (imgItem) {
-
-                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'a',
-                        { 'class': 'rsImg', 'data-rsBigImg': imgItem.img, href: imgItem.img },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { 'class': 'rsTmb', src: imgItem.img, alt: '' })
-                    );
-                })
+                ' '
             );
         }
     }]);

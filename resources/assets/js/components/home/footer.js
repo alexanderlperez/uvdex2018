@@ -59,7 +59,7 @@ class Footer extends Component{
                                     <li><a href={this.state.telTo}><img src={PhoneIcon} alt="Phone Call Icon"/></a></li>
                                     <li><a href="mailto:mailto:josh@rostmotor.com?subject=Your Favorites Car&body=This is Demo Body Content!"><img src={MailIcon} alt="Email Icon"/></a></li>
                                     <li><a href={this.state.rostsiteUrl}><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
-                                    <li><a href="#"><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></a></li>
+                                    <li><Link to="#" replace ><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></Link></li>
                                 </ul>
                             </div>
                         </div>

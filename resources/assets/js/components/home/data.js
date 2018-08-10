@@ -19,20 +19,22 @@ class CarData extends Component{
             type: '',
             body: '',
             price: '',
+            min: '',
+            max: '',
         };
 
-        this.toggleIcons = this.toggleIcons.bind(this);
         this.renderVehicles = this.renderVehicles.bind(this);
         this.onFilter = this.onFilter.bind(this);
         this.showHideFavourite = this.showHideFavourite.bind(this);
     }
-     componentDidMount() {
 
-         axios.get(`/allVehicles`)
+    componentDidMount() {
+
+         axios.get(`/getVehicles/0`)
            .then(response => {
-             this.setState({ rows : response.data.vehicles, allRows : response.data.vehicles });
-           })
-       }
+                this.setState({ rows : response.data.vehicles, allRows : response.data.vehicles, min: response.data.min, max:response.data.max });
+           });
+    }
 
     //Toggle footer fav icon function
     toggleIcons(e){
@@ -47,11 +49,15 @@ class CarData extends Component{
             e.target.setAttribute('data-icon', 'off')
         }
 
-        // Add or Remove from favourites
-        if(!this.state.favorites.includes(e.target.getAttribute('data-key')))
-            this.state.favorites.push(e.target.getAttribute('data-key'));
+        this.addRemoveFavourites(e.target.getAttribute('data-key'));
+    }
+
+    addRemoveFavourites(item) {
+
+        if(!this.state.favorites.includes(item))
+            this.state.favorites.push(item);
         else
-            this.setState({ favorites: this.state.favorites.filter(x => x === e.target.getAttribute('data-key') === false) });
+            this.setState({ favorites: this.state.favorites.filter(x => x === item === false) });
     }
 
     onFilter(data) {
@@ -70,9 +76,15 @@ class CarData extends Component{
             this.state.body = body;
         }
 
+        if (data.price !== undefined) {
+            price = data.price*1000;
+            this.state.price = price;
+        }
+
         let filters = {
             type : type,
-            body_type : body
+            body_type : body,
+            price : price,
         };
 
         var filtered = this.multiFilter(this.state.allRows, filters);
@@ -83,10 +95,13 @@ class CarData extends Component{
         const filterKeys = Object.keys(filters);
         return arr.filter(eachObj => {
             return filterKeys.every(eachKey => {
-                if (!filters[eachKey].length) {
-                    return true; // passing an empty filter means that filter is ignored.
+                if (!filters[eachKey].toString().length) {
+                    return true; // passing an empty filter means that filter is ignored
                 }
-                return filters[eachKey].includes(eachObj[eachKey]);
+                if(eachKey === 'price')
+                    return eachObj[eachKey] >= this.state.min*1000 && eachObj[eachKey] <= filters[eachKey];
+                else
+                    return filters[eachKey].includes(eachObj[eachKey]);
             });
         });
     }
@@ -118,7 +133,7 @@ class CarData extends Component{
                             <div className="car-detail-block  col-md-3 text-center">
                                 <Link to={vehicle.id+ '/detail'} className="d-none d-sm-block"><h2>{vehicle.type}</h2></Link>
                                 <Link to={vehicle.id+ '/detail'}>
-                                    <h3>{vehicle.model_year+' '+vehicle.make+' '+vehicle.model+' '+vehicle.trim}</h3>
+                                    <h3>{vehicle.title}</h3>
                                 </Link>
                                 <Link to={vehicle.id+ '/detail'} className="fav-icon d-block d-sm-none">
                                     <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={vehicle.id} onClick={this.toggleIcons}/>
@@ -133,8 +148,8 @@ class CarData extends Component{
                                 <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
                                 <h5 className="d-none d-sm-block">Color#: {vehicle.exterior_color}</h5>
                                 <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
-                                {vehicle.show_price ? <h5 className="stroke-text">Their price: {vehicle.filtered_their_price}</h5> : ''}
-                                <h5><strong>Our Price: {vehicle.filtered_our_price}</strong></h5>
+                                {vehicle.show_price ? <h5 className="stroke-text">Their price: {vehicle.their_price}</h5> : ''}
+                                <h5><strong>Our Price: {vehicle.our_price}</strong></h5>
                                 <div className="button-block d-block d-sm-none">
                                     <button type="button" className="btn btn-primary">Gallery</button>
                                     <button type="button" className="btn btn-primary">Details</button>
@@ -142,8 +157,8 @@ class CarData extends Component{
                             </div>
                             <div className="dealer-notes  col-md-6 text-center d-none d-sm-block">
                                 <h4>Dealer Notes</h4>
-                                <Link to="#" className="fav-icon">
-                                    <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={vehicle.id} onClick={this.toggleIcons}/>
+                                <Link to="#" replace className="fav-icon">
+                                    <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={vehicle.id} onClick={(e) => this.toggleIcons(e)}/>
                                 </Link>
                                 <p>{vehicle.description}</p>
                             </div>
@@ -155,10 +170,10 @@ class CarData extends Component{
     }
 
     render() {
-        
+        const { min, max } = this.state;
         return (
             <div>
-                <Filter onFilter={this.onFilter} />
+                <Filter onFilter={this.onFilter} min={min} max={max} />
                 <div className="car-info-section">
                     <div className="container">
                         <div className="row ">
