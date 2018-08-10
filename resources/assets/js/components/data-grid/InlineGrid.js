@@ -73,6 +73,7 @@ class InlineGrid extends React.Component {
                     width: 90,
                     resizable: true,
                     filterable: true,
+                    formatter: (props) => (<span>${this.formatPrice(props.value)}</span>),
                 },
                 {
                     key: 'price',
@@ -81,6 +82,7 @@ class InlineGrid extends React.Component {
                     width: 180,
                     resizable: true,
                     filterable: true,
+                    formatter: (props) => (<span>${this.formatPrice(props.value)}</span>),
                 },
                 {
                     key: 'make',
@@ -188,6 +190,7 @@ class InlineGrid extends React.Component {
                     editable: true,
                     resizable: true,
                     filterable: true,
+                    formatter: (props) => (<span>${this.formatPrice(props.value)}</span>),
                 },
                 {
                     key: 'nada',
@@ -196,6 +199,7 @@ class InlineGrid extends React.Component {
                     width: 90,
                     resizable: true,
                     filterable: true,
+                    formatter: (props) => (<span>${this.formatPrice(props.value)}</span>),
                 },
                 {
                     key: 'model_year',
@@ -491,6 +495,11 @@ class InlineGrid extends React.Component {
         let updated = {id: value};
         rows[key] = update(rowToUpdate, {$merge: updated});
         this.setState({ rows });
+    }
+
+    formatPrice(price) {
+
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     getColumns() {
