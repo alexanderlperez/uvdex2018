@@ -291,11 +291,7 @@ class VehicleController extends Controller
                 $data[$key]['cylinders'] = $row[10];
                 $data[$key]['fuel_type'] = $row[11];
                 $data[$key]['transmission'] = $row[12];
-
-                $data[$key]['price'] = '';
-                if(!empty($row[13]))
-                    $data[$key]['price'] = '$'.number_format((double)$row[13], 0);
-
+                $data[$key]['price'] = $row[13];
                 $data[$key]['exterior_color'] = $row[14];
                 $data[$key]['interior_color'] = $row[15];
 
@@ -348,7 +344,7 @@ class VehicleController extends Controller
         $vehicles = '';
         if($type == 'U') {
             $headers[] = Config::get('constants.headers.used');
-            $vehicles = Vehicle::select('stock_number', 'price', 'nada', 'model_year', 'make', 'model', 'cpo', 'exterior_color', 'trim', 'mileage', 'engine_description', 'vin', 'code', 'description', 'previous_owner', 'images', 'passengers')
+            $vehicles = Vehicle::select('stock_number', DB::raw("CONCAT('$', FORMAT(price, 0)) as price"), DB::raw("CONCAT('$', FORMAT(nada, 0)) as nada"), 'model_year', 'make', 'model', 'cpo', 'exterior_color', 'trim', 'mileage', 'engine_description', 'vin', 'code', 'description', 'previous_owner', 'images', 'passengers')
                                 ->whereUserId(Auth::user()->id)
                                 ->whereIsActive(Config::get('constants.status.active'))
                                 ->whereType($type)
@@ -357,7 +353,7 @@ class VehicleController extends Controller
                                 ->get()->toArray();
         }else if($type == 'N') {
             $headers[] = Config::get('constants.headers.new');
-            $vehicles = Vehicle::select('stock_number', 'scheduled', 'sold', 'model_year', 'msrp', 'rebate_price', 'make', 'model', 'trim', 'exterior_color', 'vin', 'description', 'images', 'passengers')
+            $vehicles = Vehicle::select('stock_number', 'scheduled', 'sold', 'model_year', DB::raw("CONCAT('$', FORMAT(msrp, 0)) as msrp"), DB::raw("CONCAT('$', FORMAT(price, 0)) as price"), 'make', 'model', 'trim', 'exterior_color', 'vin', 'description', 'images', 'passengers')
                                 ->whereUserId(Auth::user()->id)
                                 ->whereIsActive(Config::get('constants.status.active'))
                                 ->whereType($type)
