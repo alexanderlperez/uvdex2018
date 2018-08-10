@@ -30,7 +30,7 @@ class CreateVehiclesTable extends Migration
             $table->string('cylinders', 50)->default('');
             $table->string('fuel_type', 50)->default('');
             $table->string('transmission', 100)->default('');
-            $table->string('price', 20)->default('');
+            $table->integer('price')->default(0);
             $table->string('exterior_color', 100)->default('');
             $table->string('interior_color', 100)->default('');
             $table->text('option_text')->nullable(FALSE);
@@ -39,8 +39,8 @@ class CreateVehiclesTable extends Migration
             $table->string('passengers', 10)->default('');
             $table->string('scheduled', 50)->default('');
             $table->string('sold', 50)->default('');
-            $table->string('msrp', 20)->default('');
-            $table->string('nada', 20)->default('');
+            $table->integer('msrp')->default(0);
+            $table->integer('nada')->default(0);
             $table->string('cpo')->default('');
             $table->string('code', 50)->default('');
             $table->string('previous_owner', 50)->default('');
