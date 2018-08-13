@@ -30,7 +30,7 @@ class InlineGrid extends React.Component {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: CustomImageFormatter,
+                    formatter: <CustomImageFormatter onUpload={this.onUpload} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -38,7 +38,7 @@ class InlineGrid extends React.Component {
                     key: 'stock_number',
                     name: 'STOCK',
                     editable: true,
-                    width: 77,
+                    width: 85,
                     resizable: true,
                     filterable: true,
                 },
@@ -171,7 +171,7 @@ class InlineGrid extends React.Component {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: CustomImageFormatter,
+                    formatter: <CustomImageFormatter onUpload={this.onUpload} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -179,7 +179,7 @@ class InlineGrid extends React.Component {
                     key: 'stock_number',
                     name: 'STOCK',
                     editable: true,
-                    width: 77,
+                    width: 85,
                     resizable: true,
                     filterable: true,
                 },
@@ -343,7 +343,7 @@ class InlineGrid extends React.Component {
                 {
                     key: 'stock_number',
                     name: 'STOCK',
-                    width: 77,
+                    width: 85,
                     resizable: true,
                     filterable: true,
                 },
@@ -488,12 +488,12 @@ class InlineGrid extends React.Component {
         }
     }
 
-    onUpload(key, value) {
+    onUpload(id, key, value) {
 
         let rows = this.state.rows.slice();
-        let rowToUpdate = rows[key];
-        let updated = {id: value};
-        rows[key] = update(rowToUpdate, {$merge: updated});
+        let rowToUpdate = rows[id];
+        let updated = {key: value};
+        rows[id] = update(rowToUpdate, {$merge: updated});
         this.setState({ rows });
     }
 

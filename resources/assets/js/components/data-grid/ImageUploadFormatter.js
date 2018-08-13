@@ -13,7 +13,7 @@ class ImageUploadFormatter extends React.Component {
 
         e.preventDefault();
 
-        let key = this.props.dependentValues.key-1;
+        let id = this.props.dependentValues.key-1;
         let file = e.target.files[0];
         let data = new FormData();
         data.append('file', file, file.name);
@@ -25,7 +25,7 @@ class ImageUploadFormatter extends React.Component {
             .then(response => {
 
                 if(this.props.dependentValues.id === "")
-                    this.props.onUpload(key, response.data.message.id);
+                    this.props.onUpload(id, 'id', response.data.message.id);
 
                 //NotificationManager.success('Success', response.data.message.status);
             })
