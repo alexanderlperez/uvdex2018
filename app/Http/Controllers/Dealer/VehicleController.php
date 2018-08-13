@@ -74,6 +74,7 @@ class VehicleController extends Controller
             if(!empty($item->images)){
                 $item->featured = explode(',', $item->images)[0];
                 $item->images_count = count(explode(',', $item->images));
+                $item->images = explode(',', $item->images);
             }
 
             if($item->is_active)
@@ -202,33 +203,51 @@ class VehicleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Image
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function deleteImage(Request $request)
     {
-        try {
+        $id = $request->get('id');
+        $image = $request->get('image');
 
-            DB::beginTransaction();
+        if (!empty($image)){
 
-            $vehicle = Vehicle::find($id);
-            $vehicle->delete();
+            try{
 
-            // Delete image
-            if(!empty($vehicle->image))
-                deleteFile(Config::get('constants.vehicle.folder'), $vehicle->image);
+                DB::beginTransaction();
 
-            DB::commit();
-            setFlashMessage('success', trans('message.delete_success', ['name' => $this->title]));
-        } catch (\Exception $e) {
+                $vehicle = Vehicle::find($id);
+                $images = explode(',', $vehicle->images);
 
-            DB::rollBack();
-            setFlashMessage('danger', $e->getMessage());
+                $key = array_search($image,$images);
+                unset($images[$key]);
+
+                $data['images'] = implode(',',$images);
+
+                $vehicle->update($data);
+                DB::commit();
+
+                $message['type'] = 'Success';
+                $message['images'] = $data['images'];
+                $message['status'] = trans('message.delete_success', ['name' => $this->title]);
+                return response()->json(['message' => $message], $this->successStatus);
+            } catch (\Exception $e) {
+
+                DB::rollBack();
+
+                $message['type'] = 'Error';
+                $message['status'] = $e->getMessage();
+                return response()->json(['message' => $message], $this->successStatus);
+            }
+        } else {
+
+            $message['type'] = 'Error';
+            $message['status'] = trans('message.image_fail');
+            return response()->json(['message' => $message], $this->successStatus);
         }
 
-        return back();
     }
 
     /**
