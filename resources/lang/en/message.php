@@ -42,4 +42,5 @@ return [
     'no_vehicle'=>'Seems like there is no data available.',
     'image_success' => 'Image uploaded successfully',
     'image_fail' => 'Something went wrong, please try again.',
+    'delete_success' => 'Image deleted successfully.',
 ];
