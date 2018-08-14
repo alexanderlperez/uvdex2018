@@ -1095,7 +1095,6 @@ img.rsImg {
   -webkit-box-shadow: 0 1px 9px rgba(102, 102, 102, 0.65) inset;
           box-shadow: 0 1px 9px rgba(102, 102, 102, 0.65) inset;
   background: #ACACAC;
-  background-image: -moz-llinear-gradient(top, #ACACAC, #BBB);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ACACAC), to(#BBB));
   background-image: linear-gradient(to bottom, #ACACAC, #BBB);
 }
