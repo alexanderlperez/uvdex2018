@@ -47,7 +47,7 @@ class CustomImageFormatter extends React.Component {
 
                 return (
 
-                    <div key={i} className="col-lg-2 col-md-2 col-xs-2 thumb">
+                    <div key={i} className="col-xs-4 col-sm-3 col-md-2 thumb">
                         <span className="glyphicon glyphicon-remove pull-right" data-content={image} onClick={(e) => this.deleteImage(e)}> </span>
                         <div className="thumbnail">
                             <img className="img-responsive" src={image} alt="" />
@@ -71,24 +71,22 @@ class CustomImageFormatter extends React.Component {
                     : <div onClick={() => this.open()}><img src={null} height={40} width={40}/> ({this.props.dependentValues.images_count})</div>
                 }
 
-                <Modal bsSize="large" show={this.state.showModal} onHide={() => this.close()}>
+                <Modal bsSize="large" show={this.state.showModal} onHide={() => this.close()} className="image-modalbox">
                     <Modal.Header closeButton>
                         <Modal.Title>Images</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
-                        <div className="row col-lg-12"><ImageUploadFormatter /></div>
+                        <div className="container"><div className="row"><div className="col-xs-12"><ImageUploadFormatter /></div></div></div>
 
-                        <div className="container">
-                            <div className="row col-lg-12">
+                        <div className="container thumb-wrapper ">
+                            <div className="row">
                                 {this.renderImages()}
                             </div>
                         </div>
 
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={() => this.close()}>Close</Button>
-                    </Modal.Footer>
+                  
                 </Modal>
 
             </div>
