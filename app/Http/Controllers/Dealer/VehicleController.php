@@ -423,6 +423,7 @@ class VehicleController extends Controller
                 $vehicle->update($update);
 
                 $message['type'] = 'Success';
+                $message['images'] = $update['images'];
                 $message['status'] = trans('message.image_success');
             } else {
 
@@ -434,6 +435,7 @@ class VehicleController extends Controller
                 $vehicle = Vehicle::create($data);
 
                 $message['id'] = $vehicle->id;
+                $message['images'] = $data['images'];
                 $message['type'] = 'Success';
                 $message['status'] = trans('message.image_success');
             }
