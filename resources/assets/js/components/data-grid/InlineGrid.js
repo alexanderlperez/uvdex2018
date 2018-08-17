@@ -30,7 +30,7 @@ class InlineGrid extends React.Component {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: <CustomImageFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <CustomImageFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -137,7 +137,7 @@ class InlineGrid extends React.Component {
                     name: 'Images',
                     resizable: true,
                     width: 120,
-                    formatter: <ImageUploadFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     getRowMetaData: (row) => row
                 },
                 {
@@ -171,7 +171,7 @@ class InlineGrid extends React.Component {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: <CustomImageFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <CustomImageFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -302,7 +302,7 @@ class InlineGrid extends React.Component {
                     name: 'Images',
                     width: 120,
                     resizable: true,
-                    formatter: <ImageUploadFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     getRowMetaData: (row) => row
                 },
                 {
@@ -487,17 +487,22 @@ class InlineGrid extends React.Component {
         }
     }
 
-    onUpload(id, key, value) {
+    onUpload(rowKey, data) {
+
+        let images = data.images.split(',');
 
         let rows = this.state.rows.slice();
-        let rowToUpdate = rows[id];
-        let updated = {[key]: value};
+        let rowToUpdate = rows[rowKey];
+        let updated = {images: images, images_count: images.length};
 
-        if(key === 'images')
-            updated.images_count = value.length;
+        if(data.id !== undefined)
+            updated = {id: data.id};
 
-        rows[id] = update(rowToUpdate, {$merge: updated});
+        rows[rowKey] = update(rowToUpdate, {$merge: updated});
         this.setState({ rows });
+
+        //NotificationManager.success('Success', data.status);
+        console.log(this.state.rows);
     }
 
     formatPrice(price) {
@@ -627,7 +632,7 @@ class InlineGrid extends React.Component {
                     getValidFilterValues={this.getValidFilterValues}
                     onClearFilters={this.handleOnClearFilters}
                     rowHeight={70}
-                    minHeight={600}
+                    minHeight={800}
                     rowRenderer={RowRenderer}
                     rowScrollTimeout={200} />
                 <NotificationContainer/>

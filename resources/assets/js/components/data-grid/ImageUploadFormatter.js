@@ -1,5 +1,4 @@
 import React from "react";
-//import {NotificationContainer, NotificationManager} from 'react-notifications';
 import "./UploadButton.css"
 
 class ImageUploadFormatter extends React.Component {
@@ -25,12 +24,12 @@ class ImageUploadFormatter extends React.Component {
             .then(response => {
 
                 if(this.props.dependentValues.id === "")
-                    this.props.onUpload(id, 'id', response.data.message.id);
-
-                //NotificationManager.success('Success', response.data.message.status);
+                    this.props.parentUpload(id, response.data.message);
+                else
+                    this.props.parentUpload(this.props.dependentValues.key, response.data.message);
             })
             .catch((error) => {
-                //NotificationManager.error('Error', error);
+                console.log(error);
             });
     }
 
