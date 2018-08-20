@@ -437,7 +437,7 @@ class InlineGrid extends React.Component {
         }
 
 
-        this.state = { rows: [] };
+        this.state = { rows: [], refresh: false };
         this.getColumns = this.getColumns.bind(this);
         this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
         this.handleAddRow = this.handleAddRow.bind(this);
@@ -487,22 +487,29 @@ class InlineGrid extends React.Component {
         }
     }
 
-    onUpload(rowKey, data) {
+    onUpload(key, data) {
+        let rowKey = key-1;
 
-        let images = data.images.split(',');
+        let images = $.makeArray(data.images);
+        if(data.images.indexOf(',') > -1)
+            images = data.images.split(',');
 
         let rows = this.state.rows.slice();
         let rowToUpdate = rows[rowKey];
-        let updated = {images: images, images_count: images.length};
+        let updated = {};
+        updated.images = images;
+        updated.images_count = images.length;
 
-        if(data.id !== undefined)
-            updated = {id: data.id};
+        if(data.images === '')
+            updated.images_count = 0;
+
+        if(rows[rowKey].id === '')
+            updated.id = data.id;
 
         rows[rowKey] = update(rowToUpdate, {$merge: updated});
         this.setState({ rows });
-
-        //NotificationManager.success('Success', data.status);
-        console.log(this.state.rows);
+        NotificationManager.success('Success', data.status);
+        refresh();
     }
 
     formatPrice(price) {
@@ -589,8 +596,19 @@ class InlineGrid extends React.Component {
     };
 
     getSize() {
-        return Selectors.getRows(this.state).length;
+        let count = Selectors.getRows(this.state).length;
+
+        if (this.state.refresh) {
+            count++; // hack for update data-grid
+            this.setState({ refresh: false });
+        }
+
+        return count;
     };
+
+    refresh() {
+        this.setState({ refresh: true });
+    }
 
     handleFilterChange(filter) {
         let newFilters = Object.assign({}, this.state.filters);
