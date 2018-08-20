@@ -409,7 +409,7 @@ class VehicleController extends Controller
 
         try {
             $imageName = saveFile($request, 'file', Config::get('constants.inventory.prefix'), Config::get('constants.inventory.folder'));
-            $data = ['images' => $imageName];
+            $data = ['images' => url('/').Storage::url('inventory/'.$imageName)];
 
             if(!empty($request->get('id')) && !is_null($request->get('id'))){
 
