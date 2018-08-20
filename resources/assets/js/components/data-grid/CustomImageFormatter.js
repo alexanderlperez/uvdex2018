@@ -20,7 +20,6 @@ class CustomImageFormatter extends React.Component {
 
     deleteImage(e) {
 
-        const event = e.target;
         let data = {};
         data.id = this.props.dependentValues.id;
         data.image = e.target.getAttribute('data-content');
@@ -28,8 +27,6 @@ class CustomImageFormatter extends React.Component {
         axios
             .post('/deleteImage', data)
             .then(response => {
-
-                $(event).closest('.thumb').remove(); //On success remove current element
                 this.props.onUpload(this.props.dependentValues.key, response.data.message);
             })
             .catch((error) => {
@@ -79,7 +76,7 @@ class CustomImageFormatter extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
 
-                        <div className="container"><div className="row"><div className="col-xs-12"><ImageUploadFormatter parentUpload={(rowKey, value) => this.parentUpload(rowKey, value)} dependentValues={this.props.dependentValues} /></div></div></div>
+                        <div className="container"><div className="row"><div className="col-xs-12"><ImageUploadFormatter parentUpload={(rowKey, value) => this.parentUpload(rowKey, value)} dependentValues={this.props.dependentValues} parent={1} /></div></div></div>
 
                         <div className="container thumb-wrapper ">
                             <div className="row">
