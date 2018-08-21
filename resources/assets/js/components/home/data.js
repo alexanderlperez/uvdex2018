@@ -170,7 +170,7 @@ class CarData extends Component {
                             </Link>
                         </div>
                         <div className="car-detail-block  col-md-3 text-center">
-                            <Link to={vehicle.id + '/detail'} className="d-none d-sm-block"><h2>{vehicle.type}</h2></Link>
+                            <Link to={vehicle.id + '/detail'} className={"d-none d-sm-block "+ vehicle.type.toLowerCase()}><h2>{vehicle.type}</h2></Link>
                             <Link to={vehicle.id + '/detail'}>
                                 <h3>{vehicle.title}</h3>
                             </Link>
