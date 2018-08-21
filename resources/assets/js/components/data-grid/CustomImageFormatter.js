@@ -48,7 +48,7 @@ class CustomImageFormatter extends React.Component {
 
                     <div key={i} className="col-xs-4 col-sm-3 col-md-2 thumb">
                         <span className="glyphicon glyphicon-remove pull-right" data-content={image} onClick={(e) => { if (window.confirm('Are you sure you wish to delete this image?')) this.deleteImage(e) }}> </span>
-                        <div className="thumbnails">
+                        <div className="thumbnail">
                             <img className="img-responsive" src={image} alt="" />
                         </div>
                     </div>
