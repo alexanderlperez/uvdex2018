@@ -28,6 +28,10 @@ class CarData extends Component {
         this.showHideFavourite = this.showHideFavourite.bind(this);
     }
 
+    componentWillMount() {
+        this.localStorageFavourites();
+    }
+
     componentDidMount() {
 
         axios.get(`/getVehicles/0`)
@@ -39,6 +43,16 @@ class CarData extends Component {
                     max: response.data.max
                 });
             });
+    }
+
+    localStorageFavourites() {
+
+        let localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+        if(localFavourites !== null && localFavourites.length)
+            this.setState({favorites: localFavourites});
+
+        console.log(localFavourites, this.state.favorites);
     }
 
     //Toggle footer fav icon function
@@ -54,7 +68,7 @@ class CarData extends Component {
             e.target.setAttribute('data-icon', 'off')
         }
 
-        this.addRemoveFavourites(e.target.getAttribute('data-key'));
+        this.addRemoveFavourites(parseInt(e.target.getAttribute('data-key')));
     }
 
     addRemoveFavourites(item) {
@@ -63,6 +77,22 @@ class CarData extends Component {
             this.state.favorites.push(item);
         else
             this.setState({favorites: this.state.favorites.filter(x => x === item === false)});
+
+        // Set local storage
+        let localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+        if(localFavourites !== null && localFavourites.length) {
+
+            if (!localFavourites.includes(item)) {
+
+                localFavourites.push(item);
+                localStorage.setItem('favourites', JSON.stringify(localFavourites));
+            } else {
+
+                let favourites = localFavourites.filter(x => x === item === false);
+                localStorage.setItem('favourites', JSON.stringify(favourites));
+            }
+        }
     }
 
     onFilter(data) {
@@ -115,7 +145,7 @@ class CarData extends Component {
 
         // Show or Hide favourites
         if (status)
-            this.setState({rows: this.state.rows.filter(vehicle => this.state.favorites.includes(vehicle.id.toString()) === true)});
+            this.setState({rows: this.state.rows.filter(vehicle => this.state.favorites.includes(vehicle.id) === true)});
         else
             this.setState({rows: this.state.allRows});
     }
@@ -123,6 +153,13 @@ class CarData extends Component {
     renderVehicles() {
 
         return this.state.rows.map(vehicle => {
+
+            let icon = 'off';
+            let imgSrc = FavIconBlue;
+            if (this.state.favorites.includes(vehicle.id)){
+                icon = 'on';
+                imgSrc = FavIconDarkBlue;
+            }
 
             return (
                 <div key={vehicle.id} className="full-width-wrapper">
@@ -140,7 +177,7 @@ class CarData extends Component {
                                 <h3>{vehicle.title}</h3>
                             </Link>
                             <Link to={vehicle.id + '/detail'} className="fav-icon d-block d-sm-none">
-                                <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={vehicle.id}
+                                <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
                                      onClick={this.toggleIcons}/>
                             </Link>
                             {/* Mobile View */}
@@ -163,7 +200,7 @@ class CarData extends Component {
                         <div className="dealer-notes  col-md-6 text-center d-none d-sm-block">
                             <h4>Dealer Notes</h4>
                             <Link to="#" replace className="fav-icon">
-                                <img src={this.state.iconUrl} alt="Fav Icon" data-icon="off" data-key={vehicle.id}
+                                <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
                                      onClick={(e) => this.toggleIcons(e)}/>
                             </Link>
                             <p>{vehicle.description}</p>
@@ -176,6 +213,8 @@ class CarData extends Component {
 
     render() {
         const {min, max} = this.state;
+        localStorage.setItem('min', min);
+        localStorage.setItem('max', max);
         return (
             <div>
                 <Filter onFilter={this.onFilter} min={min} max={max}/>
