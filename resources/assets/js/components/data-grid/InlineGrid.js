@@ -23,14 +23,14 @@ class InlineGrid extends React.Component {
                 {
                     key: 'key',
                     name: 'ID',
-                    width: 30,
+                    width: 35,
                     resizable: true
                 },
                 {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: <CustomImageFormatter onUpload={this.onUpload} />,
+                    formatter: <CustomImageFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -137,7 +137,7 @@ class InlineGrid extends React.Component {
                     name: 'Images',
                     resizable: true,
                     width: 120,
-                    formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
+                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     getRowMetaData: (row) => row
                 },
                 {
@@ -164,14 +164,14 @@ class InlineGrid extends React.Component {
                 {
                     key: 'key',
                     name: 'ID',
-                    width: 30,
+                    width: 35,
                     resizable: true
                 },
                 {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: <CustomImageFormatter onUpload={this.onUpload} />,
+                    formatter: <CustomImageFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -302,7 +302,7 @@ class InlineGrid extends React.Component {
                     name: 'Images',
                     width: 120,
                     resizable: true,
-                    formatter: <ImageUploadFormatter onUpload={this.onUpload} />,
+                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     getRowMetaData: (row) => row
                 },
                 {
@@ -437,7 +437,7 @@ class InlineGrid extends React.Component {
         }
 
 
-        this.state = { rows: [] };
+        this.state = { rows: [], refresh: false };
         this.getColumns = this.getColumns.bind(this);
         this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
         this.handleAddRow = this.handleAddRow.bind(this);
@@ -447,7 +447,6 @@ class InlineGrid extends React.Component {
         this.getValidFilterValues = this.getValidFilterValues.bind(this);
         this.handleOnClearFilters = this.handleOnClearFilters.bind(this);
         this.handleGridSort = this.handleGridSort.bind(this);
-        this.onUpload = this.onUpload.bind(this);
     }
 
     componentDidMount() {
@@ -488,13 +487,29 @@ class InlineGrid extends React.Component {
         }
     }
 
-    onUpload(id, key, value) {
+    onUpload(key, data) {
+        let rowKey = key-1;
+
+        let images = $.makeArray(data.images);
+        if(data.images.indexOf(',') > -1)
+            images = data.images.split(',');
 
         let rows = this.state.rows.slice();
-        let rowToUpdate = rows[id];
-        let updated = {key: value};
-        rows[id] = update(rowToUpdate, {$merge: updated});
+        let rowToUpdate = rows[rowKey];
+        let updated = {};
+        updated.images = images;
+        updated.images_count = images.length;
+
+        if(data.images === '')
+            updated.images_count = 0;
+
+        if(rows[rowKey].id === '')
+            updated.id = data.id;
+
+        rows[rowKey] = update(rowToUpdate, {$merge: updated});
         this.setState({ rows });
+        NotificationManager.success('Success', data.status);
+        refresh();
     }
 
     formatPrice(price) {
@@ -581,8 +596,19 @@ class InlineGrid extends React.Component {
     };
 
     getSize() {
-        return Selectors.getRows(this.state).length;
+        let count = Selectors.getRows(this.state).length;
+
+        if (this.state.refresh) {
+            count++; // hack for update data-grid
+            this.setState({ refresh: false });
+        }
+
+        return count;
     };
+
+    refresh() {
+        this.setState({ refresh: true });
+    }
 
     handleFilterChange(filter) {
         let newFilters = Object.assign({}, this.state.filters);
@@ -609,54 +635,27 @@ class InlineGrid extends React.Component {
 
     render() {
 
-        if (action === 'sold-vehicles') {
-
-            return  (
-                <div>
-                    <ReactDataGrid
-                        ref={ node => this.grid = node }
-                        onGridSort={this.handleGridSort}
-                        enableCellSelect={true}
-                        columns={this.getColumns()}
-                        rowGetter={this.getRowAt}
-                        rowsCount={this.getSize()}
-                        onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
-                        toolbar={<Toolbar enableFilter={true}/>}
-                        onAddFilter={this.handleFilterChange}
-                        getValidFilterValues={this.getValidFilterValues}
-                        onClearFilters={this.handleOnClearFilters}
-                        rowHeight={70}
-                        minHeight={600}
-                        rowRenderer={RowRenderer}
-                        rowScrollTimeout={200} />
-                    <NotificationContainer/>
-                </div>
-            );
-        } else {
-
-            return  (
-                <div>
-                    <ReactDataGrid
-                        ref={ node => this.grid = node }
-                        onGridSort={this.handleGridSort}
-                        enableCellSelect={true}
-                        columns={this.getColumns()}
-                        rowGetter={this.getRowAt}
-                        rowsCount={this.getSize()}
-                        onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
-                        toolbar={<Toolbar addRowButtonText="Add Vehicle" onAddRow={this.handleAddRow} enableFilter={true}/>}
-                        onAddFilter={this.handleFilterChange}
-                        getValidFilterValues={this.getValidFilterValues}
-                        onClearFilters={this.handleOnClearFilters}
-                        rowHeight={70}
-                        minHeight={600}
-                        rowRenderer={RowRenderer}
-                        rowScrollTimeout={200} />
-                    <NotificationContainer/>
-                </div>
-            );
-        }
-
+        return  (
+            <div>
+                <ReactDataGrid
+                    ref={ node => this.grid = node }
+                    onGridSort={this.handleGridSort}
+                    enableCellSelect={true}
+                    columns={this.getColumns()}
+                    rowGetter={this.getRowAt}
+                    rowsCount={this.getSize()}
+                    onGridRowsUpdated={_.debounce(this.handleGridRowsUpdated, 500)}
+                    toolbar={ (action === 'sold-vehicles') ? <Toolbar enableFilter={true}/> : <Toolbar addRowButtonText="Add Vehicle" onAddRow={this.handleAddRow} enableFilter={true}/>}
+                    onAddFilter={this.handleFilterChange}
+                    getValidFilterValues={this.getValidFilterValues}
+                    onClearFilters={this.handleOnClearFilters}
+                    rowHeight={70}
+                    minHeight={800}
+                    rowRenderer={RowRenderer}
+                    rowScrollTimeout={200} />
+                <NotificationContainer/>
+            </div>
+        );
     }
 }
 

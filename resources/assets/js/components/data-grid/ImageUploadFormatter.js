@@ -1,5 +1,4 @@
 import React from "react";
-//import {NotificationContainer, NotificationManager} from 'react-notifications';
 import "./UploadButton.css"
 
 class ImageUploadFormatter extends React.Component {
@@ -13,7 +12,6 @@ class ImageUploadFormatter extends React.Component {
 
         e.preventDefault();
 
-        let id = this.props.dependentValues.key-1;
         let file = e.target.files[0];
         let data = new FormData();
         data.append('file', file, file.name);
@@ -24,13 +22,13 @@ class ImageUploadFormatter extends React.Component {
             .post('/uploadImage', data, { headers: {'Content-Type': 'multipart/form-data'} })
             .then(response => {
 
-                if(this.props.dependentValues.id === "")
-                    this.props.onUpload(id, 'id', response.data.message.id);
-
-                //NotificationManager.success('Success', response.data.message.status);
+                if(this.props.parent)
+                    this.props.parentUpload(this.props.dependentValues.key, response.data.message);
+                else
+                    this.props.onUpload(this.props.dependentValues.key, response.data.message);
             })
             .catch((error) => {
-                //NotificationManager.error('Error', error);
+                console.log(error);
             });
     }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import ImageUploadFormatter from "./ImageUploadFormatter";
 
 class CustomImageFormatter extends React.Component {
@@ -20,7 +20,6 @@ class CustomImageFormatter extends React.Component {
 
     deleteImage(e) {
 
-        const event = e.target;
         let data = {};
         data.id = this.props.dependentValues.id;
         data.image = e.target.getAttribute('data-content');
@@ -28,15 +27,15 @@ class CustomImageFormatter extends React.Component {
         axios
             .post('/deleteImage', data)
             .then(response => {
-
-                $(event).closest('.thumb').remove(); //On success remove current element
-                this.props.onUpload(this.props.dependentValues.id, 'images', response.data.message.images);
-
-                //NotificationManager.success('Success', response.data.message.status);
+                this.props.onUpload(this.props.dependentValues.key, response.data.message);
             })
             .catch((error) => {
-                //NotificationManager.error('Error', error);
+                console.log(error);
             });
+    }
+
+    parentUpload(rowKey, value) {
+        this.props.onUpload(rowKey, value);
     }
 
     renderImages() {
@@ -48,8 +47,8 @@ class CustomImageFormatter extends React.Component {
                 return (
 
                     <div key={i} className="col-xs-4 col-sm-3 col-md-2 thumb">
-                        <span className="glyphicon glyphicon-remove pull-right" data-content={image} onClick={(e) => this.deleteImage(e)}> </span>
-                        <div className="thumbnail">
+                        <span className="glyphicon glyphicon-remove pull-right" data-content={image} onClick={(e) => { if (window.confirm('Are you sure you wish to delete this image?')) this.deleteImage(e) }}> </span>
+                        <div className="thumbnails">
                             <img className="img-responsive" src={image} alt="" />
                         </div>
                     </div>
@@ -68,7 +67,7 @@ class CustomImageFormatter extends React.Component {
 
                 {   this.props.dependentValues.images_count
                     ? <div onClick={() => this.open()}><img src={this.props.value} height={40} width={40}/> ({this.props.dependentValues.images_count})</div>
-                    : <div onClick={() => this.open()}><img src={null} height={40} width={40}/> ({this.props.dependentValues.images_count})</div>
+                    : <div onClick={() => this.open()}><img src={null} height={40} width={40}/> (0)</div>
                 }
 
                 <Modal bsSize="large" show={this.state.showModal} onHide={() => this.close()} className="image-modalbox">
@@ -77,7 +76,7 @@ class CustomImageFormatter extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
 
-                        <div className="container"><div className="row"><div className="col-xs-12"><ImageUploadFormatter /></div></div></div>
+                        <div className="container"><div className="row"><div className="col-xs-12"><ImageUploadFormatter parentUpload={(rowKey, value) => this.parentUpload(rowKey, value)} dependentValues={this.props.dependentValues} parent={1} /></div></div></div>
 
                         <div className="container thumb-wrapper ">
                             <div className="row">
