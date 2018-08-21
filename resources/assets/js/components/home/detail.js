@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 
 import Filter from './filter';
 import Footer from './footer';
-
-import { Link } from 'react-router-dom';
 import Slider from '../../components/GallerySlider/Slider';
 
 class DetailBlock extends Component{
     constructor(props){
        super(props);
-       this.state = {addClass: false, vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
+       this.state = {vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
     }
 
     componentDidMount() {
@@ -21,9 +19,8 @@ class DetailBlock extends Component{
     }
 
     HideButton(e){
-
+        $(e.target).addClass('hidden');
         this.setLocalFavourites(parseInt(e.target.getAttribute('data-key')));
-        this.setState({ addClass: !this.state.addClass });
     }
 
     setLocalFavourites(item) {
@@ -43,10 +40,6 @@ class DetailBlock extends Component{
     }
 
     render() {
-        let buttonClass = ["visible btn btn-primary"];
-        
-        if(this.state.addClass)
-            buttonClass.push('hidden');
 
         const { images } = this.state.vehicle;
         return(
@@ -61,7 +54,7 @@ class DetailBlock extends Component{
                         </div>
                         <div className="col-12 col-md-5 car-price-detail">
                             <h3>{this.state.vehicle.title}</h3>
-                            <h5><span>Condtion:</span> {this.state.vehicle.type}</h5>
+                            <h5><span>Condition:</span> {this.state.vehicle.type}</h5>
                             <h5><span>Mileage:</span> {this.state.vehicle.mileage}</h5>
                             <h5><span>Stock#:</span> {this.state.vehicle.stock_number}</h5>
                             <h5><span>VIN#:</span> {this.state.vehicle.vin}</h5>
@@ -69,7 +62,7 @@ class DetailBlock extends Component{
                             <h5><span>Passengers#:</span> {this.state.vehicle.passengers}</h5>
                             <h1 className="price">{this.state.vehicle.our_price}</h1>
                             <div className="button-block">
-                                <button className={buttonClass.join(' ')} data-key={this.state.vehicle.id} onClick={(e) => this.HideButton(e)}>Add To Favorites
+                                <button className="visible btn btn-primary" data-key={this.state.vehicle.id} onClick={(e) => this.HideButton(e)}>Add To Favorites
                                 </button>
                                 <a href="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</a>
                             </div>
