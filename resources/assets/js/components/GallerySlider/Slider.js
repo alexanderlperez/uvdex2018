@@ -7,11 +7,14 @@ class Slider extends Component{
         this.state = { images: [] };
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({ images: nextProps.images });
+    componentWillMount() {
+
+        let images = ['https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313']
+
+        this.setState({ images: images });
     }
 
-    componentDidUpdate(){
+    componentDidMount(){
 
         $(".royalSlider").royalSlider({
             controlNavigation: 'thumbnails',
@@ -49,8 +52,7 @@ class Slider extends Component{
                         this.state.images.map((img, i) => {
                             return (
                                 <React.Fragment key={i}>
-                                    <a className="rsImg" data-rsbigimg={img} href={img}>
-                                        <img className="rsTmb" src={img} alt=""/></a>
+                                    <img className="rsTmb" src={img} data-rstmb={img} alt="image description"/>
                                 </React.Fragment>
                             )
                         })

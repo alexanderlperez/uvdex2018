@@ -30,7 +30,7 @@ class InlineGrid extends React.Component {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: <CustomImageFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <CustomImageFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -137,7 +137,7 @@ class InlineGrid extends React.Component {
                     name: 'Images',
                     resizable: true,
                     width: 120,
-                    formatter: <ImageUploadFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     getRowMetaData: (row) => row
                 },
                 {
@@ -171,7 +171,7 @@ class InlineGrid extends React.Component {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: <CustomImageFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <CustomImageFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     resizable: true,
                     getRowMetaData: (row) => row
                 },
@@ -302,7 +302,7 @@ class InlineGrid extends React.Component {
                     name: 'Images',
                     width: 120,
                     resizable: true,
-                    formatter: <ImageUploadFormatter onUpload={(id, key, value) => this.onUpload(id, key, value)} />,
+                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
                     getRowMetaData: (row) => row
                 },
                 {
@@ -437,7 +437,7 @@ class InlineGrid extends React.Component {
         }
 
 
-        this.state = { rows: [] };
+        this.state = { rows: [], refresh: false };
         this.getColumns = this.getColumns.bind(this);
         this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
         this.handleAddRow = this.handleAddRow.bind(this);
@@ -487,17 +487,29 @@ class InlineGrid extends React.Component {
         }
     }
 
-    onUpload(id, key, value) {
+    onUpload(key, data) {
+        let rowKey = key-1;
+
+        let images = $.makeArray(data.images);
+        if(data.images.indexOf(',') > -1)
+            images = data.images.split(',');
 
         let rows = this.state.rows.slice();
-        let rowToUpdate = rows[id];
-        let updated = {[key]: value};
+        let rowToUpdate = rows[rowKey];
+        let updated = {};
+        updated.images = images;
+        updated.images_count = images.length;
 
-        if(key === 'images')
-            updated.images_count = value.length;
+        if(data.images === '')
+            updated.images_count = 0;
 
-        rows[id] = update(rowToUpdate, {$merge: updated});
+        if(rows[rowKey].id === '')
+            updated.id = data.id;
+
+        rows[rowKey] = update(rowToUpdate, {$merge: updated});
         this.setState({ rows });
+        NotificationManager.success('Success', data.status);
+        refresh();
     }
 
     formatPrice(price) {
@@ -584,8 +596,19 @@ class InlineGrid extends React.Component {
     };
 
     getSize() {
-        return Selectors.getRows(this.state).length;
+        let count = Selectors.getRows(this.state).length;
+
+        if (this.state.refresh) {
+            count++; // hack for update data-grid
+            this.setState({ refresh: false });
+        }
+
+        return count;
     };
+
+    refresh() {
+        this.setState({ refresh: true });
+    }
 
     handleFilterChange(filter) {
         let newFilters = Object.assign({}, this.state.filters);
@@ -627,7 +650,7 @@ class InlineGrid extends React.Component {
                     getValidFilterValues={this.getValidFilterValues}
                     onClearFilters={this.handleOnClearFilters}
                     rowHeight={70}
-                    minHeight={600}
+                    minHeight={800}
                     rowRenderer={RowRenderer}
                     rowScrollTimeout={200} />
                 <NotificationContainer/>

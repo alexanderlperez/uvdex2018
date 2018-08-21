@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import ImageUploadFormatter from "./ImageUploadFormatter";
 
 class CustomImageFormatter extends React.Component {
@@ -20,7 +20,6 @@ class CustomImageFormatter extends React.Component {
 
     deleteImage(e) {
 
-        const event = e.target;
         let data = {};
         data.id = this.props.dependentValues.id;
         data.image = e.target.getAttribute('data-content');
@@ -28,16 +27,15 @@ class CustomImageFormatter extends React.Component {
         axios
             .post('/deleteImage', data)
             .then(response => {
-
-                $(event).closest('.thumb').remove(); //On success remove current element
-                let images = response.data.message.images.split(',');
-                this.props.onUpload(this.props.dependentValues.id, 'images', images);
-
-                //NotificationManager.success('Success', response.data.message.status);
+                this.props.onUpload(this.props.dependentValues.key, response.data.message);
             })
             .catch((error) => {
-                //NotificationManager.error('Error', error);
+                console.log(error);
             });
+    }
+
+    parentUpload(rowKey, value) {
+        this.props.onUpload(rowKey, value);
     }
 
     renderImages() {
@@ -78,7 +76,7 @@ class CustomImageFormatter extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
 
-                        <div className="container"><div className="row"><div className="col-xs-12"><ImageUploadFormatter /></div></div></div>
+                        <div className="container"><div className="row"><div className="col-xs-12"><ImageUploadFormatter parentUpload={(rowKey, value) => this.parentUpload(rowKey, value)} dependentValues={this.props.dependentValues} parent={1} /></div></div></div>
 
                         <div className="container thumb-wrapper ">
                             <div className="row">
