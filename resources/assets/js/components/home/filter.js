@@ -73,7 +73,7 @@ class Filter extends Component{
                             <div className="col-md-3 range-filter-block">
                                 <h3><strong>{this.state.allPrice}</strong></h3>
 
-                                <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  onChange={this.handleChange}/>
+                                <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  defaultValue={this.state.max} onChange={this.handleChange}/>
                                 <h4 className="low-price"><strong>${this.state.min}K</strong></h4>
                                 <h4 className="high-price"><strong>${this.state.max}K</strong></h4>
                             </div>
