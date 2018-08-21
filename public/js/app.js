@@ -60945,8 +60945,8 @@ var DetailBlock = function (_Component) {
                                     'Add To Favorites'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
-                                    { to: 'tel:7124693383', className: 'btn btn-primary' },
+                                    'a',
+                                    { href: 'tel:7124693383', className: 'btn btn-primary' },
                                     'Call (712) 469-3383'
                                 )
                             )

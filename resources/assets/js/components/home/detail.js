@@ -71,7 +71,7 @@ class DetailBlock extends Component{
                             <div className="button-block">
                                 <button className={buttonClass.join(' ')} data-key={this.state.vehicle.id} onClick={(e) => this.HideButton(e)}>Add To Favorites
                                 </button>
-                                <Link to="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</Link>
+                                <a href="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</a>
                             </div>
                         </div>
                         <div className="row dealer-notes">
