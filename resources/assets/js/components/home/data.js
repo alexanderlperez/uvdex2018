@@ -51,8 +51,6 @@ class CarData extends Component {
 
         if(localFavourites !== null && localFavourites.length)
             this.setState({favorites: localFavourites});
-
-        console.log(localFavourites, this.state.favorites);
     }
 
     //Toggle footer fav icon function
