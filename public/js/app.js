@@ -57249,7 +57249,7 @@ var Filter = function (_Component) {
                                         this.state.allPrice
                                     )
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', onChange: this.handleChange }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', defaultValue: this.state.max, onChange: this.handleChange }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h4',
                                     { className: 'low-price' },
@@ -58684,7 +58684,7 @@ var CarData = function (_Component) {
                             { className: 'car-detail-block  col-md-3 text-center' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail', className: 'd-none d-sm-block' },
+                                { to: vehicle.id + '/detail', className: "d-none d-sm-block " + vehicle.type.toLowerCase() },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h2',
                                     null,
@@ -60766,8 +60766,7 @@ module.exports = "/images/favorite_off.png?62c012ec9e45c2354d4daa4f01e72518";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__filter__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__footer__ = __webpack_require__(150);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router_dom__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_GallerySlider_Slider__ = __webpack_require__(242);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_GallerySlider_Slider__ = __webpack_require__(242);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -60775,8 +60774,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
 
 
 
@@ -60792,7 +60789,7 @@ var DetailBlock = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (DetailBlock.__proto__ || Object.getPrototypeOf(DetailBlock)).call(this, props));
 
-        _this.state = { addClass: false, vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
+        _this.state = { vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
         return _this;
     }
 
@@ -60808,9 +60805,8 @@ var DetailBlock = function (_Component) {
     }, {
         key: 'HideButton',
         value: function HideButton(e) {
-
+            $(e.target).addClass('hidden');
             this.setLocalFavourites(parseInt(e.target.getAttribute('data-key')));
-            this.setState({ addClass: !this.state.addClass });
         }
     }, {
         key: 'setLocalFavourites',
@@ -60834,10 +60830,6 @@ var DetailBlock = function (_Component) {
         value: function render() {
             var _this3 = this;
 
-            var buttonClass = ["visible btn btn-primary"];
-
-            if (this.state.addClass) buttonClass.push('hidden');
-
             var images = this.state.vehicle.images;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -60853,7 +60845,7 @@ var DetailBlock = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'col-12 col-md-7' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_GallerySlider_Slider__["a" /* default */], { images: images })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_GallerySlider_Slider__["a" /* default */], { images: images })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -60869,7 +60861,7 @@ var DetailBlock = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'span',
                                     null,
-                                    'Condtion:'
+                                    'Condition:'
                                 ),
                                 ' ',
                                 this.state.vehicle.type
@@ -60939,7 +60931,7 @@ var DetailBlock = function (_Component) {
                                 { className: 'button-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { className: buttonClass.join(' '), 'data-key': this.state.vehicle.id, onClick: function onClick(e) {
+                                    { className: 'visible btn btn-primary', 'data-key': this.state.vehicle.id, onClick: function onClick(e) {
                                             return _this3.HideButton(e);
                                         } },
                                     'Add To Favorites'
