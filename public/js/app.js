@@ -58543,8 +58543,6 @@ var CarData = function (_Component) {
             var localFavourites = JSON.parse(localStorage.getItem('favourites'));
 
             if (localFavourites !== null && localFavourites.length) this.setState({ favorites: localFavourites });
-
-            console.log(localFavourites, this.state.favorites);
         }
 
         //Toggle footer fav icon function
@@ -61020,13 +61018,16 @@ var Slider = function (_Component) {
     }
 
     _createClass(Slider, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.setState({ images: nextProps.images });
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+
+            var images = ['https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313'];
+
+            this.setState({ images: images });
         }
     }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
 
             $(".royalSlider").royalSlider({
                 controlNavigation: 'thumbnails',
@@ -61065,11 +61066,7 @@ var Slider = function (_Component) {
                         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.Fragment,
                             { key: i },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'a',
-                                { className: 'rsImg', 'data-rsbigimg': img, href: img },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'rsTmb', src: img, alt: '' })
-                            )
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'rsTmb', src: img, 'data-rstmb': img, alt: 'image description' })
                         );
                     })
                 );
