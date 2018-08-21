@@ -57249,7 +57249,7 @@ var Filter = function (_Component) {
                                         this.state.allPrice
                                     )
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', onChange: this.handleChange }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', defaultValue: this.state.max, onChange: this.handleChange }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h4',
                                     { className: 'low-price' },
