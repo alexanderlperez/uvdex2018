@@ -58518,6 +58518,11 @@ var CarData = function (_Component) {
     }
 
     _createClass(CarData, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.localStorageFavourites();
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             var _this2 = this;
@@ -58530,6 +58535,16 @@ var CarData = function (_Component) {
                     max: response.data.max
                 });
             });
+        }
+    }, {
+        key: 'localStorageFavourites',
+        value: function localStorageFavourites() {
+
+            var localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+            if (localFavourites !== null && localFavourites.length) this.setState({ favorites: localFavourites });
+
+            console.log(localFavourites, this.state.favorites);
         }
 
         //Toggle footer fav icon function
@@ -58548,7 +58563,7 @@ var CarData = function (_Component) {
                 e.target.setAttribute('data-icon', 'off');
             }
 
-            this.addRemoveFavourites(e.target.getAttribute('data-key'));
+            this.addRemoveFavourites(parseInt(e.target.getAttribute('data-key')));
         }
     }, {
         key: 'addRemoveFavourites',
@@ -58557,6 +58572,24 @@ var CarData = function (_Component) {
             if (!this.state.favorites.includes(item)) this.state.favorites.push(item);else this.setState({ favorites: this.state.favorites.filter(function (x) {
                     return x === item === false;
                 }) });
+
+            // Set local storage
+            var localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+            if (localFavourites !== null && localFavourites.length) {
+
+                if (!localFavourites.includes(item)) {
+
+                    localFavourites.push(item);
+                    localStorage.setItem('favourites', JSON.stringify(localFavourites));
+                } else {
+
+                    var favourites = localFavourites.filter(function (x) {
+                        return x === item === false;
+                    });
+                    localStorage.setItem('favourites', JSON.stringify(favourites));
+                }
+            }
         }
     }, {
         key: 'onFilter',
@@ -58612,7 +58645,7 @@ var CarData = function (_Component) {
 
             // Show or Hide favourites
             if (status) this.setState({ rows: this.state.rows.filter(function (vehicle) {
-                    return _this4.state.favorites.includes(vehicle.id.toString()) === true;
+                    return _this4.state.favorites.includes(vehicle.id) === true;
                 }) });else this.setState({ rows: this.state.allRows });
         }
     }, {
@@ -58621,6 +58654,13 @@ var CarData = function (_Component) {
             var _this5 = this;
 
             return this.state.rows.map(function (vehicle) {
+
+                var icon = 'off';
+                var imgSrc = __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a;
+                if (_this5.state.favorites.includes(vehicle.id)) {
+                    icon = 'on';
+                    imgSrc = __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_on_png___default.a;
+                }
 
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
@@ -58665,7 +58705,7 @@ var CarData = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
                                 { to: vehicle.id + '/detail', className: 'fav-icon d-block d-sm-none' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this5.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': vehicle.id,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: imgSrc, alt: 'Fav Icon', 'data-icon': icon, 'data-key': vehicle.id,
                                     onClick: _this5.toggleIcons })
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58737,7 +58777,7 @@ var CarData = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
                                 { to: '#', replace: true, className: 'fav-icon' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: _this5.state.iconUrl, alt: 'Fav Icon', 'data-icon': 'off', 'data-key': vehicle.id,
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: imgSrc, alt: 'Fav Icon', 'data-icon': icon, 'data-key': vehicle.id,
                                     onClick: function onClick(e) {
                                         return _this5.toggleIcons(e);
                                     } })
@@ -58759,6 +58799,8 @@ var CarData = function (_Component) {
                 min = _state.min,
                 max = _state.max;
 
+            localStorage.setItem('min', min);
+            localStorage.setItem('max', max);
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
@@ -60752,8 +60794,7 @@ var DetailBlock = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (DetailBlock.__proto__ || Object.getPrototypeOf(DetailBlock)).call(this, props));
 
-        _this.state = { addClass: false, vehicle: [] };
-        _this.Hidebutton = _this.Hidebutton.bind(_this);
+        _this.state = { addClass: false, vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
         return _this;
     }
 
@@ -60767,15 +60808,34 @@ var DetailBlock = function (_Component) {
             });
         }
     }, {
-        key: 'Hidebutton',
-        value: function Hidebutton() {
-            this.setState({
-                addClass: !this.state.addClass
-            });
+        key: 'HideButton',
+        value: function HideButton(e) {
+
+            this.setLocalFavourites(parseInt(e.target.getAttribute('data-key')));
+            this.setState({ addClass: !this.state.addClass });
+        }
+    }, {
+        key: 'setLocalFavourites',
+        value: function setLocalFavourites(item) {
+
+            var localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+            if (localFavourites !== null && localFavourites.length) {
+
+                localFavourites.push(item);
+                localStorage.setItem('favourites', JSON.stringify(localFavourites));
+            } else {
+
+                var favourites = [];
+                favourites.push(item);
+                localStorage.setItem('favourites', JSON.stringify(favourites));
+            }
         }
     }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             var buttonClass = ["visible btn btn-primary"];
 
             if (this.state.addClass) buttonClass.push('hidden');
@@ -60785,7 +60845,7 @@ var DetailBlock = function (_Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], null),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { min: this.state.min, max: this.state.max }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'container detail-information-wrapper' },
@@ -60881,7 +60941,9 @@ var DetailBlock = function (_Component) {
                                 { className: 'button-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { className: buttonClass.join(' '), onClick: this.Hidebutton.bind(this) },
+                                    { className: buttonClass.join(' '), 'data-key': this.state.vehicle.id, onClick: function onClick(e) {
+                                            return _this3.HideButton(e);
+                                        } },
                                     'Add To Favorites'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

@@ -9,8 +9,7 @@ import Slider from '../../components/GallerySlider/Slider';
 class DetailBlock extends Component{
     constructor(props){
        super(props);
-       this.state = {addClass: false, vehicle: [] };
-       this.Hidebutton = this.Hidebutton.bind(this);
+       this.state = {addClass: false, vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
     }
 
     componentDidMount() {
@@ -21,11 +20,26 @@ class DetailBlock extends Component{
             })
     }
 
+    HideButton(e){
 
-    Hidebutton(){
-        this.setState({
-            addClass: !this.state.addClass
-        });
+        this.setLocalFavourites(parseInt(e.target.getAttribute('data-key')));
+        this.setState({ addClass: !this.state.addClass });
+    }
+
+    setLocalFavourites(item) {
+
+        let localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+        if(localFavourites !== null && localFavourites.length) {
+
+            localFavourites.push(item);
+            localStorage.setItem('favourites', JSON.stringify(localFavourites));
+        } else {
+
+            let favourites = [];
+            favourites.push(item);
+            localStorage.setItem('favourites', JSON.stringify(favourites));
+        }
     }
 
     render() {
@@ -38,7 +52,7 @@ class DetailBlock extends Component{
         return(
 
             <div>
-                <Filter/>
+                <Filter min={this.state.min} max={this.state.max} />
 
                 <div className="container detail-information-wrapper">
                     <div className="row">
@@ -55,7 +69,7 @@ class DetailBlock extends Component{
                             <h5><span>Passengers#:</span> {this.state.vehicle.passengers}</h5>
                             <h1 className="price">{this.state.vehicle.our_price}</h1>
                             <div className="button-block">
-                                <button className={buttonClass.join(' ')} onClick={this.Hidebutton.bind(this)}>Add To Favorites
+                                <button className={buttonClass.join(' ')} data-key={this.state.vehicle.id} onClick={(e) => this.HideButton(e)}>Add To Favorites
                                 </button>
                                 <Link to="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</Link>
                             </div>
