@@ -62,6 +62,7 @@ input[type=file]::-webkit-file-upload-button {
     font-size: 18px;
     line-height: 23px;
     font-weight: 600;
+    color: #000000;
 }
 .react-grid-HeaderCell{
     background-color: #88BC72 !important;
@@ -96,7 +97,8 @@ input[type=file]::-webkit-file-upload-button {
 .react-grid-Cell:hover,
 .react-grid-Cell.editing .react-grid-Cell__value > div
 .react-grid-Cell.editing .react-grid-Cell__value{
-/* background-color: #b2f390 !important; */
+    background-color: #b2f390 !important;
+    color: #000000;
 }
 .react-grid-Cell__value img{
     -webkit-object-fit: cover;
@@ -106,6 +108,12 @@ input[type=file]::-webkit-file-upload-button {
     object-fit: cover;
 }
 
+.react-grid-Cell:focus{
+    outline: 2px solid #3c8dbc;
+    outline-offset: -2px;
+    background-color: #88bd72;
+    color: #000000;
+}
 /*=========== Image modal layout css here ====================*/
 .image-modalbox .modal-header .modal-title{
     font-size: 24px;
@@ -168,4 +176,8 @@ input[type=file]::-webkit-file-upload-button {
 .image-modalbox .modal-header{
     background-color: #7DB467;
     text-align: center;
+}
+.react-grid-Cell:hover{
+    background-color: #7DB467 !important;
+    color: #000000;
 }
