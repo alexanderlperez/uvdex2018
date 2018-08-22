@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -27,9 +28,11 @@ class HomeController extends Controller
         if($id)
             $vehicles = Vehicle::select('id', 'type', 'stock_number', DB::raw("CONCAT_WS(' ',model_year, make, model, trim ) as title"), 'body_type', 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'description', 'vin', 'images')
                 ->whereId($id)
+                ->whereIsActive(Config::get('constants.status.active'))
                 ->get();
         else
             $vehicles = Vehicle::select('id', 'type', 'body_type', DB::raw("CONCAT_WS(' ',model_year, make, model, trim ) as title"), 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'description', 'vin', 'images')
+                                ->whereIsActive(Config::get('constants.status.active'))
                                 ->orderByRaw("FIELD(type , 'N', 'U') ASC")
                                 ->orderBy('model_year', 'desc')
                                 ->get();
