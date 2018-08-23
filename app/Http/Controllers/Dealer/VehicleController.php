@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dealer;
 
 use App\Models\Vehicle;
+use function foo\func;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -449,5 +450,56 @@ class VehicleController extends Controller
             return response()->json(['message' => $message], $this->successStatus);
         }
 
+    }
+
+    /**
+     * exportCarForSale
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Common\Exception\InvalidArgumentException
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
+     */
+    public function exportCarForSale(){
+
+        $headers[] = Config::get('constants.headers.carforsale');
+        $vehicles = Vehicle::select('type', 'vin', 'stock_number', 'make', 'model', 'model_year', 'trim', 'body_style', 'mileage', 'engine_description', 'cylinders', 'fuel_type', 'transmission', 'price', 'exterior_color', 'interior_color', 'option_text','description', 'images')
+            ->whereUserId(Auth::user()->id)
+            ->whereIsActive(Config::get('constants.status.active')) // Unsold
+            ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
+            ->orderBy('model_year', 'desc')
+            ->get()->toArray();
+
+        $data = [];
+        foreach ($vehicles as $key => $vehicle) {
+
+            $data[$key]['CarsForSaleDealerID'] = "1004599";
+            $data[$key] += $vehicle;
+            $data[$key]['price'] = (string)($vehicle['price']);
+            $data[$key]['mileage'] = str_replace(',', '',$vehicle['mileage']);
+
+            $cylinders = substr($vehicle['cylinders'], -1);
+
+            $data[$key]['cylinders'] = "0";
+            if(!empty($cylinders))
+                $data[$key]['cylinders'] = $cylinders;
+        }
+
+        if(!empty($data)) {
+
+            $rows = $headers + $data;
+
+            $writer = WriterFactory::create(Type::CSV); // for CSV files
+            $filename = 'inventory.txt';
+            $path = storage_path('app/'.$filename);
+            $writer->openToBrowser($path); // stream data directly to the browser
+
+            $writer->addRows($rows);
+            $writer->close();
+        } else {
+
+            setFlashMessage('error', trans('message.no_vehicle'));
+            return back();
+        }
     }
 }
