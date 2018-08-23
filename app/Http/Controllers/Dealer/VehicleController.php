@@ -431,7 +431,7 @@ class VehicleController extends Controller
 
                 //Append to existing string if present
                 if(!empty($vehicle->images))
-                    $update['images'] = $vehicle->images.','.url('/').Storage::url('inventory/'.$data['images']);
+                    $update['images'] = $vehicle->images.','.$data['images'];
 
                 $vehicle->update($update);
 
@@ -440,7 +440,6 @@ class VehicleController extends Controller
                 $message['status'] = trans('message.image_success');
             } else {
 
-                $data['images'] = url('/').Storage::url('inventory/'.$data['images']);
                 $data['user_id'] = Auth::user()->id;
                 $data['option_text'] = '';
                 $data['description'] = '';
