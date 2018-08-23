@@ -419,6 +419,11 @@ footer .back-button {
   position: absolute;
 }
 
+.detail-information-wrapper .car-price-detail h5 {
+  font-size: 17px;
+  line-break: 21px;
+}
+
 /*================ Header css here =================*/
 
 .navbar-brand h1 {

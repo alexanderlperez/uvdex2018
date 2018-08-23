@@ -77,15 +77,15 @@ input[type=file]::-webkit-file-upload-button {
     
 }
 .react-grid-Cell.blue{
-    background-color: #3c8dbc !important;
+    background-color: #3c8dbca1  !important;
     color: #f5f5f5 !important;
 }
 .react-grid-Cell.green{
-    background-color: #008000 !important;
+    background-color: #057d059e !important;
     color: #f5f5f5 !important;
 }
 .react-grid-Cell.orange {
-    background-color: #FFA500 !important;
+    background-color: #ffa500ad  !important;
     color: #f5f5f5 !important;
 }
 .react-grid-Cell.editing .react-grid-Cell__value{
@@ -93,13 +93,7 @@ input[type=file]::-webkit-file-upload-button {
     line-height: 26px;
     font-weight: 600;
 }
-.react-grid-Cell.editing, 
-.react-grid-Cell:hover,
-.react-grid-Cell.editing .react-grid-Cell__value > div
-.react-grid-Cell.editing .react-grid-Cell__value{
-    background-color: #b2f390 !important;
-    color: #000000;
-}
+
 .react-grid-Cell__value img{
     -webkit-object-fit: cover;
     -moz-object-fit: cover;
@@ -111,8 +105,6 @@ input[type=file]::-webkit-file-upload-button {
 .react-grid-Cell:focus{
     outline: 2px solid #3c8dbc;
     outline-offset: -2px;
-    background-color: #88bd72;
-    color: #000000;
 }
 /*=========== Image modal layout css here ====================*/
 .image-modalbox .modal-header .modal-title{
@@ -176,8 +168,4 @@ input[type=file]::-webkit-file-upload-button {
 .image-modalbox .modal-header{
     background-color: #7DB467;
     text-align: center;
-}
-.react-grid-Cell:hover{
-    background-color: #7DB467 !important;
-    color: #000000;
 }
