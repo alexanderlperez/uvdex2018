@@ -57148,7 +57148,7 @@ var Filter = function (_Component) {
         key: 'handleChange',
         value: function handleChange(e) {
 
-            if (parseInt(e.target.value) === this.state.max) this.setState({ allPrice: 'All Price' });else this.setState({ allPrice: '$' + e.target.value });
+            if (parseInt(e.target.value) === this.state.max) this.setState({ allPrice: 'All Price' });else this.setState({ allPrice: '$' + e.target.value * 1000 });
 
             this.props.onFilter({ 'price': e.target.value });
         }
@@ -58235,17 +58235,26 @@ var Footer = function (_Component) {
             copied: false,
             telTo: 'tel:7124693383',
             rostsiteUrl: 'http://rostmotor.com/',
+            isDetail: false,
             fav: false
         };
 
         _this.toggleIcon = _this.toggleIcon.bind(_this);
-        _this.copyPath = _this.copyPath.bind(_this);
         return _this;
     }
-    //Toggle footer fav icon function
-
 
     _createClass(Footer, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+
+            var isDetail = window.location.hash.includes('detail');
+
+            if (isDetail) this.setState({ isDetail: true });
+        }
+
+        //Toggle footer fav icon function
+
+    }, {
         key: 'toggleIcon',
         value: function toggleIcon() {
             if (this.state.iconsUrl === __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png___default.a) {
@@ -58257,14 +58266,6 @@ var Footer = function (_Component) {
             if (this.state.fav === false) this.state.fav = true;else this.state.fav = false;
 
             this.props.showHideFavourite(this.state.fav);
-        }
-    }, {
-        key: 'copyPath',
-        value: function copyPath() {
-            this.setState = {
-                Subject: 'true'
-            };
-            console.log(this.state.hasBeenClicked);
         }
     }, {
         key: 'render',
@@ -58296,16 +58297,15 @@ var Footer = function (_Component) {
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__img_icons_phone_icon_png___default.a, alt: 'Phone Call Icon' })
                                         )
                                     ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    this.state.isDetail ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'li',
                                         null,
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'a',
-                                            { href: 'mailto:mailto:josh@rostmotor.com?subject=Your Favorites Car&body=This is Demo Body Content!' },
-                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_3__img_icons_mail_icon_png___default.a, alt: 'Email Icon' })
+                                            { href: 'javascript:history.back()' },
+                                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_4__img_icons_back_button_png___default.a, alt: 'Back Button Icon' })
                                         )
-                                    ),
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'li',
                                         null,
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58716,51 +58716,55 @@ var CarData = function (_Component) {
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'h5',
-                                { className: 'd-none d-sm-block' },
-                                'Mileage: ',
-                                vehicle.mileage
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'h5',
-                                { className: 'd-none d-sm-block' },
-                                'Color#: ',
-                                vehicle.exterior_color
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'h5',
-                                { className: 'd-none d-sm-block' },
-                                'Passengers: ',
-                                vehicle.passengers
-                            ),
-                            vehicle.show_price ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'h5',
-                                { className: 'stroke-text' },
-                                'Their price: ',
-                                vehicle.their_price
-                            ) : '',
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'h5',
-                                null,
+                                __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                { to: vehicle.id + '/detail' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'strong',
-                                    null,
-                                    'Our Price: ',
-                                    vehicle.our_price
-                                )
-                            ),
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'button-block d-block d-sm-none' },
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'button',
-                                    { type: 'button', className: 'btn btn-primary' },
-                                    'Gallery'
+                                    'h5',
+                                    { className: 'd-none d-sm-block' },
+                                    'Mileage: ',
+                                    vehicle.mileage
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'button',
-                                    { type: 'button', className: 'btn btn-primary' },
-                                    'Details'
+                                    'h5',
+                                    { className: 'd-none d-sm-block' },
+                                    'Color#: ',
+                                    vehicle.exterior_color
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    { className: 'd-none d-sm-block' },
+                                    'Passengers: ',
+                                    vehicle.passengers
+                                ),
+                                vehicle.show_price ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    { className: 'stroke-text' },
+                                    'Their price: ',
+                                    vehicle.their_price
+                                ) : '',
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'h5',
+                                    null,
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'strong',
+                                        null,
+                                        'Our Price: ',
+                                        vehicle.our_price
+                                    )
+                                ),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'div',
+                                    { className: 'button-block d-block d-sm-none' },
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'button',
+                                        { type: 'button', className: 'btn btn-primary' },
+                                        'Gallery'
+                                    ),
+                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                        'button',
+                                        { type: 'button', className: 'btn btn-primary' },
+                                        'Details'
+                                    )
                                 )
                             )
                         ),
@@ -58781,9 +58785,13 @@ var CarData = function (_Component) {
                                     } })
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'p',
-                                null,
-                                vehicle.description
+                                __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
+                                { to: vehicle.id + '/detail' },
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'p',
+                                    null,
+                                    vehicle.description
+                                )
                             )
                         )
                     )
@@ -60905,7 +60913,7 @@ var DetailBlock = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'span',
                                     null,
-                                    'Color#:'
+                                    'Color:'
                                 ),
                                 ' ',
                                 this.state.vehicle.exterior_color
@@ -61013,7 +61021,7 @@ var Slider = function (_Component) {
         key: 'componentWillMount',
         value: function componentWillMount() {
 
-            var images = ['https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313'];
+            var images = ['https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313, https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313, https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313'];
 
             this.setState({ images: images });
         }
