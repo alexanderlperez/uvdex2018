@@ -8,7 +8,6 @@ import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import _ from 'lodash';
 import RowRenderer from './Row';
-import ImageUploadFormatter from './ImageUploadFormatter';
 import CustomImageFormatter from './CustomImageFormatter';
 
 const status = ['Available', 'Sold'];
@@ -131,14 +130,6 @@ class InlineGrid extends React.Component {
                     width: 350,
                     resizable: true,
                     filterable: true,
-                },
-                {
-                    key: 'images',
-                    name: 'Images',
-                    resizable: true,
-                    width: 120,
-                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
-                    getRowMetaData: (row) => row
                 },
                 {
                     key: 'passengers',
@@ -296,14 +287,6 @@ class InlineGrid extends React.Component {
                     width: 140,
                     resizable: true,
                     filterable: true,
-                },
-                {
-                    key: 'image',
-                    name: 'Images',
-                    width: 120,
-                    resizable: true,
-                    formatter: <ImageUploadFormatter onUpload={(rowKey, value) => this.onUpload(rowKey, value)} />,
-                    getRowMetaData: (row) => row
                 },
                 {
                     key: 'passengers',
@@ -532,6 +515,9 @@ class InlineGrid extends React.Component {
 
     handleGridRowsUpdated({ fromRow, toRow, updated }) {
         let rows = this.state.rows.slice();
+
+        if(updated.hasOwnProperty("price") || updated.hasOwnProperty("nada") || updated.hasOwnProperty("msrp"))
+            updated[Object.keys(updated)[0]] = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
 
         for (let i = fromRow; i <= toRow; i++) {
             let rowToUpdate = rows[i];

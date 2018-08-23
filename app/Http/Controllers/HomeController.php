@@ -72,7 +72,7 @@ class HomeController extends Controller
             $item->our_price = '$'.number_format((double)$our_price, 0);
 
             $item->show_price = TRUE;
-            if ( $item->their_price == 0 || ($item->their_price < $item->our_price) )
+            if ( $their_price == 0 || ($their_price < $our_price) )
                 $item->show_price = FALSE;
 
             return $item;
