@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dealer;
 
 use App\Models\Vehicle;
-use function foo\func;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -64,9 +63,22 @@ class VehicleController extends Controller
     public function getData($type, $id){
 
         if($type == 'S') // Sold vehicles
-            $vehicles = Vehicle::whereUserId($id)->whereIsActive(Config::get('constants.status.inactive'))->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")->orderBy('model_year', 'desc')->get();
+            $vehicles = Vehicle::whereUserId($id)
+                            ->whereIsActive(Config::get('constants.status.inactive'))
+                            ->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])
+                            ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
+                            ->orderBy('model_year', 'desc')
+                            ->orderBy('model')
+                            ->get();
         else
-            $vehicles = Vehicle::whereUserId($id)->whereIsActive(Config::get('constants.status.active'))->whereType($type)->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")->orderBy('model_year', 'desc')->get();
+            $vehicles = Vehicle::whereUserId($id)
+                            ->whereIsActive(Config::get('constants.status.active'))
+                            ->whereType($type)
+                            ->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])
+                            ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
+                            ->orderBy('model_year', 'desc')
+                            ->orderBy('model')
+                            ->get();
 
         $vehicles->transform(function ($item, $key){
 
@@ -419,7 +431,7 @@ class VehicleController extends Controller
 
                 //Append to existing string if present
                 if(!empty($vehicle->images))
-                    $update['images'] = $vehicle->images.','.url('/').Storage::url('inventory/'.$data['images']);
+                    $update['images'] = $vehicle->images.','.$data['images'];
 
                 $vehicle->update($update);
 
@@ -428,7 +440,6 @@ class VehicleController extends Controller
                 $message['status'] = trans('message.image_success');
             } else {
 
-                $data['images'] = url('/').Storage::url('inventory/'.$data['images']);
                 $data['user_id'] = Auth::user()->id;
                 $data['option_text'] = '';
                 $data['description'] = '';
