@@ -133,6 +133,7 @@
   border: 2px solid #CFCFCF;
   padding: 15px;
   cursor: pointer;
+  position: relative;
 }
 
 .car-info-section .car-detail-wrapper:hover {
@@ -171,6 +172,7 @@
     width: 100%;
     max-width: 100%;
     text-align: center;
+    position: static;
   }
 }
 
@@ -193,8 +195,8 @@
 
 .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
   position: absolute;
-  top: 19px;
-  right: 0;
+  top: 13px;
+  right: 8px;
   -webkit-object-fit: cover;
   -ms-object-fit: cover;
   -o-object-fit: cover;
@@ -276,11 +278,17 @@
   object-fit: cover;
 }
 
+.car-info-section .car-detail-wrapper .car-detail-block a.used h2 {
+  color: #50a600;
+}
+
 @media screen and (max-width: 991px) {
   .car-info-section .car-detail-wrapper .image-block {
     width: 100%;
     max-width: 100%;
     text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
   }
 }
 
