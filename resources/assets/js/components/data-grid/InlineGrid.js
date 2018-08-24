@@ -481,6 +481,7 @@ class InlineGrid extends React.Component {
         let rowToUpdate = rows[rowKey];
         let updated = {};
         updated.images = images;
+        updated.featured = images[0]; // Featured image
         updated.images_count = images.length;
 
         if(data.images === '')
