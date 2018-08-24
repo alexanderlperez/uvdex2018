@@ -9,7 +9,7 @@ class Slider extends Component{
 
     componentWillMount() {
 
-        let images = ['https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313']
+        let images = ['https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313, https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313, https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313'];
 
         this.setState({ images: images });
     }

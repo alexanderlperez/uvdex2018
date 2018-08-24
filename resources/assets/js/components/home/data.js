@@ -185,15 +185,17 @@ class CarData extends Component {
                                 </figure>
                             </Link>
                             {/* Mobile View */}
-                            <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
-                            <h5 className="d-none d-sm-block">Color#: {vehicle.exterior_color}</h5>
-                            <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
-                            {vehicle.show_price ? <h5 className="stroke-text">Their price: {vehicle.their_price}</h5> : ''}
-                            <h5><strong>Our Price: {vehicle.our_price}</strong></h5>
-                            <div className="button-block d-block d-sm-none">
-                                <button type="button" className="btn btn-primary">Gallery</button>
-                                <button type="button" className="btn btn-primary">Details</button>
-                            </div>
+                            <Link to={vehicle.id + '/detail'}>
+                                <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
+                                <h5 className="d-none d-sm-block">Color#: {vehicle.exterior_color}</h5>
+                                <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
+                                {vehicle.show_price ? <h5 className="stroke-text">Their price: {vehicle.their_price}</h5> : ''}
+                                <h5><strong>Our Price: {vehicle.our_price}</strong></h5>
+                                <div className="button-block d-block d-sm-none">
+                                    <button type="button" className="btn btn-primary">Gallery</button>
+                                    <button type="button" className="btn btn-primary">Details</button>
+                                </div>
+                            </Link>
                         </div>
                         <div className="dealer-notes  col-md-6 text-center d-none d-sm-block">
                             <h4>Dealer Notes</h4>
@@ -201,7 +203,7 @@ class CarData extends Component {
                                 <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
                                      onClick={(e) => this.toggleIcons(e)}/>
                             </Link>
-                            <p>{vehicle.description}</p>
+                            <Link to={vehicle.id + '/detail'}><p>{vehicle.description}</p></Link>
                         </div>
                     </div>
                 </div>
