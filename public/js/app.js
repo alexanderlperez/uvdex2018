@@ -60868,7 +60868,7 @@ var DetailBlock = function (_Component) {
                     { className: 'container detail-information-wrapper' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
-                        { className: 'row' },
+                        { className: 'row carinfo-block' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'col-12 col-md-7' },
@@ -60969,27 +60969,27 @@ var DetailBlock = function (_Component) {
                                     'Call (712) 469-3383'
                                 )
                             )
-                        ),
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'row dealer-notes' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
-                            { className: 'row dealer-notes' },
+                            { className: 'col-12' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                'div',
-                                { className: 'col-12' },
+                                'h4',
+                                null,
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'h4',
+                                    'strong',
                                     null,
-                                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                        'strong',
-                                        null,
-                                        'Dealer Notes'
-                                    )
-                                ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                    'p',
-                                    null,
-                                    this.state.vehicle.description
+                                    'Dealer Notes'
                                 )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                'p',
+                                null,
+                                this.state.vehicle.description
                             )
                         )
                     )

@@ -52,7 +52,7 @@ class DetailBlock extends Component{
                 <Filter min={this.state.min} max={this.state.max} />
 
                 <div className="container detail-information-wrapper">
-                    <div className="row">
+                    <div className="row carinfo-block">
                         <div className="col-12 col-md-7">
                             <Slider images={images} fullscreen={fullscreen} />
                         </div>
@@ -71,12 +71,13 @@ class DetailBlock extends Component{
                                 <a href="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</a>
                             </div>
                         </div>
-                        <div className="row dealer-notes">
+                        
+                    </div>
+                    <div className="row dealer-notes">
                             <div className="col-12">
                                 <h4><strong>Dealer Notes</strong></h4>
                                 <p>{this.state.vehicle.description}</p>
                             </div>
-                        </div>
                     </div>
                 </div>
 
