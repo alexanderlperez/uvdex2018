@@ -30,6 +30,9 @@
             color: $dark-blue;
             font-family: $lato-font;
             margin: 11px 0 2px 0;
+            &.used{
+                color: $medium-green;
+            }
         }
         h3 {
             font-size: 17px;
@@ -67,6 +70,10 @@
                 color: $black;
                 font-family: $lato-font;
                 margin-top: 14px;
+                margin: 30px 0 0 0;
+                @media screen and (min-width: $xlscreen-size){
+                    margin: 14px 0 0 0;
+                }
             }
             a {
                 &.fav-icon {
