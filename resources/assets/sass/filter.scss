@@ -28,6 +28,9 @@
         }
     }
     .range-filter-block {
+        @media screen and (max-width: ($mdscreen-size - 1)){
+            padding: 0 30px;
+        }
         h3 {
             font-size: 18px;
             line-height: 22px;
