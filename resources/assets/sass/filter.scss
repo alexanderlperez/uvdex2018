@@ -54,4 +54,13 @@
             }
         }
     }
+    .navbar-collapse{
+        .row{
+            flex-wrap: wrap;
+            @media screen and (min-width: $mdscreen-size){
+                flex-wrap: nowrap;
+            }
+        }
+        
+    }
 }
