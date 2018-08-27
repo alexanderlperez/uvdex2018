@@ -8,9 +8,7 @@
     .dealer-notes {
         margin-top: 0;
         margin-bottom: 20px;
-        padding-left: 15px;
-        padding-right: 15px;
-        width: calc(100% - 30px);
+       
         p {
             font-size: 16px;
             line-height: 24x;
@@ -61,6 +59,12 @@
                 line-height: 46px;
                 font-weight: 400;
             }
+        }
+    }
+    .carinfo-block{
+        flex-wrap: wrap;
+        @media screen and (min-width: $mdscreen-size){
+            flex-wrap: nowrap;
         }
     }
 }
