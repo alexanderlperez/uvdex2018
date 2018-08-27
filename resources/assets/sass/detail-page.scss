@@ -8,11 +8,9 @@
     .dealer-notes {
         margin-top: 20px;
         margin-bottom: 20px;
-        padding: 0 15px;
-        @media screen and (min-width: $mdscreen-size){
-            padding: 0;
-        }
-        
+        padding-left: 15px;
+        padding-right: 15px;
+        width: calc(100% - 30px);
         p {
             font-size: 16px;
             line-height: 24px;
@@ -22,8 +20,11 @@
             }
         }
         h4 {
+
             strong {
                 text-decoration: underline;
+                font-size: 22px;
+                line-height: 27px;
             }
         }
     }
@@ -43,8 +44,25 @@
             }
         }
         h5{
-            font-size: 17px;
-            line-break: 21px;
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 400;
+            margin: 6px 0 0 0;
+            
+        }
+        h3{
+            text-decoration: underline;
+            @media screen and (min-width: $mdscreen-size){
+                margin-top: 0;
+            }
+        }
+        h1{
+            &.price{
+                color: $dark-blue;
+                font-size: 42px;
+                line-height: 46px;
+                font-weight: 400;
+            }
         }
     }
 }

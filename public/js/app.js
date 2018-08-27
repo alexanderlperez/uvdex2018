@@ -58314,7 +58314,7 @@ var Footer = function (_Component) {
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'a',
-                                                { href: 'javascript:history.back()', replace: true },
+                                                { href: 'javascript:history.back()' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconsUrl, alt: 'Fav Icon', onClick: this.toggleIcon })
                                             )
                                         )
@@ -58687,7 +58687,7 @@ var CarData = function (_Component) {
                             { className: 'image-block col-md-3 d-none d-sm-block' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail' },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: true } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'figure',
                                     null,
@@ -58724,7 +58724,7 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail' },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: true } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'figure',
                                     { className: 'd-block d-sm-none' },
@@ -60856,6 +60856,9 @@ var DetailBlock = function (_Component) {
 
             var images = this.state.vehicle.images;
 
+            var fullscreen = false;
+            if (this.props.location.state !== undefined) fullscreen = true;
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
@@ -60869,7 +60872,7 @@ var DetailBlock = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'col-12 col-md-7' },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_GallerySlider_Slider__["a" /* default */], { images: images })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__components_GallerySlider_Slider__["a" /* default */], { images: images, fullscreen: fullscreen })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -61034,16 +61037,13 @@ var Slider = function (_Component) {
     }
 
     _createClass(Slider, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-
-            var images = ['https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313, https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313, https://cdn04.carsforsale.com/3/1004599/4316117/697682025.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697682642.jpg?dt=072920162313', 'https://cdn04.carsforsale.com/3/1004599/4316117/697681510.jpg?dt=072920162313'];
-
-            this.setState({ images: images });
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.setState({ images: nextProps.images });
         }
     }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate() {
 
             $(".royalSlider").royalSlider({
                 controlNavigation: 'thumbnails',
@@ -61063,11 +61063,11 @@ var Slider = function (_Component) {
 
                 fullscreen: {
                     enabled: true,
-                    nativeFS: true
+                    nativeFS: false
                 }
             });
 
-            $(".rsFullscreenIcn").click();
+            if (this.props.fullscreen === true) $(".rsFullscreenIcn").click();
         }
     }, {
         key: 'render',
@@ -61082,7 +61082,7 @@ var Slider = function (_Component) {
                         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.Fragment,
                             { key: i },
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'rsTmb', src: img, 'data-rstmb': img, alt: 'image description' })
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { className: 'rsTmb', src: img, 'data-rstmb': img })
                         );
                     })
                 );

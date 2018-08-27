@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDataGrid from 'react-data-grid';
-const { Toolbar, Editors, Filters: { MultiSelectFilter, SingleSelectFilter }, Data: { Selectors } } = require('react-data-grid-addons');
+const { Toolbar, Editors, Data: { Selectors } } = require('react-data-grid-addons');
 const { DropDownEditor } = Editors;
 import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
@@ -418,7 +418,6 @@ class InlineGrid extends React.Component {
                 },
             ];
         }
-
 
         this.state = { rows: [], refresh: false };
         this.getColumns = this.getColumns.bind(this);
