@@ -42,6 +42,10 @@ class DetailBlock extends Component{
     render() {
 
         const { images } = this.state.vehicle;
+        let fullscreen = false;
+        if(this.props.location.state !== undefined)
+            fullscreen = true;
+
         return(
 
             <div>
@@ -50,7 +54,7 @@ class DetailBlock extends Component{
                 <div className="container detail-information-wrapper">
                     <div className="row">
                         <div className="col-12 col-md-7">
-                            <Slider images={images} />
+                            <Slider images={images} fullscreen={fullscreen} />
                         </div>
                         <div className="col-12 col-md-5 car-price-detail">
                             <h3>{this.state.vehicle.title}</h3>
