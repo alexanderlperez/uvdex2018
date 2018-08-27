@@ -63,7 +63,7 @@ class Footer extends Component{
                                     {
                                         this.state.isDetail
                                         ? <span><li><a href="javascript:history.back()"><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
-                                            <li><a href="javascript:history.back()" replace ><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></a></li></span>
+                                            <li><a href="javascript:history.back()" ><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></a></li></span>
                                         : <span><li><a href={this.state.rostsiteUrl}><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
                                             <li><Link to="#" replace ><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></Link></li></span>
                                     }

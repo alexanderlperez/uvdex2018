@@ -163,7 +163,7 @@ class CarData extends Component {
                 <div key={vehicle.id} className="full-width-wrapper">
                     <div className="car-detail-wrapper clearfix">
                         <div className="image-block col-md-3 d-none d-sm-block">
-                            <Link to={vehicle.id + '/detail'}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true} }}>
                                 <figure>
                                     <img src={vehicle.featured} alt=""/>
                                 </figure>
@@ -179,7 +179,7 @@ class CarData extends Component {
                                      onClick={this.toggleIcons}/>
                             </Link>
                             {/* Mobile View */}
-                            <Link to={vehicle.id + '/detail'}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true}}}>
                                 <figure className="d-block d-sm-none">
                                     <img src={vehicle.featured} alt=""/>
                                 </figure>
