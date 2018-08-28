@@ -319,9 +319,8 @@ class InlineGrid extends React.Component {
                     key: 'featured',
                     name: 'Image',
                     width: 90,
-                    formatter: CustomImageFormatter,
-                    resizable: true,
-                    getRowMetaData: (row) => row
+                    formatter: (props) => (<img src={props.value} height={50} width={50}/>),
+                    resizable: true
                 },
                 {
                     key: 'stock_number',
