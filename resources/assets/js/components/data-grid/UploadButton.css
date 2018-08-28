@@ -77,15 +77,15 @@ input[type=file]::-webkit-file-upload-button {
     
 }
 .react-grid-Cell.blue{
-    background-color: #3c8dbca1  !important;
+    background-color: #b0def9a1  !important;
     color: #f5f5f5 !important;
 }
 .react-grid-Cell.green{
-    background-color: #057d059e !important;
+    background-color: #b4fdb49e !important;
     color: #f5f5f5 !important;
 }
 .react-grid-Cell.orange {
-    background-color: #ffa500ad  !important;
+    background-color: #ffe9ca !important;
     color: #f5f5f5 !important;
 }
 .react-grid-Cell.editing .react-grid-Cell__value{
