@@ -205,3 +205,18 @@ function getRole($value = 0, $prefix = false)
     }
     return $role;
 }
+
+/**
+ * Filter Null Values
+ * @param $data
+ * @return mixed
+ */
+function filterNullValues($data){
+
+    foreach($data as $key => $value) {
+
+        if(is_null($value))
+            $data[$key] = '';
+    }
+    return $data;
+}
