@@ -268,7 +268,7 @@ class InlineGrid extends React.Component {
                     key: 'code',
                     name: 'CODE',
                     editable: true,
-                    width: 70,
+                    width: 100,
                     resizable: true,
                     filterable: true,
                 },
@@ -497,7 +497,10 @@ class InlineGrid extends React.Component {
 
     formatPrice(price) {
 
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if(price === 0)
+            return '';
+        else
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     getColumns() {
@@ -516,8 +519,15 @@ class InlineGrid extends React.Component {
     handleGridRowsUpdated({ fromRow, toRow, updated }) {
         let rows = this.state.rows.slice();
 
-        if(updated.hasOwnProperty("price") || updated.hasOwnProperty("nada") || updated.hasOwnProperty("msrp"))
-            updated[Object.keys(updated)[0]] = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
+        if(updated.hasOwnProperty("price") || updated.hasOwnProperty("nada") || updated.hasOwnProperty("msrp")) {
+
+            let price = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
+
+            if(price === '')
+                updated[Object.keys(updated)[0]] = 0;
+            else
+                updated[Object.keys(updated)[0]] = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
+        }
 
         for (let i = fromRow; i <= toRow; i++) {
             let rowToUpdate = rows[i];
@@ -534,6 +544,12 @@ class InlineGrid extends React.Component {
                         console.log(error.response.statusText);
                     });
             } else {
+
+                if (action === 'new-vehicles')
+                    updated.type = 'N';
+                else if (action === 'used-vehicles')
+                    updated.type = 'U';
+
                 axios.post('/saveVehicle', {updated})
                     .then(
                         response => {
