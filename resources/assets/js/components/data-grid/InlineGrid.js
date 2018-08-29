@@ -11,6 +11,7 @@ import RowRenderer from './Row';
 import CustomImageFormatter from './CustomImageFormatter';
 
 const status = ['Available', 'Sold'];
+const types = ['CAR', 'SUV', 'TRUCK'];
 
 class InlineGrid extends React.Component {
     constructor(props, context) {
@@ -136,6 +137,15 @@ class InlineGrid extends React.Component {
                     name: 'PASSENGERS',
                     editable: true,
                     width: 105,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'body_type',
+                    name: 'TYPE',
+                    editable: true,
+                    editor: <DropDownEditor options={types}/>,
+                    width: 80,
                     resizable: true,
                     filterable: true,
                 },
@@ -293,6 +303,15 @@ class InlineGrid extends React.Component {
                     name: 'PASSENGERS',
                     editable: true,
                     width: 105,
+                    resizable: true,
+                    filterable: true,
+                },
+                {
+                    key: 'body_type',
+                    name: 'TYPE',
+                    editable: true,
+                    editor: <DropDownEditor options={types}/>,
+                    width: 80,
                     resizable: true,
                     filterable: true,
                 },
