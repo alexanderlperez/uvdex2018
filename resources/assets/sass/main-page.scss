@@ -62,6 +62,9 @@
                 font-weight: 600;
                 color: $black;
                 font-family: $lato-font;
+                @media screen and (max-width: ($xlscreen-size - 1)){
+                     margin-top: 28px;
+                }
             }
             p {
                 font-size: 16px;
@@ -70,7 +73,7 @@
                 color: $black;
                 font-family: $lato-font;
                 margin-top: 14px;
-                margin: 30px 0 0 0;
+                margin-bottom: 0;
                 @media screen and (min-width: $xlscreen-size){
                     margin: 14px 0 0 0;
                 }
