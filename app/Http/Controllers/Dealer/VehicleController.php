@@ -95,6 +95,7 @@ class VehicleController extends Controller
             else
                 $item->is_active = 'Sold';
 
+            $item->body_type = strtoupper($item->body_type);
             $item->key = $key+1;
             return $item;
         });
@@ -149,6 +150,9 @@ class VehicleController extends Controller
         $default['option_text'] = $default['description'] = $default['images'] = '';
         $data = array_merge($default, $data);
 
+        if(isset($data['body_type']))
+            $data['body_type'] = strtolower($data['body_type']);
+
         try {
 
             DB::beginTransaction();
@@ -189,6 +193,9 @@ class VehicleController extends Controller
     public function update(Request $request, $id)
     {
         $data = filterNullValues($request->get('updated'));
+
+        if(isset($data['body_type']))
+            $data['body_type'] = strtolower($data['body_type']);
 
         if(isset($data['is_active'])) {
 
