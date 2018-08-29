@@ -185,9 +185,16 @@
 
 @media screen and (min-width: 768px) {
   .car-info-section .car-detail-wrapper h3 {
+    font-size: 24px;
+    line-height: 29px;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .car-info-section .car-detail-wrapper h3 {
     font-size: 20px;
     line-height: 24px;
-    padding: 0;
   }
 }
 
@@ -344,7 +351,7 @@
   width: 100%;
   height: 100%;
   min-height: 214px;
-  max-height: 214px;
+  max-height: 300px;
   min-width: 100%;
   -webkit-object-fit: cover;
   -ms-object-fit: cover;
@@ -352,6 +359,12 @@
   -moz-object-fit: cover;
   object-fit: cover;
   border: 1px solid #CFCFCF;
+}
+
+@media screen and (min-width: 992px) {
+  .car-info-section .car-detail-wrapper .image-block a figure img {
+    max-height: 214px;
+  }
 }
 
 a.fav-icon i {
