@@ -23,7 +23,7 @@ class CellRenderer extends React.Component {
             rowColor = 'blue';
 
         if(this.props.column.key === 'stock_number')
-            return (<div style={{color:rowColor}}><Cell className={rowColor} {...this.props} /></div>);
+            return <Cell className={rowColor} {...this.props} />;
         else
             return <Cell {...this.props} />;
     }
