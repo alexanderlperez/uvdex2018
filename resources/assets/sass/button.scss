@@ -9,7 +9,7 @@
     border-radius: 0 !important;
     letter-spacing: 1px;
     font-family: $lato-font;
-    box-shadow: none !important;
+    
     @media screen and (min-width: $lgscreen-size) {
         min-width: 100px;
         
@@ -17,7 +17,8 @@
     &:hover {
         background-color: $dark-sky-blue !important;
     }
-    &.active {
+    &.active,
+    &:visited {
         border: 3px solid $black !important;
         background-color: $dark-sky-blue !important;
     }
