@@ -95,6 +95,7 @@ class VehicleController extends Controller
             else
                 $item->is_active = 'Sold';
 
+            $item->body_type = strtoupper($item->body_type);
             $item->key = $key+1;
             return $item;
         });
@@ -145,7 +146,12 @@ class VehicleController extends Controller
      */
     public function saveVehicle(Request $request)
     {
-        $data = $request->get('updated');
+        $data = filterNullValues($request->get('updated'));
+        $default['option_text'] = $default['description'] = $default['images'] = '';
+        $data = array_merge($default, $data);
+
+        if(isset($data['body_type']))
+            $data['body_type'] = strtolower($data['body_type']);
 
         try {
 
@@ -186,7 +192,10 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->get('updated');
+        $data = filterNullValues($request->get('updated'));
+
+        if(isset($data['body_type']))
+            $data['body_type'] = strtolower($data['body_type']);
 
         if(isset($data['is_active'])) {
 
@@ -489,23 +498,21 @@ class VehicleController extends Controller
             $data[$key]['price'] = (string)($vehicle['price']);
             $data[$key]['mileage'] = str_replace(',', '',$vehicle['mileage']);
 
-            $cylinders = substr($vehicle['cylinders'], -1);
+            /*$cylinders = substr($vehicle['cylinders'], -1);
 
             $data[$key]['cylinders'] = "0";
             if(!empty($cylinders))
-                $data[$key]['cylinders'] = $cylinders;
+                $data[$key]['cylinders'] = $cylinders;*/
         }
 
         if(!empty($data)) {
-
-            $rows = $headers + $data;
 
             $writer = WriterFactory::create(Type::CSV); // for CSV files
             $filename = 'inventory.txt';
             $path = storage_path('app/'.$filename);
             $writer->openToBrowser($path); // stream data directly to the browser
 
-            $writer->addRows($rows);
+            $writer->addRows($data);
             $writer->close();
         } else {
 
