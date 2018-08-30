@@ -40,7 +40,7 @@ class Filter extends Component{
         if(parseInt(e.target.value) === this.state.max)
             this.setState({allPrice: 'All Price'});
         else
-            this.setState({allPrice: '$' + e.target.value*1000});
+            this.setState({allPrice: '$' + e.target.value*1000+ '.00'});
 
         this.props.onFilter({'price': e.target.value});
     }

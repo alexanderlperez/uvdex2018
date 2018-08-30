@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name', 100)->nullable();
             $table->string('email')->unique()->length(100);
             $table->integer('role_id')->unsigned()->index();
+            $table->integer('parent_id')->default(0);
             $table->tinyInteger('status')->default(Config::get('constants.status.inactive'));
             $table->string('password');
             $table->rememberToken();
