@@ -68,3 +68,20 @@
         }
     }
 }
+
+.main-wrapper{
+    .container{
+        @media screen and (max-width: ($lgscreen-size - 1)){
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        .full-width-wrapper{
+            @media screen and (max-width: ($lgscreen-size - 1)){
+                padding: 0 15px;
+            }
+        }
+    }
+}
+.royalSlider.rsFullscreen{
+    min-height: 300px;
+}

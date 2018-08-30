@@ -57206,7 +57206,7 @@ var Filter = function (_Component) {
                             { className: 'row' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'col-sm-5 col-md-4 button-block type' },
+                                { className: 'col-sm-12 col-md-4 button-block type' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
                                     { type: 'button', className: 'btn btn-primary', 'data-title': 'type', 'data-name': 'New', onClick: this.clickFilter },
@@ -57220,7 +57220,7 @@ var Filter = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'col-sm-7 col-md-5 button-block body' },
+                                { className: 'col-sm-12 col-md-5 button-block body' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
                                     { type: 'button', className: 'btn btn-primary', 'data-title': 'body', 'data-name': 'car', onClick: this.clickFilter },
@@ -57239,7 +57239,7 @@ var Filter = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'col-md-3 range-filter-block' },
+                                { className: 'col-sm-12 col-md-3 range-filter-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h3',
                                     null,
