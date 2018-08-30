@@ -503,6 +503,19 @@ footer .back-button {
   }
 }
 
+@media screen and (max-width: 991px) {
+  .main-wrapper .container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .main-wrapper .container .full-width-wrapper {
+    padding: 0 15px;
+  }
+}
+
 /*================ Header css here =================*/
 
 .navbar-brand h1 {
