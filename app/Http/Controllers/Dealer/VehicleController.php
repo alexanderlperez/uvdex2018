@@ -56,14 +56,13 @@ class VehicleController extends Controller
     /**
      * Get Vehicle Data
      * @param $type
-     * @param $id
      * @return mixed
      * @throws \Exception
      */
-    public function getData($type, $id){
+    public function getData($type){
 
         if($type == 'S') // Sold vehicles
-            $vehicles = Vehicle::whereUserId($id)
+            $vehicles = Vehicle::whereUserId(getUserId())
                             ->whereIsActive(Config::get('constants.status.inactive'))
                             ->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])
                             ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
@@ -71,7 +70,7 @@ class VehicleController extends Controller
                             ->orderBy('model')
                             ->get();
         else
-            $vehicles = Vehicle::whereUserId($id)
+            $vehicles = Vehicle::whereUserId(getUserId())
                             ->whereIsActive(Config::get('constants.status.active'))
                             ->whereType($type)
                             ->exclude(['user_id', 'body_style', 'created_at', 'updated_at'])
@@ -156,7 +155,7 @@ class VehicleController extends Controller
         try {
 
             DB::beginTransaction();
-            $data['user_id'] = Auth::user()->id;
+            $data['user_id'] = getUserId();
 
             if(isset($data['is_active'])) {
 
@@ -304,7 +303,7 @@ class VehicleController extends Controller
                 if($key == 1) // Skipping header
                     continue;
 
-                $data[$key]['user_id'] = Auth::user()->id;
+                $data[$key]['user_id'] = getUserId();
                 $data[$key]['vin'] = $row[0];
                 $data[$key]['type'] = $row[1];
                 $data[$key]['stock_number'] = $row[2];
@@ -353,7 +352,7 @@ class VehicleController extends Controller
         $reader->close();
 
         if(!empty($data)) {
-            Vehicle::whereUserId(Auth::user()->id)->delete();
+            Vehicle::whereUserId(getUserId())->delete();
             Vehicle::insert($data);
         }
 
@@ -386,7 +385,7 @@ class VehicleController extends Controller
         if($type == 'U') {
             $headers[] = Config::get('constants.headers.used');
             $vehicles = Vehicle::select('stock_number', DB::raw("CONCAT('$', FORMAT(price, 0)) as price"), DB::raw("CONCAT('$', FORMAT(nada, 0)) as nada"), 'model_year', 'make', 'model', 'cpo', 'exterior_color', 'trim', 'mileage', 'engine_description', 'vin', 'code', 'description', 'previous_owner', 'images', 'passengers')
-                                ->whereUserId(Auth::user()->id)
+                                ->whereUserId(getUserId())
                                 ->whereIsActive(Config::get('constants.status.active'))
                                 ->whereType($type)
                                 ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
@@ -395,7 +394,7 @@ class VehicleController extends Controller
         }else if($type == 'N') {
             $headers[] = Config::get('constants.headers.new');
             $vehicles = Vehicle::select('stock_number', 'scheduled', 'sold', 'model_year', DB::raw("CONCAT('$', FORMAT(msrp, 0)) as msrp"), DB::raw("CONCAT('$', FORMAT(price, 0)) as price"), 'make', 'model', 'trim', 'exterior_color', 'vin', 'description', 'images', 'passengers')
-                                ->whereUserId(Auth::user()->id)
+                                ->whereUserId(getUserId())
                                 ->whereIsActive(Config::get('constants.status.active'))
                                 ->whereType($type)
                                 ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
@@ -449,7 +448,7 @@ class VehicleController extends Controller
                 $message['status'] = trans('message.image_success');
             } else {
 
-                $data['user_id'] = Auth::user()->id;
+                $data['user_id'] = getUserId();
                 $data['option_text'] = '';
                 $data['description'] = '';
                 $data['type'] = $request->get('type');
@@ -484,7 +483,7 @@ class VehicleController extends Controller
 
         $headers[] = Config::get('constants.headers.carforsale');
         $vehicles = Vehicle::select('type', 'vin', 'stock_number', 'make', 'model', 'model_year', 'trim', 'body_style', 'mileage', 'engine_description', 'cylinders', 'fuel_type', 'transmission', 'price', 'exterior_color', 'interior_color', 'option_text','description', 'images')
-            ->whereUserId(Auth::user()->id)
+            ->whereUserId(getUserId())
             ->whereIsActive(Config::get('constants.status.active')) // Unsold
             ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
             ->orderBy('model_year', 'desc')
