@@ -516,13 +516,17 @@ class InlineGrid extends React.Component {
 
     getColumns() {
         let clonedColumns = this._columns.slice();
-        clonedColumns[2].events = {
-            onClick: (ev, args) => {
-                const idx = args.idx;
-                const rowIdx = args.rowIdx;
-                this.grid.openCellEditor(rowIdx, idx);
-            }
-        };
+
+        for (let i = 0; i < clonedColumns.length; i++) {
+
+            clonedColumns[i].events = {
+                onClick: (ev, args) => {
+                    const idx = args.idx;
+                    const rowIdx = args.rowIdx;
+                    this.grid.openCellEditor(rowIdx, idx);
+                }
+            };
+        }
 
         return clonedColumns;
     };
