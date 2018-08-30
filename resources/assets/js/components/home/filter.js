@@ -61,16 +61,16 @@ class Filter extends Component{
                
                     <div id="navbar" className="navbar-collapse collapse ">
                         <div className="row">
-                            <div className="col-sm-5 col-md-4 button-block type">
+                            <div className="col-sm-12 col-md-4 button-block type">
                                 <button type="button" className="btn btn-primary" data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
                                 <button type="button" className="btn btn-primary" data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
                             </div>
-                            <div className="col-sm-7 col-md-5 button-block body">
+                            <div className="col-sm-12 col-md-5 button-block body">
                                 <button type="button" className="btn btn-primary" data-title="body" data-name="car" onClick={this.clickFilter}>CAR</button>
                                 <button type="button" className="btn btn-primary" data-title="body" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
                                 <button type="button" className="btn btn-primary" data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
                             </div>
-                            <div className="col-md-3 range-filter-block">
+                            <div className="col-sm-12 col-md-3 range-filter-block">
                                 <h3><strong>{this.state.allPrice}</strong></h3>
 
                                 <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  defaultValue={this.state.max} onChange={this.handleChange}/>

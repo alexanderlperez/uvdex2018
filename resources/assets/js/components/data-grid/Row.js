@@ -13,7 +13,10 @@ class CellRenderer extends React.Component {
     render() {
 
         let rowColor;
-        let body_type = this.props.rowData.body_type.toLowerCase();
+
+        let body_type = this.props.rowData.body_type;
+        if ( this.props.rowData.body_type !== undefined )
+            body_type = this.props.rowData.body_type.toLowerCase();
 
         if(body_type === 'car')
             rowColor = 'orange';
