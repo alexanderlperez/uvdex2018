@@ -27,6 +27,11 @@
     @media screen and (max-width: ($mdscreen-size - 1)) {
         border-top: 3px solid $black !important;
     }
+    .button-block{
+        @media screen and (max-width: ($mdscreen-size - 1)) {
+            text-align: center;
+        }
+    }
 }
 
 .filter-section {

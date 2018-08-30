@@ -524,6 +524,12 @@ footer .back-button {
   }
 }
 
+@media screen and (max-width: 767px) {
+  .navbar-collapse .button-block {
+    text-align: center;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .filter-section .container {
     width: 100%;

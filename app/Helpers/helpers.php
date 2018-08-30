@@ -220,3 +220,15 @@ function filterNullValues($data){
     }
     return $data;
 }
+
+/**
+ * Get User Id
+ * @return mixed
+ */
+function getUserId() {
+
+    if(\Illuminate\Support\Facades\Auth::user()->parent_id)
+        return \Illuminate\Support\Facades\Auth::user()->parent_id;
+    else
+        return \Illuminate\Support\Facades\Auth::user()->id;
+}

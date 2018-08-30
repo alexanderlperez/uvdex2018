@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactDataGrid from 'react-data-grid';
-const { Toolbar, Editors, Data: { Selectors } } = require('react-data-grid-addons');
-const { DropDownEditor } = Editors;
+const { Toolbar, Editors: {DropDownEditor}, Data: { Selectors } } = require('react-data-grid-addons');
 import update from 'immutability-helper';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -447,7 +446,7 @@ class InlineGrid extends React.Component {
 
         if (action === 'new-vehicles') {
 
-            axios.get('/getVehicles/N/'+user_id)
+            axios.get('/getData/N')
                 .then((response) => {
                     this.setState({
                         rows: [...response.data.vehicles]
@@ -458,7 +457,7 @@ class InlineGrid extends React.Component {
                 });
         } else if (action === 'used-vehicles') {
 
-            axios.get('/getVehicles/U/'+user_id)
+            axios.get('/getData/U')
                 .then((response) => {
                     this.setState({
                         rows: [...response.data.vehicles]
@@ -469,7 +468,7 @@ class InlineGrid extends React.Component {
                 });
         } else if (action === 'sold-vehicles') {
 
-            axios.get('/getVehicles/S/'+user_id)
+            axios.get('/getData/S')
                 .then((response) => {
                     this.setState({
                         rows: [...response.data.vehicles]
