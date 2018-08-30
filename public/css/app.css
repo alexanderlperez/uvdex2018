@@ -516,6 +516,10 @@ footer .back-button {
   }
 }
 
+.royalSlider.rsFullscreen {
+  min-height: 300px;
+}
+
 /*================ Header css here =================*/
 
 .navbar-brand h1 {
