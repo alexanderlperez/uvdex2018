@@ -257,6 +257,7 @@ class InlineGrid extends React.Component {
                     width: 80,
                     resizable: true,
                     filterable: true,
+                    formatter: (props) => (<span>{this.formatPrice(props.value)}</span>),
                 },
                 {
                     key: 'engine_description',
@@ -380,13 +381,6 @@ class InlineGrid extends React.Component {
                     key: 'trim',
                     name: 'PKG.',
                     width: 200,
-                    resizable: true,
-                    filterable: true,
-                },
-                {
-                    key: 'mileage',
-                    name: 'MILES',
-                    width: 80,
                     resizable: true,
                     filterable: true,
                 },
