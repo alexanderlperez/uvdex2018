@@ -1,5 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*============= Object fit mixins here ================*/
 
+/*===========================
+flex box css mixins here
+============================*/
+
+/*===========================
+flex box wrap css mixins here
+============================*/
+
 /*============ filter-section Css start here ===========*/
 
 .filter-section {
@@ -183,7 +191,7 @@
   padding: 0 12px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 576px) {
   .car-info-section .car-detail-wrapper h3 {
     font-size: 24px;
     line-height: 29px;
@@ -278,8 +286,19 @@
   margin-top: 18px;
 }
 
+@media screen and (max-width: 575px) {
+  .car-info-section .car-detail-wrapper .car-detail-block .button-block {
+    display: -webkit-box  !important;
+    display: -ms-flexbox  !important;
+    display: flex  !important;
+    -o-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+}
+
 .car-info-section .car-detail-wrapper .car-detail-block .button-block button {
-  padding: 11px 19px !important;
+  padding: 11px 11px !important;
   margin: 0 5px;
 }
 
@@ -514,10 +533,6 @@ footer .back-button {
   .main-wrapper .container .full-width-wrapper {
     padding: 0 15px;
   }
-}
-
-.royalSlider.rsFullscreen {
-  min-height: 300px;
 }
 
 /*================ Header css here =================*/
