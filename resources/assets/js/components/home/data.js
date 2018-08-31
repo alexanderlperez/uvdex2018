@@ -198,7 +198,7 @@ class CarData extends Component {
                             {/* Mobile View */}
                             <Link to={vehicle.id + '/detail'}>
                                 <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
-                                <h5 className="d-none d-sm-block">Color#: {vehicle.exterior_color}</h5>
+                                <h5 className="d-none d-sm-block">Color: {vehicle.exterior_color}</h5>
                                 <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
                                 <h2 className={"d-block d-sm-none "+ vehicle.type.toLowerCase()}>{vehicle.type}</h2>
                                 {vehicle.show_price ? <h5 className="stroke-text">Their price: {vehicle.their_price}</h5> : ''}

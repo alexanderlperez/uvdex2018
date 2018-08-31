@@ -58758,7 +58758,7 @@ var CarData = function (_Component) {
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h5',
                                     { className: 'd-none d-sm-block' },
-                                    'Color#: ',
+                                    'Color: ',
                                     vehicle.exterior_color
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
