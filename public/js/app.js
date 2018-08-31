@@ -58304,8 +58304,8 @@ var Footer = function (_Component) {
                                             'li',
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'a',
-                                                { href: 'javascript:history.back()' },
+                                                __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
+                                                { to: '/' },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_4__img_icons_back_button_png___default.a, alt: 'Back Button Icon' })
                                             )
                                         ),
@@ -58313,9 +58313,9 @@ var Footer = function (_Component) {
                                             'li',
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                                                'a',
-                                                { href: 'javascript:history.back()' },
-                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconsUrl, alt: 'Fav Icon', onClick: this.toggleIcon })
+                                                __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
+                                                { to: { pathname: '/', state: { show: true } } },
+                                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: this.state.iconsUrl, alt: 'Fav Icon' })
                                             )
                                         )
                                     ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -58518,6 +58518,7 @@ var CarData = function (_Component) {
         _this.state = {
             iconUrl: __WEBPACK_IMPORTED_MODULE_3__img_icons_favorite_off_png___default.a,
             favorites: [],
+            showFavorites: false,
             rows: [],
             allRows: [],
             type: '',
@@ -58550,6 +58551,8 @@ var CarData = function (_Component) {
                     min: response.data.min,
                     max: response.data.max
                 });
+
+                if (_this2.props.location.state !== undefined) _this2.showHideFavourite(true);
             });
         }
     }, {
@@ -58557,6 +58560,8 @@ var CarData = function (_Component) {
         value: function localStorageFavourites() {
 
             var localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+            if (localFavourites === null) localStorage.setItem('favourites', JSON.stringify([]));
 
             if (localFavourites !== null && localFavourites.length) this.setState({ favorites: localFavourites });
         }
@@ -58590,20 +58595,21 @@ var CarData = function (_Component) {
             // Set local storage
             var localFavourites = JSON.parse(localStorage.getItem('favourites'));
 
-            if (localFavourites !== null && localFavourites.length) {
+            if (!localFavourites.includes(item)) {
 
-                if (!localFavourites.includes(item)) {
+                localFavourites.push(item);
+                localStorage.setItem('favourites', JSON.stringify(localFavourites));
+            } else {
 
-                    localFavourites.push(item);
-                    localStorage.setItem('favourites', JSON.stringify(localFavourites));
-                } else {
-
-                    var favourites = localFavourites.filter(function (x) {
-                        return x === item === false;
-                    });
-                    localStorage.setItem('favourites', JSON.stringify(favourites));
-                }
+                var favourites = localFavourites.filter(function (x) {
+                    return x === item === false;
+                });
+                localStorage.setItem('favourites', JSON.stringify(favourites));
             }
+
+            if (this.state.showFavorites) this.setState({ rows: this.state.rows.filter(function (vehicle) {
+                    return vehicle.id === item === false;
+                }) });
         }
     }, {
         key: 'onFilter',
@@ -58660,7 +58666,7 @@ var CarData = function (_Component) {
             // Show or Hide favourites
             if (status) this.setState({ rows: this.state.rows.filter(function (vehicle) {
                     return _this4.state.favorites.includes(vehicle.id) === true;
-                }) });else this.setState({ rows: this.state.allRows });
+                }), showFavorites: true });else this.setState({ rows: this.state.allRows, showFavorites: false });
         }
     }, {
         key: 'renderVehicles',
