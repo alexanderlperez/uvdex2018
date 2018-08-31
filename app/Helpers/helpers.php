@@ -217,6 +217,9 @@ function filterNullValues($data){
 
         if(is_null($value))
             $data[$key] = '';
+
+        if( ($key == 'price' || $key == 'nada' || $key == 'msrp') && $value == '')
+            $data[$key] = 0;
     }
     return $data;
 }
