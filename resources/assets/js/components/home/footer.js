@@ -15,7 +15,6 @@ class Footer extends Component{
         this.state = {
             iconsUrl : FavIcon,
             mailTo: 'mailto:josh@rostmotor.com',
-            Subject: 'this is demo',
             copied: false,
             telTo: 'tel:7124693383',
             rostsiteUrl: 'http://rostmotor.com/',
@@ -32,6 +31,12 @@ class Footer extends Component{
 
         if(isDetail)
             this.setState({isDetail: true})
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        if(nextProps.show)
+            this.setState({fav: true, iconsUrl: FavWhiteIcon});
     }
 
     //Toggle footer fav icon function

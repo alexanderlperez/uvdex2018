@@ -44,8 +44,12 @@ class CarData extends Component {
                     max: response.data.max
                 });
 
-                if(this.props.location.state !== undefined)
+                if(this.props.location.state !== undefined) {
+
                     this.showHideFavourite(true);
+                    this.setState({ showFavorites: true });
+                }
+
             });
     }
 
@@ -220,7 +224,8 @@ class CarData extends Component {
     }
 
     render() {
-        const {min, max} = this.state;
+        const {min, max, showFavorites} = this.state;
+
         localStorage.setItem('min', min);
         localStorage.setItem('max', max);
         return (
@@ -233,7 +238,7 @@ class CarData extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer showHideFavourite={this.showHideFavourite}/>
+                <Footer showHideFavourite={this.showHideFavourite} show={showFavorites}/>
             </div>
         );
     }
