@@ -58231,7 +58231,6 @@ var Footer = function (_Component) {
         _this.state = {
             iconsUrl: __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_icon_png___default.a,
             mailTo: 'mailto:josh@rostmotor.com',
-            Subject: 'this is demo',
             copied: false,
             telTo: 'tel:7124693383',
             rostsiteUrl: 'http://rostmotor.com/',
@@ -58250,6 +58249,12 @@ var Footer = function (_Component) {
             var isDetail = window.location.hash.includes('detail');
 
             if (isDetail) this.setState({ isDetail: true });
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+
+            if (nextProps.show) this.setState({ fav: true, iconsUrl: __WEBPACK_IMPORTED_MODULE_7__img_icons_favorite_engaged_png___default.a });
         }
 
         //Toggle footer fav icon function
@@ -58552,7 +58557,11 @@ var CarData = function (_Component) {
                     max: response.data.max
                 });
 
-                if (_this2.props.location.state !== undefined) _this2.showHideFavourite(true);
+                if (_this2.props.location.state !== undefined) {
+
+                    _this2.showHideFavourite(true);
+                    _this2.setState({ showFavorites: true });
+                }
             });
         }
     }, {
@@ -58830,7 +58839,9 @@ var CarData = function (_Component) {
         value: function render() {
             var _state = this.state,
                 min = _state.min,
-                max = _state.max;
+                max = _state.max,
+                showFavorites = _state.showFavorites;
+
 
             localStorage.setItem('min', min);
             localStorage.setItem('max', max);
@@ -58851,7 +58862,7 @@ var CarData = function (_Component) {
                         )
                     )
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { showHideFavourite: this.showHideFavourite })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { showHideFavourite: this.showHideFavourite, show: showFavorites })
             );
         }
     }]);
