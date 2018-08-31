@@ -131,7 +131,7 @@ function getDashboardUrl()
                 $url = url('admin');
                 break;
             case \Config::get('constants.role.dealer'):
-                $url = url('dealer');
+                $url = url('used-vehicles');
                 break;
             default:
                 $url = url('login');
