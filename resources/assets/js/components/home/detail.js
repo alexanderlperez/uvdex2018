@@ -74,10 +74,11 @@ class DetailBlock extends Component{
                         
                     </div>
                     <div className="row dealer-notes">
-                            <div className="col-12">
-                                <h4><strong>Dealer Notes</strong></h4>
-                                <p>{this.state.vehicle.description}</p>
-                            </div>
+                        <div className="col-12">
+                            <h4><strong>Dealer Notes</strong></h4>
+                            <p>{this.state.vehicle.description}</p>
+                            <br/> <br/>
+                        </div>
                     </div>
                 </div>
 

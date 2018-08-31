@@ -60995,7 +60995,10 @@ var DetailBlock = function (_Component) {
                                 'p',
                                 null,
                                 this.state.vehicle.description
-                            )
+                            ),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                            ' ',
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
                         )
                     )
                 ),
