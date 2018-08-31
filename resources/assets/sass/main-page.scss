@@ -42,7 +42,7 @@
             font-family: $lato-font;
             margin: 0 0 20px 0;
             padding: 0 12px;
-            @media screen and (min-width: $mdscreen-size){
+            @media screen and (min-width: $smscreen-size){
                 font-size: 24px;
                 line-height: 29px;
                 padding: 0;
@@ -112,9 +112,14 @@
             }
             .button-block {
                 margin-top: 18px;
+                @media screen and (max-width: ($smscreen-size - 1)){
+                    @include flexbox();
+                    @include flex-wrap($flex-wrap: nowrap);
+                }
                 button {
-                    padding: 11px 19px !important;
+                    padding: 11px 11px !important;
                     margin: 0 5px;
+                    
                     @media screen and (min-width: $smscreen-size) {
                         padding: 15px 30px !important;
                     }
