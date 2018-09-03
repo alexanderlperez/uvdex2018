@@ -8,6 +8,10 @@ flex box css mixins here
 flex box wrap css mixins here
 ============================*/
 
+/*===========================
+justify content css mixins here
+============================*/
+
 /*============ filter-section Css start here ===========*/
 
 .filter-section {
@@ -294,6 +298,12 @@ flex box wrap css mixins here
     -o-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 
@@ -590,6 +600,17 @@ footer .back-button {
 .rsDefault .rsVideoFrameHolder,
 .rsDefault .rsThumbs {
   width: 100% !important;
+}
+
+@media screen and (max-width: 991px) {
+  .rsDefault,
+  .rsDefault .rsOverflow,
+  .rsDefault .rsSlide,
+  .rsDefault .rsVideoFrameHolder,
+  .rsDefault .rsThumbs {
+    max-width: 500px !important;
+    margin: 0 auto;
+  }
 }
 
 .royalSlider > * {
