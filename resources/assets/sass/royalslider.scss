@@ -9,7 +9,9 @@
     position: relative;
     direction: ltr;
 }
-
+.rsDefault, .rsDefault .rsOverflow, .rsDefault .rsSlide, .rsDefault .rsVideoFrameHolder, .rsDefault .rsThumbs{
+    width: 100% !important;
+}
 .royalSlider>* {
     float: left;
 }
