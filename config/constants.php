@@ -53,7 +53,6 @@ return [
             'Previous_Owner',
             'Images',
             'Passengers',
-            'Status',
         ],
         'new' => [
             'Stock_Number',
@@ -70,7 +69,6 @@ return [
             'Dealer_Notes',
             'Images',
             'Passengers',
-            'Status',
         ],
         'carforsale' => [
             'CarsForSaleDealerID',
