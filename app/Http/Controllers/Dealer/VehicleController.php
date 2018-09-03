@@ -403,7 +403,7 @@ class VehicleController extends Controller
 
         if(!empty($vehicles)) {
 
-            $rows = $headers + $vehicles;
+            $rows = array_merge($headers, $vehicles);
 
             $writer = WriterFactory::create(Type::XLSX); // for XLSX files
             $filename = 'inventory.xlsx';

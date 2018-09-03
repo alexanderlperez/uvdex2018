@@ -9,8 +9,13 @@
     position: relative;
     direction: ltr;
 }
-.rsDefault, .rsDefault .rsOverflow, .rsDefault .rsSlide, .rsDefault .rsVideoFrameHolder, .rsDefault .rsThumbs{
+.rsDefault, .rsDefault .rsOverflow, .rsDefault .rsSlide, 
+.rsDefault .rsVideoFrameHolder, .rsDefault .rsThumbs{
     width: 100% !important;
+    @media screen and (max-width: ($lgscreen-size - 1)){
+        max-width: 500px !important;
+        margin: 0 auto;
+    }
 }
 .royalSlider>* {
     float: left;

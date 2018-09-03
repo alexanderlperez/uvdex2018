@@ -115,6 +115,8 @@
                 @media screen and (max-width: ($smscreen-size - 1)){
                     @include flexbox();
                     @include flex-wrap($flex-wrap: nowrap);
+                    @include justfy-content($justify-content: center);
+
                 }
                 button {
                     padding: 11px 11px !important;
