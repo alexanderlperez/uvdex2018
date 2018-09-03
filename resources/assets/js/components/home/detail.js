@@ -65,7 +65,7 @@ class DetailBlock extends Component{
                             <h5><span>Stock#:</span> {this.state.vehicle.stock_number}</h5>
                             <h5><span>VIN#:</span> {this.state.vehicle.vin}</h5>
                             <h5><span>Color:</span> {this.state.vehicle.exterior_color}</h5>
-                            <h5><span>Passengers#:</span> {this.state.vehicle.passengers}</h5>
+                            <h5><span>Passengers:</span> {this.state.vehicle.passengers}</h5>
                             <h1 className="price">{this.state.vehicle.our_price}</h1>
                             <div className="button-block">
                                 <button className="visible btn btn-primary" data-key={this.state.vehicle.id} onClick={(e) => this.HideButton(e)}>Add To Favorites
