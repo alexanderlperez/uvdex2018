@@ -609,12 +609,25 @@ footer .back-button {
   .rsDefault .rsVideoFrameHolder,
   .rsDefault .rsThumbs {
     max-width: 500px !important;
-    margin: 0 auto;
   }
 }
 
-.royalSlider > * {
-  float: left;
+.rsDefault.rsFullscreen,
+.rsDefault.rsFullscreen .rsOverflow,
+.rsDefault.rsFullscreen .rsSlide,
+.rsDefault.rsFullscreen .rsVideoFrameHolder,
+.rsDefault.rsFullscreen .rsThumbs {
+  width: 100% !important;
+}
+
+@media screen and (max-width: 991px) {
+  .rsDefault.rsFullscreen,
+  .rsDefault.rsFullscreen .rsOverflow,
+  .rsDefault.rsFullscreen .rsSlide,
+  .rsDefault.rsFullscreen .rsVideoFrameHolder,
+  .rsDefault.rsFullscreen .rsThumbs {
+    max-width: 100% !important;
+  }
 }
 
 .rsWebkit3d .rsSlide {
