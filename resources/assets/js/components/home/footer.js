@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 
 //Footer icons import here 
 import PhoneIcon from '../../../img/icons/phone-icon.png';
-import MailIcon from '../../../img/icons/mail-icon.png';
 import BackbuttonIcon from '../../../img/icons/back-button.png';
 import FavIcon from '../../../img/icons/favorite-icon.png';
-import FavBlueIcon from '../../../img/icons/favorite_on.png';
 import FavWhiteIcon from '../../../img/icons/favorite_engaged.png';
 
 class Footer extends Component{
@@ -15,7 +13,6 @@ class Footer extends Component{
         this.state = {
             iconsUrl : FavIcon,
             mailTo: 'mailto:josh@rostmotor.com',
-            Subject: 'this is demo',
             copied: false,
             telTo: 'tel:7124693383',
             rostsiteUrl: 'http://rostmotor.com/',
@@ -32,6 +29,12 @@ class Footer extends Component{
 
         if(isDetail)
             this.setState({isDetail: true})
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        if(nextProps.show)
+            this.setState({fav: true, iconsUrl: FavWhiteIcon});
     }
 
     //Toggle footer fav icon function
@@ -62,8 +65,8 @@ class Footer extends Component{
                                     <li><a href={this.state.telTo}><img src={PhoneIcon} alt="Phone Call Icon"/></a></li>
                                     {
                                         this.state.isDetail
-                                        ? <span><li><a href="javascript:history.back()"><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
-                                            <li><a href="javascript:history.back()" ><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></a></li></span>
+                                        ? <span><li><Link to={ '/' }><img src={BackbuttonIcon} alt="Back Button Icon"/></Link></li>
+                                            <li><Link to={{ pathname: '/', state:{show: true}}}><img src={this.state.iconsUrl} alt="Fav Icon"/></Link></li></span>
                                         : <span><li><a href={this.state.rostsiteUrl}><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
                                             <li><Link to="#" replace ><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></Link></li></span>
                                     }

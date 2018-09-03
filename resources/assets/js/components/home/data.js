@@ -14,6 +14,7 @@ class CarData extends Component {
         this.state = {
             iconUrl: FavIconBlue,
             favorites: [],
+            showFavorites: false,
             rows: [],
             allRows: [],
             type: '',
@@ -42,12 +43,22 @@ class CarData extends Component {
                     min: response.data.min,
                     max: response.data.max
                 });
+
+                if(this.props.location.state !== undefined) {
+
+                    this.showHideFavourite(true);
+                    this.setState({ showFavorites: true });
+                }
+
             });
     }
 
     localStorageFavourites() {
 
         let localFavourites = JSON.parse(localStorage.getItem('favourites'));
+
+        if(localFavourites === null)
+            localStorage.setItem('favourites', JSON.stringify([]));
 
         if(localFavourites !== null && localFavourites.length)
             this.setState({favorites: localFavourites});
@@ -79,18 +90,18 @@ class CarData extends Component {
         // Set local storage
         let localFavourites = JSON.parse(localStorage.getItem('favourites'));
 
-        if(localFavourites !== null && localFavourites.length) {
+        if (!localFavourites.includes(item)) {
 
-            if (!localFavourites.includes(item)) {
+            localFavourites.push(item);
+            localStorage.setItem('favourites', JSON.stringify(localFavourites));
+        } else {
 
-                localFavourites.push(item);
-                localStorage.setItem('favourites', JSON.stringify(localFavourites));
-            } else {
-
-                let favourites = localFavourites.filter(x => x === item === false);
-                localStorage.setItem('favourites', JSON.stringify(favourites));
-            }
+            let favourites = localFavourites.filter(x => x === item === false);
+            localStorage.setItem('favourites', JSON.stringify(favourites));
         }
+
+        if(this.state.showFavorites)
+            this.setState({rows: this.state.rows.filter(vehicle => vehicle.id === item === false)});
     }
 
     onFilter(data) {
@@ -143,9 +154,9 @@ class CarData extends Component {
 
         // Show or Hide favourites
         if (status)
-            this.setState({rows: this.state.rows.filter(vehicle => this.state.favorites.includes(vehicle.id) === true)});
+            this.setState({rows: this.state.rows.filter(vehicle => this.state.favorites.includes(vehicle.id) === true), showFavorites: true});
         else
-            this.setState({rows: this.state.allRows});
+            this.setState({rows: this.state.allRows, showFavorites: false});
     }
 
     renderVehicles() {
@@ -187,7 +198,7 @@ class CarData extends Component {
                             {/* Mobile View */}
                             <Link to={vehicle.id + '/detail'}>
                                 <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
-                                <h5 className="d-none d-sm-block">Color#: {vehicle.exterior_color}</h5>
+                                <h5 className="d-none d-sm-block">Color: {vehicle.exterior_color}</h5>
                                 <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
                                 <h2 className={"d-block d-sm-none "+ vehicle.type.toLowerCase()}>{vehicle.type}</h2>
                                 {vehicle.show_price ? <h5 className="stroke-text">Their price: {vehicle.their_price}</h5> : ''}
@@ -213,7 +224,8 @@ class CarData extends Component {
     }
 
     render() {
-        const {min, max} = this.state;
+        const {min, max, showFavorites} = this.state;
+
         localStorage.setItem('min', min);
         localStorage.setItem('max', max);
         return (
@@ -226,7 +238,7 @@ class CarData extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer showHideFavourite={this.showHideFavourite}/>
+                <Footer showHideFavourite={this.showHideFavourite} show={showFavorites}/>
             </div>
         );
     }
