@@ -15,7 +15,9 @@ class DetailBlock extends Component{
         axios.get(`/getVehicles/${this.props.match.params.id}`)
             .then(response => {
                 this.setState({ vehicle : response.data.vehicle });
-            })
+            });
+
+        window.scrollTo(0, 0);
     }
 
     HideButton(e){

@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 
 //Footer icons import here 
 import PhoneIcon from '../../../img/icons/phone-icon.png';
-import MailIcon from '../../../img/icons/mail-icon.png';
 import BackbuttonIcon from '../../../img/icons/back-button.png';
 import FavIcon from '../../../img/icons/favorite-icon.png';
-import FavBlueIcon from '../../../img/icons/favorite_on.png';
 import FavWhiteIcon from '../../../img/icons/favorite_engaged.png';
 
 class Footer extends Component{
