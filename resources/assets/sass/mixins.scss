@@ -45,3 +45,14 @@ flex box wrap css mixins here
     flex-wrap: $flex-wrap;
 }
 
+/*===========================
+justify content css mixins here
+============================*/
+
+@mixin justfy-content($justify-content) {
+    -webkit-justify-content: $justify-content;
+    -moz-justify-content: $justify-content;
+    -ms-justify-content: $justify-content;
+    -o-justify-content: $justify-content;
+    justify-content: $justify-content;
+}
