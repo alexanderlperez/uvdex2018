@@ -37,13 +37,12 @@ class HomeController extends Controller
                                 ->orderBy('model_year', 'desc')
                                 ->get();
 
-        $vehicles->transform(function ($item){
+        $vehicles->transform(function ($item) use ($id) {
 
             $item->featured = NULL;
             if ( ! empty($item->images)) {
 
                 $item->featured = explode(',', $item->images)[0];
-                $item->images = explode(',', $item->images);
             }
 
             $their_price = 0;
@@ -74,6 +73,11 @@ class HomeController extends Controller
             $item->show_price = TRUE;
             if ( $their_price == 0 || ($their_price < $our_price) )
                 $item->show_price = FALSE;
+
+            if($id)
+                $item->images = explode(',', $item->images);
+            else
+                unset($item->images, $item->msrp, $item->nada, $item->price);
 
             return $item;
         });
