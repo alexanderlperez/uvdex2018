@@ -45,6 +45,7 @@ class HomeController extends Controller
                 $item->featured = explode(',', $item->images)[0];
             }
 
+            // Calculate price
             $their_price = 0;
             $our_price = 0;
 
@@ -85,6 +86,7 @@ class HomeController extends Controller
         if ($id)
             return response()->json(['vehicle' => $vehicles[0]]);
         else {
+            // Min/Max price from all vehicles
             $minPrice = $vehicles->min('price');
             if ($minPrice > 0)
                 $minPrice = floor($minPrice / 1000);

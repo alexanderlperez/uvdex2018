@@ -46,8 +46,7 @@ class CarData extends Component {
 
                 if(this.props.location.state !== undefined) {
 
-                    this.showHideFavourite(true);
-                    this.setState({ showFavorites: true });
+                    this.setState({ showFavorites: true }, () => {this.showHideFavourite(true);});
                 }
 
             });
@@ -131,6 +130,7 @@ class CarData extends Component {
             price: price,
         };
 
+        // Filter data
         let filtered = this.multiFilter(this.state.allRows, filters);
         this.setState({rows: filtered});
     }

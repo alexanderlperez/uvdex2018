@@ -144,6 +144,7 @@ class VehicleController extends Controller
      */
     public function saveVehicle(Request $request)
     {
+        // Filter values for null
         $data = filterNullValues($request->get('updated'));
         $default['option_text'] = $default['description'] = $default['images'] = '';
         $data = array_merge($default, $data);
@@ -190,6 +191,7 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Filter values for null
         $data = filterNullValues($request->get('updated'));
 
         if(isset($data['body_type']))
@@ -232,6 +234,9 @@ class VehicleController extends Controller
         $id = $request->get('id');
         $image = $request->get('image');
 
+        $message['type'] = 'Error';
+        $message['status'] = trans('message.image_fail');
+
         if (!empty($image)){
 
             try{
@@ -252,22 +257,16 @@ class VehicleController extends Controller
                 $message['type'] = 'Success';
                 $message['images'] = $data['images'];
                 $message['status'] = trans('message.delete_success', ['name' => $this->title]);
-                return response()->json(['message' => $message], $this->successStatus);
             } catch (\Exception $e) {
 
                 DB::rollBack();
 
                 $message['type'] = 'Error';
                 $message['status'] = $e->getMessage();
-                return response()->json(['message' => $message], $this->successStatus);
             }
-        } else {
-
-            $message['type'] = 'Error';
-            $message['status'] = trans('message.image_fail');
-            return response()->json(['message' => $message], $this->successStatus);
         }
 
+        return response()->json(['message' => $message], $this->successStatus);
     }
 
     /**
@@ -302,6 +301,7 @@ class VehicleController extends Controller
                 if($key == 1) // Skipping header
                     continue;
 
+                // Set import variables
                 $data[$key]['user_id'] = getUserId();
                 $data[$key]['vin'] = $row[0];
                 $data[$key]['type'] = $row[1];
