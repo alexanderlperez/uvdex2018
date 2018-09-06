@@ -185,7 +185,7 @@ class CarData extends Component {
                             <Link to={vehicle.id + '/detail'}>
                                 <h3>{vehicle.title}</h3>
                             </Link>
-                            <Link to={vehicle.id + '/detail'} className="fav-icon d-block d-sm-none">
+                            <Link to='#' className="fav-icon d-block d-sm-none">
                                 <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
                                      onClick={this.toggleIcons}/>
                             </Link>
