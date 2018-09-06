@@ -232,6 +232,9 @@ class VehicleController extends Controller
         $id = $request->get('id');
         $image = $request->get('image');
 
+        $message['type'] = 'Error';
+        $message['status'] = trans('message.image_fail');
+
         if (!empty($image)){
 
             try{
@@ -252,22 +255,16 @@ class VehicleController extends Controller
                 $message['type'] = 'Success';
                 $message['images'] = $data['images'];
                 $message['status'] = trans('message.delete_success', ['name' => $this->title]);
-                return response()->json(['message' => $message], $this->successStatus);
             } catch (\Exception $e) {
 
                 DB::rollBack();
 
                 $message['type'] = 'Error';
                 $message['status'] = $e->getMessage();
-                return response()->json(['message' => $message], $this->successStatus);
             }
-        } else {
-
-            $message['type'] = 'Error';
-            $message['status'] = trans('message.image_fail');
-            return response()->json(['message' => $message], $this->successStatus);
         }
 
+        return response()->json(['message' => $message], $this->successStatus);
     }
 
     /**
