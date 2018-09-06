@@ -77,7 +77,7 @@ class HomeController extends Controller
             if($id)
                 $item->images = explode(',', $item->images);
             else
-                unset($item->images, $item->msrp, $item->nada, $item->price);
+                unset($item->images, $item->msrp, $item->nada);
 
             return $item;
         });
