@@ -144,6 +144,7 @@ class VehicleController extends Controller
      */
     public function saveVehicle(Request $request)
     {
+        // Filter values for null
         $data = filterNullValues($request->get('updated'));
         $default['option_text'] = $default['description'] = $default['images'] = '';
         $data = array_merge($default, $data);
@@ -190,6 +191,7 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Filter values for null
         $data = filterNullValues($request->get('updated'));
 
         if(isset($data['body_type']))
@@ -299,6 +301,7 @@ class VehicleController extends Controller
                 if($key == 1) // Skipping header
                     continue;
 
+                // Set import variables
                 $data[$key]['user_id'] = getUserId();
                 $data[$key]['vin'] = $row[0];
                 $data[$key]['type'] = $row[1];
