@@ -8,6 +8,7 @@ class Filter extends Component{
             allPrice: 'All Prices',
             min: 0,
             max: 0,
+            filters: {type: "", body_type: "", price: ""},
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,7 +19,16 @@ class Filter extends Component{
         this.setState({
             min: nextProps.min,
             max: nextProps.max
-        })
+        });
+
+        if(nextProps.filters !== undefined) {
+
+            this.setState({ filters: nextProps.filters });
+
+            if(nextProps.filters.price !== "")
+                this.setState({allPrice: '$' + nextProps.filters.price+ '.00'});
+        }
+
     }
 
     clickFilter(e) {
@@ -46,6 +56,22 @@ class Filter extends Component{
     }
 
     render() {
+
+        // Set default values
+        let type_new,type_used,body_type_car,body_type_truck,body_type_suv = '';
+
+        if(this.state.filters.type === 'New')
+            type_new = 'active';
+        if(this.state.filters.type === 'Used')
+            type_used = 'active';
+
+        if(this.state.filters.body_type === 'car')
+            body_type_car = 'active';
+        if(this.state.filters.body_type === 'truck')
+            body_type_truck = 'active';
+        if(this.state.filters.body_type === 'suv')
+            body_type_suv = 'active';
+
         return (
             <div className="filter-section navbar-fixed-top">
                 <div className="container">
@@ -62,13 +88,13 @@ class Filter extends Component{
                     <div id="navbar" className="navbar-collapse collapse ">
                         <div className="row">
                             <div className="col-sm-12 col-md-4 button-block type">
-                                <button type="button" className="btn btn-primary" data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
-                                <button type="button" className="btn btn-primary" data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
+                                <button type="button" className={"btn btn-primary "+ type_new} data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
+                                <button type="button" className={"btn btn-primary "+ type_used} data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
                             </div>
                             <div className="col-sm-12 col-md-5 button-block body">
-                                <button type="button" className="btn btn-primary" data-title="body" data-name="car" onClick={this.clickFilter}>CAR</button>
-                                <button type="button" className="btn btn-primary" data-title="body" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
-                                <button type="button" className="btn btn-primary" data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
+                                <button type="button" className={"btn btn-primary "+ body_type_car} data-title="body" data-name="car" onClick={this.clickFilter}>CAR</button>
+                                <button type="button" className={"btn btn-primary "+ body_type_truck} data-title="body" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
+                                <button type="button" className={"btn btn-primary "+ body_type_suv} data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
                             </div>
                             <div className="col-sm-12 col-md-3 range-filter-block">
                                 <h3><strong>{this.state.allPrice}</strong></h3>

@@ -37,15 +37,15 @@ class HomeController extends Controller
                                 ->orderBy('model_year', 'desc')
                                 ->get();
 
-        $vehicles->transform(function ($item){
+        $vehicles->transform(function ($item) use ($id) {
 
             $item->featured = NULL;
             if ( ! empty($item->images)) {
 
                 $item->featured = explode(',', $item->images)[0];
-                $item->images = explode(',', $item->images);
             }
 
+            // Calculate price
             $their_price = 0;
             $our_price = 0;
 
@@ -75,12 +75,18 @@ class HomeController extends Controller
             if ( $their_price == 0 || ($their_price < $our_price) )
                 $item->show_price = FALSE;
 
+            if($id)
+                $item->images = explode(',', $item->images);
+            else
+                unset($item->images, $item->msrp, $item->nada);
+
             return $item;
         });
 
         if ($id)
             return response()->json(['vehicle' => $vehicles[0]]);
         else {
+            // Min/Max price from all vehicles
             $minPrice = $vehicles->min('price');
             if ($minPrice > 0)
                 $minPrice = floor($minPrice / 1000);

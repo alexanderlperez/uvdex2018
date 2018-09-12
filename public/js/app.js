@@ -57115,7 +57115,8 @@ var Filter = function (_Component) {
         _this.state = {
             allPrice: 'All Prices',
             min: 0,
-            max: 0
+            max: 0,
+            filters: { type: "", body_type: "", price: "" }
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
@@ -57130,6 +57131,13 @@ var Filter = function (_Component) {
                 min: nextProps.min,
                 max: nextProps.max
             });
+
+            if (nextProps.filters !== undefined) {
+
+                this.setState({ filters: nextProps.filters });
+
+                if (nextProps.filters.price !== "") this.setState({ allPrice: '$' + nextProps.filters.price + '.00' });
+            }
         }
     }, {
         key: 'clickFilter',
@@ -57155,6 +57163,21 @@ var Filter = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+
+            // Set default values
+            var type_new = void 0,
+                type_used = void 0,
+                body_type_car = void 0,
+                body_type_truck = void 0,
+                body_type_suv = '';
+
+            if (this.state.filters.type === 'New') type_new = 'active';
+            if (this.state.filters.type === 'Used') type_used = 'active';
+
+            if (this.state.filters.body_type === 'car') body_type_car = 'active';
+            if (this.state.filters.body_type === 'truck') body_type_truck = 'active';
+            if (this.state.filters.body_type === 'suv') body_type_suv = 'active';
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'filter-section navbar-fixed-top' },
@@ -57209,12 +57232,12 @@ var Filter = function (_Component) {
                                 { className: 'col-sm-12 col-md-4 button-block type' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'type', 'data-name': 'New', onClick: this.clickFilter },
+                                    { type: 'button', className: "btn btn-primary " + type_new, 'data-title': 'type', 'data-name': 'New', onClick: this.clickFilter },
                                     'New'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'type', 'data-name': 'Used', onClick: this.clickFilter },
+                                    { type: 'button', className: "btn btn-primary " + type_used, 'data-title': 'type', 'data-name': 'Used', onClick: this.clickFilter },
                                     'Used'
                                 )
                             ),
@@ -57223,17 +57246,17 @@ var Filter = function (_Component) {
                                 { className: 'col-sm-12 col-md-5 button-block body' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'body', 'data-name': 'car', onClick: this.clickFilter },
+                                    { type: 'button', className: "btn btn-primary " + body_type_car, 'data-title': 'body', 'data-name': 'car', onClick: this.clickFilter },
                                     'CAR'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'body', 'data-name': 'truck', onClick: this.clickFilter },
+                                    { type: 'button', className: "btn btn-primary " + body_type_truck, 'data-title': 'body', 'data-name': 'truck', onClick: this.clickFilter },
                                     'TRUCK'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: 'btn btn-primary', 'data-title': 'body', 'data-name': 'suv', onClick: this.clickFilter },
+                                    { type: 'button', className: "btn btn-primary " + body_type_suv, 'data-title': 'body', 'data-name': 'suv', onClick: this.clickFilter },
                                     'SUV'
                                 )
                             ),
@@ -58229,7 +58252,8 @@ var Footer = function (_Component) {
             telTo: 'tel:7124693383',
             rostsiteUrl: 'http://rostmotor.com/',
             isDetail: false,
-            fav: false
+            fav: false,
+            filters: { type: "", body_type: "", price: "" }
         };
 
         _this.toggleIcon = _this.toggleIcon.bind(_this);
@@ -58249,6 +58273,8 @@ var Footer = function (_Component) {
         value: function componentWillReceiveProps(nextProps) {
 
             if (nextProps.show) this.setState({ fav: true, iconsUrl: __WEBPACK_IMPORTED_MODULE_5__img_icons_favorite_engaged_png___default.a });
+
+            if (nextProps.filters !== undefined) this.setState({ filters: nextProps.filters });
         }
 
         //Toggle footer fav icon function
@@ -58304,7 +58330,7 @@ var Footer = function (_Component) {
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 __WEBPACK_IMPORTED_MODULE_1_react_router_dom__["b" /* Link */],
-                                                { to: '/' },
+                                                { to: { pathname: '/', state: { filters: this.state.filters } } },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_3__img_icons_back_button_png___default.a, alt: 'Back Button Icon' })
                                             )
                                         ),
@@ -58518,7 +58544,9 @@ var CarData = function (_Component) {
             body: '',
             price: '',
             min: '',
-            max: ''
+            max: '',
+            filters: '',
+            preSetFilters: { type: "", body_type: "", price: "" }
         };
 
         _this.renderVehicles = _this.renderVehicles.bind(_this);
@@ -58547,8 +58575,16 @@ var CarData = function (_Component) {
 
                 if (_this2.props.location.state !== undefined) {
 
-                    _this2.showHideFavourite(true);
-                    _this2.setState({ showFavorites: true });
+                    // Set previous filters
+                    if (_this2.props.location.state.filters !== undefined) {
+
+                        var filtered = _this2.multiFilter(_this2.state.allRows, _this2.props.location.state.filters);
+                        _this2.setState({ rows: filtered, preSetFilters: _this2.props.location.state.filters });
+                    }
+
+                    if (_this2.props.location.state.show !== undefined) _this2.setState({ showFavorites: true }, function () {
+                        _this2.showHideFavourite(true);
+                    });
                 }
             });
         }
@@ -58637,8 +58673,9 @@ var CarData = function (_Component) {
                 price: price
             };
 
+            // Filter data
             var filtered = this.multiFilter(this.state.allRows, filters);
-            this.setState({ rows: filtered });
+            this.setState({ rows: filtered, filters: filters });
         }
     }, {
         key: 'multiFilter',
@@ -58690,7 +58727,7 @@ var CarData = function (_Component) {
                             { className: 'image-block col-md-3 d-none d-sm-block' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: true } } },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: true, filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'figure',
                                     null,
@@ -58703,7 +58740,7 @@ var CarData = function (_Component) {
                             { className: 'car-detail-block  col-md-3 text-center' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail', className: "d-none d-sm-block " + vehicle.type.toLowerCase() },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } }, className: "d-none d-sm-block " + vehicle.type.toLowerCase() },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h2',
                                     null,
@@ -58712,7 +58749,7 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail' },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h3',
                                     null,
@@ -58721,13 +58758,13 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail', className: 'fav-icon d-block d-sm-none' },
+                                { to: '#', className: 'fav-icon d-block d-sm-none' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: imgSrc, alt: 'Fav Icon', 'data-icon': icon, 'data-key': vehicle.id,
                                     onClick: _this5.toggleIcons })
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: true } } },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: true, filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'figure',
                                     { className: 'd-block d-sm-none' },
@@ -58736,7 +58773,7 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail' },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h5',
                                     { className: 'd-none d-sm-block' },
@@ -58810,7 +58847,7 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: vehicle.id + '/detail' },
+                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'p',
                                     null,
@@ -58828,7 +58865,8 @@ var CarData = function (_Component) {
             var _state = this.state,
                 min = _state.min,
                 max = _state.max,
-                showFavorites = _state.showFavorites;
+                showFavorites = _state.showFavorites,
+                preSetFilters = _state.preSetFilters;
 
 
             localStorage.setItem('min', min);
@@ -58836,7 +58874,7 @@ var CarData = function (_Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { onFilter: this.onFilter, min: min, max: max }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { onFilter: this.onFilter, min: min, max: max, filters: preSetFilters }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'car-info-section' },
@@ -60823,7 +60861,12 @@ var DetailBlock = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (DetailBlock.__proto__ || Object.getPrototypeOf(DetailBlock)).call(this, props));
 
-        _this.state = { vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
+        _this.state = {
+            vehicle: [],
+            min: localStorage.getItem('min'),
+            max: localStorage.getItem('max'),
+            preSetFilters: { type: "", body_type: "", price: "" }
+        };
         return _this;
     }
 
@@ -60834,6 +60877,12 @@ var DetailBlock = function (_Component) {
 
             axios.get('/getVehicles/' + this.props.match.params.id).then(function (response) {
                 _this2.setState({ vehicle: response.data.vehicle });
+
+                if (_this2.props.location.state !== undefined) {
+
+                    // Set previous filters
+                    if (_this2.props.location.state.filters !== undefined) _this2.setState({ preSetFilters: _this2.props.location.state.filters });
+                }
             });
 
             window.scrollTo(0, 0);
@@ -60868,13 +60917,17 @@ var DetailBlock = function (_Component) {
 
             var images = this.state.vehicle.images;
 
+            var vehicle = this.state.vehicle;
             var fullscreen = false;
-            if (this.props.location.state !== undefined) fullscreen = true;
+            if (this.props.location.state !== undefined) fullscreen = this.props.location.state.fullscreen;
+
+            var preSetFilters = this.state.preSetFilters;
+
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { min: this.state.min, max: this.state.max }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { min: this.state.min, max: this.state.max, filters: preSetFilters }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'container detail-information-wrapper' },
@@ -60892,7 +60945,7 @@ var DetailBlock = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h3',
                                 null,
-                                this.state.vehicle.title
+                                vehicle.title
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60903,7 +60956,7 @@ var DetailBlock = function (_Component) {
                                     'Condition:'
                                 ),
                                 ' ',
-                                this.state.vehicle.type
+                                vehicle.type
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60914,7 +60967,7 @@ var DetailBlock = function (_Component) {
                                     'Mileage:'
                                 ),
                                 ' ',
-                                this.state.vehicle.mileage
+                                vehicle.mileage
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60925,7 +60978,7 @@ var DetailBlock = function (_Component) {
                                     'Stock#:'
                                 ),
                                 ' ',
-                                this.state.vehicle.stock_number
+                                vehicle.stock_number
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60936,7 +60989,7 @@ var DetailBlock = function (_Component) {
                                     'VIN#:'
                                 ),
                                 ' ',
-                                this.state.vehicle.vin
+                                vehicle.vin
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60947,7 +61000,7 @@ var DetailBlock = function (_Component) {
                                     'Color:'
                                 ),
                                 ' ',
-                                this.state.vehicle.exterior_color
+                                vehicle.exterior_color
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h5',
@@ -60958,19 +61011,19 @@ var DetailBlock = function (_Component) {
                                     'Passengers:'
                                 ),
                                 ' ',
-                                this.state.vehicle.passengers
+                                vehicle.passengers
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h1',
                                 { className: 'price' },
-                                this.state.vehicle.our_price
+                                vehicle.our_price
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
                                 { className: 'button-block' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { className: 'visible btn btn-primary', 'data-key': this.state.vehicle.id, onClick: function onClick(e) {
+                                    { className: 'visible btn btn-primary', 'data-key': vehicle.id, onClick: function onClick(e) {
                                             return _this3.HideButton(e);
                                         } },
                                     'Add To Favorites'
@@ -61001,7 +61054,7 @@ var DetailBlock = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'p',
                                 null,
-                                this.state.vehicle.description
+                                vehicle.description
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
                             ' ',
@@ -61009,7 +61062,7 @@ var DetailBlock = function (_Component) {
                         )
                     )
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], null)
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { filters: this.props.location.state.filters })
             );
         }
     }]);
