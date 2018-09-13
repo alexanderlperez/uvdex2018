@@ -1,24 +1,83 @@
 /*================== Detail Page CSS here ==========================*/
 
 .detail-information-wrapper {
+    @media screen and (min-width: $mdscreen-size){
+        margin-top: 50px;
+    }
+    
     .dealer-notes {
-        margin-top: 20px;
+        margin-top: 0;
         margin-bottom: 20px;
+       
         p {
-            font-size: 18px;
-            line-height: 24px;
+            font-size: 16px;
+            line-height: 24x;
+           
         }
         h4 {
+
             strong {
                 text-decoration: underline;
+                font-size: 22px;
+                line-height: 27px;
             }
         }
     }
     .car-price-detail {
-        .btn {
-            &.btn-primary {
-                padding: 17px !important;
-                min-width: 230px;
+        
+        .button-block{
+            position: relative;
+            .btn {
+                &.btn-primary {
+                    padding: 17px !important;
+                    min-width: 230px;
+                    &.visible{
+                        position: absolute;
+                        
+                    }
+                }
+            }
+        }
+        h5{
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 400;
+            margin: 2px 0 0 0;
+            
+        }
+        h3{
+            text-decoration: underline;
+            font-weight: 700;
+            @media screen and (min-width: $mdscreen-size){
+                margin-top: 0;
+            }
+        }
+        h1{
+            &.price{
+                color: $dark-blue;
+                font-size: 42px;
+                line-height: 46px;
+                font-weight: 400;
+            }
+        }
+    }
+    .carinfo-block{
+        flex-wrap: wrap;
+        @media screen and (min-width: $mdscreen-size){
+            flex-wrap: nowrap;
+        }
+    }
+}
+
+.main-wrapper{
+    .container{
+        @media screen and (max-width: ($lgscreen-size - 1)){
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        .full-width-wrapper{
+            @media screen and (max-width: ($lgscreen-size - 1)){
+                padding: 0 15px;
             }
         }
     }

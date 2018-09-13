@@ -7,3 +7,52 @@
     -moz-object-fit: $property;
     object-fit: $property;
 }
+@mixin box-shadow ($string) {
+    -webkit-box-shadow: $string;
+    -moz-box-shadow: $string;
+    -ms-box-shadow: $string;
+    -o-box-shadow: $string;
+    box-shadow: $string;
+}
+@mixin transitions($time-delay) {
+    -webkit-transition: $time-delay ease-in-out;
+    -moz-transition: $time-delay ease-in-out;
+    -ms-transition: $time-delay ease-in-out;
+    -o-transition: $time-delay ease-in-out;
+    transition: $time-delay ease-in-out;
+  }
+/*===========================
+flex box css mixins here
+============================*/
+
+@mixin flexbox() {
+    display: -webkit-box  !important;
+    display: -moz-box  !important;
+    display: -ms-flexbox  !important;
+    display: -webkit-flex  !important;
+    display: flex  !important;
+}
+
+/*===========================
+flex box wrap css mixins here
+============================*/
+
+@mixin flex-wrap($flex-wrap) {
+    -webkit-flex-wrap: $flex-wrap;
+    -moz-flex-wrap: $flex-wrap;
+    -o-flex-wrap: $flex-wrap;
+    -ms-flex-wrap: $flex-wrap;
+    flex-wrap: $flex-wrap;
+}
+
+/*===========================
+justify content css mixins here
+============================*/
+
+@mixin justfy-content($justify-content) {
+    -webkit-justify-content: $justify-content;
+    -moz-justify-content: $justify-content;
+    -ms-justify-content: $justify-content;
+    -o-justify-content: $justify-content;
+    justify-content: $justify-content;
+}

@@ -2,7 +2,7 @@
 
 .filter-section {
     background-color: $dark-blue;
-    padding: 11px 0;
+    padding: 11px 0 0 0;
     min-height: 77px;
     border-width: 3px;
     @media screen and (min-width: $mdscreen-size) {
@@ -22,12 +22,18 @@
             @media screen and (min-width: $xlscreen-size) {
                 margin-right: 24px;
             }
+            &.active{
+                border-color: $black;
+            }
         }
     }
     .range-filter-block {
+        @media screen and (max-width: ($xlscreen-size - 1)){
+            padding: 0 25px;
+        }
         h3 {
-            font-size: 16px;
-            line-height: 20px;
+            font-size: 18px;
+            line-height: 22px;
             color: $white;
             text-align: center;
             @media screen and (min-width: $mdscreen-size) {
@@ -41,10 +47,23 @@
             color: $white;
             &.low-price {
                 float: left;
+                font-size: 20px;
+                line-height: 24px;
             }
             &.high-price {
                 float: right;
+                font-size: 20px;
+                line-height: 24px;
             }
         }
+    }
+    .navbar-collapse{
+        .row{
+            flex-wrap: wrap;
+            @media screen and (min-width: $mdscreen-size){
+                flex-wrap: nowrap;
+            }
+        }
+        
     }
 }

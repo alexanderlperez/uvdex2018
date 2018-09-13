@@ -1,0 +1,171 @@
+input[type=file] {
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+    overflow: hidden;
+}
+
+input[type=file]:before {
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    line-height: 32px;
+    content: 'Choose File';
+    display: inline-block;
+    background: #0080A4;
+    border: 1px solid #0080A4;
+    padding: 2px 10px;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+.file-upload{
+    width: 100px;
+    border-radius: 0px;
+    height: 32px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.react-grid-image{
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+.react-grid-Container .react-grid-Toolbar{
+    height: 62px;
+}
+.react-grid-Container .react-grid-Toolbar .tools{
+    float: none;
+    width: 100%;
+    clear: both;
+    
+}
+.react-grid-Container .react-grid-Toolbar .tools button{
+    background-color: #3c8dbc;
+    border-color: #3c8dbc;
+    color: #ffffff;
+    padding: 10px 25px;
+    font-size: 16px;
+    line-height: 22px;
+    border-radius: 0;
+}
+.react-grid-Container .react-grid-Toolbar .tools > button:first-child{
+    float: left;
+}
+.react-grid-Container .react-grid-Toolbar .tools > button:last-child{
+    float: right;
+}
+.react-grid-Cell:not(.editing) .react-grid-Cell__value{
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 600;
+    color: #000000;
+}
+.react-grid-HeaderCell{
+    background-color: #88BC72 !important;
+}
+.react-grid-HeaderCell .widget-HeaderCell__value{
+    margin: 16px auto;
+    height: 100%;
+    font-size: 16px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #000000;
+    
+}
+.react-grid-Cell.blue{
+    background-color: #b0def9a1  !important;
+    color: #f5f5f5 !important;
+}
+.react-grid-Cell.green{
+    background-color: #b4fdb49e !important;
+    color: #f5f5f5 !important;
+}
+.react-grid-Cell.orange {
+    background-color: #ffe9ca !important;
+    color: #f5f5f5 !important;
+}
+.react-grid-Cell.editing .react-grid-Cell__value{
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: 600;
+}
+
+.react-grid-Cell__value img{
+    -webkit-object-fit: cover;
+    -moz-object-fit: cover;
+    -ms-object-fit: cover;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.react-grid-Cell:focus{
+    outline: 2px solid #3c8dbc;
+    outline-offset: -2px;
+}
+/*=========== Image modal layout css here ====================*/
+.image-modalbox .modal-header .modal-title{
+    font-size: 24px;
+    line-height: 26px;
+    font-weight: 600;
+    color: #ffffff;
+}
+.image-modalbox .modal-header button.close{
+    opacity: 1;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    width: 35px;
+    height: 36px;
+    background-color: #FF9B00 !important;
+    color: #ffffff;
+    margin-top: -24px;
+    margin-right: -21px;
+}
+.image-modalbox .modal-header button.close:hover{
+    opacity: 1;
+}
+.image-modalbox .modal-body input[type="file"]{
+    float: right;
+    margin-bottom: 17px;
+}
+.image-modalbox .container{
+    width: auto;
+}
+.image-modalbox .thumb span.glyphicon-remove{
+    top: -8px;
+    right: 9px;
+    background-color: #FF9B00;
+    color: #fff;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    display: block;
+    padding-top: 3px;
+    position: absolute;
+}
+.image-modalbox .thumb .thumbnail img{
+    height: 63px;
+    width: 100%;
+    -webkit-object-fit: cover;
+    -moz-object-fit: cover;
+    -ms-object-fit: cover;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+.image-modalbox .modal-header{
+    background-color: #7DB467;
+    text-align: center;
+}

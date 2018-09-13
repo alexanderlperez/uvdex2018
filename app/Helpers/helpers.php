@@ -131,7 +131,7 @@ function getDashboardUrl()
                 $url = url('admin');
                 break;
             case \Config::get('constants.role.dealer'):
-                $url = url('dealer');
+                $url = url('used-vehicles');
                 break;
             default:
                 $url = url('login');
@@ -204,4 +204,47 @@ function getRole($value = 0, $prefix = false)
         }
     }
     return $role;
+}
+
+/**
+ * Filter Null Values
+ * @param $data
+ * @return mixed
+ */
+function filterNullValues($data){
+
+    foreach($data as $key => $value) {
+
+        if(is_null($value))
+            $data[$key] = '';
+
+        if( ($key == 'price' || $key == 'nada' || $key == 'msrp') && $value == '')
+            $data[$key] = 0;
+    }
+    return $data;
+}
+
+/**
+ * Get User Id
+ * @return mixed
+ */
+function getUserId() {
+
+    if(\Illuminate\Support\Facades\Auth::user()->parent_id)
+        return \Illuminate\Support\Facades\Auth::user()->parent_id;
+    else
+        return \Illuminate\Support\Facades\Auth::user()->id;
+}
+
+/**
+ * check IE Browser
+ * @return bool
+ */
+function browserIE() {
+
+    $response = false;
+    if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)
+        $response = true;
+
+    return $response;
 }

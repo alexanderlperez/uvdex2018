@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'collapse_sidebar' => false,
+    'collapse_sidebar' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -120,10 +120,19 @@ return [
             'icon' => 'car',
             'submenu' => [
                 [
-                    'text'   => 'Vehicles',
-                    'url'    => 'vehicles',
+                    'text'   => 'New Vehicles',
+                    'url'    => 'new-vehicles',
                     'icon'   => 'car',
-                    'active' => ['vehicles'],
+                ],
+                [
+                    'text'   => 'Used Vehicles',
+                    'url'    => 'used-vehicles',
+                    'icon'   => 'car',
+                ],
+                [
+                    'text'   => 'Inactive/Sold Vehicles',
+                    'url'    => 'sold-vehicles',
+                    'icon'   => 'car',
                 ],
                 [
                     'text'   => 'Import Vehicles',
@@ -178,8 +187,8 @@ return [
     */
 
     'plugins' => [
-        'datatables' => true,
-        'select2'    => true,
-        'chartjs'    => true,
+        'datatables' => false,
+        'select2'    => false,
+        'chartjs'    => false,
     ],
 ];

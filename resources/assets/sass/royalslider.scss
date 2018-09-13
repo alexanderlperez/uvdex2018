@@ -9,9 +9,21 @@
     position: relative;
     direction: ltr;
 }
-
-.royalSlider>* {
-    float: left;
+.rsDefault, .rsDefault .rsOverflow, .rsDefault .rsSlide, 
+.rsDefault .rsVideoFrameHolder, .rsDefault .rsThumbs{
+    width: 100% !important;
+    @media screen and (max-width: ($lgscreen-size - 1)){
+        max-width: 500px !important;
+        
+    }
+}
+.rsDefault.rsFullscreen, .rsDefault.rsFullscreen .rsOverflow, .rsDefault.rsFullscreen .rsSlide, 
+.rsDefault.rsFullscreen .rsVideoFrameHolder, .rsDefault.rsFullscreen .rsThumbs{
+    width: 100% !important;
+    @media screen and (max-width: ($lgscreen-size - 1)){
+        max-width: 100% !important;
+        
+    }
 }
 
 .rsWebkit3d .rsSlide {
@@ -662,7 +674,7 @@ img.rsImg {
     box-shadow: 0 1px 9px rgba(102, 102, 102, 0.65) inset;
     background: #ACACAC;
     background-image: -webkit-linear-gradient(top, #ACACAC, #BBB);
-    background-image: -moz-llinear-gradient(top, #ACACAC, #BBB);
+    background-image: -moz-linear-gradient(top, #ACACAC, #BBB);
     background-image: linear-gradient(to bottom, #ACACAC, #BBB);
 }
 

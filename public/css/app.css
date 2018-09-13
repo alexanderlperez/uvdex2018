@@ -1,10 +1,22 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);/*============= Object fit mixins here ================*/
 
+/*===========================
+flex box css mixins here
+============================*/
+
+/*===========================
+flex box wrap css mixins here
+============================*/
+
+/*===========================
+justify content css mixins here
+============================*/
+
 /*============ filter-section Css start here ===========*/
 
 .filter-section {
   background-color: #0051A6;
-  padding: 11px 0;
+  padding: 11px 0 0 0;
   min-height: 77px;
   border-width: 3px;
 }
@@ -42,9 +54,19 @@
   }
 }
 
+.filter-section .button-block button.active {
+  border-color: #000000;
+}
+
+@media screen and (max-width: 1199px) {
+  .filter-section .range-filter-block {
+    padding: 0 25px;
+  }
+}
+
 .filter-section .range-filter-block h3 {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 18px;
+  line-height: 22px;
   color: #ffffff;
   text-align: center;
 }
@@ -65,31 +87,44 @@
 
 .filter-section .range-filter-block h4.low-price {
   float: left;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .filter-section .range-filter-block h4.high-price {
   float: right;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.filter-section .navbar-collapse .row {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+@media screen and (min-width: 768px) {
+  .filter-section .navbar-collapse .row {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
 }
 
 .btn-primary {
-  border: 2px solid #ffffff !important;
+  border: 3px solid #ffffff !important;
   background-color: #008cba !important;
   font-size: 17px !important;
   line-height: 21px !important;
   font-weight: 400 !important;
   min-width: 87px;
-  padding: 8px 12px !important;
+  padding: 5px 12px !important;
   border-radius: 0 !important;
   letter-spacing: 1px;
   font-family: "Lato", sans-serif;
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
 }
 
 @media screen and (min-width: 992px) {
   .btn-primary {
     min-width: 100px;
-    padding: 10px 12px !important;
   }
 }
 
@@ -97,15 +132,16 @@
   background-color: #007095 !important;
 }
 
-.btn-primary.active {
-  border: 2px solid #000000 !important;
+.btn-primary.active,
+.btn-primary:visited {
+  border: 3px solid #000000 !important;
   background-color: #007095 !important;
 }
 
 /*=========== main page css here ===========*/
 
 .car-info-section {
-  margin: 25px 0;
+  margin: 25px 0 50px 0;
   min-height: 700px;
   padding: 0 15px;
 }
@@ -127,8 +163,9 @@
 .car-info-section .car-detail-wrapper {
   width: 100%;
   border: 2px solid #CFCFCF;
-  padding: 15px;
+  padding: 11px 0 15px 0;
   cursor: pointer;
+  position: relative;
 }
 
 .car-info-section .car-detail-wrapper:hover {
@@ -141,15 +178,42 @@
   font-weight: 600;
   color: #0051A6;
   font-family: "Lato", sans-serif;
+  margin: 0 0 2px 0;
+}
+
+.car-info-section .car-detail-wrapper h2.used {
+  color: #50a600;
 }
 
 .car-info-section .car-detail-wrapper h3 {
-  font-size: 20px;
+  font-size: 17px;
   line-height: 22px;
   font-weight: 600;
   color: #000000;
   font-family: "Lato", sans-serif;
-  margin-top: 0;
+  margin: 0 0 20px 0;
+  padding: 0 12px;
+}
+
+@media screen and (min-width: 576px) {
+  .car-info-section .car-detail-wrapper h3 {
+    font-size: 24px;
+    line-height: 29px;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .car-info-section .car-detail-wrapper h3 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .car-info-section .car-detail-wrapper .dealer-notes {
+    position: static;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -166,21 +230,35 @@
   font-weight: 600;
   color: #000000;
   font-family: "Lato", sans-serif;
+  margin-top: 0;
+}
+
+@media screen and (max-width: 1199px) {
+  .car-info-section .car-detail-wrapper .dealer-notes h4 {
+    margin-top: 28px;
+  }
 }
 
 .car-info-section .car-detail-wrapper .dealer-notes p {
-  font-size: 17px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 400;
   color: #000000;
   font-family: "Lato", sans-serif;
-  margin-top: 27px;
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1200px) {
+  .car-info-section .car-detail-wrapper .dealer-notes p {
+    margin: 14px 0 0 0;
+  }
 }
 
 .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
   position: absolute;
-  top: 19px;
-  right: 0;
+  top: 13px;
+  right: 8px;
   -webkit-object-fit: cover;
   -ms-object-fit: cover;
   -o-object-fit: cover;
@@ -188,7 +266,7 @@
   object-fit: cover;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 768px) {
   .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
     top: 0;
   }
@@ -207,7 +285,7 @@
   line-height: 21px;
   font-weight: 400;
   color: #000000;
-  margin-bottom: 5px;
+  margin: 2px 0;
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block h5.stroke-text {
@@ -218,8 +296,25 @@
   margin-top: 18px;
 }
 
+@media screen and (max-width: 575px) {
+  .car-info-section .car-detail-wrapper .car-detail-block .button-block {
+    display: -webkit-box  !important;
+    display: -ms-flexbox  !important;
+    display: flex  !important;
+    -o-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
 .car-info-section .car-detail-wrapper .car-detail-block .button-block button {
-  padding: 11px 19px !important;
+  padding: 11px 11px !important;
   margin: 0 5px;
 }
 
@@ -236,12 +331,20 @@
   -o-object-fit: cover;
   -moz-object-fit: cover;
   object-fit: cover;
+  margin-bottom: 20px;
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block a.fav-icon {
   position: absolute;
-  right: 0;
-  top: -5px;
+  right: -13px;
+  top: -12px;
+}
+
+@media screen and (min-width: 768px) {
+  .car-info-section .car-detail-wrapper .car-detail-block a.fav-icon {
+    right: 0;
+    top: -5px;
+  }
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block a.fav-icon img {
@@ -254,11 +357,103 @@
   object-fit: cover;
 }
 
+.car-info-section .car-detail-wrapper .car-detail-block a.used h2 {
+  color: #50a600;
+}
+
+@media screen and (max-width: 767px) {
+  .car-info-section .car-detail-wrapper .car-detail-block a figure img {
+    width: 100%;
+    height: 100%;
+    max-height: 204px;
+    max-width: 204px;
+    min-width: 204px;
+    min-height: 204px;
+    -webkit-object-fit: contain;
+    -ms-object-fit: contain;
+    -o-object-fit: contain;
+    -moz-object-fit: contain;
+    object-fit: contain;
+    border: 1px solid #CFCFCF;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .car-info-section .car-detail-wrapper .image-block {
     width: 100%;
     max-width: 100%;
     text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .car-info-section .car-detail-wrapper .image-block {
+    padding: 0 10px;
+  }
+}
+
+.car-info-section .car-detail-wrapper .image-block a {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.car-info-section .car-detail-wrapper .image-block a figure {
+  width: 100%;
+  height: 100%;
+}
+
+.car-info-section .car-detail-wrapper .image-block a figure img {
+  width: 100%;
+  height: 100%;
+  min-height: 214px;
+  max-height: 300px;
+  min-width: 100%;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  -o-object-fit: cover;
+  -moz-object-fit: cover;
+  object-fit: cover;
+  border: 1px solid #CFCFCF;
+}
+
+@media screen and (max-width: 767px) {
+  .car-info-section .car-detail-wrapper .image-block a figure img {
+    width: 100%;
+    height: 100%;
+    max-height: 204px;
+    max-width: 204px;
+    min-width: 204px;
+    min-height: 204px;
+    -webkit-object-fit: contain;
+    -ms-object-fit: contain;
+    -o-object-fit: contain;
+    -moz-object-fit: contain;
+    object-fit: contain;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .car-info-section .car-detail-wrapper .image-block a figure img {
+    width: 100%;
+    height: 100%;
+    max-height: 302px;
+    max-width: 302px;
+    min-width: 302px;
+    min-height: 302px;
+    -webkit-object-fit: contain;
+    -ms-object-fit: contain;
+    -o-object-fit: contain;
+    -moz-object-fit: contain;
+    object-fit: contain;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .car-info-section .car-detail-wrapper .image-block a figure img {
+    max-height: 214px;
   }
 }
 
@@ -266,6 +461,20 @@ a.fav-icon i {
   font-size: 36px;
   line-height: 40px;
   color: #0051A6;
+}
+
+.full-width-wrapper {
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.full-width-wrapper:hover {
+  -webkit-box-shadow: 2px 9px 25px -4px #0251a694;
+  -ms-box-shadow: 2px 9px 25px -4px #0251a694;
+  -o-box-shadow: 2px 9px 25px -4px #0251a694;
+  box-shadow: 2px 9px 25px -4px #0251a694;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 /*============== footer block css here ============*/
@@ -280,7 +489,11 @@ footer {
   width: 100%;
   left: 0;
   right: 0;
+<<<<<<< HEAD
   z-index: 23;
+=======
+  z-index: 99;
+>>>>>>> cf699bffb467b82291c158c3d6ab952e4d2de1f4
 }
 
 footer ul {
@@ -294,7 +507,8 @@ footer ul li {
   margin: 0 10px;
 }
 
-footer ul li a img {
+footer ul li a img,
+footer ul li button.back-button img {
   width: 30px;
   height: 30px;
   -webkit-object-fit: cover;
@@ -304,25 +518,96 @@ footer ul li a img {
   object-fit: cover;
 }
 
+footer .back-button {
+  border: none;
+  background-color: transparent;
+}
+
 /*================== Detail Page CSS here ==========================*/
 
+@media screen and (min-width: 768px) {
+  .detail-information-wrapper {
+    margin-top: 50px;
+  }
+}
+
 .detail-information-wrapper .dealer-notes {
-  margin-top: 20px;
+  margin-top: 0;
   margin-bottom: 20px;
 }
 
 .detail-information-wrapper .dealer-notes p {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 24x;
 }
 
 .detail-information-wrapper .dealer-notes h4 strong {
   text-decoration: underline;
+  font-size: 22px;
+  line-height: 27px;
 }
 
-.detail-information-wrapper .car-price-detail .btn.btn-primary {
+.detail-information-wrapper .car-price-detail .button-block {
+  position: relative;
+}
+
+.detail-information-wrapper .car-price-detail .button-block .btn.btn-primary {
   padding: 17px !important;
   min-width: 230px;
+}
+
+.detail-information-wrapper .car-price-detail .button-block .btn.btn-primary.visible {
+  position: absolute;
+}
+
+.detail-information-wrapper .car-price-detail h5 {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+  margin: 2px 0 0 0;
+}
+
+.detail-information-wrapper .car-price-detail h3 {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+  .detail-information-wrapper .car-price-detail h3 {
+    margin-top: 0;
+  }
+}
+
+.detail-information-wrapper .car-price-detail h1.price {
+  color: #0051A6;
+  font-size: 42px;
+  line-height: 46px;
+  font-weight: 400;
+}
+
+.detail-information-wrapper .carinfo-block {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+@media screen and (min-width: 768px) {
+  .detail-information-wrapper .carinfo-block {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .main-wrapper .container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .main-wrapper .container .full-width-wrapper {
+    padding: 0 15px;
+  }
 }
 
 /*================ Header css here =================*/
@@ -343,6 +628,12 @@ footer ul li a img {
 @media screen and (max-width: 767px) {
   .navbar-collapse {
     border-top: 3px solid #000000 !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-collapse .button-block {
+    text-align: center;
   }
 }
 
@@ -368,8 +659,40 @@ footer ul li a img {
   direction: ltr;
 }
 
-.royalSlider > * {
-  float: left;
+.rsDefault,
+.rsDefault .rsOverflow,
+.rsDefault .rsSlide,
+.rsDefault .rsVideoFrameHolder,
+.rsDefault .rsThumbs {
+  width: 100% !important;
+}
+
+@media screen and (max-width: 991px) {
+  .rsDefault,
+  .rsDefault .rsOverflow,
+  .rsDefault .rsSlide,
+  .rsDefault .rsVideoFrameHolder,
+  .rsDefault .rsThumbs {
+    max-width: 500px !important;
+  }
+}
+
+.rsDefault.rsFullscreen,
+.rsDefault.rsFullscreen .rsOverflow,
+.rsDefault.rsFullscreen .rsSlide,
+.rsDefault.rsFullscreen .rsVideoFrameHolder,
+.rsDefault.rsFullscreen .rsThumbs {
+  width: 100% !important;
+}
+
+@media screen and (max-width: 991px) {
+  .rsDefault.rsFullscreen,
+  .rsDefault.rsFullscreen .rsOverflow,
+  .rsDefault.rsFullscreen .rsSlide,
+  .rsDefault.rsFullscreen .rsVideoFrameHolder,
+  .rsDefault.rsFullscreen .rsThumbs {
+    max-width: 100% !important;
+  }
 }
 
 .rsWebkit3d .rsSlide {
@@ -1001,7 +1324,6 @@ img.rsImg {
   -webkit-box-shadow: 0 1px 9px rgba(102, 102, 102, 0.65) inset;
           box-shadow: 0 1px 9px rgba(102, 102, 102, 0.65) inset;
   background: #ACACAC;
-  background-image: -moz-llinear-gradient(top, #ACACAC, #BBB);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ACACAC), to(#BBB));
   background-image: linear-gradient(to bottom, #ACACAC, #BBB);
 }
@@ -8106,23 +8428,23 @@ button.bg-dark:focus {
 }
 
 .border {
-  border: 1px solid #dee2e6 !important;
+  border: 1px solid #CFCFCF !important;
 }
 
 .border-top {
-  border-top: 1px solid #dee2e6 !important;
+  border-top: 1px solid #CFCFCF !important;
 }
 
 .border-right {
-  border-right: 1px solid #dee2e6 !important;
+  border-right: 1px solid #CFCFCF !important;
 }
 
 .border-bottom {
-  border-bottom: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #CFCFCF !important;
 }
 
 .border-left {
-  border-left: 1px solid #dee2e6 !important;
+  border-left: 1px solid #CFCFCF !important;
 }
 
 .border-0 {
@@ -11583,5 +11905,13 @@ a {
 
 .new-car-text-color {
   color: #0051A6;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 

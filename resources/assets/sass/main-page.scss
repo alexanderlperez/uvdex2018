@@ -1,7 +1,7 @@
 /*=========== main page css here ===========*/
 
 .car-info-section {
-    margin: 25px 0;
+    margin: 25px 0 50px 0;
     min-height: 700px;
     padding: 0 15px;
     @media screen and (min-width: $mdscreen-size) {
@@ -16,8 +16,10 @@
     .car-detail-wrapper {
         width: 100%;
         border: 2px solid $medium-gray;
-        padding: 15px;
+        padding: 11px 0 15px 0;
         cursor: pointer;
+        position: relative;
+        
         &:hover {
             border: 2px solid $dark-blue;
         }
@@ -27,43 +29,71 @@
             font-weight: 600;
             color: $dark-blue;
             font-family: $lato-font;
+            margin: 0 0 2px 0;
+            &.used{
+                color: $medium-green;
+            }
         }
         h3 {
-            font-size: 20px;
+            font-size: 17px;
             line-height: 22px;
             font-weight: 600;
             color: $black;
             font-family: $lato-font;
-            margin-top: 0;
+            margin: 0 0 20px 0;
+            padding: 0 12px;
+            @media screen and (min-width: $smscreen-size){
+                font-size: 24px;
+                line-height: 29px;
+                padding: 0;
+            }
+            @media screen and (min-width: $xlscreen-size){
+                font-size: 20px;
+                line-height: 24px;
+                
+            }
         }
         .dealer-notes {
+            @media screen and (max-width: ($mdscreen-size - 1)) {
+                position: static;
+            }
             @media screen and (max-width: ($lgscreen-size - 1)) {
                 width: 100%;
                 max-width: 100%;
                 text-align: center;
+                
             }
+
             h4 {
                 font-size: 18px;
                 line-height: 22px;
                 font-weight: 600;
                 color: $black;
                 font-family: $lato-font;
+                margin-top: 0;
+                @media screen and (max-width: ($xlscreen-size - 1)){
+                     margin-top: 28px;
+                }
             }
             p {
-                font-size: 17px;
-                line-height: 22px;
+                font-size: 16px;
+                line-height: 24px;
                 font-weight: 400;
                 color: $black;
                 font-family: $lato-font;
-                margin-top: 27px;
+                margin-top: 14px;
+                margin-bottom: 0;
+                @media screen and (min-width: $xlscreen-size){
+                    margin: 14px 0 0 0;
+                }
             }
             a {
                 &.fav-icon {
                     position: absolute;
-                    top: 19px;
-                    right: 0;
+                    top: 13px;
+                    right: 8px;
                     @include object-fit($property: cover);
-                    @media screen and (min-width: $lgscreen-size) {
+                    @media screen and (min-width: $mdscreen-size) {
                         top: 0;
                     }
                 }
@@ -80,16 +110,23 @@
                 line-height: 21px;
                 font-weight: 400;
                 color: $black;
-                margin-bottom: 5px;
+                margin: 2px 0;
                 &.stroke-text {
                     text-decoration: line-through;
                 }
             }
             .button-block {
                 margin-top: 18px;
+                @media screen and (max-width: ($smscreen-size - 1)){
+                    @include flexbox();
+                    @include flex-wrap($flex-wrap: nowrap);
+                    @include justfy-content($justify-content: center);
+
+                }
                 button {
-                    padding: 11px 19px !important;
+                    padding: 11px 11px !important;
                     margin: 0 5px;
+                    
                     @media screen and (min-width: $smscreen-size) {
                         padding: 15px 30px !important;
                     }
@@ -98,16 +135,42 @@
             img {
                 width: 100%;
                 @include object-fit($property: cover);
+                margin-bottom: 20px;
             }
             a {
                 &.fav-icon {
                     position: absolute;
-                    right: 0;
-                    top: -5px;
+                    right: -13px;
+                    top: -12px;
+                    @media screen and (min-width: $mdscreen-size){
+                        right: 0;
+                        top: -5px;
+                    }
                     img {
                         width: 30px;
                         height: 30px;
                         @include object-fit($property: cover);
+                    }
+                    
+                }
+                &.used{
+                    
+                    h2{
+                        color: $medium-green;
+                    }
+                }
+                figure{
+                    img{
+                        @media screen and (max-width: ($mdscreen-size - 1)) {
+                            width: 100%;
+                            height: 100%;
+                            max-height: 204px;
+                            max-width: 204px;
+                            min-width: 204px;
+                            min-height: 204px;
+                            @include object-fit($property: contain);
+                            border: 1px solid $border-color;
+                        }
                     }
                 }
             }
@@ -117,6 +180,53 @@
                 width: 100%;
                 max-width: 100%;
                 text-align: center;
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            @media screen and (min-width: $lgscreen-size){
+                padding: 0 10px;
+            }
+           
+            a{
+                width: 100%;
+                height: 100%;
+                display: inline-block;
+                figure{
+                    width: 100%;
+                    height: 100%;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        min-height: 214px;
+                        max-height: 300px;
+                        min-width: 100%;
+                        @include object-fit($property: cover);
+                        border: 1px solid $border-color;
+                        @media screen and (max-width: ($mdscreen-size - 1)) {
+                            width: 100%;
+                            height: 100%;
+                            max-height: 204px;
+                            max-width: 204px;
+                            min-width: 204px;
+                            min-height: 204px;
+                            @include object-fit($property: contain);
+                        }
+                        @media screen and (max-width: ($lgscreen-size - 1)) {
+                            width: 100%;
+                            height: 100%;
+                            max-height: 302px;
+                            max-width: 302px;
+                            min-width: 302px;
+                            min-height: 302px;
+                            @include object-fit($property: contain);
+                        }
+                       
+                        @media screen and (min-width: $lgscreen-size) {
+                            max-height: 214px;
+                        }
+                    }
+                }
+                
             }
             img {
                 width: 214px;
@@ -135,5 +245,14 @@ a {
             line-height: 40px;
             color: $dark-blue;
         }
+    }
+}
+
+.full-width-wrapper{
+    width: 100%;
+    margin-bottom: 22px;
+    &:hover{
+        @include box-shadow($string: 2px 9px 25px -4px $shadow-color);
+        @include transitions($time-delay: .3s);
     }
 }
