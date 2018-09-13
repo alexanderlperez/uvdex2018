@@ -33,6 +33,7 @@ class HomeController extends Controller
         else
             $vehicles = Vehicle::select('id', 'type', 'body_type', DB::raw("CONCAT_WS(' ',model_year, make, model, trim ) as title"), 'mileage', 'exterior_color', 'passengers', 'msrp', 'price', 'nada', 'description', 'vin', 'images')
                                 ->whereIsActive(Config::get('constants.status.active'))
+                                ->where('price', '!=', 0)
                                 ->orderByRaw("FIELD(type , 'N', 'U') ASC")
                                 ->orderBy('model_year', 'desc')
                                 ->get();

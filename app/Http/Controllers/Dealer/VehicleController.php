@@ -483,6 +483,7 @@ class VehicleController extends Controller
         $headers[] = Config::get('constants.headers.carforsale');
         $vehicles = Vehicle::select('type', 'vin', 'stock_number', 'make', 'model', 'model_year', 'trim', 'body_style', 'mileage', 'engine_description', 'cylinders', 'fuel_type', 'transmission', 'price', 'exterior_color', 'interior_color', 'option_text','description', 'images')
             ->whereUserId(getUserId())
+            ->where('price', '!=', 0)
             ->whereIsActive(Config::get('constants.status.active')) // Unsold
             ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
             ->orderBy('model_year', 'desc')
