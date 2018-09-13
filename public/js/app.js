@@ -56582,8 +56582,8 @@ var Slider = function (_Component) {
 
                     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'a',
-                        { 'class': 'rsImg', 'data-rsw': '400', 'data-rsh': '500', 'data-rsBigImg': imgItem.img, href: imgItem.img },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { width: '96', height: '72', 'class': 'rsTmb', src: imgItem.img })
+                        { 'class': 'rsImg', 'data-rsBigImg': imgItem.img, href: imgItem.img },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { 'class': 'rsTmb', src: imgItem.img })
                     );
                 })
             );
