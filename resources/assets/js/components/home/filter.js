@@ -5,30 +5,37 @@ class Filter extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            allPrice: 'All Prices',
+            allPrice: 'All Price',
             min: 0,
             max: 0,
             filters: {type: "", body_type: "", price: ""},
+            isDetail: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.clickFilter = this.clickFilter.bind(this);
     }
 
+    componentWillMount() {
+
+        let isDetail = window.location.hash.includes('detail');
+
+        if(isDetail)
+            this.setState({isDetail: true})
+    }
+
     componentWillReceiveProps(nextProps){
+
+        let filterPrice = this.state.allPrice;
+        if(nextProps.filters.price !== "")
+            filterPrice = '$' + nextProps.filters.price*1000+ '.00';
+
         this.setState({
             min: nextProps.min,
-            max: nextProps.max
+            max: nextProps.max,
+            filters: nextProps.filters,
+            allPrice: filterPrice
         });
-
-        if(nextProps.filters !== undefined) {
-
-            this.setState({ filters: nextProps.filters });
-
-            if(nextProps.filters.price !== "")
-                this.setState({allPrice: '$' + nextProps.filters.price+ '.00'});
-        }
-
     }
 
     clickFilter(e) {
@@ -36,8 +43,8 @@ class Filter extends Component{
         if (e.target.getAttribute('data-title') === 'type')
             $('.type>.btn').removeClass('active');
 
-        if (e.target.getAttribute('data-title') === 'body')
-            $('.body>.btn').removeClass('active');
+        if (e.target.getAttribute('data-title') === 'body_type')
+            $('.body_type>.btn').removeClass('active');
 
         e.target.classList.add('active');
 
@@ -48,29 +55,24 @@ class Filter extends Component{
     handleChange(e) {
 
         if(parseInt(e.target.value) === this.state.max)
-            this.setState({allPrice: 'All Price'});
+            $('.rangePrice').html('All Price');
         else
-            this.setState({allPrice: '$' + e.target.value*1000+ '.00'});
+            $('.rangePrice').html('$' + e.target.value*1000 + '.00');
 
-        this.props.onFilter({'price': e.target.value});
+        if(!this.state.isDetail)
+            this.props.onFilter({'price': e.target.value});
     }
 
     render() {
 
-        // Set default values
-        let type_new,type_used,body_type_car,body_type_truck,body_type_suv = '';
+        const { type, body_type } = this.state.filters;
 
-        if(this.state.filters.type === 'New')
-            type_new = 'active';
-        if(this.state.filters.type === 'Used')
-            type_used = 'active';
+        let min = this.state.min;
+        let max = this.state.max;
+        let price = this.state.max;
 
-        if(this.state.filters.body_type === 'car')
-            body_type_car = 'active';
-        if(this.state.filters.body_type === 'truck')
-            body_type_truck = 'active';
-        if(this.state.filters.body_type === 'suv')
-            body_type_suv = 'active';
+        if(this.state.filters.price !== "")
+            price = this.state.filters.price;
 
         return (
             <div className="filter-section navbar-fixed-top">
@@ -84,24 +86,24 @@ class Filter extends Component{
                         </button>
                         <Link to="#" replace className="navbar-brand d-block d-sm-block d-md-none"><h1>ROST MOTOR INC</h1></Link>
                     </div>
-               
+
                     <div id="navbar" className="navbar-collapse collapse ">
                         <div className="row">
                             <div className="col-sm-12 col-md-4 button-block type">
-                                <button type="button" className={"btn btn-primary "+ type_new} data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
-                                <button type="button" className={"btn btn-primary "+ type_used} data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
+                                <button type="button" className={ (type === 'New')?'btn btn-primary active': "btn btn-primary "} data-title="type" data-name="New" onClick={this.clickFilter}>New</button>
+                                <button type="button" className={ (type === 'Used')?'btn btn-primary active': "btn btn-primary "} data-title="type" data-name="Used" onClick={this.clickFilter}>Used</button>
                             </div>
-                            <div className="col-sm-12 col-md-5 button-block body">
-                                <button type="button" className={"btn btn-primary "+ body_type_car} data-title="body" data-name="car" onClick={this.clickFilter}>CAR</button>
-                                <button type="button" className={"btn btn-primary "+ body_type_truck} data-title="body" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
-                                <button type="button" className={"btn btn-primary "+ body_type_suv} data-title="body" data-name="suv" onClick={this.clickFilter}>SUV</button>
+                            <div className="col-sm-12 col-md-5 button-block body_type">
+                                <button type="button" className={ (body_type === 'car')?'btn btn-primary active': "btn btn-primary "} data-title="body_type" data-name="car" onClick={this.clickFilter}>CAR</button>
+                                <button type="button" className={ (body_type === 'truck')?'btn btn-primary active': "btn btn-primary "} data-title="body_type" data-name="truck" onClick={this.clickFilter}>TRUCK</button>
+                                <button type="button" className={ (body_type === 'suv')?'btn btn-primary active': "btn btn-primary "} data-title="body_type" data-name="suv" onClick={this.clickFilter}>SUV</button>
                             </div>
-                            <div className="col-sm-12 col-md-3 range-filter-block">
-                                <h3><strong>{this.state.allPrice}</strong></h3>
 
-                                <input type="range" id="rangeslider" min={this.state.min} max={this.state.max} step="1"  defaultValue={this.state.max} onChange={this.handleChange}/>
-                                <h4 className="low-price"><strong>${this.state.min}K</strong></h4>
-                                <h4 className="high-price"><strong>${this.state.max}K</strong></h4>
+                            <div className="col-sm-12 col-md-3 range-filter-block">
+                                <h3><strong className="rangePrice">{this.state.allPrice}</strong></h3>
+                                <input type="range" id="rangeslider" min={min} max={max} step="1" defaultValue={price} onChange={this.handleChange}/>
+                                <h4 className="low-price"><strong>${min}K</strong></h4>
+                                <h4 className="high-price"><strong>${max}K</strong></h4>
                             </div>
                         </div>
                     </div>

@@ -9,8 +9,8 @@ class DetailBlock extends Component{
        super(props);
        this.state = {
             vehicle: [],
-            min: localStorage.getItem('min'),
-            max: localStorage.getItem('max'),
+            min: parseInt(localStorage.getItem('min')),
+            max: parseInt(localStorage.getItem('max')),
             preSetFilters: {type: "", body_type: "", price: ""},
        };
     }
@@ -100,7 +100,7 @@ class DetailBlock extends Component{
                     </div>
                 </div>
 
-                <Footer filters={this.props.location.state.filters}/>
+                <Footer filters={this.state.preSetFilters}/>
             </div>
         );
     }
