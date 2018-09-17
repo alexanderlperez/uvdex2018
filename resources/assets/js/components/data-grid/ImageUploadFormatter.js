@@ -36,7 +36,15 @@ class ImageUploadFormatter extends React.Component {
 
         return (
             <form encType="multipart/form-data">
-                <input type="file" className="file" onChange={this.onChange}  />
+                <div className="row">
+                    <div className="col-sm-4 pull-right">
+                        <input type="file" className="file" onChange={this.onChange}  />
+                    </div>
+                    <div className="col-sm-8 pull-left">
+                        <p className="text-red">(Photos must be added one at a time, please add your display photo first)</p><br />
+                    </div>
+                    <div className="clearfix"></div>
+                </div>
             </form>);
     }
 }

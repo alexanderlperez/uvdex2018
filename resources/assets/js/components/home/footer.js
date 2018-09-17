@@ -18,6 +18,7 @@ class Footer extends Component{
             rostsiteUrl: 'http://rostmotor.com/',
             isDetail: false,
             fav: false,
+            filters: {type: "", body_type: "", price: ""},
         };
 
         this.toggleIcon = this.toggleIcon.bind(this);
@@ -35,6 +36,9 @@ class Footer extends Component{
 
         if(nextProps.show)
             this.setState({fav: true, iconsUrl: FavWhiteIcon});
+
+        if(nextProps.filters !== undefined)
+            this.setState({filters: nextProps.filters});
     }
 
     //Toggle footer fav icon function
@@ -65,8 +69,8 @@ class Footer extends Component{
                                     <li><a href={this.state.telTo}><img src={PhoneIcon} alt="Phone Call Icon"/></a></li>
                                     {
                                         this.state.isDetail
-                                        ? <span><li><Link to={ '/' }><img src={BackbuttonIcon} alt="Back Button Icon"/></Link></li>
-                                            <li><Link to={{ pathname: '/', state:{show: true}}}><img src={this.state.iconsUrl} alt="Fav Icon"/></Link></li></span>
+                                        ? <span><li><Link to={{ pathname: '/', state:{filters: this.state.filters} }}><img src={BackbuttonIcon} alt="Back Button Icon"/></Link></li>
+                                            <li><Link to={{ pathname: '/', state:{show: true} }}><img src={this.state.iconsUrl} alt="Fav Icon"/></Link></li></span>
                                         : <span><li><a href={this.state.rostsiteUrl}><img src={BackbuttonIcon} alt="Back Button Icon"/></a></li>
                                             <li><Link to="#" replace ><img src={this.state.iconsUrl} alt="Fav Icon" onClick={this.toggleIcon}/></Link></li></span>
                                     }

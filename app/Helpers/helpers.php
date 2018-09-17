@@ -235,3 +235,16 @@ function getUserId() {
     else
         return \Illuminate\Support\Facades\Auth::user()->id;
 }
+
+/**
+ * check IE Browser
+ * @return bool
+ */
+function browserIE() {
+
+    $response = false;
+    if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)
+        $response = true;
+
+    return $response;
+}

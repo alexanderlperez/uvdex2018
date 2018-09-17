@@ -18,10 +18,12 @@ class CarData extends Component {
             rows: [],
             allRows: [],
             type: '',
-            body: '',
+            body_type: '',
             price: '',
             min: '',
             max: '',
+            filters: '',
+            preSetFilters: {type: "", body_type: "", price: ""},
         };
 
         this.renderVehicles = this.renderVehicles.bind(this);
@@ -46,7 +48,15 @@ class CarData extends Component {
 
                 if(this.props.location.state !== undefined) {
 
-                    this.setState({ showFavorites: true }, () => {this.showHideFavourite(true);});
+                    // Set previous filters
+                    if(this.props.location.state.filters !== undefined) {
+
+                        this.onFilter(this.props.location.state.filters);
+                        this.setState({ preSetFilters: this.props.location.state.filters });
+                    }
+
+                    if(this.props.location.state.show !== undefined)
+                        this.setState({ showFavorites: true }, () => {this.showHideFavourite(true);});
                 }
 
             });
@@ -106,33 +116,40 @@ class CarData extends Component {
     onFilter(data) {
 
         let type = this.state.type;
-        let body = this.state.body;
+        let body_type = this.state.body_type;
         let price = this.state.price;
 
-        if (data.type !== undefined) {
+        if (data.type !== undefined && data.type !== "") {
             type = data.type;
             this.state.type = type;
         }
 
-        if (data.body !== undefined) {
-            body = data.body;
-            this.state.body = body;
+        if (data.body_type !== undefined && data.body_type !== "") {
+            body_type = data.body_type;
+            this.state.body_type = body_type;
         }
 
-        if (data.price !== undefined) {
+        if (data.price !== undefined && data.price !== "") {
             price = data.price * 1000;
             this.state.price = price;
         }
 
         let filters = {
             type: type,
-            body_type: body,
+            body_type: body_type,
             price: price,
         };
 
         // Filter data
-        let filtered = this.multiFilter(this.state.allRows, filters);
-        this.setState({rows: filtered});
+        if(filters.type !== "" || filters.body_type !== "" || filters.price !== "") {
+
+            let filtered = this.multiFilter(this.state.allRows, filters);
+
+            if(filters.price !== "")
+                filters.price = filters.price/1000;
+
+            this.setState({rows: filtered, filters: filters});
+        }
     }
 
     multiFilter(arr, filters) {
@@ -174,15 +191,15 @@ class CarData extends Component {
                 <div key={vehicle.id} className="full-width-wrapper">
                     <div className="car-detail-wrapper clearfix">
                         <div className="image-block col-md-3 d-none d-sm-block">
-                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true} }}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true, filters: this.state.filters} }}>
                                 <figure>
                                     <img src={vehicle.featured} alt=""/>
                                 </figure>
                             </Link>
                         </div>
                         <div className="car-detail-block  col-md-3 text-center">
-                            <Link to={vehicle.id + '/detail'} className={"d-none d-sm-block "+ vehicle.type.toLowerCase()}><h2>{vehicle.type}</h2></Link>
-                            <Link to={vehicle.id + '/detail'}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }} className={"d-none d-sm-block "+ vehicle.type.toLowerCase()}><h2>{vehicle.type}</h2></Link>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}>
                                 <h3>{vehicle.title}</h3>
                             </Link>
                             <Link to='#' className="fav-icon d-block d-sm-none">
@@ -190,13 +207,13 @@ class CarData extends Component {
                                      onClick={this.toggleIcons}/>
                             </Link>
                             {/* Mobile View */}
-                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true}}}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true, filters: this.state.filters}}}>
                                 <figure className="d-block d-sm-none">
                                     <img src={vehicle.featured} alt=""/>
                                 </figure>
                             </Link>
                             {/* Mobile View */}
-                            <Link to={vehicle.id + '/detail'}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}>
                                 <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
                                 <h5 className="d-none d-sm-block">Color: {vehicle.exterior_color}</h5>
                                 <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
@@ -215,7 +232,7 @@ class CarData extends Component {
                                 <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
                                      onClick={(e) => this.toggleIcons(e)}/>
                             </Link>
-                            <Link to={vehicle.id + '/detail'}><p>{vehicle.description}</p></Link>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}><p>{vehicle.description}</p></Link>
                         </div>
                     </div>
                 </div>
@@ -224,13 +241,13 @@ class CarData extends Component {
     }
 
     render() {
-        const {min, max, showFavorites} = this.state;
+        const {min, max, showFavorites, preSetFilters} = this.state;
 
         localStorage.setItem('min', min);
         localStorage.setItem('max', max);
         return (
             <div>
-                <Filter onFilter={this.onFilter} min={min} max={max}/>
+                <Filter onFilter={this.onFilter} min={min} max={max} filters={preSetFilters}/>
                 <div className="car-info-section">
                     <div className="container">
                         <div className="row ">

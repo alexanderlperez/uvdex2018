@@ -7,7 +7,13 @@ import Slider from '../../components/GallerySlider/Slider';
 class DetailBlock extends Component{
     constructor(props){
        super(props);
-       this.state = {vehicle: [], min: localStorage.getItem('min'), max: localStorage.getItem('max') };
+       this.state = {
+            fullscreen: false,
+            vehicle: [],
+            min: parseInt(localStorage.getItem('min')),
+            max: parseInt(localStorage.getItem('max')),
+            preSetFilters: {type: "", body_type: "", price: ""},
+       };
     }
 
     componentDidMount() {
@@ -15,6 +21,17 @@ class DetailBlock extends Component{
         axios.get(`/getVehicles/${this.props.match.params.id}`)
             .then(response => {
                 this.setState({ vehicle : response.data.vehicle });
+
+                if(this.props.location.state !== undefined) {
+
+                    // Set previous filters
+                    if(this.props.location.state.filters !== undefined)
+                        this.setState({preSetFilters: this.props.location.state.filters});
+
+                    if(this.props.location.state.fullscreen !== undefined)
+                        this.setState({fullscreen: true});
+                }
+
             });
 
         window.scrollTo(0, 0);
@@ -45,14 +62,12 @@ class DetailBlock extends Component{
 
         const { images } = this.state.vehicle;
         const vehicle = this.state.vehicle;
-        let fullscreen = false;
-        if(this.props.location.state !== undefined)
-            fullscreen = true;
+        const {preSetFilters, fullscreen} = this.state;
 
         return(
 
             <div>
-                <Filter min={this.state.min} max={this.state.max} />
+                <Filter min={this.state.min} max={this.state.max} filters={preSetFilters} />
 
                 <div className="container detail-information-wrapper">
                     <div className="row carinfo-block">
@@ -85,7 +100,7 @@ class DetailBlock extends Component{
                     </div>
                 </div>
 
-                <Footer/>
+                <Footer filters={this.state.preSetFilters}/>
             </div>
         );
     }
