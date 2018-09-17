@@ -4,11 +4,11 @@ import '../../royalslider.min.js';
 class Slider extends Component{
     constructor(props){
         super(props);
-        this.state = { images: [] };
+        this.state = { images: [], fullscreen: false };
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ images: nextProps.images });
+        this.setState({ images: nextProps.images, fullscreen: nextProps.fullscreen });
     }
 
     componentDidUpdate(){

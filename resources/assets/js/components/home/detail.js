@@ -8,6 +8,7 @@ class DetailBlock extends Component{
     constructor(props){
        super(props);
        this.state = {
+            fullscreen: false,
             vehicle: [],
             min: parseInt(localStorage.getItem('min')),
             max: parseInt(localStorage.getItem('max')),
@@ -26,6 +27,9 @@ class DetailBlock extends Component{
                     // Set previous filters
                     if(this.props.location.state.filters !== undefined)
                         this.setState({preSetFilters: this.props.location.state.filters});
+
+                    if(this.props.location.state.fullscreen !== undefined)
+                        this.setState({fullscreen: true});
                 }
 
             });
@@ -58,11 +62,7 @@ class DetailBlock extends Component{
 
         const { images } = this.state.vehicle;
         const vehicle = this.state.vehicle;
-        let fullscreen = false;
-        if(this.props.location.state !== undefined)
-            fullscreen = this.props.location.state.fullscreen;
-
-        const {preSetFilters} = this.state;
+        const {preSetFilters, fullscreen} = this.state;
 
         return(
 

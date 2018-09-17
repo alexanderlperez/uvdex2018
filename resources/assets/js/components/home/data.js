@@ -198,8 +198,8 @@ class CarData extends Component {
                             </Link>
                         </div>
                         <div className="car-detail-block  col-md-3 text-center">
-                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: false, filters: this.state.filters} }} className={"d-none d-sm-block "+ vehicle.type.toLowerCase()}><h2>{vehicle.type}</h2></Link>
-                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: false, filters: this.state.filters} }}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }} className={"d-none d-sm-block "+ vehicle.type.toLowerCase()}><h2>{vehicle.type}</h2></Link>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}>
                                 <h3>{vehicle.title}</h3>
                             </Link>
                             <Link to='#' className="fav-icon d-block d-sm-none">
@@ -213,7 +213,7 @@ class CarData extends Component {
                                 </figure>
                             </Link>
                             {/* Mobile View */}
-                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: false, filters: this.state.filters} }}>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}>
                                 <h5 className="d-none d-sm-block">Mileage: {vehicle.mileage}</h5>
                                 <h5 className="d-none d-sm-block">Color: {vehicle.exterior_color}</h5>
                                 <h5 className="d-none d-sm-block">Passengers: {vehicle.passengers}</h5>
@@ -232,7 +232,7 @@ class CarData extends Component {
                                 <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
                                      onClick={(e) => this.toggleIcons(e)}/>
                             </Link>
-                            <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: false, filters: this.state.filters} }}><p>{vehicle.description}</p></Link>
+                            <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}><p>{vehicle.description}</p></Link>
                         </div>
                     </div>
                 </div>
