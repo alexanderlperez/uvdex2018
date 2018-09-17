@@ -27,8 +27,11 @@ class Filter extends Component{
     componentWillReceiveProps(nextProps){
 
         let filterPrice = this.state.allPrice;
-        if(nextProps.filters.price !== "")
-            filterPrice = '$' + nextProps.filters.price*1000+ '.00';
+        if(nextProps.filters !== "") {
+
+            if (nextProps.filters.price !== "")
+                filterPrice = '$' + nextProps.filters.price * 1000 + '.00';
+        }
 
         this.setState({
             min: nextProps.min,
