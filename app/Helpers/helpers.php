@@ -242,6 +242,8 @@ function getUserId() {
  */
 function browserIE() {
 
+    dd($_SERVER['HTTP_USER_AGENT']);
+
     $response = false;
     if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)
         $response = true;
