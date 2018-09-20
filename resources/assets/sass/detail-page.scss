@@ -11,7 +11,7 @@
        
         p {
             font-size: 16px;
-            line-height: 24x;
+            line-height: 26px;
            
         }
         h4 {
@@ -19,7 +19,7 @@
             strong {
                 text-decoration: underline;
                 font-size: 22px;
-                line-height: 27px;
+                line-height: 1;
             }
         }
     }
@@ -29,7 +29,7 @@
             position: relative;
             .btn {
                 &.btn-primary {
-                    padding: 17px !important;
+                    padding: 18px !important;
                     min-width: 230px;
                     &.visible{
                         position: absolute;
@@ -40,14 +40,16 @@
         }
         h5{
             font-size: 20px;
-            line-height: 24px;
+            line-height: 1;
             font-weight: 400;
-            margin: 2px 0 0 0;
+            margin: 0 0 5px 0;
             
         }
         h3{
             text-decoration: underline;
             font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 10px;
             @media screen and (min-width: $mdscreen-size){
                 margin-top: 0;
             }
@@ -56,7 +58,7 @@
             &.price{
                 color: $dark-blue;
                 font-size: 42px;
-                line-height: 46px;
+                line-height: 1;
                 font-weight: 400;
             }
         }

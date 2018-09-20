@@ -33,7 +33,7 @@
         }
         h3 {
             font-size: 18px;
-            line-height: 22px;
+            line-height: 1;
             color: $white;
             text-align: center;
             @media screen and (min-width: $mdscreen-size) {
@@ -48,12 +48,12 @@
             &.low-price {
                 float: left;
                 font-size: 20px;
-                line-height: 24px;
+                line-height: 1;
             }
             &.high-price {
                 float: right;
                 font-size: 20px;
-                line-height: 24px;
+                line-height: 1;
             }
         }
     }
