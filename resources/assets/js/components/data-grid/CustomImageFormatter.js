@@ -45,20 +45,20 @@ class CustomImageFormatter extends React.Component {
         if (rowId > 0) {
             images.splice(rowId, 1);
             images.unshift(image);
+
+            data.id = this.props.dependentValues.id;
+            data.images = images;
+
+            axios
+                .post('/updateFeaturedImage', data)
+                .then(response => {
+                    data.status = response.data.message.status;
+                    this.props.onUpload(this.props.dependentValues.key, data);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         }
-
-        data.id = this.props.dependentValues.id;
-        data.images = images;
-
-        axios
-            .post('/updateFeaturedImage', data)
-            .then(response => {
-                data.status = response.data.message.state;
-                this.props.onUpload(this.props.dependentValues.key, data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     }
 
     parentUpload(rowKey, value) {
@@ -75,9 +75,8 @@ class CustomImageFormatter extends React.Component {
 
                     <div key={i} className="col-xs-4 col-sm-3 col-md-2 thumb">
                         <span className="glyphicon glyphicon-remove pull-right" data-content={image} onClick={(e) => { if (window.confirm('Are you sure you wish to delete this image?')) this.deleteImage(e) }}> </span>
-                        <input type="checkbox" data-id={i} data-content={image} onClick={(e) => { this.setFeaturedImage(e) }} className="pull-left"/> 
                         <div className="thumbnail">
-                            <img className="img-responsive" src={image} alt="" draggable="false" />
+                            <img className="img-responsive" data-id={i} data-content={image} onClick={(e) => { this.setFeaturedImage(e) }} src={image} alt="" draggable="false" />
                         </div>
                     </div>
                 );
