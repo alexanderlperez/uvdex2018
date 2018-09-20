@@ -214,7 +214,7 @@ justify content css mixins here
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 575px) {
   .car-info-section .car-detail-wrapper .dealer-notes {
     position: static;
   }
@@ -264,7 +264,7 @@ justify content css mixins here
   object-fit: cover;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 576px) {
   .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
     top: 0;
   }

@@ -55,7 +55,7 @@
             }
         }
         .dealer-notes {
-            @media screen and (max-width: ($mdscreen-size - 1)) {
+            @media screen and (max-width: ($smscreen-size - 1)) {
                 position: static;
             }
             @media screen and (max-width: ($lgscreen-size - 1)) {
@@ -93,7 +93,7 @@
                     top: 13px;
                     right: 8px;
                     @include object-fit($property: cover);
-                    @media screen and (min-width: $mdscreen-size) {
+                    @media screen and (min-width: $smscreen-size) {
                         top: 0;
                     }
                 }

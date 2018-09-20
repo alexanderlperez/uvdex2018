@@ -169,3 +169,6 @@ input[type=file]::-webkit-file-upload-button {
     background-color: #7DB467;
     text-align: center;
 }
+.thumb-wrapper .thumb input[type="cheeckbox"]{ 
+    margin: 0; 
+}
