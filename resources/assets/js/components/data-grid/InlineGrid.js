@@ -547,8 +547,12 @@ class InlineGrid extends React.Component {
     handleGridRowsUpdated({ fromRow, toRow, updated }) {
         let rows = this.state.rows.slice();
 
-        if(updated.hasOwnProperty("price") || updated.hasOwnProperty("nada") || updated.hasOwnProperty("msrp"))
-            updated[Object.keys(updated)[0]] = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
+        if(updated.hasOwnProperty("price") || updated.hasOwnProperty("nada") || updated.hasOwnProperty("msrp")) {
+
+            updated[Object.keys(updated)[0]] = '';
+            if(updated[Object.keys(updated)].replace(/\$/g, '') !== 0)
+                updated[Object.keys(updated)[0]] = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
+        }
 
         for (let i = fromRow; i <= toRow; i++) {
             let rowToUpdate = rows[i];
