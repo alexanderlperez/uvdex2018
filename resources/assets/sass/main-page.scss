@@ -230,6 +230,12 @@
                 }
                 
             }
+            img {
+                width: 214px;
+                height: 214px;
+                @include object-fit($property: contain);
+                border: 1px solid $lighter-gray;
+            }
         }
     }
 }

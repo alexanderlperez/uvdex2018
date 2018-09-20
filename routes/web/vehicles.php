@@ -10,5 +10,6 @@ Route::group(array('namespace' => 'Dealer', 'middleware' => ['auth', 'role:'.con
     Route::post('saveVehicle', 'VehicleController@saveVehicle')->name('saveVehicle');
     Route::post('uploadImage', 'VehicleController@uploadImage')->name('uploadImage');
     Route::post('deleteImage', 'VehicleController@deleteImage')->name('deleteImage');
+    Route::post('updateFeaturedImage', 'VehicleController@updateFeaturedImage')->name('updateFeaturedImage');
     Route::get('exportCarForSale', 'VehicleController@exportCarForSale')->name('exportCarForSale');
 });

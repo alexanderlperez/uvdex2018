@@ -471,6 +471,37 @@ class VehicleController extends Controller
     }
 
     /**
+     * Update Featured Image
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateFeaturedImage(Request $request) {
+
+        try {
+
+            DB::beginTransaction();
+
+            $data['images'] = $request->get('images');
+            if(is_array($request->get('images')))
+                $data['images'] = implode(',', $request->get('images'));
+
+            $vehicle = Vehicle::find($request->get('id'));
+            $vehicle->update($data);
+            $message['type'] = 'Success';
+            $message['status'] = trans('message.featured_update');
+
+            DB::commit();
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            $message['type'] = 'Error';
+            $message['status'] = $e->getMessage();
+        }
+
+        return response()->json(['message' => $message], $this->successStatus);
+    }
+
+    /**
      * exportCarForSale
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Box\Spout\Common\Exception\IOException
@@ -483,6 +514,7 @@ class VehicleController extends Controller
         $headers[] = Config::get('constants.headers.carforsale');
         $vehicles = Vehicle::select('type', 'vin', 'stock_number', 'make', 'model', 'model_year', 'trim', 'body_style', 'mileage', 'engine_description', 'cylinders', 'fuel_type', 'transmission', 'price', 'exterior_color', 'interior_color', 'option_text','description', 'images')
             ->whereUserId(getUserId())
+            ->where('price', '!=', 0)
             ->whereIsActive(Config::get('constants.status.active')) // Unsold
             ->orderByRaw("FIELD(body_type , 'car', 'suv', 'truck', '') ASC")
             ->orderBy('model_year', 'desc')

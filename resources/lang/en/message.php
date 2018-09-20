@@ -43,4 +43,5 @@ return [
     'image_success' => 'Image uploaded successfully',
     'image_fail' => 'Something went wrong, please try again.',
     'delete_success' => 'Image deleted successfully.',
+    'featured_update' => 'Featured image updated successfully.',
 ];

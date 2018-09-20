@@ -57113,10 +57113,11 @@ var Filter = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this, props));
 
         _this.state = {
-            allPrice: 'All Prices',
+            allPrice: 'All Price',
             min: 0,
             max: 0,
-            filters: { type: "", body_type: "", price: "" }
+            filters: { type: "", body_type: "", price: "" },
+            isDetail: false
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
@@ -57125,19 +57126,29 @@ var Filter = function (_Component) {
     }
 
     _createClass(Filter, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+
+            var isDetail = window.location.hash.includes('detail');
+
+            if (isDetail) this.setState({ isDetail: true });
+        }
+    }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
+
+            var filterPrice = this.state.allPrice;
+            if (nextProps.filters !== "") {
+
+                if (nextProps.filters.price !== "") filterPrice = '$' + nextProps.filters.price * 1000 + '.00';
+            }
+
             this.setState({
                 min: nextProps.min,
-                max: nextProps.max
+                max: nextProps.max,
+                filters: nextProps.filters,
+                allPrice: filterPrice
             });
-
-            if (nextProps.filters !== undefined) {
-
-                this.setState({ filters: nextProps.filters });
-
-                if (nextProps.filters.price !== "") this.setState({ allPrice: '$' + nextProps.filters.price + '.00' });
-            }
         }
     }, {
         key: 'clickFilter',
@@ -57145,7 +57156,7 @@ var Filter = function (_Component) {
 
             if (e.target.getAttribute('data-title') === 'type') $('.type>.btn').removeClass('active');
 
-            if (e.target.getAttribute('data-title') === 'body') $('.body>.btn').removeClass('active');
+            if (e.target.getAttribute('data-title') === 'body_type') $('.body_type>.btn').removeClass('active');
 
             e.target.classList.add('active');
 
@@ -57156,27 +57167,23 @@ var Filter = function (_Component) {
         key: 'handleChange',
         value: function handleChange(e) {
 
-            if (parseInt(e.target.value) === this.state.max) this.setState({ allPrice: 'All Price' });else this.setState({ allPrice: '$' + e.target.value * 1000 + '.00' });
+            if (parseInt(e.target.value) === this.state.max) $('.rangePrice').html('All Price');else $('.rangePrice').html('$' + e.target.value * 1000 + '.00');
 
-            this.props.onFilter({ 'price': e.target.value });
+            if (!this.state.isDetail) this.props.onFilter({ 'price': e.target.value });
         }
     }, {
         key: 'render',
         value: function render() {
+            var _state$filters = this.state.filters,
+                type = _state$filters.type,
+                body_type = _state$filters.body_type;
 
-            // Set default values
-            var type_new = void 0,
-                type_used = void 0,
-                body_type_car = void 0,
-                body_type_truck = void 0,
-                body_type_suv = '';
 
-            if (this.state.filters.type === 'New') type_new = 'active';
-            if (this.state.filters.type === 'Used') type_used = 'active';
+            var min = this.state.min;
+            var max = this.state.max;
+            var price = this.state.max;
 
-            if (this.state.filters.body_type === 'car') body_type_car = 'active';
-            if (this.state.filters.body_type === 'truck') body_type_truck = 'active';
-            if (this.state.filters.body_type === 'suv') body_type_suv = 'active';
+            if (this.state.filters.price !== "") price = this.state.filters.price;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -57232,31 +57239,31 @@ var Filter = function (_Component) {
                                 { className: 'col-sm-12 col-md-4 button-block type' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: "btn btn-primary " + type_new, 'data-title': 'type', 'data-name': 'New', onClick: this.clickFilter },
+                                    { type: 'button', className: type === 'New' ? 'btn btn-primary active' : "btn btn-primary ", 'data-title': 'type', 'data-name': 'New', onClick: this.clickFilter },
                                     'New'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: "btn btn-primary " + type_used, 'data-title': 'type', 'data-name': 'Used', onClick: this.clickFilter },
+                                    { type: 'button', className: type === 'Used' ? 'btn btn-primary active' : "btn btn-primary ", 'data-title': 'type', 'data-name': 'Used', onClick: this.clickFilter },
                                     'Used'
                                 )
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'div',
-                                { className: 'col-sm-12 col-md-5 button-block body' },
+                                { className: 'col-sm-12 col-md-5 button-block body_type' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: "btn btn-primary " + body_type_car, 'data-title': 'body', 'data-name': 'car', onClick: this.clickFilter },
+                                    { type: 'button', className: body_type === 'car' ? 'btn btn-primary active' : "btn btn-primary ", 'data-title': 'body_type', 'data-name': 'car', onClick: this.clickFilter },
                                     'CAR'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: "btn btn-primary " + body_type_truck, 'data-title': 'body', 'data-name': 'truck', onClick: this.clickFilter },
+                                    { type: 'button', className: body_type === 'truck' ? 'btn btn-primary active' : "btn btn-primary ", 'data-title': 'body_type', 'data-name': 'truck', onClick: this.clickFilter },
                                     'TRUCK'
                                 ),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'button',
-                                    { type: 'button', className: "btn btn-primary " + body_type_suv, 'data-title': 'body', 'data-name': 'suv', onClick: this.clickFilter },
+                                    { type: 'button', className: body_type === 'suv' ? 'btn btn-primary active' : "btn btn-primary ", 'data-title': 'body_type', 'data-name': 'suv', onClick: this.clickFilter },
                                     'SUV'
                                 )
                             ),
@@ -57268,11 +57275,11 @@ var Filter = function (_Component) {
                                     null,
                                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                         'strong',
-                                        null,
+                                        { className: 'rangePrice' },
                                         this.state.allPrice
                                     )
                                 ),
-                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: this.state.min, max: this.state.max, step: '1', defaultValue: this.state.max, onChange: this.handleChange }),
+                                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'range', id: 'rangeslider', min: min, max: max, step: '1', defaultValue: price, onChange: this.handleChange }),
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h4',
                                     { className: 'low-price' },
@@ -57280,7 +57287,7 @@ var Filter = function (_Component) {
                                         'strong',
                                         null,
                                         '$',
-                                        this.state.min,
+                                        min,
                                         'K'
                                     )
                                 ),
@@ -57291,7 +57298,7 @@ var Filter = function (_Component) {
                                         'strong',
                                         null,
                                         '$',
-                                        this.state.max,
+                                        max,
                                         'K'
                                     )
                                 )
@@ -58247,10 +58254,6 @@ var Footer = function (_Component) {
 
         _this.state = {
             iconsUrl: __WEBPACK_IMPORTED_MODULE_4__img_icons_favorite_icon_png___default.a,
-            mailTo: 'mailto:josh@rostmotor.com',
-            copied: false,
-            telTo: 'tel:7124693383',
-            rostsiteUrl: 'http://rostmotor.com/',
             isDetail: false,
             fav: false,
             filters: { type: "", body_type: "", price: "" }
@@ -58295,6 +58298,9 @@ var Footer = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
+            var rostUrl = 'http://rostmotor.com/',
+                telTo = 'tel:7124693383';
+
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 { className: 'footer-section' },
@@ -58318,7 +58324,7 @@ var Footer = function (_Component) {
                                         null,
                                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                             'a',
-                                            { href: this.state.telTo },
+                                            { href: telTo },
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_2__img_icons_phone_icon_png___default.a, alt: 'Phone Call Icon' })
                                         )
                                     ),
@@ -58351,7 +58357,7 @@ var Footer = function (_Component) {
                                             null,
                                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                                 'a',
-                                                { href: this.state.rostsiteUrl },
+                                                { href: rostUrl },
                                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: __WEBPACK_IMPORTED_MODULE_3__img_icons_back_button_png___default.a, alt: 'Back Button Icon' })
                                             )
                                         ),
@@ -58541,7 +58547,7 @@ var CarData = function (_Component) {
             rows: [],
             allRows: [],
             type: '',
-            body: '',
+            body_type: '',
             price: '',
             min: '',
             max: '',
@@ -58578,8 +58584,8 @@ var CarData = function (_Component) {
                     // Set previous filters
                     if (_this2.props.location.state.filters !== undefined) {
 
-                        var filtered = _this2.multiFilter(_this2.state.allRows, _this2.props.location.state.filters);
-                        _this2.setState({ rows: filtered, preSetFilters: _this2.props.location.state.filters });
+                        _this2.onFilter(_this2.props.location.state.filters);
+                        _this2.setState({ preSetFilters: _this2.props.location.state.filters });
                     }
 
                     if (_this2.props.location.state.show !== undefined) _this2.setState({ showFavorites: true }, function () {
@@ -58649,33 +58655,39 @@ var CarData = function (_Component) {
         value: function onFilter(data) {
 
             var type = this.state.type;
-            var body = this.state.body;
+            var body_type = this.state.body_type;
             var price = this.state.price;
 
-            if (data.type !== undefined) {
+            if (data.type !== undefined && data.type !== "") {
                 type = data.type;
                 this.state.type = type;
             }
 
-            if (data.body !== undefined) {
-                body = data.body;
-                this.state.body = body;
+            if (data.body_type !== undefined && data.body_type !== "") {
+                body_type = data.body_type;
+                this.state.body_type = body_type;
             }
 
-            if (data.price !== undefined) {
+            if (data.price !== undefined && data.price !== "") {
                 price = data.price * 1000;
                 this.state.price = price;
             }
 
             var filters = {
                 type: type,
-                body_type: body,
+                body_type: body_type,
                 price: price
             };
 
             // Filter data
-            var filtered = this.multiFilter(this.state.allRows, filters);
-            this.setState({ rows: filtered, filters: filters });
+            if (filters.type !== "" || filters.body_type !== "" || filters.price !== "") {
+
+                var filtered = this.multiFilter(this.state.allRows, filters);
+
+                if (filters.price !== "") filters.price = filters.price / 1000;
+
+                this.setState({ rows: filtered, filters: filters });
+            }
         }
     }, {
         key: 'multiFilter',
@@ -58740,7 +58752,7 @@ var CarData = function (_Component) {
                             { className: 'car-detail-block  col-md-3 text-center' },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } }, className: "d-none d-sm-block " + vehicle.type.toLowerCase() },
+                                { to: { pathname: vehicle.id + '/detail', state: { filters: _this5.state.filters } }, className: "d-none d-sm-block " + vehicle.type.toLowerCase() },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h2',
                                     null,
@@ -58749,7 +58761,7 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } } },
+                                { to: { pathname: vehicle.id + '/detail', state: { filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h3',
                                     null,
@@ -58773,7 +58785,7 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } } },
+                                { to: { pathname: vehicle.id + '/detail', state: { filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'h5',
                                     { className: 'd-none d-sm-block' },
@@ -58847,7 +58859,7 @@ var CarData = function (_Component) {
                             ),
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 __WEBPACK_IMPORTED_MODULE_5_react_router_dom__["b" /* Link */],
-                                { to: { pathname: vehicle.id + '/detail', state: { fullscreen: false, filters: _this5.state.filters } } },
+                                { to: { pathname: vehicle.id + '/detail', state: { filters: _this5.state.filters } } },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'p',
                                     null,
@@ -60862,9 +60874,10 @@ var DetailBlock = function (_Component) {
         var _this = _possibleConstructorReturn(this, (DetailBlock.__proto__ || Object.getPrototypeOf(DetailBlock)).call(this, props));
 
         _this.state = {
+            fullscreen: false,
             vehicle: [],
-            min: localStorage.getItem('min'),
-            max: localStorage.getItem('max'),
+            min: parseInt(localStorage.getItem('min')),
+            max: parseInt(localStorage.getItem('max')),
             preSetFilters: { type: "", body_type: "", price: "" }
         };
         return _this;
@@ -60882,6 +60895,8 @@ var DetailBlock = function (_Component) {
 
                     // Set previous filters
                     if (_this2.props.location.state.filters !== undefined) _this2.setState({ preSetFilters: _this2.props.location.state.filters });
+
+                    if (_this2.props.location.state.fullscreen !== undefined) _this2.setState({ fullscreen: true });
                 }
             });
 
@@ -60918,10 +60933,9 @@ var DetailBlock = function (_Component) {
             var images = this.state.vehicle.images;
 
             var vehicle = this.state.vehicle;
-            var fullscreen = false;
-            if (this.props.location.state !== undefined) fullscreen = this.props.location.state.fullscreen;
-
-            var preSetFilters = this.state.preSetFilters;
+            var _state = this.state,
+                preSetFilters = _state.preSetFilters,
+                fullscreen = _state.fullscreen;
 
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -61062,7 +61076,7 @@ var DetailBlock = function (_Component) {
                         )
                     )
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { filters: this.props.location.state.filters })
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__footer__["a" /* default */], { filters: this.state.preSetFilters })
             );
         }
     }]);
@@ -61100,14 +61114,14 @@ var Slider = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Slider.__proto__ || Object.getPrototypeOf(Slider)).call(this, props));
 
-        _this.state = { images: [] };
+        _this.state = { images: [], fullscreen: false };
         return _this;
     }
 
     _createClass(Slider, [{
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
-            this.setState({ images: nextProps.images });
+            this.setState({ images: nextProps.images, fullscreen: nextProps.fullscreen });
         }
     }, {
         key: 'componentDidUpdate',

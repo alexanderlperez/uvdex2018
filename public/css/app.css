@@ -457,6 +457,17 @@ justify content css mixins here
   }
 }
 
+.car-info-section .car-detail-wrapper .image-block img {
+  width: 214px;
+  height: 214px;
+  -webkit-object-fit: contain;
+  -ms-object-fit: contain;
+  -o-object-fit: contain;
+  -moz-object-fit: contain;
+  object-fit: contain;
+  border: 1px solid #CFCFCF;
+}
+
 a.fav-icon i {
   font-size: 36px;
   line-height: 40px;
