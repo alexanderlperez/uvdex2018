@@ -32,6 +32,13 @@ class DetailBlock extends Component{
                         this.setState({fullscreen: true});
                 }
 
+                let localFavourites = JSON.parse(localStorage.getItem('favourites'));
+                if(localFavourites !== null && localFavourites.length){
+                    if(localFavourites.includes(parseInt(this.props.match.params.id)))
+                        $('.visible').addClass('hidden');
+                }
+
+
             });
 
         window.scrollTo(0, 0);
