@@ -471,6 +471,37 @@ class VehicleController extends Controller
     }
 
     /**
+     * Update Featured Image
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateFeaturedImage(Request $request) {
+
+        try {
+
+            DB::beginTransaction();
+
+            $data['images'] = $request->get('images');
+            if(is_array($request->get('images')))
+                $data['images'] = implode(',', $request->get('images'));
+
+            $vehicle = Vehicle::find($request->get('id'));
+            $vehicle->update($data);
+            $message['type'] = 'Success';
+            $message['status'] = trans('message.featured_update');
+
+            DB::commit();
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+            $message['type'] = 'Error';
+            $message['status'] = $e->getMessage();
+        }
+
+        return response()->json(['message' => $message], $this->successStatus);
+    }
+
+    /**
      * exportCarForSale
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Box\Spout\Common\Exception\IOException
