@@ -521,7 +521,7 @@ class InlineGrid extends React.Component {
 
     formatPrice(price) {
 
-        if(price === 0)
+        if(parseInt(price) === 0)
             return '';
         else
             return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
