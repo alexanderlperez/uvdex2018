@@ -116,7 +116,6 @@ return [
         ],*/
         [
             'text' => 'Manage Vehicles',
-            'url'  => '#',
             'icon' => 'car',
             'submenu' => [
                 [
