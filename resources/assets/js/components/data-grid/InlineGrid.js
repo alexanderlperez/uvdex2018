@@ -549,9 +549,11 @@ class InlineGrid extends React.Component {
 
         if(updated.hasOwnProperty("price") || updated.hasOwnProperty("nada") || updated.hasOwnProperty("msrp")) {
 
-            updated[Object.keys(updated)[0]] = '';
-            if(updated[Object.keys(updated)].replace(/\$/g, '') !== 0)
-                updated[Object.keys(updated)[0]] = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
+            let price = '';
+            if(updated[Object.keys(updated)].replace(/\$/g, '') !== "0")
+                price = updated[Object.keys(updated)].replace(/\$/g, ''); // Remove extra dollar signs
+
+            updated[Object.keys(updated)[0]] = price;
         }
 
         for (let i = fromRow; i <= toRow; i++) {
