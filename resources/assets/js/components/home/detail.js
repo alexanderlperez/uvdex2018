@@ -68,13 +68,13 @@ class DetailBlock extends Component{
     render() {
 
         const { images } = this.state.vehicle;
-        const vehicle = this.state.vehicle;
-        const {preSetFilters, fullscreen} = this.state;
+        const {min, max, fullscreen, vehicle} = this.state;
+        let filters = {type: "", body_type: "", price: ""};
 
         return(
 
             <div>
-                <Filter min={this.state.min} max={this.state.max} filters={preSetFilters} />
+                <Filter min={min} max={max} filters={filters} />
 
                 <div className="container detail-information-wrapper">
                     <div className="row carinfo-block">
