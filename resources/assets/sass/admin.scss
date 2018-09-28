@@ -1,21 +1,8 @@
 /*================ sidebar styling here ============*/
-// .main-sidebar{
-//     ul{
-//         &.sidebar-menu{
-//             li{
-//                 &.menu-open{
-//                     span{
-//                        .pull-right-container{
-//                            @media screen and (max-width: 600px){
-                               
-//                            }
-//                        } 
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:not(.menu-open):hover>.treeview-menu{
+    display: none !important;
+} 
+
 @media screen and (max-width: 600px){
     .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li:hover>a>.pull-right-container{
         position: absolute !important;
@@ -27,4 +14,5 @@
         position: static !important;
         width: 100% !important;
     }
+    
 }
