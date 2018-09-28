@@ -60898,6 +60898,11 @@ var DetailBlock = function (_Component) {
 
                     if (_this2.props.location.state.fullscreen !== undefined) _this2.setState({ fullscreen: true });
                 }
+
+                var localFavourites = JSON.parse(localStorage.getItem('favourites'));
+                if (localFavourites !== null && localFavourites.length) {
+                    if (localFavourites.includes(parseInt(_this2.props.match.params.id))) $('.visible').addClass('hidden');
+                }
             });
 
             window.scrollTo(0, 0);
@@ -60931,17 +60936,18 @@ var DetailBlock = function (_Component) {
             var _this3 = this;
 
             var images = this.state.vehicle.images;
-
-            var vehicle = this.state.vehicle;
             var _state = this.state,
-                preSetFilters = _state.preSetFilters,
-                fullscreen = _state.fullscreen;
+                min = _state.min,
+                max = _state.max,
+                fullscreen = _state.fullscreen,
+                vehicle = _state.vehicle;
 
+            var filters = { type: "", body_type: "", price: "" };
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { min: this.state.min, max: this.state.max, filters: preSetFilters }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__filter__["a" /* default */], { min: min, max: max, filters: filters }),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     { className: 'container detail-information-wrapper' },
