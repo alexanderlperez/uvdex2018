@@ -1,0 +1,16 @@
+/*================ sidebar styling here ============*/
+
+@media screen and (max-width: 600px) {
+  .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li:hover > a > .pull-right-container {
+    position: absolute !important;
+    top: 50% !important;
+    padding: 2px 4px;
+    left: auto !important;
+  }
+
+  .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+
