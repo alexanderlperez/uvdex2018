@@ -19,8 +19,11 @@
         padding: 15px;
         cursor: pointer;
         position: relative;
+        @include flexbox();
+        @include flex-wrap($flex-wrap: wrap);
         @media screen and (min-width: $mdscreen-size){
             padding: 11px 0 15px 0;
+            @include flex-wrap($flex-wrap: nowrap);
         }
         
         &:hover {
@@ -83,6 +86,7 @@
                 font-family: $lato-font;
                 margin-top: 14px;
                 margin-bottom: 0;
+                height: calc(100% - 22px);
                 @media screen and (min-width: $xlscreen-size){
                     margin: 14px 0 0 0;
                 }
