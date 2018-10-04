@@ -19,13 +19,14 @@
         padding: 15px;
         cursor: pointer;
         position: relative;
-        @include flexbox();
-        @include flex-wrap($flex-wrap: wrap);
-        @media screen and (min-width: $mdscreen-size){
+        
+        // @include flex-wrap($flex-wrap: wrap);
+        @media screen and (min-width: $lgscreen-size){
             padding: 11px 0 15px 0;
+            @include flexbox();
             @include flex-wrap($flex-wrap: nowrap);
         }
-        
+                
         &:hover {
             border: 2px solid $dark-blue;
         }
@@ -58,14 +59,12 @@
             }
         }
         .dealer-notes {
-            @media screen and (max-width: ($smscreen-size - 1)) {
-                position: static;
-            }
+           
             @media screen and (max-width: ($lgscreen-size - 1)) {
                 width: 100%;
                 max-width: 100%;
                 text-align: center;
-                
+                position: static;
             }
 
             h4 {
@@ -98,6 +97,9 @@
                     right: 8px;
                     @include object-fit($property: cover);
                     @media screen and (min-width: $smscreen-size) {
+                        top: 8px;
+                    }
+                    @media screen and (min-width: $lgscreen-size) {
                         top: 0;
                     }
                 }
