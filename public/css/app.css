@@ -166,17 +166,14 @@ justify content css mixins here
   padding: 15px;
   cursor: pointer;
   position: relative;
-  display: -webkit-box  !important;
-  display: -ms-flexbox  !important;
-  display: flex  !important;
-  -o-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   .car-info-section .car-detail-wrapper {
     padding: 11px 0 15px 0;
+    display: -webkit-box  !important;
+    display: -ms-flexbox  !important;
+    display: flex  !important;
     -o-flex-wrap: nowrap;
     -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
@@ -223,17 +220,12 @@ justify content css mixins here
   }
 }
 
-@media screen and (max-width: 575px) {
-  .car-info-section .car-detail-wrapper .dealer-notes {
-    position: static;
-  }
-}
-
 @media screen and (max-width: 991px) {
   .car-info-section .car-detail-wrapper .dealer-notes {
     width: 100%;
     max-width: 100%;
     text-align: center;
+    position: static;
   }
 }
 
@@ -275,6 +267,12 @@ justify content css mixins here
 }
 
 @media screen and (min-width: 576px) {
+  .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
+    top: 8px;
+  }
+}
+
+@media screen and (min-width: 992px) {
   .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
     top: 0;
   }
