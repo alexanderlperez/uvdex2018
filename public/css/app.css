@@ -255,29 +255,6 @@ justify content css mixins here
   }
 }
 
-.car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
-  position: absolute;
-  top: 13px;
-  right: 8px;
-  -webkit-object-fit: cover;
-  -ms-object-fit: cover;
-  -o-object-fit: cover;
-  -moz-object-fit: cover;
-  object-fit: cover;
-}
-
-@media screen and (min-width: 576px) {
-  .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
-    top: 8px;
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .car-info-section .car-detail-wrapper .dealer-notes a.fav-icon {
-    top: 0;
-  }
-}
-
 @media screen and (max-width: 991px) {
   .car-info-section .car-detail-wrapper .car-detail-block {
     width: 100%;
@@ -338,29 +315,6 @@ justify content css mixins here
   -moz-object-fit: cover;
   object-fit: cover;
   margin-bottom: 20px;
-}
-
-.car-info-section .car-detail-wrapper .car-detail-block a.fav-icon {
-  position: absolute;
-  right: -13px;
-  top: -12px;
-}
-
-@media screen and (min-width: 768px) {
-  .car-info-section .car-detail-wrapper .car-detail-block a.fav-icon {
-    right: 0;
-    top: -5px;
-  }
-}
-
-.car-info-section .car-detail-wrapper .car-detail-block a.fav-icon img {
-  width: 30px;
-  height: 30px;
-  -webkit-object-fit: cover;
-  -ms-object-fit: cover;
-  -o-object-fit: cover;
-  -moz-object-fit: cover;
-  object-fit: cover;
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block a.used h2 {
@@ -474,6 +428,25 @@ justify content css mixins here
   -moz-object-fit: contain;
   object-fit: contain;
   border: 1px solid #CFCFCF;
+}
+
+.car-info-section .car-detail-wrapper a.fav-icon {
+  position: absolute;
+  top: 15px;
+  right: 4px;
+  z-index: 1;
+  -webkit-object-fit: cover;
+  -ms-object-fit: cover;
+  -o-object-fit: cover;
+  -moz-object-fit: cover;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 576px) {
+  .car-info-section .car-detail-wrapper a.fav-icon {
+    right: 14px;
+    top: 12px;
+  }
 }
 
 a.fav-icon i {

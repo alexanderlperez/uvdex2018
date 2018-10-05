@@ -19,8 +19,6 @@
         padding: 15px;
         cursor: pointer;
         position: relative;
-        
-        // @include flex-wrap($flex-wrap: wrap);
         @media screen and (min-width: $lgscreen-size){
             padding: 11px 0 15px 0;
             @include flexbox();
@@ -90,20 +88,7 @@
                     margin: 14px 0 0 0;
                 }
             }
-            a {
-                &.fav-icon {
-                    position: absolute;
-                    top: 13px;
-                    right: 8px;
-                    @include object-fit($property: cover);
-                    @media screen and (min-width: $smscreen-size) {
-                        top: 8px;
-                    }
-                    @media screen and (min-width: $lgscreen-size) {
-                        top: 0;
-                    }
-                }
-            }
+            
         }
         .car-detail-block {
             @media screen and (max-width: ($lgscreen-size - 1)) {
@@ -144,21 +129,7 @@
                 margin-bottom: 20px;
             }
             a {
-                &.fav-icon {
-                    position: absolute;
-                    right: -13px;
-                    top: -12px;
-                    @media screen and (min-width: $mdscreen-size){
-                        right: 0;
-                        top: -5px;
-                    }
-                    img {
-                        width: 30px;
-                        height: 30px;
-                        @include object-fit($property: cover);
-                    }
-                    
-                }
+                
                 &.used{
                     
                     h2{
@@ -241,6 +212,20 @@
                 height: 214px;
                 @include object-fit($property: contain);
                 border: 1px solid $lighter-gray;
+            }
+        }
+        a {
+            &.fav-icon {
+                position: absolute;
+                top: 15px;
+                right: 4px;
+                z-index: 1;
+                @include object-fit($property: cover);
+                @media screen and (min-width: $smscreen-size) {
+                    right: 14px;
+                    top: 12px;
+                }
+                
             }
         }
     }
