@@ -41,20 +41,13 @@
         }
         h3 {
             font-size: 20px;
-            line-height: 1;
+            line-height: 22px;
             font-weight: 600;
             color: $black;
             font-family: $lato-font;
             margin: 0 0 22px 0;
             padding: 0 12px;
-            @media screen and (min-width: $smscreen-size){
-                font-size: 24px;
-                padding: 0;
-            }
-            @media screen and (min-width: $xlscreen-size){
-                font-size: 20px;
-                            
-            }
+            
         }
         .dealer-notes {
            
