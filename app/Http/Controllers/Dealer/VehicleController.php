@@ -523,21 +523,32 @@ class VehicleController extends Controller
         $data = [];
         foreach ($vehicles as $key => $vehicle) {
 
-            $data[$key]['CarsForSaleDealerID'] = "1004599";
-            $data[$key] += $vehicle;
-            $data[$key]['price'] = (string)($vehicle['price']);
-            $data[$key]['mileage'] = str_replace(',', '',$vehicle['mileage']);
-
-            /*$cylinders = substr($vehicle['cylinders'], -1);
-
-            $data[$key]['cylinders'] = "0";
-            if(!empty($cylinders))
-                $data[$key]['cylinders'] = $cylinders;*/
+            $data[$key]['CarsForSaleDealerID'] = '"1004599"';
+            $data[$key]['type'] = '"'.$vehicle['type'].'"';
+            $data[$key]['vin'] = '"'.$vehicle['vin'].'"';
+            $data[$key]['stock_number'] = '"'.$vehicle['stock_number'].'"';
+            $data[$key]['make'] = '"'.$vehicle['make'].'"';
+            $data[$key]['model'] = '"'.$vehicle['model'].'"';
+            $data[$key]['model_year'] = '"'.$vehicle['model_year'].'"';
+            $data[$key]['trim'] = '"'.str_replace("'", '',$vehicle['trim']).'"';
+            $data[$key]['body_style'] = '"'.$vehicle['body_style'].'"';
+            $data[$key]['mileage'] = '"'.str_replace(',', '',$vehicle['mileage']).'"';
+            $data[$key]['engine_description'] = '"'.$vehicle['engine_description'].'"';
+            $data[$key]['cylinders'] = '"'.$vehicle['cylinders'].'"';
+            $data[$key]['fuel_type'] = '"'.$vehicle['fuel_type'].'"';
+            $data[$key]['transmission'] = '"'.$vehicle['transmission'].'"';
+            $data[$key]['price'] = '"'.$vehicle['price'].'"';
+            $data[$key]['exterior_color'] = '"'.$vehicle['exterior_color'].'"';
+            $data[$key]['interior_color'] = '"'.$vehicle['interior_color'].'"';
+            $data[$key]['option_text'] = '"'.$vehicle['option_text'].'"';
+            $data[$key]['description'] = '"'.$vehicle['description'].'"';
+            $data[$key]['images'] = '"'.$vehicle['images'].'"';
         }
 
         if(!empty($data)) {
 
             $writer = WriterFactory::create(Type::CSV); // for CSV files
+            $writer->setFieldEnclosure("'");
             $filename = 'inventory.txt';
             $path = storage_path('app/'.$filename);
             $writer->openToBrowser($path); // stream data directly to the browser
