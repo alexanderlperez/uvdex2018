@@ -190,6 +190,10 @@ class CarData extends Component {
             return (
                 <div key={vehicle.id} className="full-width-wrapper">
                     <div className="car-detail-wrapper clearfix">
+                            <Link to="#" replace className="fav-icon">
+                                <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
+                                     onClick={(e) => this.toggleIcons(e)}/>
+                            </Link>
                         <div className="image-block col-md-3 d-none d-sm-block">
                             <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true, filters: this.state.filters} }}>
                                 <figure>
@@ -202,10 +206,7 @@ class CarData extends Component {
                             <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}>
                                 <h3>{vehicle.title}</h3>
                             </Link>
-                            <Link to='#' className="fav-icon d-block d-sm-none">
-                                <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
-                                     onClick={this.toggleIcons}/>
-                            </Link>
+                            
                             {/* Mobile View */}
                             <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true, filters: this.state.filters}}}>
                                 <figure className="d-block d-sm-none">
@@ -228,10 +229,7 @@ class CarData extends Component {
                         </div>
                         <div className="dealer-notes  col-md-6 text-center d-none d-sm-block">
                             <h4>Dealer Notes</h4>
-                            <Link to="#" replace className="fav-icon">
-                                <img src={imgSrc} alt="Fav Icon" data-icon={icon} data-key={vehicle.id}
-                                     onClick={(e) => this.toggleIcons(e)}/>
-                            </Link>
+                            
                             <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}><p>{vehicle.description}</p></Link>
                         </div>
                     </div>
