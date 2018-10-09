@@ -172,8 +172,14 @@ class CarData extends Component {
         // Show or Hide favourites
         if (status)
             this.setState({rows: this.state.rows.filter(vehicle => this.state.favorites.includes(vehicle.id) === true), showFavorites: true});
-        else
+        else {
             this.setState({rows: this.state.allRows, showFavorites: false});
+
+            if (this.state.filters !== undefined || this.state.filters !== "")
+                this.onFilter(this.state.filters);
+            else
+                this.onFilter(this.state.preSetFilters);
+        }
     }
 
     renderVehicles() {
