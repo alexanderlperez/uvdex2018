@@ -34,7 +34,7 @@ class DetailBlock extends Component{
 
                 let localFavourites = JSON.parse(localStorage.getItem('favourites'));
                 if(localFavourites !== null && localFavourites.length){
-                    if(localFavourites.includes(parseInt(this.props.match.params.id)))
+                    if(localFavourites.indexOf(parseInt(this.props.match.params.id) >= 0))
                         $('.visible').addClass('hidden');
                 }
 
@@ -68,13 +68,13 @@ class DetailBlock extends Component{
     render() {
 
         const { images } = this.state.vehicle;
-        const {min, max, fullscreen, vehicle} = this.state;
+        const {min, max, fullscreen, vehicle, preSetFilters} = this.state;
         let filters = {type: "", body_type: "", price: ""};
 
         return(
 
             <div>
-                <Filter min={min} max={max} filters={filters} />
+                <Filter min={min} max={max} filters={preSetFilters} />
 
                 <div className="container detail-information-wrapper">
                     <div className="row carinfo-block">
@@ -107,7 +107,7 @@ class DetailBlock extends Component{
                     </div>
                 </div>
 
-                <Footer filters={this.state.preSetFilters}/>
+                <Footer filters={preSetFilters}/>
             </div>
         );
     }

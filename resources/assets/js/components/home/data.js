@@ -47,7 +47,7 @@ class CarData extends Component {
                 });
 
                 if(this.props.location.state !== undefined) {
-
+console.log(this.props.location.state.filters);
                     // Set previous filters
                     if(this.props.location.state.filters !== undefined) {
 
@@ -91,7 +91,7 @@ class CarData extends Component {
 
     addRemoveFavourites(item) {
 
-        if (!this.state.favorites.includes(item))
+        if (!this.state.favorites.indexOf(item) >= 0)
             this.state.favorites.push(item);
         else
             this.setState({favorites: this.state.favorites.filter(x => x === item === false)});
@@ -99,7 +99,7 @@ class CarData extends Component {
         // Set local storage
         let localFavourites = JSON.parse(localStorage.getItem('favourites'));
 
-        if (!localFavourites.includes(item)) {
+        if (!localFavourites.indexOf(item) >= 0) {
 
             localFavourites.push(item);
             localStorage.setItem('favourites', JSON.stringify(localFavourites));
@@ -162,7 +162,7 @@ class CarData extends Component {
                 if (eachKey === 'price')
                     return eachObj[eachKey] >= this.state.min * 1000 && eachObj[eachKey] <= filters[eachKey];
                 else
-                    return filters[eachKey].includes(eachObj[eachKey]);
+                    return filters[eachKey].indexOf(eachObj[eachKey] >= 0);
             });
         });
     }
@@ -171,7 +171,7 @@ class CarData extends Component {
 
         // Show or Hide favourites
         if (status)
-            this.setState({rows: this.state.rows.filter(vehicle => this.state.favorites.includes(vehicle.id) === true), showFavorites: true});
+            this.setState({rows: this.state.rows.filter(vehicle => this.state.favorites.indexOf(vehicle.id) >= 0), showFavorites: true});
         else
             this.setState({rows: this.state.allRows, showFavorites: false});
     }
@@ -182,7 +182,7 @@ class CarData extends Component {
 
             let icon = 'off';
             let imgSrc = FavIconBlue;
-            if (this.state.favorites.includes(vehicle.id)){
+            if (this.state.favorites.indexOf(vehicle.id) >= 0){
                 icon = 'on';
                 imgSrc = FavIconDarkBlue;
             }

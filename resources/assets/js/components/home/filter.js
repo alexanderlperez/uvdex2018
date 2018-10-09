@@ -18,9 +18,7 @@ class Filter extends Component{
 
     componentWillMount() {
 
-        let isDetail = window.location.hash.includes('detail');
-
-        if(isDetail)
+        if(window.location.hash.indexOf('detail') >= 0)
             this.setState({isDetail: true})
     }
 
