@@ -278,7 +278,7 @@ class InlineGrid extends React.Component {
                 width: 80,
                 resizable: true,
                 filterable: true,
-                formatter: (props) => (<span>{this.formatPrice(props.value)}</span>),
+                formatter: (props) => (<span>{props.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>),
             },
             {
                 key: 'engine_description',
