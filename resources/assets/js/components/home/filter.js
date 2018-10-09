@@ -41,6 +41,17 @@ class Filter extends Component{
         });
     }
 
+    componentDidUpdate() {
+
+        let price = this.state.max;
+
+        if(this.state.filters.price !== "")
+            price = this.state.filters.price;
+
+        if (this.state.isDetail)
+            $('#rangeslider').val(price);
+    }
+
     clickFilter(e) {
 
         if (e.target.getAttribute('data-title') === 'type')
