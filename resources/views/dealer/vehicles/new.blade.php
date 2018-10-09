@@ -3,6 +3,7 @@
 @section('heading','New Vehicles')
 
 @section('action')
+    <a href='{{ route('exportCarForSale') }}' class='btn btn-primary'>CarsForSale Export</a>
     <a href='{{ route('export', ['type' => 'N']) }}' class='btn btn-primary'>Export Inventory</a>
 @stop
 
