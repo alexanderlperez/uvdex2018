@@ -14,5 +14,10 @@
         position: static !important;
         width: 100% !important;
     }
-    
+    .skin-blue .content-header{
+        min-height: 81px;
+    }
+    .skin-blue .content-header span.pull-right{
+        margin-top: 9px;
+    }
 }

@@ -521,34 +521,33 @@ class VehicleController extends Controller
             ->get()->toArray();
 
         $data = [];
+        $id = '"1004599"';
         foreach ($vehicles as $key => $vehicle) {
-
-            $data[$key]['CarsForSaleDealerID'] = '"1004599"';
-            $data[$key]['type'] = '"'.$vehicle['type'].'"';
-            $data[$key]['vin'] = '"'.$vehicle['vin'].'"';
-            $data[$key]['stock_number'] = '"'.$vehicle['stock_number'].'"';
-            $data[$key]['make'] = '"'.$vehicle['make'].'"';
-            $data[$key]['model'] = '"'.$vehicle['model'].'"';
-            $data[$key]['model_year'] = '"'.$vehicle['model_year'].'"';
-            $data[$key]['trim'] = '"'.str_replace("'", '',$vehicle['trim']).'"';
-            $data[$key]['body_style'] = '"'.$vehicle['body_style'].'"';
-            $data[$key]['mileage'] = '"'.str_replace(',', '',$vehicle['mileage']).'"';
-            $data[$key]['engine_description'] = '"'.$vehicle['engine_description'].'"';
-            $data[$key]['cylinders'] = '"'.$vehicle['cylinders'].'"';
-            $data[$key]['fuel_type'] = '"'.$vehicle['fuel_type'].'"';
-            $data[$key]['transmission'] = '"'.$vehicle['transmission'].'"';
-            $data[$key]['price'] = '"'.$vehicle['price'].'"';
-            $data[$key]['exterior_color'] = '"'.$vehicle['exterior_color'].'"';
-            $data[$key]['interior_color'] = '"'.$vehicle['interior_color'].'"';
-            $data[$key]['option_text'] = '"'.$vehicle['option_text'].'"';
-            $data[$key]['description'] = '"'.$vehicle['description'].'"';
-            $data[$key]['images'] = '"'.$vehicle['images'].'"';
+            $data[$key]['CarsForSaleDealerID'] = $id;
+            $data[$key]['type'] = self::getEQuote($vehicle['type']);
+            $data[$key]['vin'] = self::getEQuote($vehicle['vin']);
+            $data[$key]['stock_number'] = self::getEQuote($vehicle['stock_number']);
+            $data[$key]['make'] = self::getEQuote($vehicle['make']);
+            $data[$key]['model'] = self::getEQuote($vehicle['model']);
+            $data[$key]['model_year'] = self::getEQuote($vehicle['model_year']);
+            $data[$key]['trim'] = self::getEQuote($vehicle['trim']);
+            $data[$key]['body_style'] = self::getEQuote($vehicle['body_style']);
+            $data[$key]['mileage'] = self::getEQuote($vehicle['mileage']);
+            $data[$key]['engine_description'] = self::getEQuote($vehicle['engine_description']);
+            $data[$key]['cylinders'] = self::getEQuote($vehicle['cylinders']);
+            $data[$key]['fuel_type'] = self::getEQuote($vehicle['fuel_type']);
+            $data[$key]['transmission'] = self::getEQuote($vehicle['transmission']);
+            $data[$key]['price'] = self::getEQuote($vehicle['price']);
+            $data[$key]['exterior_color'] = self::getEQuote($vehicle['exterior_color']);
+            $data[$key]['interior_color'] = self::getEQuote($vehicle['interior_color']);
+            $data[$key]['option_text'] = self::getEQuote($vehicle['option_text']);
+            $data[$key]['description'] = self::getEQuote($vehicle['description']);
+            $data[$key]['images'] = self::getEQuote($vehicle['images']);
         }
-
         if(!empty($data)) {
 
             $writer = WriterFactory::create(Type::CSV); // for CSV files
-            $writer->setFieldEnclosure("'");
+            $writer->setFieldEnclosure(" ");
             $filename = 'inventory.txt';
             $path = storage_path('app/'.$filename);
             $writer->openToBrowser($path); // stream data directly to the browser
@@ -560,5 +559,23 @@ class VehicleController extends Controller
             setFlashMessage('error', trans('message.no_vehicle'));
             return back();
         }
+    }
+
+    /**
+     * getEQuote
+     * @return string
+     * @throws \Box\Spout\Common\Exception\IOException
+     * @throws \Box\Spout\Common\Exception\InvalidArgumentException
+     * @throws \Box\Spout\Common\Exception\UnsupportedTypeException
+     * @throws \Box\Spout\Writer\Exception\WriterNotOpenedException
+     */
+    public function getEQuote( $data ){
+
+      if( $data ):
+
+        $data  = sprintf('"%s"', $data);
+      endif;
+
+      return $data;
     }
 }
