@@ -16,3 +16,9 @@ if(document.getElementById('root')){
         , document.getElementById('root')
     );
 }
+/* back button event tracking to avoid the scroll lock*/
+if (window.history && window.history.pushState) {
+  $(window).on('popstate', function() {
+    $('html, body').removeAttr('style')
+	});
+}
