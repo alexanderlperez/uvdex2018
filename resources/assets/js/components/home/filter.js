@@ -48,6 +48,9 @@ class Filter extends Component{
         if(this.state.filters.price !== "")
             price = this.state.filters.price;
 
+        if(price === undefined)
+            price = this.state.max;
+
         if (this.state.isDetail)
             $('#rangeslider').val(price);
     }
