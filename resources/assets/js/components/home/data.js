@@ -212,7 +212,7 @@ class CarData extends Component {
                             <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}>
                                 <h3>{vehicle.title}</h3>
                             </Link>
-                            
+
                             {/* Mobile View */}
                             <Link to={{ pathname: vehicle.id + '/detail', state:{fullscreen: true, filters: this.state.filters}}}>
                                 <figure className="d-block d-sm-none">
@@ -235,7 +235,7 @@ class CarData extends Component {
                         </div>
                         <div className="dealer-notes  col-md-6 text-center d-none d-sm-block">
                             <h4>Dealer Notes</h4>
-                            
+
                             <Link to={{ pathname: vehicle.id + '/detail', state:{filters: this.state.filters} }}><p>{vehicle.description}</p></Link>
                         </div>
                     </div>

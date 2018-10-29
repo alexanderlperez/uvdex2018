@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Filter from './filter';
 import Footer from './footer';
 import Slider from '../../components/GallerySlider/Slider';
+import MetaTags from 'react-meta-tags';
 
 class DetailBlock extends Component{
     constructor(props){
@@ -20,6 +21,8 @@ class DetailBlock extends Component{
 
         axios.get(`/getVehicles/${this.props.match.params.id}`)
             .then(response => {
+
+
                 this.setState({ vehicle : response.data.vehicle });
 
                 if(this.props.location.state !== undefined) {
@@ -40,7 +43,6 @@ class DetailBlock extends Component{
 
 
             });
-
         window.scrollTo(0, 0);
     }
 
@@ -73,6 +75,7 @@ class DetailBlock extends Component{
         return(
 
             <div>
+                { this.initialMetaTags()}
                 <Filter min={min} max={max} filters={preSetFilters} />
 
                 <div className="container detail-information-wrapper">
@@ -95,7 +98,7 @@ class DetailBlock extends Component{
                                 <a href="tel:7124693383" className="btn btn-primary">Call (712) 469-3383</a>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div className="row dealer-notes">
                         <div className="col-12">
@@ -110,6 +113,30 @@ class DetailBlock extends Component{
             </div>
         );
     }
+
+    /* initilaization of basic meta tags*/
+    initialMetaTags(){
+
+      const {vehicle} = this.state
+      if( vehicle ){
+        let description = vehicle.description
+        description = (description && description.length >= 156 ) ? vehicle.description : vehicle.description
+
+        let images  = vehicle.images
+
+        images      = ( images ) ? images[0] : ''
+
+        return(
+          <MetaTags>
+            <title>{vehicle.title}</title>
+            <meta id="meta-description" name="description" content={description} />
+            <meta id="og-title" property="og:title" content={vehicle.title} />
+            <meta id="og-image" property="og:image" content={images} />
+          </MetaTags>
+        )
+      }
+    }
+
 }
 
 export default DetailBlock;
