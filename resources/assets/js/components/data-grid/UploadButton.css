@@ -174,4 +174,6 @@ input[type=file]::-webkit-file-upload-button {
     border-color: #7DB467;
 }
 
-
+.react-grid-Container .react-grid-Grid .react-grid-Viewport{
+    overflow-x: scroll !important;
+}
