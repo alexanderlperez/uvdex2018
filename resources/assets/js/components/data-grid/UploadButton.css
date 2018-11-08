@@ -173,10 +173,7 @@ input[type=file]::-webkit-file-upload-button {
     background-color: #c3efb2;
     border-color: #7DB467;
 }
-<<<<<<< HEAD
+
 .react-grid-Cell, .react-grid-Row{
   contain: inherit!important;
 }
-=======
-
->>>>>>> 988caa2f76ff33d92fd1000d99d116b19d251282
