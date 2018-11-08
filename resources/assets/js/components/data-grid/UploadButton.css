@@ -41,7 +41,7 @@ input[type=file]::-webkit-file-upload-button {
     float: none;
     width: 100%;
     clear: both;
-    
+
 }
 .react-grid-Container .react-grid-Toolbar .tools button{
     background-color: #3c8dbc;
@@ -74,7 +74,7 @@ input[type=file]::-webkit-file-upload-button {
     line-height: 22px;
     text-transform: uppercase;
     color: #000000;
-    
+
 }
 .react-grid-Cell.blue{
     background-color: #b0def9a1  !important;
@@ -169,9 +169,10 @@ input[type=file]::-webkit-file-upload-button {
     background-color: #7DB467;
     text-align: center;
 }
-.thumb-wrapper .thumb:nth-child(1) .thumbnail{ 
+.thumb-wrapper .thumb:nth-child(1) .thumbnail{
     background-color: #c3efb2;
     border-color: #7DB467;
 }
-
-
+.react-grid-Cell, .react-grid-Row{
+  contain: inherit!important;
+}
