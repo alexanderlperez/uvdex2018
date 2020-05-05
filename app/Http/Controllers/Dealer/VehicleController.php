@@ -383,7 +383,7 @@ class VehicleController extends Controller
         $vehicles = '';
         if($type == 'U') {
             $headers[] = Config::get('constants.headers.used');
-            $vehicles = Vehicle::select('stock_number', DB::raw("CONCAT('$', FORMAT(price, 0)) as price"), DB::raw("CONCAT('$', FORMAT(nada, 0)) as nada"), 'model_year', 'make', 'model', 'cpo', 'exterior_color', 'trim', 'mileage', 'engine_description', 'vin', 'description', 'previous_owner', 'images', 'passengers')
+            $vehicles = Vehicle::select('stock_number', DB::raw("CONCAT('$', FORMAT(price, 0)) as price"), DB::raw("CONCAT('$', FORMAT(nada, 0)) as nada"), 'model_year', 'make', 'model', 'cpo', 'exterior_color', 'trim', 'mileage', 'engine_description', 'vin', 'code', 'description', 'previous_owner', 'images', 'passengers')
                                 ->whereUserId(getUserId())
                                 ->whereIsActive(Config::get('constants.status.active'))
                                 ->whereType($type)

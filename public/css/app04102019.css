@@ -227,7 +227,7 @@ justify content css mixins here
 
 .car-info-section .car-detail-wrapper .dealer-notes p {
   font-size: 16px;
-  line-height: normal;
+  line-height: 1;
   font-weight: 400;
   color: #000000;
   font-family: "Lato", sans-serif;
@@ -268,7 +268,7 @@ justify content css mixins here
 
 @media screen and (max-width: 575px) {
   .car-info-section .car-detail-wrapper .car-detail-block .button-block {
-    display: -webkit-box  !important; margin-top: 10px;
+    display: -webkit-box  !important;
     display: -ms-flexbox  !important;
     display: flex  !important;
     -o-flex-wrap: nowrap;
@@ -281,7 +281,6 @@ justify content css mixins here
         -ms-flex-pack: center;
             justify-content: center;
   }
-	
 }
 
 .car-info-section .car-detail-wrapper .car-detail-block .button-block button {
@@ -310,11 +309,11 @@ justify content css mixins here
 }
 
 @media screen and (max-width: 767px) {
-
-	.car-info-section .car-detail-wrapper .car-detail-block a figure img {
+  .car-info-section .car-detail-wrapper .car-detail-block a figure img {
     width: 100%;
-    height: 100%; padding: 2px;
-
+    height: 100%;
+    max-height: 204px;
+    max-width: 204px;
     min-width: 204px;
     min-height: 204px;
     -webkit-object-fit: contain;
@@ -324,7 +323,6 @@ justify content css mixins here
     object-fit: contain;
     border: 1px solid #CFCFCF;
   }
-	.car-info-section .car-detail-wrapper h3, .car-info-section .car-detail-wrapper h2{font-size: 18px;}
 }
 
 @media screen and (max-width: 991px) {
@@ -367,7 +365,7 @@ justify content css mixins here
   -moz-object-fit: contain;
   object-fit: contain;
   border: 1px solid #CFCFCF;
-  margin-bottom: 15px; padding: 2px;
+  margin-bottom: 15px;
 }
 
 @media screen and (max-width: 767px) {
@@ -390,8 +388,8 @@ justify content css mixins here
   .car-info-section .car-detail-wrapper .image-block a figure img {
     width: 100%;
     height: 100%;
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 302px;
+    max-width: 302px;
     min-width: 302px;
     min-height: 302px;
     -webkit-object-fit: contain;
@@ -534,7 +532,7 @@ footer .back-button {
 }
 
 .detail-information-wrapper .car-price-detail .button-block .btn.btn-primary.visible {
-  /*position: absolute;*/
+  position: absolute;
 }
 
 .detail-information-wrapper .car-price-detail h5 {
@@ -652,7 +650,7 @@ footer .back-button {
   .rsDefault .rsSlide,
   .rsDefault .rsVideoFrameHolder,
   .rsDefault .rsThumbs {
-   
+    max-width: 500px !important;
   }
 }
 
@@ -11947,222 +11945,5 @@ a {
 
 .visible {
   display: block;
-}
-
-#navbar .range-filter-block strong{font-weight: 400;}
-
-@media screen and (max-width: 991px) {
-	body{ padding-top:60px;}
-	.detail-information-wrapper .car-price-detail h1.price{font-size: 26px;}
-	.detail-information-wrapper .car-price-detail h3, .detail-information-wrapper .dealer-notes h4{font-size: 18px;}
-	.detail-information-wrapper .car-price-detail h5{font-size: 16px;}
-	.detail-information-wrapper .car-price-detail .button-block .btn.btn-primary{padding: 10px 5px !important;}
-	.car-info-section .car-detail-wrapper h3{margin-bottom: 10px;}
-	
-	.car-info-section .car-detail-wrapper .image-block{float: left; width: 50%; padding-left: 0;}
-	.car-info-section .car-detail-wrapper .image-block a figure img{max-width: inherit; min-height: inherit;}
-	.car-info-section .car-detail-wrapper .car-detail-block, .car-info-section .car-detail-wrapper .dealer-notes{width: 50%; float: right;}
-	.car-info-section .car-detail-wrapper .dealer-notes {margin-top: 10px;}
-	.car-info-section .car-detail-wrapper .dealer-notes h4{font-size: 18px; margin-bottom: 0;}
-	.car-info-section .car-detail-wrapper .dealer-notes p{margin-top: 5px; word-break: break-word; font-size: 14px;}
-	.car-info-section .car-detail-wrapper h3{font-size: 18px;}
-	.filter-section { padding: 0; min-height: inherit;}
-	.car-info-section{ margin-top:0;}
-	.navbar-toggle{ margin-top:4px !important; margin-bottom:0 !important;}
-	.navbar-brand.d-block.d-sm-block.d-md-none{display:block !important;}
-	.filter-section{border-top:0 !important;}
-	#navbar.navbar-collapse.collapse{ display:none !important; }
-	#navbar.navbar-collapse.collapse.show{display:block !important;}
-	.navbar-collapse { border-top: 3px solid #000000 !important;}
-	.navbar-toggle{display:block !important;}
-	.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header
-	{margin-left:-15px !important; margin-right:-15px !important;}
-	.navbar-header{ float:none !important;}
-	.navbar-collapse .col-sm-12.col-md-4, .navbar-collapse .col-sm-12.col-md-5, .navbar-collapse .col-sm-12.col-md-3 { width:100%; text-align: center; flex: 0 0 100%;
-    max-width: 100%;}
-	.filter-section .navbar-collapse .row { -ms-flex-wrap: wrap; flex-wrap: wrap;}
-	.filter-section .range-filter-block h3{margin-top: 20px;}
-	.filter-section .range-filter-block{padding: 0 35px;}
-
-}
-
-@media screen and (max-width: 767px) {
-	.detail-information-wrapper .dealer-notes {margin-top: 15px;}
-	.car-info-section .car-detail-wrapper .car-detail-block img{margin-bottom: 10px;}
-	.car-info-section{padding: 0;}
-	.car-info-section .car-detail-wrapper .image-block, .car-info-section .car-detail-wrapper .car-detail-block, .car-info-section .car-detail-wrapper .dealer-notes{float: none; width: 100%;}
-	.car-info-section .car-detail-wrapper h3, .car-info-section .car-detail-wrapper .dealer-notes h4{font-size: 16px;}
-	.filter-section .range-filter-block{padding: 0 25px;}
-}
-
-@media screen and (max-width: 575px) {
-	.car-info-section .car-detail-wrapper .car-detail-block .button-block button{padding: 5px 10px !important;}
-	.car-info-section .car-detail-wrapper a.fav-icon{top: 6px;}
-	.car-info-section .car-detail-wrapper .car-detail-block a figure img{min-height: inherit; min-width: inherit;}
-	.car-info-section .car-detail-wrapper a.fav-icon img{height: 24px; width: 24px;}
-	
-	
-}
-
-@media only screen  and (max-width: 896px)
-and (orientation: landscape)
- {
-
-   .car-info-section .car-detail-wrapper h3{width: 50%;}
-   .car-info-section .car-detail-wrapper .car-detail-block .button-block button { padding: 5px 10px !important;}
-   .car-info-section .car-detail-wrapper .car-detail-block a figure img{float: left; width: 50%;}
-					   .image-block.col-md-3.d-none.d-sm-block, .d-none.d-sm-block.new,
-					   .car-info-section .car-detail-wrapper .car-detail-block h5.d-none.d-sm-block,
-					   .dealer-notes.col-md-6.text-center.d-none.d-sm-block
-					   {display: none !important;}
-					  .car-detail-block a figure.d-block.d-sm-none,
-					   .car-info-section .car-detail-wrapper h2.d-block.d-sm-none.new,
-					   .button-block.d-block.d-sm-none
-					   {display: block !important;}
-					   .car-info-section .car-detail-wrapper .car-detail-block .button-block{margin-top: 15px;}
-					   .car-info-section .car-detail-wrapper .car-detail-block{width:100%;}
-					   
-}
-
-@media only screen and (min-device-width: 480px) 
-                   and (max-device-width: 850px) 
-                   and (orientation: landscape) {
-
-   .car-info-section .car-detail-wrapper h3{width: 50%;}
-   .car-info-section .car-detail-wrapper .car-detail-block .button-block button { padding: 5px 10px !important;}
-   .car-info-section .car-detail-wrapper .car-detail-block a figure img{float: left; width: 50%;}
-					   .image-block.col-md-3.d-none.d-sm-block, .d-none.d-sm-block.new,
-					   .car-info-section .car-detail-wrapper .car-detail-block h5.d-none.d-sm-block,
-					   .dealer-notes.col-md-6.text-center.d-none.d-sm-block
-					   {display: none !important;}
-					  .car-detail-block a figure.d-block.d-sm-none,
-					   .car-info-section .car-detail-wrapper h2.d-block.d-sm-none.new,
-					   .button-block.d-block.d-sm-none
-					   {display: block !important;}
-					   .car-info-section .car-detail-wrapper .car-detail-block .button-block{margin-top: 15px;}
-					   .car-info-section .car-detail-wrapper .car-detail-block{width:100%;}
-					   
-}
-
-/* ----------- iPhone X+ ----------- */
-
-/* Portrait and Landscape */
-
-
-@media only screen 
-  and (min-device-width: 414px) 
-  and (max-device-width: 896px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) { 
-  
-.car-info-section .car-detail-wrapper h3{width: 50%;}
-   .car-info-section .car-detail-wrapper .car-detail-block .button-block button { padding: 5px 10px !important;}
-   .car-info-section .car-detail-wrapper .car-detail-block a figure img{float: left; width: 50%;}
-					   .image-block.col-md-3.d-none.d-sm-block, .d-none.d-sm-block.new,
-					   .car-info-section .car-detail-wrapper .car-detail-block h5.d-none.d-sm-block,
-					   .dealer-notes.col-md-6.text-center.d-none.d-sm-block
-					   {display: none !important;}
-					  .car-detail-block a figure.d-block.d-sm-none,
-					   .car-info-section .car-detail-wrapper h2.d-block.d-sm-none.new,
-					   .button-block.d-block.d-sm-none
-					   {display: block !important;}
-					   .car-info-section .car-detail-wrapper .car-detail-block .button-block{margin-top: 15px;}
-					   .car-info-section .car-detail-wrapper .car-detail-block{width:100%;}
-}
-
-/* ----------- iPhone X ----------- */
-
-/* Portrait and Landscape */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 812px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-  and (orientation: landscape) { 
-  
-.car-info-section .car-detail-wrapper h3{width: 50%;}
-   .car-info-section .car-detail-wrapper .car-detail-block .button-block button { padding: 5px 10px !important;}
-   .car-info-section .car-detail-wrapper .car-detail-block a figure img{float: left; width: 50%;}
-					   .image-block.col-md-3.d-none.d-sm-block, .d-none.d-sm-block.new,
-					   .car-info-section .car-detail-wrapper .car-detail-block h5.d-none.d-sm-block,
-					   .dealer-notes.col-md-6.text-center.d-none.d-sm-block
-					   {display: none !important;}
-					  .car-detail-block a figure.d-block.d-sm-none,
-					   .car-info-section .car-detail-wrapper h2.d-block.d-sm-none.new,
-					   .button-block.d-block.d-sm-none
-					   {display: block !important;}
-					   .car-info-section .car-detail-wrapper .car-detail-block .button-block{margin-top: 15px;}
-					   .car-info-section .car-detail-wrapper .car-detail-block{width:100%;}
-}
-
-
-/* ----------- iPhone 6+, 7+ and 8+ ----------- */
-@media only screen and (min-device-width: 414px) 
-  and (max-device-width: 736px) 
-  and (-webkit-min-device-pixel-ratio: 3)
-                   and (orientation: landscape) {
-
-   .car-info-section .car-detail-wrapper h3{width: 50%;}
-   .car-info-section .car-detail-wrapper .car-detail-block .button-block button { padding: 5px 10px !important;}
-   .car-info-section .car-detail-wrapper .car-detail-block a figure img{float: left; width: 50%;}
-					   .image-block.col-md-3.d-none.d-sm-block, .d-none.d-sm-block.new,
-					   .car-info-section .car-detail-wrapper .car-detail-block h5.d-none.d-sm-block,
-					   .dealer-notes.col-md-6.text-center.d-none.d-sm-block
-					   {display: none !important;}
-					  .car-detail-block a figure.d-block.d-sm-none,
-					   .car-info-section .car-detail-wrapper h2.d-block.d-sm-none.new,
-					   .button-block.d-block.d-sm-none
-					   {display: block !important;}
-					   .car-info-section .car-detail-wrapper .car-detail-block .button-block{margin-top: 15px;}
-					   .car-info-section .car-detail-wrapper .car-detail-block{width:100%;}
-					   
-}
-
-/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
-@media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) { 
-  
-  .car-info-section .car-detail-wrapper h3{width: 50%;}
-   .car-info-section .car-detail-wrapper .car-detail-block .button-block button { padding: 5px 10px !important;}
-   .car-info-section .car-detail-wrapper .car-detail-block a figure img{float: left; width: 50%;}
-					   .image-block.col-md-3.d-none.d-sm-block, .d-none.d-sm-block.new,
-					   .car-info-section .car-detail-wrapper .car-detail-block h5.d-none.d-sm-block,
-					   .dealer-notes.col-md-6.text-center.d-none.d-sm-block
-					   {display: none !important;}
-					  .car-detail-block a figure.d-block.d-sm-none,
-					   .car-info-section .car-detail-wrapper h2.d-block.d-sm-none.new,
-					   .button-block.d-block.d-sm-none
-					   {display: block !important;}
-					   .car-info-section .car-detail-wrapper .car-detail-block .button-block{margin-top: 15px;}
-					   .car-info-section .car-detail-wrapper .car-detail-block{width:100%;}
-
-}
-
-/* ----------- iPhone 4 and 4S ----------- */
-
-
-/* Landscape */
-@media only screen 
-  and (min-device-width: 320px) 
-  and (max-device-width: 480px)
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (orientation: landscape) {
-	  
-	    .car-info-section .car-detail-wrapper h3{width: 50%;}
-   .car-info-section .car-detail-wrapper .car-detail-block .button-block button { padding: 5px 10px !important;}
-   .car-info-section .car-detail-wrapper .car-detail-block a figure img{float: left; width: 50%;}
-					   .image-block.col-md-3.d-none.d-sm-block, .d-none.d-sm-block.new,
-					   .car-info-section .car-detail-wrapper .car-detail-block h5.d-none.d-sm-block,
-					   .dealer-notes.col-md-6.text-center.d-none.d-sm-block
-					   {display: none !important;}
-					  .car-detail-block a figure.d-block.d-sm-none,
-					   .car-info-section .car-detail-wrapper h2.d-block.d-sm-none.new,
-					   .button-block.d-block.d-sm-none
-					   {display: block !important;}
-					   .car-info-section .car-detail-wrapper .car-detail-block .button-block{margin-top: 15px;}
-					   .car-info-section .car-detail-wrapper .car-detail-block{width:100%;}
-
 }
 

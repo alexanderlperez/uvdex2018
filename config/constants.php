@@ -48,6 +48,7 @@ return [
             'Miles',
             'Engine',
             'VIN',
+            'Dealer_Code',
             'Dealer_Notes',
             'Previous_Owner',
             'Images',

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 //Footer icons import here 
 import PhoneIcon from '../../../img/icons/phone-icon.png';
+import EmalIcon from '../../../img/icons/mail-icon.png';
 import BackbuttonIcon from '../../../img/icons/back-button.png';
 import FavIcon from '../../../img/icons/favorite-icon.png';
 import FavWhiteIcon from '../../../img/icons/favorite_engaged.png';
@@ -55,7 +56,7 @@ class Footer extends Component{
     }
 
     render() {
-        const rostUrl = 'http://rostmotor.com/', telTo = 'tel:7124693383';
+        const rostUrl = 'http://rostmotor.com/', telTo = 'tel:7124693383', emailTo = 'mailto:bernie@rostmotor.com';
 
         return(
             <div className="footer-section">
@@ -65,6 +66,7 @@ class Footer extends Component{
                             <div className="col-12 text-center">
                                 <ul>
                                     <li><a href={telTo}><img src={PhoneIcon} alt="Phone Call Icon"/></a></li>
+                                    <li><a href={emailTo}><img src={EmalIcon} alt="Phone Call Icon"/></a></li>
                                     {
                                         this.state.isDetail
                                         ? <span><li><Link to={{ pathname: '/', state:{filters: this.state.filters} }}><img src={BackbuttonIcon} alt="Back Button Icon"/></Link></li>
